@@ -26,7 +26,7 @@ import edu.wpi.first.wpilibj.buttons.Button;
  * POV_Dn.whenPressed(new ExampleCommand2());
  */
 
-public class joystickPOVButton extends Button {
+public class JoystickPOVButton extends Button {
 
 	GenericHID m_joystick;
 	private double angle;
@@ -37,7 +37,7 @@ public class joystickPOVButton extends Button {
 	 * @param joystick The GenericHID object that has the button (e.g. Joystick, KinectStick, etc).
 	 * @param angle The angle of the POV button to watch.
 	 */
-	public joystickPOVButton(GenericHID joystick, double angle) {
+	public JoystickPOVButton(GenericHID joystick, double angle) {
 		m_joystick = joystick;
 		this.angle = angle;
 	}

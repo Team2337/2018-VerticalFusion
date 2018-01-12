@@ -19,14 +19,14 @@ public class extend extends Command {
 	public extend(double pos) {
 		this.pos = pos;
 		// Use requires() here to declare subsystem dependencies
-		requires(Robot._ejector);
+		requires(Robot.ejector);
 	}
 
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
 		//use this.pos here
-		Robot._ejector.extend();
+		Robot.ejector.extend();
 	}
 
 	// Called repeatedly when this Command is scheduled to run

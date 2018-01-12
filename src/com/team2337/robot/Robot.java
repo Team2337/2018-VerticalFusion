@@ -9,6 +9,11 @@ package com.team2337.robot;
 
 import com.team2337.robot.subsystems.Chassis;
 import com.team2337.robot.subsystems.Ejector;
+import com.team2337.robot.subsystems.Extender;
+import com.team2337.robot.subsystems.Intake;
+import com.team2337.robot.subsystems.LED;
+import com.team2337.robot.subsystems.Lifter;
+import com.team2337.robot.subsystems.Shifter;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -23,9 +28,15 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * project.
  */
 public class Robot extends TimedRobot {
-	public static Chassis _chassis;
-	public static Ejector _ejector;
-	public static OI m_oi;
+	public static Chassis chassis;
+	public static Ejector ejector;
+	public static Extender extender;
+	public static Intake intake;
+	public static LED led;
+	public static Lifter lifter;
+	public static Shifter shifter;
+	
+	public static OI oi;
 
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -36,9 +47,15 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {
-		m_oi = new OI();
-		_chassis = new Chassis();
-		_ejector = new Ejector();
+		oi = new OI();
+		chassis = new Chassis();
+		ejector = new Ejector();
+		extender = new Extender();
+		intake = new Intake();
+		led = new LED();
+		lifter = new Lifter() ;
+		shifter = new Shifter();
+		RobotMap.init();
 		//m_chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);

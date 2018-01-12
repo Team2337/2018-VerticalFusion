@@ -7,6 +7,8 @@
 
 package com.team2337.robot.subsystems;
 
+import com.team2337.robot.commands.chassis.drive;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -18,6 +20,6 @@ public class Chassis extends Subsystem {
 
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
-		//setDefaultCommand(new MySpecialCommand());
+		setDefaultCommand(new drive());
 	}
 }

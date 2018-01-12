@@ -27,7 +27,7 @@ import edu.wpi.first.wpilibj.buttons.Button;
  * TriggerL.whenPressed(new ExampleCommand2());
  */
 
-public class joystickAnalogButton extends Button {
+public class JoystickAnalogButton extends Button {
 
 	GenericHID m_joystick;
 	int m_axisNumber;
@@ -39,7 +39,7 @@ public class joystickAnalogButton extends Button {
 	 * @param joystick The GenericHID object that has the button (e.g. Joystick, KinectStick, etc)
 	 * @param axisNumber The axis number
 	 */
-	public joystickAnalogButton(GenericHID joystick, int axisNumber) {
+	public JoystickAnalogButton(GenericHID joystick, int axisNumber) {
 		m_joystick = joystick;
 		m_axisNumber = axisNumber;
 	}
@@ -51,7 +51,7 @@ public class joystickAnalogButton extends Button {
 	 * @param axisNumber The axis number
 	 * @param threshold The threshold to trigger above (positive) or below (negative)
 	 */
-	public joystickAnalogButton(GenericHID joystick, int axisNumber, double threshold) {
+	public JoystickAnalogButton(GenericHID joystick, int axisNumber, double threshold) {
 		m_joystick = joystick;
 		m_axisNumber = axisNumber;
 		THRESHOLD = threshold;

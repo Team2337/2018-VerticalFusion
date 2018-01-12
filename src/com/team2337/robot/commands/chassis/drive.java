@@ -7,28 +7,37 @@
 
 package com.team2337.robot.commands.chassis;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 
 import com.team2337.robot.Robot;
-
+import com.team2337.robot.RobotMap;
+import com.team2337.robot.RobotMap.*;
+import com.team2337.fusion.drive.*;
 /**
  * An example command.  You can replace me with your own command.
  */
-public class NerdyDrive extends Command {
-	public NerdyDrive() {
+public class drive extends Command {
+	private Joystick driverJoystick = Robot.oi.driverJoystick;
+	public drive() {
 		// Use requires() here to declare subsystem dependencies
-		//requires();
+		requires(Robot.chassis);
 	}
 
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
+		
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		//runs 20 times a second
+		double moveSpeed = -driverJoystick.getRawAxis(1); //Left Y
+		double turnSpeed = driverJoystick.getRawAxis(4); //Right X
+		
+		RobotMap.drive.arcadeDrive(moveSpeed, turnSpeed);
+		
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
