@@ -9,7 +9,7 @@ package com.team2337.robot;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.team2337.fusion.drive.*;
-
+import com.team2337.robot.subsystems.Lifter;
 
 import edu.wpi.first.wpilibj.Solenoid;
 
@@ -22,7 +22,14 @@ import edu.wpi.first.wpilibj.Solenoid;
 public class RobotMap {
 	
 	public static Solenoid ejector_push;
+	
 	public static NerdyDrive drive;
+	
+	public static TalonSRX liftLeftTop;
+	public static TalonSRX liftRightTop;
+	public static TalonSRX liftLeftBottom;
+	public static TalonSRX liftRightBottom;
+	
 	public static void init () {
 		ejector_push = new Solenoid(0,1);
 		
@@ -47,5 +54,18 @@ public class RobotMap {
 
 		drive = new NerdyDrive(chassis_leftFront, chassis_rightFront);
 		drive.setSensitivity(0.5);
+		
+		TalonSRX liftRightTop = new TalonSRX(4);
+		TalonSRX liftRightBottom = new TalonSRX(5);
+		
+		liftRightBottom.follow(liftRightTop);
+		
+		liftLeftTop = new TalonSRX(6);
+		liftLeftBottom = new TalonSRX(7);
+		
+		liftLeftTop.setInverted(true);
+		liftLeftBottom.follow(liftLeftTop);
+		liftLeftBottom.setInverted(true);
+		
 	}
 }
