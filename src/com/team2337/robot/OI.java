@@ -1,19 +1,18 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package com.team2337.robot;
 
 import com.team2337.fusion.controller.JoystickAnalogButton;
 import com.team2337.fusion.controller.JoystickPOVButton;
+
 import com.team2337.robot.commands.*;
+
+import com.team2337.robot.commands.ejector.*;
+import com.team2337.robot.commands.extender.*;
+import com.team2337.robot.commands.intake.*;
+import com.team2337.robot.commands.shifter.*;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType; 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 /**
@@ -21,42 +20,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	
-	//// CREATING BUTTONS
-	// One type of button is a joystick button which is any button on a joystick.
-	// You create one by telling it which joystick it's on and which button
-	// number it is.
-	// Joystick stick = new Joystick(port);
-	// Button button = new JoystickButton(stick, buttonNumber);
-	
-	// There are a few additional built in buttons you can use. Additionally,
-	// by subclassing Button you can create custom triggers and bind those to
-	// commands the same as any other Button.
-	
-	//// TRIGGERING COMMANDS WITH BUTTONS
-	// Once you have a button, it's trivial to bind it to a button in one of
-	// three ways:
-	
-	// Start the command when the button is pressed and let it run the command
-	// until it is finished as determined by it's isFinished method.
-	// button.whenPressed(new ExampleCommand());
-	
-	// Run the command while the button is being held down and interrupt it once
-	// the button is released.
-	// button.whileHeld(new ExampleCommand());
-	
-	// Start the command when the button is released  and let it run the command
-	// until it is finished as determined by it's isFinished method.
-	// button.whenReleased(new ExampleCommand());
-	
-	/////CONSTANTS//////
-	//static double exampleConstant = constantsFile.KConstantname;
-	
-	
-	
-	////////////////////
-	
-	public static Joystick improvedJoystick;
+
+	/*
+	 * DriverJoystick
+	 */
 	public static Joystick				driverJoystick			= new Joystick(0);
 	
 	JoystickButton			driver_GreenA			= new JoystickButton(driverJoystick, 1);
@@ -80,7 +47,10 @@ public class OI {
 	JoystickPOVButton		driver_POVLeft			= new JoystickPOVButton(driverJoystick, 270);
 	JoystickPOVButton		driver_POVUpLeft		= new JoystickPOVButton(driverJoystick, 315);
 	
-	Joystick				operatorJoystick		= new Joystick(1);
+	/*
+	 * OperatorJoystick
+	 */
+	public static Joystick				operatorJoystick		= new Joystick(1);
 	JoystickButton			operator_GreenA			= new JoystickButton(operatorJoystick, 1);
 	JoystickButton			operator_RedB			= new JoystickButton(operatorJoystick, 2);
 	JoystickButton			operator_BlueX			= new JoystickButton(operatorJoystick, 3);
@@ -102,15 +72,14 @@ public class OI {
 	JoystickPOVButton		operator_POVLeft		= new JoystickPOVButton(operatorJoystick, 270);
 	JoystickPOVButton		operator_POVUpLeft		= new JoystickPOVButton(operatorJoystick, 315);
 	
-	//Driver Station
-	
-	//Ask about the use of a third controller and if it's possible, re-map the operator interface controls onto the corrent controller
-	Joystick				operatorControls		= new Joystick(2);
-	
-	//Ask about these buttons (which appeared to be mapped to enabling and disabling the robot last year)
-	//What where their IDs and what did they do?
-	//JoystickButton			operatorInt_GreenButton				= new JoystickButton(operatorJoystick, 19);
-	//JoystickButton			operatorInt_RedButton				= new JoystickButton(operatorJoystick, 20);
+
+	/*
+	 * OperatorControl
+	 */
+	public static Joystick				operatorControls		= new Joystick(2);
+
+	JoystickButton			operatorInt_GreenButton				= new JoystickButton(operatorJoystick, 19);
+	JoystickButton			operatorInt_RedButton				= new JoystickButton(operatorJoystick, 20);
     JoystickButton 			operatorInt_ClearSwitch				= new JoystickButton(operatorJoystick, 15);
 	JoystickButton 			operatorInt_YellowSwitch			= new JoystickButton(operatorJoystick, 18);
 	JoystickButton 			operatorInt_BlackSwitch				= new JoystickButton(operatorJoystick, 17);
@@ -120,38 +89,35 @@ public class OI {
 	JoystickButton 			operatorInt_BlackButton 			= new JoystickButton(operatorJoystick, 11);
 	JoystickButton 			operatorInt_BlueButton				= new JoystickButton(operatorJoystick, 12);
     
-    //////////////////////////////////////
-    //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\//
-    //////////////////////////////////////
 	
 	public OI() {
 		
 		/* ====== DRIVER JOYSTICK ===== */
 		
-		driver_GreenA			.whenPressed(new _DoNothing());
-		driver_RedB				.whenPressed(new _DoNothing());
-		driver_BlueX			.whenPressed(new _DoNothing()); 
-		driver_YellowY			.whenPressed(new _DoNothing());
+		driver_GreenA			.whenPressed(new ejector_retract());
+		driver_RedB				.whenPressed(new ejector_extend());
+		driver_BlueX			.whenPressed(new extender_retract()); 
+		driver_YellowY			.whenPressed(new extender_extend());
 		
-		driver_BumperLeft		.whenPressed(new _DoNothing());
-		driver_BumperRight		.whenPressed(new _DoNothing());
+		driver_BumperLeft		.whenPressed(new shifter_high());
+		driver_BumperRight		.whenPressed(new shifter_low());
 		
-		driver_Back				.whileHeld(new _DoNothing()); 
-		driver_Start			.whileHeld(new _DoNothing());
+		driver_Back				.whileHeld(new DoNothing()); 
+		driver_Start			.whileHeld(new DoNothing());
 		
-		driver_LeftStick		.whenPressed(new _DoNothing()); 
-		driver_RightStick		.whenPressed(new _DoNothing()); 
+		driver_LeftStick		.whenPressed(new DoNothing()); 
+		driver_RightStick		.whenPressed(new DoNothing()); 
 		
-		driver_TriggerLeft		.whileHeld(new _DoNothing());
-		driver_TriggerRight		.whileHeld(new _DoNothing());
+		driver_TriggerLeft		.whileHeld(new intake_in(0.5));
+		driver_TriggerRight		.whileHeld(new intake_out(0.5));
 		
-		driver_POVUp			.whenPressed(new _DoNothing());  
+		driver_POVUp			.whenPressed(new DoNothing());  
 		//driver_POVUpRight		.whenPressed(new _DoNothing()); 
-	    driver_POVRight			.whenPressed(new _DoNothing()); 
+	    driver_POVRight			.whenPressed(new DoNothing()); 
 	   	//driver_POVDownRight	.whenPressed(new _DoNothing()); 
-	    driver_POVDown			.whenPressed(new _DoNothing()); 
+	    driver_POVDown			.whenPressed(new DoNothing()); 
 	   	//driver_POVDownLeft	.whenPressed(new _DoNothing()); 
-	    driver_POVLeft			.whenPressed(new _DoNothing()); 
+	    driver_POVLeft			.whenPressed(new DoNothing()); 
 	   	//driver_POVUpLeft		.whenPressed(new _DoNothing()); 
 	    
 	    //////////////////////////////////
@@ -159,30 +125,30 @@ public class OI {
 	    
 		/* ====== OPERATOR JOYSTICK ===== */
 	    
-		operator_GreenA			.whenPressed(new _DoNothing());
-		operator_RedB			.whenPressed(new _DoNothing());
-		operator_BlueX			.whenPressed(new _DoNothing());
-		operator_YellowY		.whenPressed(new _DoNothing());
+		operator_GreenA			.whenPressed(new DoNothing());
+		operator_RedB			.whenPressed(new DoNothing());
+		operator_BlueX			.whenPressed(new DoNothing());
+		operator_YellowY		.whenPressed(new DoNothing());
 		
-		operator_BumperLeft		.whenPressed(new _DoNothing());
-		operator_BumperRight	.whenPressed(new _DoNothing());
+		operator_BumperLeft		.whenPressed(new DoNothing());
+		operator_BumperRight	.whenPressed(new DoNothing());
 		
-		operator_Back			.whenPressed(new _DoNothing());
-		operator_Start			.whenPressed(new _DoNothing());
+		operator_Back			.whenPressed(new DoNothing());
+		operator_Start			.whenPressed(new DoNothing());
 		
-		operator_LeftStick		.whenPressed(new _DoNothing());
-		operator_RightStick		.whenPressed(new _DoNothing());
+		operator_LeftStick		.whenPressed(new DoNothing());
+		operator_RightStick		.whenPressed(new DoNothing());
 		
-		operator_TriggerLeft	.whileHeld(new _DoNothing());
-		operator_TriggerRight	.whileHeld(new _DoNothing());
+		operator_TriggerLeft	.whileHeld(new DoNothing());
+		operator_TriggerRight	.whileHeld(new DoNothing());
 		
-		operator_POVUp			.whenPressed(new _DoNothing());
+		operator_POVUp			.whenPressed(new DoNothing());
 		//operator_POVUpRight	.whenPressed(new _DoNothing());
-		operator_POVRight		.whenPressed(new _DoNothing());
+		operator_POVRight		.whenPressed(new DoNothing());
 		//operator_POVDownRight	.whenPressed(new _DoNothing());
-	    operator_POVDown	    .whenPressed(new _DoNothing());
+	    operator_POVDown	    .whenPressed(new DoNothing());
 		//operator_POVDownLeft  .whenPressed(new _DoNothing());
-		operator_POVLeft	    .whenPressed(new _DoNothing());
+		operator_POVLeft	    .whenPressed(new DoNothing());
 		//operator_POVUpLeft	.whenPressed(new _DoNothing());
 		
 		////////////////////////////////////
@@ -193,23 +159,19 @@ public class OI {
 		//operatorInt_GreenButton	.whenPressed(new _DoNothing());
 		//operatorInt_RedButton	.whenPressed(new _DoNothing());
 		
-		operatorInt_ClearSwitch	.whenPressed(new _DoNothing());
-		operatorInt_BlueSwitch	.whenPressed(new _DoNothing());
-		operatorInt_BlackSwitch	.whenPressed(new _DoNothing());
-		operatorInt_YellowSwitch.whenPressed(new _DoNothing());
+		operatorInt_ClearSwitch	.whenPressed(new DoNothing());
+		operatorInt_BlueSwitch	.whenPressed(new DoNothing());
+		operatorInt_BlackSwitch	.whenPressed(new DoNothing());
+		operatorInt_YellowSwitch.whenPressed(new DoNothing());
 		
-		operatorInt_BlackButton	.whenPressed(new _DoNothing());
-		operatorInt_BlueButton	.whenPressed(new _DoNothing());
-		operatorInt_YellowButton.whenPressed(new _DoNothing());
-		operatorInt_WhiteButton	.whenPressed(new _DoNothing());
+		operatorInt_BlackButton	.whenPressed(new DoNothing());
+		operatorInt_BlueButton	.whenPressed(new DoNothing());
+		operatorInt_YellowButton.whenPressed(new DoNothing());
+		operatorInt_WhiteButton	.whenPressed(new DoNothing());
 		
-		/////////////////////////////////////////
-		
+		///////////////////////////////////////// 
 	}
-	
-    //////////////////////////////////////
-    //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\//
-    //////////////////////////////////////
+
 	
 	public Joystick getDriverJoystick() {
 		return driverJoystick;

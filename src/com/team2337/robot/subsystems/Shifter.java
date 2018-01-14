@@ -1,23 +1,37 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package com.team2337.robot.subsystems;
 
+import com.team2337.robot.RobotMap;
+import com.team2337.robot.commands.shifter.shifter_doNothing;
+
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- * An example subsystem.  You can replace me with your own Subsystem.
+ * Shifts the chassis to a different gear ration
+ * 
+ * @category SHIFTER
+ * @author Brendan
  */
 public class Shifter extends Subsystem {
-	// Put methods for controlling this subsystem
-	// here. Call these from Commands.
-
+	
+	private final Solenoid left = RobotMap.shifter_left;
+	private final Solenoid right = RobotMap.shifter_right;
+	
 	public void initDefaultCommand() {
-		// Set the default command for a subsystem here.
-		//setDefaultCommand(new MySpecialCommand());
+		setDefaultCommand(new shifter_doNothing());
+	}
+	/**
+	 * Shift the robot into high gear
+	 */
+	public void shiftHighGear() {
+		left.set(true);
+		right.set(true);
+	}
+	/**
+	 * Shift the robot into low gear
+	 */
+	public void shiftLowGear() {
+		left.set(false);
+		right.set(false);
 	}
 }

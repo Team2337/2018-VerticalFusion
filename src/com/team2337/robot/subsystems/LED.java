@@ -1,23 +1,24 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package com.team2337.robot.subsystems;
 
+import com.team2337.robot.RobotMap;
+
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- * An example subsystem.  You can replace me with your own Subsystem.
+ * Where all the LED are controlled
+ * 
+ * @category LED
+ * @author Brendan
  */
 public class LED extends Subsystem {
-	// Put methods for controlling this subsystem
-	// here. Call these from Commands.
-
-	public void initDefaultCommand() {
-		// Set the default command for a subsystem here.
-		//setDefaultCommand(new MySpecialCommand());
+	private final Solenoid infoLED = RobotMap.led_info;
+	public void initDefaultCommand() {}
+	/**
+	 * Turn on the LED
+	 * @param state Boolean of the STATE of the LED
+	 */
+	public void LEDState(boolean state) {
+		infoLED.set(state);
 	}
 }

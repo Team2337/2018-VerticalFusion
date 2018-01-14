@@ -8,6 +8,7 @@
 package com.team2337.robot;
 
 import com.team2337.robot.subsystems.Chassis;
+import com.team2337.robot.subsystems.Climber;
 import com.team2337.robot.subsystems.Ejector;
 import com.team2337.robot.subsystems.Extender;
 import com.team2337.robot.subsystems.Intake;
@@ -35,6 +36,7 @@ public class Robot extends TimedRobot {
 	public static LED led;
 	public static Lifter lifter;
 	public static Shifter shifter;
+	public static Climber climber;
 	
 	public static OI oi;
 
@@ -47,15 +49,18 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {
-		oi = new OI();
+		RobotMap.init();
 		chassis = new Chassis();
+		lifter = new Lifter();
+		intake = new Intake();
 		ejector = new Ejector();
 		extender = new Extender();
-		intake = new Intake();
-		led = new LED();
-		lifter = new Lifter() ;
+		climber = new Climber();
 		shifter = new Shifter();
-		RobotMap.init();
+		led = new LED();
+		
+		oi = new OI();
+		
 		//m_chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
