@@ -1,23 +1,34 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package com.team2337.robot.subsystems;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.team2337.robot.RobotMap;
+import com.team2337.robot.commands.lifter.lifter_main;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- * An example subsystem.  You can replace me with your own Subsystem.
+ * The system to move cubes up and down
+ * 
+ * @category LIFTER
+ * @author Brendan
  */
 public class Lifter extends Subsystem {
-	// Put methods for controlling this subsystem
-	// here. Call these from Commands.
-
-	public void initDefaultCommand() {
-		// Set the default command for a subsystem here.
-		//setDefaultCommand(new MySpecialCommand());
+	
+	private final TalonSRX left = RobotMap.lift_leftTop; 
+	private final TalonSRX right = RobotMap.lift_rightTop;
+	
+	public Lifter() {}
+	protected void initDefaultCommand() {	
+		setDefaultCommand(new lifter_main());
+	}
+	/**
+	 * Vertical Movement of the lift
+	 * @param power Power
+	 */
+	public void verticleMovement(double power)
+	{
+		left.set(ControlMode.PercentOutput, power);
+		right.set(ControlMode.PercentOutput, power);	
 	}
 }
