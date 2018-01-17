@@ -7,6 +7,7 @@
 
 package com.team2337.robot;
 
+
 import com.team2337.robot.subsystems.Chassis;
 import com.team2337.robot.subsystems.Climber;
 import com.team2337.robot.subsystems.Ejector;
@@ -15,6 +16,8 @@ import com.team2337.robot.subsystems.Intake;
 import com.team2337.robot.subsystems.LED;
 import com.team2337.robot.subsystems.Lifter;
 import com.team2337.robot.subsystems.Shifter;
+import com.team2337.robot.subsystems.Pixy.PixyVision;
+import com.team2337.robot.subsystems.PixyCam.PixyCam;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -37,6 +40,8 @@ public class Robot extends TimedRobot {
 	public static Lifter lifter;
 	public static Shifter shifter;
 	public static Climber climber;
+	public static PixyVision vision;
+	public static PixyCam pixyCam;
 	
 	public static OI oi;
 
@@ -58,6 +63,7 @@ public class Robot extends TimedRobot {
 		climber = new Climber();
 		shifter = new Shifter();
 		led = new LED();
+		vision = new PixyVision();
 		
 		oi = new OI();
 		
@@ -134,6 +140,8 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		
+		//vision.testPixy1();
 	}
 
 	/**
