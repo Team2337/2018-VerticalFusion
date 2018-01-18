@@ -1,15 +1,17 @@
 package com.team2337.robot.subsystems.PixyCam;
 
-import org.usfirst.frc3467.robot.CommandBase;
+import com.team2337.robot.Robot;
+
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class displayPixyGearData extends CommandBase {
+public class displayPixyData extends Command {
 
-    public displayPixyGearData() {
+    public displayPixyData() {
         // Use requires() here to declare subsystem dependencies
-        requires(pixyCamGear);
+        requires(Robot.pixyCam);
     }
 
     // Called just before this Command runs the first time
@@ -19,7 +21,7 @@ public class displayPixyGearData extends CommandBase {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
 
-    	pixyCamGear.detectTarget();
+    	Robot.pixyCam.detectTarget();
     }
 
     // Make this return true when this Command no longer needs to run execute()

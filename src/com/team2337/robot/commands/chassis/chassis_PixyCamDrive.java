@@ -10,23 +10,30 @@ import com.team2337.robot.Robot;
 import com.team2337.robot.RobotMap;
 import com.team2337.robot.RobotMap.*;
 import com.team2337.fusion.drive.*;
-import com.team2337.robot.subsystems.Pixy.*;
+import com.team2337.robot.subsystems.PixyCam.*;
 
 import com.team2337.robot.subsystems.PixyCam.NoTargetException;
 
 public class chassis_PixyCamDrive extends Command {
 
 	// Configurable parameters
-	public static final double ANGLE_PRECISION = 1.0;
+	//public static final double ANGLE_PRECISION = 1.0;
+
+	int pixyState;
+	public static final int PIXY_READCAMERA = 1;
+	public static final int PIXY_MOVING = 2;
+
+	double MAX_TURN_ANGLE;
+	double MIN_TURN_ANGLE;
 	
-	boolean targetFound = false;
-	int targetSearchCount = 1;
+	int targetSearchCount;
 	int targetSearchDirection = 1;
 	int targetSearchIncrement = 10;
+
+	double turn, move, movement, moveSpeed;
+	double angleX;
 	
-	int aimState;
-	public static final int AIM_READCAMERA = 1;
-	public static final int AIM_MOVING = 2;
+	private Joystick driverJoystick = Robot.oi.driverJoystick;
 	
 	public chassis_PixyCamDrive() {
 		requires(Robot.pixyCam);
@@ -36,45 +43,44 @@ public class chassis_PixyCamDrive extends Command {
 	}
 	
 	public void initialize() {
-		targetFound = false;
-		aimState = AIM_READCAMERA;
-		SmartDashboard.putString("ShooterTurret", "Auto Aim");
+		pixyState = PIXY_READCAMERA;
+
 	}
 	
 	public void execute() {
 
-    	double angleX;
-
-    	switch (aimState) {
+    	switch (pixyState) {
     	
-    	case AIM_READCAMERA:
+    	case PIXY_READCAMERA:
     		try {
     			// Read PixyCam
     			angleX = readCamera();
+    			pixyState = PIXY_MOVING;
+    			targetSearchCount = 1;
         	} catch (NoTargetException ex) {
         		// No target found
-        		searchForTarget();
-        		aimState = AIM_MOVING;
+        		SmartDashboard.putString("PIXY:", "No Power Cubes in sight.");
+    			RobotMap.drive.arcadeDrive(0,0);
         		return;
         	}
-
-    		// Command is completed if we are on target in the X direction
-    		if (Math.abs(angleX) <= ANGLE_PRECISION) {
-    			targetFound = true;
-    		}
-    		else
-    		{
-        		// Start moving turret to center of object
-            	shooterTurret.setDesiredAngle(shooterTurret.getAngle() + angleX);
-            	aimState = AIM_MOVING;
-    		}
     		break;
-
-    	case AIM_MOVING:
-    		if (shooterTurret.isOnTarget()) {
-    			// Finished movement - read camera again
-    			aimState = AIM_READCAMERA;
-    		}
+    		
+    	case PIXY_MOVING:
+    		try {
+    			// Read PixyCam
+    			angleX = readCamera();
+        		SmartDashboard.putString("PIXY:", "Chasing a Power Cube!!!");
+          	} catch (NoTargetException ex) {
+        		// No target found
+          		pixyState = PIXY_READCAMERA;
+          		RobotMap.drive.arcadeDrive(0, 0);
+          		return;
+          	}	
+			
+    		
+    		turn = angleX/10; ///////************************
+    		moveSpeed = -driverJoystick.getRawAxis(1); //Left Y
+    		RobotMap.drive.arcadeDrive(moveSpeed,turn);
     		break;
     	}
 
@@ -83,29 +89,29 @@ public class chassis_PixyCamDrive extends Command {
 	// This will throw a NoTargetException error if the camera cannot find the target
 	private double readCamera() {
 
-		double [] pixyData = {0.0, 0.0, 0.0};
+		double [] pixyData = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 
 		// Read PixyCam
-		pixyData = pixyCamShooter.getBoilerLocationData();
+		pixyData = Robot.pixyCam.getBasicPixyData();
 
 		// Display the returned data
-	   	SmartDashboard.putString("Turret AutoAim","distance = " + pixyData[0] +"   angleX = " + pixyData[1] + "   angleY = "+ pixyData[2]);
+	   	SmartDashboard.putString("PIXY:","cX" + pixyData[0] +"cY = " + pixyData[1]);
 
    		// Return X angle
-	   	return pixyData[1];
+	   	return pixyData[0];
 	}
 	
 	private void searchForTarget() {
 		// Turn back and forth in ever increasing angles  until target is found
 		int movement = targetSearchCount * targetSearchIncrement * targetSearchDirection ;
-		double target = shooterTurret.getAngle() + movement;
-		if (target > ShooterTurret.SOFT_MAX_TURRET_ANGLE || target < ShooterTurret.SOFT_MIN_TURRET_ANGLE) {
+		double target = movement; // + gyro angle
+		if (Math.abs(target) > MAX_TURN_ANGLE || Math.abs(target) < MIN_TURN_ANGLE) {
 			target = 0.0;
 			targetSearchCount = 1;
 		}
 		
 		// Move turret 
-    	shooterTurret.setDesiredAngle(target);
+    	//Robot.chassis.gyroTurn(target);
 		
     	// Go the other way next time
     	targetSearchDirection *= -1.0;
@@ -113,14 +119,11 @@ public class chassis_PixyCamDrive extends Command {
 	}
 	
 	protected boolean isFinished() {
-		return targetFound;
+		return false;
 	}
-	
 	public void end() {
-		shooterTurret.runTurret(0.0);
-		
+		RobotMap.drive.arcadeDrive(0,0);
 	}
-	
 	protected void interrupted() {
 		end();
 	}

@@ -23,49 +23,35 @@ public class PixyCam extends Subsystem {
 	List<PixyCmu5.PixyBlock> pixyBlocks;
 	boolean cameraPresent = false;
 	int m_i2c_address;
-	String m_targetName = "";
+	//String m_targetName = "";
 
 	
 	public PixyCam(int i2c_address) {
     	try
     	{
-    		// Pixy Port Assignment (Final & Practice Robots)
+    		// Pixy Port Assignment
     		
     		/*
     		 * Instantiate a new Pixy object at the given address and schedule it to read data
     		 * at a 1 second period. This data will be accessible by calling pixyCamera.getCurrentframes()
     		 */
     		m_i2c_address = i2c_address;
-    		m_targetName = "Power Cube";
-    	   /* if (m_i2c_address == PIXY_I2C_GEAR_ADDR) {
-	    		m_targetName = "Gear";
-	    	} else if (m_i2c_address == PIXY_I2C_SHOOTER_ADDR) {
-	    		m_targetName = "Shooter";
-	    	}
-	    	*/
             
     		pixyBlocks = new LinkedList<PixyCmu5.PixyBlock>();
     	    pixyCamera = new PixyCmu5(i2c_address, I2C.Port.kMXP, 0.25);
     	    cameraPresent = true;
 	
-    	    SmartDashboard.putString(m_targetName + " PixyCam", "Running normally");
+    	    SmartDashboard.putString("PIXYCAM:", "Running normally");
         	
     	} catch (RuntimeException ex ) {
-	        DriverStation.reportError("Error instantiating " + m_targetName + "Pixy:  " + ex.getMessage(), true);
-	        SmartDashboard.putString(m_targetName + " PixyCam", "NOT DETECTED");
-	    }
-    	
-	}
+	        DriverStation.reportError("Error instantiating Pixy:  " + ex.getMessage(), true);
+	        SmartDashboard.putString("PIXYCAM:", "NOT DETECTED");
+	    	}	
+		}
 
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-       // if (m_i2c_address == PIXY_I2C_GEAR_ADDR) {
-       //     setDefaultCommand(new displayPixyGearData());
-       // } else if (m_i2c_address == PIXY_I2C_SHOOTER_ADDR) {
-       //     setDefaultCommand(new displayPixyShooterData());
-       // }
-    }
-    
+            setDefaultCommand(new displayPixyData());
+        }
     
     public void detectTarget() {
 
@@ -75,7 +61,7 @@ public class PixyCam extends Subsystem {
     	// If an object is detected in the frame
 		if(cameraPresent && !pixyCamera.getCurrentBlocks().isEmpty())
 		{
-			SmartDashboard.putBoolean(m_targetName + " Target Detected", true);
+			SmartDashboard.putBoolean("Pixy Target Detected", true);
 			
 			for (int i = 0; i < 2; i++) {
 				try
@@ -83,8 +69,8 @@ public class PixyCam extends Subsystem {
 					// Calculate the number of degrees from the center the current frame 
 					degFromCenterX = PixyCmu5.degreesXFromCenter(pixyCamera.getCurrentBlocks().get(i));
 					degFromCenterY = PixyCmu5.degreesYFromCenter(pixyCamera.getCurrentBlocks().get(i));
-					SmartDashboard.putString(m_targetName + " AimX[" + Integer.toString(i) + "]", Double.toString(degFromCenterX) + " degrees from target");
-					SmartDashboard.putString(m_targetName + " AimY[" + Integer.toString(i) + "]", Double.toString(degFromCenterY) + " degrees from target");
+					SmartDashboard.putString("Pixy AimX[" + Integer.toString(i) + "]", Double.toString(degFromCenterX) + " degrees from target");
+					SmartDashboard.putString("Pixy AimY[" + Integer.toString(i) + "]", Double.toString(degFromCenterY) + " degrees from target");
 				
 				} catch  (RuntimeException ex ){
 	
@@ -92,19 +78,95 @@ public class PixyCam extends Subsystem {
 			}
 
 		} else {
-			SmartDashboard.putBoolean(m_targetName + " Target Detected", false);
-			SmartDashboard.putString(m_targetName + " AimX[0]", "No visible target");
-			SmartDashboard.putString(m_targetName + " AimY[0]", "No visible target");
-			SmartDashboard.putString(m_targetName + " AimX[1]", "No visible target");
-			SmartDashboard.putString(m_targetName + " AimY[1]", "No visible target");
+			SmartDashboard.putBoolean("Pixy Target Detected", false);
+			SmartDashboard.putString("Pixy AimX[0]", "No visible target");
+			SmartDashboard.putString("Pixy AimY[0]", "No visible target");
+			SmartDashboard.putString("Pixy AimX[1]", "No visible target");
+			SmartDashboard.putString("Pixy AimY[1]", "No visible target");
 		}
 
     }
+ 
+    /******************************
+     * Basic Pixy Tracking
+     * centerX, centerY
+     ******************************/
+    
     
     /******************************
-     * SteamWorks Boiler Tracking
-     ******************************/
+     * Power Up Tracking
+     ******************************/    
+    
+    // Array of data calculated from values returned from Pixy
+    // deltaCenterX, deltaCenterY, centerX, centerY, width, height
+    double[] basicPixyData = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};  
+
+    
+    /**
+     * Calculate the current centerX, centerY, width & height
+     * and store the values in a local array for pickup by helper routines below.
+     * 
+     * @throws NoTargetException
+     */
+    protected void calculateBasicPixyData() throws NoTargetException {
+
+    	double centerXDelta = 0;
+    	double centerYDelta = 0;
+    	double centerX= 0;
+    	double centerY = 0;
+    	double width = 0;
+    	double height = 0;
+    	
+    	// If an object is detected in the frame
+		if(cameraPresent && !pixyCamera.getCurrentBlocks().isEmpty())
+		{
+			SmartDashboard.putBoolean("Target Detected", true);
+			
+			try
+			{
+	    		centerXDelta = PixyCmu5.xCenterDelta(pixyCamera.getCurrentBlocks().get(0));
+	    		centerYDelta = PixyCmu5.yCenterDelta(pixyCamera.getCurrentBlocks().get(0));
+	    		centerX 	 = pixyCamera.getCurrentBlocks().get(0).xCenter;
+	    		centerY 	 = pixyCamera.getCurrentBlocks().get(0).yCenter;
+	        	width        = pixyCamera.getCurrentBlocks().get(0).width;
+	        	height       = pixyCamera.getCurrentBlocks().get(0).height;
+
+	    		
+	    		SmartDashboard.putString("PIXY:", Double.toString(centerXDelta) + " delta X");
+				SmartDashboard.putString("PIXY:", Double.toString(centerYDelta) + " delta Y");
+				SmartDashboard.putString("PIXY:", Double.toString(centerX) + " centerX");
+				SmartDashboard.putString("PIXY:", Double.toString(centerY) + " centerY");
+				SmartDashboard.putString("PIXY:", Double.toString(width) + " width");
+				SmartDashboard.putString("PIXY:", Double.toString(height) + " height");
+				
+			} catch (RuntimeException ex ) { }
+
+		} else {
+			SmartDashboard.putBoolean("Target Detected", false);
+			throw new NoTargetException("No Boiler Target Found");
+		}
+
+		basicPixyData[0] = centerXDelta;
+		basicPixyData[1] = centerYDelta;
+		basicPixyData[2] = centerX;
+		basicPixyData[3] = centerY;
+		basicPixyData[4] = height;
+		basicPixyData[5] = width;
 	
+    }
+    
+    /**
+     * Helper routine to return current data
+     * 
+     * @throws NoTargetException
+     */
+    public double[] getBasicPixyData() throws NoTargetException {
+    	calculateBasicPixyData();
+    	return basicPixyData;
+    }
+    
+    ///********************************************************************************************************old*****
+    
     // Height of the goal above the Pixy camera mount point on the robot
     static final double GOAL_HEIGHT = .5;
 	
@@ -136,8 +198,8 @@ public class PixyCam extends Subsystem {
 			{
 	    		tapePosy = PixyCmu5.degreesYFromCenter(pixyCamera.getCurrentBlocks().get(0));
 	    		tapePosx = PixyCmu5.degreesXFromCenter(pixyCamera.getCurrentBlocks().get(0));
-				SmartDashboard.putString(m_targetName + " AimX[0]", Double.toString(tapePosx) + " degrees from target");
-				SmartDashboard.putString(m_targetName + " AimY[0]", Double.toString(tapePosy) + " degrees from target");
+				SmartDashboard.putString("Pixy AimX[0]", Double.toString(tapePosx) + " degrees from target");
+				SmartDashboard.putString("Pixy AimY[0]", Double.toString(tapePosy) + " degrees from target");
 			} catch (RuntimeException ex ) { }
 
 		} else {

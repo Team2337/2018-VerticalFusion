@@ -9,6 +9,7 @@ import com.team2337.robot.commands.ejector.*;
 import com.team2337.robot.commands.extender.*;
 import com.team2337.robot.commands.intake.*;
 import com.team2337.robot.commands.shifter.*;
+import com.team2337.robot.commands.chassis.*;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -24,7 +25,7 @@ public class OI {
 	/*
 	 * DriverJoystick
 	 */
-	public static Joystick				driverJoystick			= new Joystick(0);
+	public Joystick				driverJoystick			= new Joystick(0);
 	
 	JoystickButton			driver_GreenA			= new JoystickButton(driverJoystick, 1);
 	JoystickButton			driver_RedB				= new JoystickButton(driverJoystick, 2);
@@ -103,7 +104,7 @@ public class OI {
 		driver_BumperRight		.whenPressed(new shifter_low());
 		
 		driver_Back				.whileHeld(new DoNothing()); 
-		driver_Start			.whileHeld(new DoNothing());
+		driver_Start			.whileHeld(new chassis_PixyCamDrive());
 		
 		driver_LeftStick		.whenPressed(new DoNothing()); 
 		driver_RightStick		.whenPressed(new DoNothing()); 
