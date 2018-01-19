@@ -4,6 +4,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.team2337.fusion.drive.*;
 import com.team2337.robot.subsystems.Lifter;
 
+import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.Solenoid;
 
 /**
@@ -20,29 +21,37 @@ public class RobotMap {
 	
 	public static NerdyDrive drive;
 	
-	public static TalonSRX lift_leftTop;
-	public static TalonSRX lift_rightTop;
+	//Lift 
+	public static TalonSRX lift_leftFront;
+	public static TalonSRX lift_rightFront;
+	public static TalonSRX lift_leftBack;
+	public static TalonSRX lift_rightBack;
+	public static AnalogPotentiometer lift_potentiometer;  //Use for string pot
+	
 
+	//Intake 
 	public static TalonSRX intake_left;
 	public static TalonSRX intake_right;
 	
+	//Ejector 
 	public static Solenoid ejector_push;
 	
+	//Extender 
 	public static Solenoid extender_left;
 	public static Solenoid extender_right;
 	
+	//Climber 
 	public static TalonSRX climber_left;
 	public static TalonSRX climber_right;
 	
+	//Shifter 
 	public static Solenoid shifter_left;
 	public static Solenoid shifter_right;
 	
+	//LEDs
 	public static Solenoid led_info;
 	
 	public static void init () {
-		/*
-		 * Drive
-		 */
 			/*
 			 * Drive Left
 			 */
@@ -59,7 +68,7 @@ public class RobotMap {
 			/*
 			 * Drive Right 
 			 */
-			TalonSRX chassis_rightFront = new TalonSRX(0); //0
+			TalonSRX chassis_rightFront = new TalonSRX(6); //0
 			TalonSRX chassis_rightMid = new TalonSRX(1); //1
 			TalonSRX chassis_rightRear = new TalonSRX(2); //2
 			
@@ -77,10 +86,19 @@ public class RobotMap {
 		/*
 		 * Lift
 		 */
-		lift_leftTop = new TalonSRX(3); //3
-		lift_leftTop.setInverted(true);
-		lift_rightTop = new TalonSRX(4); // 4
-
+		lift_leftFront = new TalonSRX(3); //3
+		
+		lift_leftBack = new TalonSRX(4); //3
+		lift_leftBack.follow(lift_leftFront);
+		
+		lift_rightFront = new TalonSRX(5); // 4
+		lift_rightFront.setInverted(true);
+		
+		lift_rightBack = new TalonSRX(0); // 4
+		lift_rightBack.follow(lift_rightFront);
+		lift_rightFront.setInverted(true);
+		
+		lift_potentiometer = new AnalogPotentiometer(2, 10.0, 0.068);
 	
 		/*
 		 * Intake

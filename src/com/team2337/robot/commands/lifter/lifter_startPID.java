@@ -8,23 +8,43 @@
 package com.team2337.robot.commands.lifter;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.PIDCommand;
 
 import com.team2337.robot.Robot;
 
 /**
  * Lifter: STARTPID - Starts the PID of the lift
+ * 
  * @category LIFTER
- * @author -
+ * @author - Bryce
  */
 public class lifter_startPID extends Command {
+	public static boolean set = false; 
 	public lifter_startPID() {
 		requires(Robot.lifter);
 	}
-	
-	protected void initialize() {}
-	protected void execute() {}
-	protected boolean isFinished() {return false;}
-	protected void end() {}
-	protected void interrupted() {this.end();}
-}
 
+	protected void initialize() {
+		Robot.lifter.startPID();
+		if(!this.set) {
+		Robot.lifter.setPosition(Robot.lifter.getPosition());
+		set = true;
+		}
+		
+	}
+
+	protected void execute() {
+		
+	}
+
+	protected boolean isFinished() {
+		return true;
+	}
+
+	protected void end() {
+	}
+
+	protected void interrupted() {
+		this.end();
+	}
+}

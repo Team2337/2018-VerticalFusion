@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- * Extends the intake out and in
+ * Extends the intake out and in over the bumpers
  * 
  * @category EXTENDER
  * @author Brendan, Bryce
@@ -21,14 +21,14 @@ public class Extender extends Subsystem {
 		//setDefaultCommand(new extender_doNothing());
 	}
 	/**
-	 * Extends the extender
+	 * Extends the intake out over the bumpers
 	 */
 	public void extend() {
 		left.set(true);
 		right.set(true);
 	}
 	/**
-	 * Retracts the retracting
+	 * Retracts the intake in over the bumpers
 	 */
 	public void retract() {
 		left.set(false);
