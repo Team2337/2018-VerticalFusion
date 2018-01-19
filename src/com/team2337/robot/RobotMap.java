@@ -68,7 +68,7 @@ public class RobotMap {
 			/*
 			 * Drive Right 
 			 */
-			TalonSRX chassis_rightFront = new TalonSRX(6); //0
+			TalonSRX chassis_rightFront = new TalonSRX(0); //0
 			TalonSRX chassis_rightMid = new TalonSRX(1); //1
 			TalonSRX chassis_rightRear = new TalonSRX(2); //2
 			
@@ -94,7 +94,7 @@ public class RobotMap {
 		lift_rightFront = new TalonSRX(5); // 4
 		lift_rightFront.setInverted(true);
 		
-		lift_rightBack = new TalonSRX(0); // 4
+		lift_rightBack = new TalonSRX(6); // 4
 		lift_rightBack.follow(lift_rightFront);
 		lift_rightFront.setInverted(true);
 		
@@ -103,9 +103,9 @@ public class RobotMap {
 		/*
 		 * Intake
 		 */
-		intake_left = new TalonSRX(6); //6
+		intake_left = new TalonSRX(11); //6
 		intake_left.setInverted(true);
-		intake_right = new TalonSRX(5); //5
+		intake_right = new TalonSRX(10); //5
 
 		/*
 		 * Ejector
