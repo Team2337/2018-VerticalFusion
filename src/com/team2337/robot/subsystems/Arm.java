@@ -12,7 +12,7 @@ import com.team2337.robot.commands.ejector.ejector_doNothing;
  * @category EJECTOR
  * @author Brendan
  */
-public class Ejector extends Subsystem {
+public class Arm extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
     public Solenoid ejector_push = RobotMap.ejector_push;

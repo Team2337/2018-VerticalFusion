@@ -1,8 +1,8 @@
 package com.team2337.robot.subsystems;
 
 import com.team2337.robot.RobotMap;
-import com.team2337.robot.commands.extender.extender_doNothing;
 
+import arm.extender_doNothing;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 

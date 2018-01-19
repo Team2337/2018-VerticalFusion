@@ -4,12 +4,12 @@ import com.team2337.fusion.controller.JoystickAnalogButton;
 import com.team2337.fusion.controller.JoystickPOVButton;
 
 import com.team2337.robot.commands.*;
-
+import com.team2337.robot.commands.chassis.chassis_moveForward;
 import com.team2337.robot.commands.ejector.*;
-import com.team2337.robot.commands.extender.*;
 import com.team2337.robot.commands.intake.*;
 import com.team2337.robot.commands.shifter.*;
 
+import arm.*;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType; 
@@ -94,7 +94,7 @@ public class OI {
 		
 		/* ====== DRIVER JOYSTICK ===== */
 		
-		driver_GreenA			.whenPressed(new ejector_retract());
+		driver_GreenA			.whenPressed(new chassis_moveForward(5));
 		driver_RedB				.whenPressed(new ejector_extend());
 		driver_BlueX			.whenPressed(new extender_retract()); 
 		driver_YellowY			.whenPressed(new extender_extend());

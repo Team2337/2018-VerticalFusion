@@ -9,7 +9,7 @@ package com.team2337.robot;
 
 import com.team2337.robot.subsystems.Chassis;
 import com.team2337.robot.subsystems.Climber;
-import com.team2337.robot.subsystems.Ejector;
+import com.team2337.robot.subsystems.Arm;
 import com.team2337.robot.subsystems.Extender;
 import com.team2337.robot.subsystems.Intake;
 import com.team2337.robot.subsystems.LED;
@@ -30,14 +30,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends TimedRobot {
 	public static Chassis chassis;
-	public static Ejector ejector;
+	public static Arm ejector;
 	public static Extender extender;
 	public static Intake intake;
 	public static LED led;
 	public static Lifter lifter;
 	public static Shifter shifter;
 	public static Climber climber;
-	
 	public static OI oi;
 
 	Command m_autonomousCommand;
@@ -49,11 +48,13 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {
+		
+		
 		RobotMap.init();
 		chassis = new Chassis();
 		lifter = new Lifter();
 		intake = new Intake();
-		ejector = new Ejector();
+		ejector = new Arm();
 		extender = new Extender();
 		climber = new Climber();
 		shifter = new Shifter();

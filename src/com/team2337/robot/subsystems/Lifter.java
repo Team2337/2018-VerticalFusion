@@ -15,8 +15,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Lifter extends Subsystem {
 	
-	private final TalonSRX left = RobotMap.lift_leftTop; 
-	private final TalonSRX right = RobotMap.lift_rightTop;
+	private final TalonSRX left = RobotMap.lift_leftFront; 
+	private final TalonSRX right = RobotMap.lift_rightFront;
 	
 	public Lifter() {}
 	protected void initDefaultCommand() {	
@@ -26,7 +26,7 @@ public class Lifter extends Subsystem {
 	 * Vertical Movement of the lift
 	 * @param power Power
 	 */
-	public void verticleMovement(double power)
+	public void verticalMovement(double power)
 	{
 		left.set(ControlMode.PercentOutput, power);
 		right.set(ControlMode.PercentOutput, power);	

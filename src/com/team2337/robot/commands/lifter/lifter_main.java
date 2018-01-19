@@ -29,9 +29,9 @@ public class lifter_main extends Command {
 	protected void execute() {
 		double power = (operatorJoystick.getRawAxis(1))/2;
 		if (Math.abs(power) > 0.1) {
-			Robot.lifter.verticleMovement(power);	
+			Robot.lifter.verticalMovement(power);	
 		} else {
-			Robot.lifter.verticleMovement(0);
+			Robot.lifter.verticalMovement(0);
 		}
 	}
 
