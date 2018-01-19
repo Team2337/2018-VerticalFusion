@@ -1,22 +1,22 @@
-package com.team2337.robot.commands.extender;
+package arm;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 import com.team2337.robot.Robot;
 
 /**
- * Extender: EXTEND - Moves the extender out
+ * Extender: RETRACT - Moves the extender in
  * 
  * @category EXTENDER
- * @author Bryce
+ * @author Bruce
  */
-public class extender_extend extends Command {
-	public extender_extend() {
-		requires(Robot.extender);
+public class extender_retract extends Command {
+	public extender_retract() {
+		requires(Robot.arm);
 	}
 
 	protected void initialize() {
-		Robot.extender.extend();
+		Robot.arm.retract();
 	}
 
 	protected void execute() {

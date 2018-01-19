@@ -2,7 +2,9 @@ package com.team2337.robot;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.team2337.fusion.drive.*;
+import com.team2337.fusion.vision.VisionProcessing;
 import com.team2337.robot.subsystems.Lifter;
+import com.team2337.robot.Constants;
 
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -51,13 +53,12 @@ public class RobotMap {
 	//LEDs
 	public static Solenoid led_info;
 	
+	public static VisionProcessing vision;
+	
 	public static void init () {
 			/*
 			 * Drive Left
 			 */
-			TalonSRX chassis_leftFront = new TalonSRX(13); //13
-			TalonSRX chassis_leftMid = new TalonSRX(14); //14
-			TalonSRX chassis_leftRear = new TalonSRX(15); //15
 			
 			chassis_leftFront.setInverted(true); 
 			chassis_leftMid.follow(chassis_leftFront);
@@ -134,5 +135,25 @@ public class RobotMap {
 	     * LED
 	     */
 	    led_info = new Solenoid(1,5);
+	    
+	    
+	    
+	  
+	    /*
+	     * VisionProcessing for PixyCam 
+	     */
+	    
+		vision = new VisionProcessing("GRIP/vision");
+		vision.setCameraVerticalOffset(Constants.TargetingCamera_VerticalOffset); //Offset from front of robot
+		vision.setCameraHorizontalOffset(Constants.TargetingCamera_HorizontalOffset); //Offset from front of robot
+		vision.setCameraWidth(Constants.TargetingCamera_CameraWidth); //Camera's width
+		vision.setObjectHeight(Constants.TargetingCamera_ObjectHeight);  //In inches, height of the tap from the ground (eg Gear);
+		vision.setWidthBetweenTarget(Constants.TargetingCamera_WidthBetweenTarget); //Amount in inches of how far apart the two CONSTANTStours are (or retoreflective tap)
+		vision.setAngleConstant(Constants.TargetingCamera_AngleConstant);
+		vision.setCenterConstant(Constants.TargetingCamera_CenterConstant);
+		vision.setDistances(Constants.TargetingCamera_DistanceInchesMin, Constants.TargetingCamera_DistanceInchesMax);
+		vision.setAreas(Constants.TargetingCamera_AreaMin, Constants.TargetingCamera_AreaMax);
+		vision.setDegreePerPixel(Constants.TargetingCamera_PixelDegree);
+		vision.setRevolutionPerDegree(Constants.TargetingCamera_RevDegree);
 	}
 }

@@ -37,7 +37,7 @@ public class lifter_joystickControl extends Command {
 		liftJoystickY = -liftJoystickY;
     	
     	//Check the joystick for a dead band, if in do...
-    	if ((liftJoystickY > -.1 ) && (liftJoystickY < .1)) { 	//Dead band
+    	if ((liftJoystickY > -.2 ) && (liftJoystickY < .2)) { 	//Dead band
     		
     		liftJoystickY = 0;  //Set Motor to 0 if in dead band
     		//If setPointSet, is not set (so false), run this ONCE and
