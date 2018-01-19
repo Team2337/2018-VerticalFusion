@@ -13,17 +13,30 @@ import com.team2337.robot.Robot;
 
 /**
  * Lifter: STOPPID - Stops the PID of the lift
+ * 
  * @category LIFTER
- * @author -
+ * @author - Bryce
  */
 public class lifter_stopPID extends Command {
 	public lifter_stopPID() {
 		requires(Robot.lifter);
 	}
-	
-	protected void initialize() {}
-	protected void execute() {}
-	protected boolean isFinished() {return false;}
-	protected void end() {}
-	protected void interrupted() {this.end();}
+
+	protected void initialize() {
+		Robot.lifter.stopPID();
+	}
+
+	protected void execute() {
+	}
+
+	protected boolean isFinished() {
+		return true;
+	}
+
+	protected void end() {
+	}
+
+	protected void interrupted() {
+		this.end();
+	}
 }

@@ -9,6 +9,7 @@ package com.team2337.robot;
 
 import com.team2337.robot.subsystems.Chassis;
 import com.team2337.robot.subsystems.Climber;
+import com.team2337.robot.subsystems.Ejector;
 import com.team2337.robot.subsystems.Arm;
 import com.team2337.robot.subsystems.Extender;
 import com.team2337.robot.subsystems.Intake;
@@ -30,8 +31,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends TimedRobot {
 	public static Chassis chassis;
-	public static Arm ejector;
-	public static Extender extender;
+	public static Ejector ejector;
+	public static Arm arm;
 	public static Intake intake;
 	public static LED led;
 	public static Lifter lifter;
@@ -54,8 +55,8 @@ public class Robot extends TimedRobot {
 		chassis = new Chassis();
 		lifter = new Lifter();
 		intake = new Intake();
-		ejector = new Arm();
-		extender = new Extender();
+		ejector = new Ejector();
+		arm = new Arm();
 		climber = new Climber();
 		shifter = new Shifter();
 		led = new LED();
@@ -135,6 +136,8 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		SmartDashboard.putNumber("pot", RobotMap.lift_potentiometer.get());
+		SmartDashboard.putNumber("SetPoint", Robot.lifter.getSetpoint());
 	}
 
 	/**

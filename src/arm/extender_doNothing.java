@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class extender_doNothing extends Command {
 	
     public extender_doNothing() {
-    	requires(Robot.extender);
+    	requires(Robot.arm);
     }
 
     protected void initialize() {}

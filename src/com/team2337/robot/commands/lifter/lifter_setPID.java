@@ -13,17 +13,40 @@ import com.team2337.robot.Robot;
 
 /**
  * Lifter: SETPID - Moves the lifter based of a PID set
+ * 
  * @category LIFTER
- * @author -
+ * @author - Bryce
  */
 public class lifter_setPID extends Command {
-	public lifter_setPID() {
+	private double pos = 0;
+
+	public lifter_setPID(double pos) {
 		requires(Robot.lifter);
+
+		this.pos = pos;
 	}
-	
-	protected void initialize() {}
-	protected void execute() {}
-	protected boolean isFinished() {return false;}
-	protected void end() {}
-	protected void interrupted() {this.end();}
+
+	protected void initialize() {
+		Robot.lifter.enable(); // Sets the position of the lifter PID (variable grabbed from OI)
+		Robot.lifter.setPosition(this.pos);
+	}
+
+	protected void execute() {
+
+	}
+
+	protected boolean isFinished() {
+		return (Robot.lifter.onTarget());
+	}
+
+	protected void end() {
+		Robot.lifter.enable();
+		Robot.lifter.setPosition(Robot.lifter.getPosition());
+		// When the command ends or is interrupted it will keep the lifter from dropping
+		// back to a bad position
+	}
+
+	protected void interrupted() {
+		this.end();
+	}
 }

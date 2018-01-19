@@ -7,6 +7,9 @@ import com.team2337.robot.commands.*;
 import com.team2337.robot.commands.chassis.chassis_moveForward;
 import com.team2337.robot.commands.ejector.*;
 import com.team2337.robot.commands.intake.*;
+import com.team2337.robot.commands.lifter.lifter_setPID;
+import com.team2337.robot.commands.lifter.lifter_startPID;
+import com.team2337.robot.commands.lifter.lifter_stopPID;
 import com.team2337.robot.commands.shifter.*;
 
 import arm.*;
@@ -94,13 +97,13 @@ public class OI {
 		
 		/* ====== DRIVER JOYSTICK ===== */
 		
-		driver_GreenA			.whenPressed(new chassis_moveForward(5));
-		driver_RedB				.whenPressed(new ejector_extend());
-		driver_BlueX			.whenPressed(new extender_retract()); 
-		driver_YellowY			.whenPressed(new extender_extend());
+		driver_GreenA			.whenPressed(new lifter_setPID(0.7));
+		driver_RedB				.whenPressed(new lifter_setPID(0.9));
+		driver_BlueX			.whenPressed(new lifter_stopPID()); 
+		driver_YellowY			.whenPressed(new DoNothing());
 		
-		driver_BumperLeft		.whenPressed(new shifter_high());
-		driver_BumperRight		.whenPressed(new shifter_low());
+		driver_BumperLeft		.whenPressed(new DoNothing());
+		driver_BumperRight		.whenPressed(new DoNothing());
 		
 		driver_Back				.whileHeld(new DoNothing()); 
 		driver_Start			.whileHeld(new DoNothing());
