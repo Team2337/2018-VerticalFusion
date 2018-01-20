@@ -95,11 +95,8 @@ public class RobotMap {
 		lift_rightFront = new TalonSRX(5); // 5
 		lift_rightFront.setInverted(true);
 		
-<<<<<<< HEAD
 		lift_rightBack = new TalonSRX(6); // 6
-=======
-		lift_rightBack = new TalonSRX(6); // 4
->>>>>>> b97bf3b9e3eea7cc6947191f069f11eabae4ed7f
+
 		lift_rightBack.follow(lift_rightFront);
 		lift_rightFront.setInverted(true);
 		
