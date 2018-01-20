@@ -125,10 +125,10 @@ public class OI {
 	    
 		/* ====== OPERATOR JOYSTICK ===== */
 	    
-		operator_GreenA			.whenPressed(new DoNothing());
-		operator_RedB			.whenPressed(new DoNothing());
-		operator_BlueX			.whenPressed(new DoNothing());
-		operator_YellowY		.whenPressed(new DoNothing());
+		operator_GreenA			.whenPressed(new lifter_setPID(0.7));
+		operator_RedB			.whenPressed(new lifter_setPID(0.9));
+		operator_BlueX			.whenPressed(new lifter_setPID(0.6));
+		operator_YellowY		.whenPressed(new lifter_stopPID());
 		
 		operator_BumperLeft		.whenPressed(new DoNothing());
 		operator_BumperRight	.whenPressed(new DoNothing());
