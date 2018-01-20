@@ -21,6 +21,14 @@ import edu.wpi.first.wpilibj.Solenoid;
  */
 public class RobotMap {
 	
+	public static TalonSRX chassis_leftFront;
+	public static TalonSRX chassis_leftMid;
+	public static TalonSRX chassis_leftRear;
+	
+	public static TalonSRX chassis_rightFront;
+	public static TalonSRX chassis_rightMid;
+	public static TalonSRX chassis_rightRear;
+	
 	public static NerdyDrive drive;
 	
 	//Lift 
@@ -59,6 +67,9 @@ public class RobotMap {
 			/*
 			 * Drive Left
 			 */
+			chassis_leftFront = new TalonSRX(13); //13
+			chassis_leftMid = new TalonSRX(14); //14
+			chassis_leftRear = new TalonSRX(15); //15
 			
 			chassis_leftFront.setInverted(true); 
 			chassis_leftMid.follow(chassis_leftFront);
@@ -69,9 +80,9 @@ public class RobotMap {
 			/*
 			 * Drive Right 
 			 */
-			TalonSRX chassis_rightFront = new TalonSRX(0); //0
-			TalonSRX chassis_rightMid = new TalonSRX(1); //1
-			TalonSRX chassis_rightRear = new TalonSRX(2); //2
+			chassis_rightFront = new TalonSRX(0); //0
+			chassis_rightMid = new TalonSRX(1); //1
+			chassis_rightRear = new TalonSRX(2); //2
 			
 	
 			chassis_rightMid.follow(chassis_rightFront);
@@ -96,7 +107,6 @@ public class RobotMap {
 		lift_rightFront.setInverted(true);
 		
 		lift_rightBack = new TalonSRX(6); // 6
-
 		lift_rightBack.follow(lift_rightFront);
 		lift_rightFront.setInverted(true);
 		
@@ -105,9 +115,9 @@ public class RobotMap {
 		/*
 		 * Intake
 		 */
-		intake_left = new TalonSRX(11); //6
+		intake_left = new TalonSRX(6); //6
 		intake_left.setInverted(true);
-		intake_right = new TalonSRX(10); //5
+		intake_right = new TalonSRX(5); //5
 
 		/*
 		 * Ejector
