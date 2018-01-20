@@ -47,8 +47,8 @@ public class RobotMap {
 	public static Solenoid ejector_push;
 	
 	//Extender 
-	public static Solenoid extender_left;
-	public static Solenoid extender_right;
+	public static TalonSRX arm_left;
+	public static TalonSRX arm_right;
 	
 	//Climber 
 	public static TalonSRX climber_left;
@@ -100,13 +100,13 @@ public class RobotMap {
 		 */
 		lift_leftFront = new TalonSRX(3); //3
 		
-		lift_leftBack = new TalonSRX(4); //3
+		lift_leftBack = new TalonSRX(4); //4
 		lift_leftBack.follow(lift_leftFront);
 		
-		lift_rightFront = new TalonSRX(5); // 4
+		lift_rightFront = new TalonSRX(5); // 5
 		lift_rightFront.setInverted(true);
 		
-		lift_rightBack = new TalonSRX(0); // 4
+		lift_rightBack = new TalonSRX(6); // 6
 		lift_rightBack.follow(lift_rightFront);
 		lift_rightFront.setInverted(true);
 		
@@ -125,16 +125,16 @@ public class RobotMap {
 		ejector_push = new Solenoid(1,0); //1,0
 		
 		/*
-		 * Extender
+		 * Arm
 		 */
-		extender_left = new Solenoid(1,1); //1,1
-		extender_right = new Solenoid(1,2); //1,1
+		arm_left = new TalonSRX(7);  //7
+		arm_right = new TalonSRX(8); //8
 		
 		/*
 		 * Climber
 		 */
-		climber_left = new TalonSRX(7); //7
-	    climber_right = new TalonSRX(8); //8
+		climber_left = new TalonSRX(9); //9
+	    climber_right = new TalonSRX(10); //
 		
 	    /*
 	     * Shifter

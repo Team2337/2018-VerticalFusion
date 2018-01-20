@@ -11,7 +11,6 @@ import com.team2337.robot.subsystems.Chassis;
 import com.team2337.robot.subsystems.Climber;
 import com.team2337.robot.subsystems.Ejector;
 import com.team2337.robot.subsystems.Arm;
-import com.team2337.robot.subsystems.Extender;
 import com.team2337.robot.subsystems.Intake;
 import com.team2337.robot.subsystems.LED;
 import com.team2337.robot.subsystems.Lifter;

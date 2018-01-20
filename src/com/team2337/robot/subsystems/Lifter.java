@@ -4,15 +4,10 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.team2337.robot.RobotMap;
 import com.team2337.robot.commands.lifter.lifter_joystickControl;
-import com.team2337.robot.commands.lifter.lifter_startPID;
 
-import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
-import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.interfaces.Potentiometer;
+
 
 /**
  * The system to move cubes up and down
