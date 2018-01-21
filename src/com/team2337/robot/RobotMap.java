@@ -50,6 +50,10 @@ public class RobotMap {
 	public static TalonSRX arm_left;
 	public static TalonSRX arm_right;
 	
+	//Claw
+	public static Solenoid claw_left;
+	public static Solenoid claw_right;
+	
 	//Climber 
 	public static TalonSRX climber_left;
 	public static TalonSRX climber_right;
@@ -67,7 +71,7 @@ public class RobotMap {
 			/*
 			 * Drive Left
 			 */
-			chassis_leftFront = new TalonSRX(13); //13
+			chassis_leftFront = new TalonSRX(8); //13
 			chassis_leftMid = new TalonSRX(14); //14
 			chassis_leftRear = new TalonSRX(15); //15
 			
@@ -80,7 +84,7 @@ public class RobotMap {
 			/*
 			 * Drive Right 
 			 */
-			chassis_rightFront = new TalonSRX(0); //0
+			chassis_rightFront = new TalonSRX(7); //0
 			chassis_rightMid = new TalonSRX(1); //1
 			chassis_rightRear = new TalonSRX(2); //2
 			
@@ -115,20 +119,27 @@ public class RobotMap {
 		/*
 		 * Intake
 		 */
-		intake_left = new TalonSRX(6); //6
+		intake_left = new TalonSRX(12); //6
 		intake_left.setInverted(true);
-		intake_right = new TalonSRX(5); //5
+		intake_right = new TalonSRX(11); //5
 
 		/*
 		 * Ejector
 		 */
-		ejector_push = new Solenoid(1,0); //1,0
+		ejector_push = new Solenoid(0,1); //1,0
 		
 		/*
 		 * Arm
 		 */
-		arm_left = new TalonSRX(7);  //7
-		arm_right = new TalonSRX(8); //8
+		arm_left = new TalonSRX(0);  //7
+		arm_right = new TalonSRX(13); //8
+		arm_right.setInverted(true);
+		
+		/*
+		 * Claw
+		 */
+		claw_left = new Solenoid(0,2);
+		claw_right = new Solenoid(0,3);
 		
 		/*
 		 * Climber

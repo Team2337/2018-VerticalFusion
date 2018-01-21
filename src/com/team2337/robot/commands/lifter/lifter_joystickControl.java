@@ -7,11 +7,14 @@
 
 package com.team2337.robot.commands.lifter;
 
+import edu.wpi.first.wpilibj.AnalogPotentiometer;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Command;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.team2337.robot.Robot;
 import com.team2337.robot.RobotMap;
+import com.team2337.robot.subsystems.Arm;
 
 /**
  * Lifter: JOYSTICKCONTROL - Moves the lifter based joystick
@@ -20,22 +23,38 @@ import com.team2337.robot.RobotMap;
  * @author - Bryce
  */
 public class lifter_joystickControl extends Command {
-	
 	public boolean setPointSet = false;
+	public static boolean isAtTop = false;
+	public static double potValue;
 	
 	public lifter_joystickControl() {
 		requires(Robot.lifter);
 	}
 
 	protected void initialize() {
+		isAtTop = false;
 		setPointSet = false; 
     	Robot.lifter.disable();
 	}
 
 	protected void execute() {
 		double liftJoystickY = Robot.oi.operatorJoystick.getRawAxis(1);
+		if(Arm.armAngle <= 85) {
 		liftJoystickY = -liftJoystickY;
-    	
+		}
+		else if(Arm.armAngle >85 && Arm.armAngle <180) {
+			liftJoystickY = +liftJoystickY;
+		}
+		
+		potValue = RobotMap.lift_potentiometer.get();
+		
+		if(potValue <= 1.1 && potValue > 1.025) {
+			isAtTop = true; 
+			
+		}
+		else if(potValue <= 1.0) {
+			isAtTop = false; 
+		}
     	//Check the joystick for a dead band, if in do...
     	if ((liftJoystickY > -.2 ) && (liftJoystickY < .2)) { 	//Dead band
     		

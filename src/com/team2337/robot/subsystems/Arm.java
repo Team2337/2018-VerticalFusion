@@ -3,17 +3,19 @@ package com.team2337.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.team2337.robot.RobotMap;
+import com.team2337.robot.commands.arm.arm_joystickControl;
 import com.team2337.robot.commands.lifter.lifter_joystickControl;
 
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 /**
  * The subsystem to control the arm via a PID
  * 
  * @category LIFTER
- * @author Brendan, Jennah (not bryce)
+ * @author Brendan, Jennah, Bryce
  */
 public class Arm extends PIDSubsystem {
 
@@ -22,11 +24,12 @@ public class Arm extends PIDSubsystem {
 
 	private boolean PIDStatus = false;
 
+	public static double armAngle = 0;
 	private double maxSpeedUp = 0.5;
 	private double maxSpeedDown = -0.5;
 
 	protected void initDefaultCommand() {
-		setDefaultCommand(new lifter_joystickControl());
+		setDefaultCommand(new arm_joystickControl());
 	}
 
 	public Arm() {
@@ -40,10 +43,11 @@ public class Arm extends PIDSubsystem {
 	/**
 	 * Returns the input of the PID 
 	 */
-	protected double returnPIDInput() {
+	public double returnPIDInput() {
 
 
 		return armLeft.getSensorCollection().getQuadraturePosition();
+//		return SmartDashboard.getNumber("ArmPosition", 0.5);
 	}
 	
 	/**
@@ -102,9 +106,9 @@ public class Arm extends PIDSubsystem {
 	}
 
 	/**
-	 * Set the Output range for the Lift during Telop.
+	 * Set the Output range for the Lift during Teleop.
 	 */
-	public void setTeleopLiftSpeed() {
+	public void setTeleopArmSpeed() {
 		getPIDController().setOutputRange(maxSpeedDown, maxSpeedUp); // For the lift PID
 	}
 	/**

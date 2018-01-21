@@ -4,6 +4,8 @@ import com.team2337.fusion.controller.JoystickAnalogButton;
 import com.team2337.fusion.controller.JoystickPOVButton;
 
 import com.team2337.robot.commands.*;
+import com.team2337.robot.commands.arm.arm_decreaseAngle;
+import com.team2337.robot.commands.arm.arm_increaseAngle;
 import com.team2337.robot.commands.ejector.*;
 import com.team2337.robot.commands.intake.*;
 import com.team2337.robot.commands.shifter.*;
@@ -95,9 +97,9 @@ public class OI {
 		/* ====== DRIVER JOYSTICK ===== */
 		
 		driver_GreenA			.whenPressed(new lifter_setPID(0.7));
-		driver_RedB				.whenPressed(new lifter_setPID(0.9));
-		driver_BlueX			.whenPressed(new lifter_stopPID()); 
-		driver_YellowY			.whenPressed(new DoNothing());
+		driver_RedB				.whenPressed(new lifter_setPID(0.6));
+		driver_BlueX			.whenPressed(new lifter_setPID(0.1)); 
+		driver_YellowY			.whenPressed(new lifter_stopPID());
 		
 		driver_BumperLeft		.whenPressed(new DoNothing());
 		driver_BumperRight		.whenPressed(new DoNothing());
@@ -127,11 +129,11 @@ public class OI {
 	    
 		operator_GreenA			.whenPressed(new lifter_setPID(0.7));
 		operator_RedB			.whenPressed(new lifter_setPID(0.9));
-		operator_BlueX			.whenPressed(new lifter_setPID(0.6));
+		operator_BlueX			.whenPressed(new lifter_setPID(1.1));
 		operator_YellowY		.whenPressed(new lifter_stopPID());
 		
-		operator_BumperLeft		.whenPressed(new DoNothing());
-		operator_BumperRight	.whenPressed(new DoNothing());
+		operator_BumperLeft		.whileHeld(new arm_increaseAngle());
+		operator_BumperRight	.whileHeld(new arm_decreaseAngle());
 		
 		operator_Back			.whenPressed(new DoNothing());
 		operator_Start			.whenPressed(new DoNothing());

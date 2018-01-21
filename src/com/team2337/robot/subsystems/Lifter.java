@@ -25,6 +25,8 @@ public class Lifter extends PIDSubsystem {
 
 	private boolean PIDStatus = false;
 
+	public double potValue = RobotMap.lift_potentiometer.get();
+	
 	private double maxSpeedUp = 0.5;
 	private double maxSpeedDown = -0.5;
 
@@ -38,7 +40,7 @@ public class Lifter extends PIDSubsystem {
 		setAbsoluteTolerance(0.05);
 		getPIDController().setContinuous(false);
 
-		getPIDController().setInputRange(0, 1);
+		getPIDController().setInputRange(0, 5);
 
 		// Use these to get going:
 		// setSetpoint() - Sets where the PID controller should move the system

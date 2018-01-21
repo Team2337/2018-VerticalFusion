@@ -22,6 +22,7 @@ import com.team2337.robot.RobotMap;
 public class arm_joystickControl extends Command {
 	
 	public boolean setPointSet = false;
+	public static double armPositionValue;
 	
 	public arm_joystickControl() {
 		requires(Robot.arm);
@@ -33,38 +34,40 @@ public class arm_joystickControl extends Command {
 	}
 
 	protected void execute() {
-		double liftJoystickY = Robot.oi.operatorJoystick.getRawAxis(1);
-    	liftJoystickY = -liftJoystickY;
+		armPositionValue = Robot.oi.operatorJoystick.getRawAxis(4);
+		double armJoystickX = Robot.oi.operatorJoystick.getRawAxis(4);
+    	armJoystickX = -armJoystickX;
     	
     	//Check the joystick for a dead band, if in do...
-    	if ((liftJoystickY > -.1 ) && (liftJoystickY < .1)) { //Dead band
+    	if ((armJoystickX > -.1 ) && (armJoystickX < .1)) { //Dead band
     		
-    		liftJoystickY = 0;  //Set Motor to 0 if in dead band
+    		armJoystickX = 0;  //Set Motor to 0 if in dead band
     		//If setPointSet, is not set (so false), run this ONCE and
-    		//enable the Lift PID and set the PID to where the lift is
+    		//enable the arm PID and set the PID to where the arm is
     		if (!setPointSet) {
-    			Robot.arm.enable(); //Enable Lift Pid
-    			Robot.arm.setSetpoint(Robot.arm.getPosition()); //Set the Lift
+    			Robot.arm.enable(); //Enable arm Pid
+    			Robot.arm.setSetpoint(Robot.arm.getPosition()); //Set the arm
     			//Make setPointSet true so this statement true so it won't loop
     			setPointSet = true; 
     		}
     	} else {		//If the Joystick is out of the dead band, do..
-    		Robot.arm.disable(); //Disable the Lift PID
+    		Robot.arm.disable(); //Disable the arm PID
     		//Make the motor be controlled by the joystick but at a multiplied speed
-    		if  ((liftJoystickY < 0) && (Robot.arm.getPosition() > 7.9)) {
-    			RobotMap.lift_rightFront.set(ControlMode.PercentOutput, 0);
-    			RobotMap.lift_leftFront.set(ControlMode.PercentOutput, 0);
-    		} else if (liftJoystickY < 0) {
-    			RobotMap.lift_rightFront.set(ControlMode.PercentOutput, 1.00 * liftJoystickY); //Positive
-    			RobotMap.lift_leftFront.set(ControlMode.PercentOutput, 1.00 * liftJoystickY);
-
-    		} else if ((Robot.arm.getPosition() > 1.249) && (liftJoystickY > 0)) {
-    			RobotMap.lift_rightFront.set(ControlMode.PercentOutput, 1.00 * liftJoystickY);	//Negative
-    			RobotMap.lift_leftFront.set(ControlMode.PercentOutput, 1.00 * liftJoystickY);
-
-    		} else  {
-    			RobotMap.lift_rightFront.set(ControlMode.PercentOutput, 0);
-    			RobotMap.lift_leftFront.set(ControlMode.PercentOutput, 0);
+    		if  ((armJoystickX > .1)) {
+    			RobotMap.arm_right.set(ControlMode.PercentOutput, armJoystickX);
+    			RobotMap.arm_left.set(ControlMode.PercentOutput, -armJoystickX);
+    			//System.out.println("UP!");
+    			
+    		} 
+    		else if (armJoystickX < -.1) {
+    			RobotMap.arm_right.set(ControlMode.PercentOutput, armJoystickX);
+    			RobotMap.arm_left.set(ControlMode.PercentOutput, -armJoystickX);
+    			//System.out.println("HEY, This should be going down!");
+    		}
+    		else {
+    			RobotMap.arm_right.set(ControlMode.PercentOutput, 0);
+    			RobotMap.arm_left.set(ControlMode.PercentOutput, 0);
+    			
     		}
     		//Make the setPointSet to false, so if in dead band, the PID can reset
     		setPointSet = false;
