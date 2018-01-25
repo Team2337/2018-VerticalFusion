@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.team2337.robot.Robot;
 import com.team2337.robot.RobotMap;
+import com.team2337.robot.subsystems.Arm;
 
 /**
  * arm: JOYSTICKCONTROL - Moves the arm based joystick
@@ -20,58 +21,85 @@ import com.team2337.robot.RobotMap;
  * @author - Bryce
  */
 public class arm_joystickControl extends Command {
-	
+
 	public boolean setPointSet = false;
-	public static double armPositionValue;
-	
+	public static double armPositionValue = 0;
+	public static double armPositionEncoder;
+	public static boolean isAtTop;
+
 	public arm_joystickControl() {
 		requires(Robot.arm);
 	}
 
 	protected void initialize() {
-		setPointSet = false; 
-    	Robot.arm.disable();
+		setPointSet = false;
+		Robot.arm.disable();
 	}
 
 	protected void execute() {
-		armPositionValue = Robot.oi.operatorJoystick.getRawAxis(4);
-		double armJoystickX = Robot.oi.operatorJoystick.getRawAxis(4);
-    	armJoystickX = -armJoystickX;
-    	
-    	//Check the joystick for a dead band, if in do...
-    	if ((armJoystickX > -.1 ) && (armJoystickX < .1)) { //Dead band
-    		
-    		armJoystickX = 0;  //Set Motor to 0 if in dead band
-    		//If setPointSet, is not set (so false), run this ONCE and
-    		//enable the arm PID and set the PID to where the arm is
-    		if (!setPointSet) {
-    			Robot.arm.enable(); //Enable arm Pid
-    			Robot.arm.setSetpoint(Robot.arm.getPosition()); //Set the arm
-    			//Make setPointSet true so this statement true so it won't loop
-    			setPointSet = true; 
-    		}
-    	} else {		//If the Joystick is out of the dead band, do..
-    		Robot.arm.disable(); //Disable the arm PID
-    		//Make the motor be controlled by the joystick but at a multiplied speed
-    		if  ((armJoystickX > .1)) {
-    			RobotMap.arm_right.set(ControlMode.PercentOutput, armJoystickX);
-    			RobotMap.arm_left.set(ControlMode.PercentOutput, -armJoystickX);
-    			//System.out.println("UP!");
-    			
-    		} 
-    		else if (armJoystickX < -.1) {
-    			RobotMap.arm_right.set(ControlMode.PercentOutput, armJoystickX);
-    			RobotMap.arm_left.set(ControlMode.PercentOutput, -armJoystickX);
-    			//System.out.println("HEY, This should be going down!");
-    		}
-    		else {
-    			RobotMap.arm_right.set(ControlMode.PercentOutput, 0);
-    			RobotMap.arm_left.set(ControlMode.PercentOutput, 0);
-    			
-    		}
-    		//Make the setPointSet to false, so if in dead band, the PID can reset
-    		setPointSet = false;
-    	}	// End Deadband
+		armPositionEncoder = RobotMap.arm_right.getSelectedSensorPosition(0);
+		isAtTop = com.team2337.robot.commands.lifter.lifter_joystickControl.isAtTop;
+
+		// armPositionValue = Robot.oi.operatorJoystick.getRawAxis(5);
+		double armJoystickX = Robot.oi.operatorJoystick.getRawAxis(5);
+		armJoystickX = -armJoystickX;
+
+		// Check the joystick for a dead band, if in do...
+		if ((armJoystickX > -.2) && (armJoystickX < .2)) { // Dead band
+
+			armJoystickX = 0; // Set Motor to 0 if in dead band
+			// If setPointSet, is not set (so false), run this ONCE and
+			// enable the arm PID and set the PID to where the arm is
+
+		} else { // If the Joystick is out of the dead band, do..
+			Robot.arm.disable(); // Disable the arm PID
+			// Make the motor be controlled by the joystick but at a multiplied speed
+			if ((armJoystickX > .1)) {
+				if (armPositionEncoder <= 2500 && !isAtTop && armPositionValue >= 0 && armPositionValue < 225) {
+					Arm.setSoftLimits(968, 0);
+					
+					RobotMap.arm_right.set(ControlMode.PercentOutput, armJoystickX);
+					RobotMap.arm_left.set(ControlMode.PercentOutput, -armJoystickX);
+					armPositionValue++;
+					System.out.println("UP!");
+				} else if (armPositionEncoder <= 2500 && isAtTop && armPositionValue >= 0 && armPositionValue < 225) {
+					RobotMap.arm_right.set(ControlMode.PercentOutput, armJoystickX);
+					RobotMap.arm_left.set(ControlMode.PercentOutput, -armJoystickX);
+					
+					Arm.setSoftLimits(2560, 0);
+					armPositionValue++;
+					System.out.println("UP!Lift SetPoint");
+				} /*else {
+					Arm.setSoftLimits(2560, 0);
+					System.out.println("Stop");
+				}*/
+
+			} else if (armJoystickX < -.1) {
+				 if (armPositionEncoder <= 2560 && armPositionEncoder > 0 && armPositionValue <= 225 && armPositionValue >0) {
+					if (isAtTop) {
+						Arm.setSoftLimits(2560, 0);
+						armPositionValue--;
+						System.out.println("DOWN At Top");
+					} else {
+						if(armPositionEncoder >1080 && armPositionValue <= 225 && armPositionValue > 0) {
+						Arm.setSoftLimits(2560, 1810);
+						armPositionValue--;
+						System.out.println("DOWN! Not At Top");
+						}
+						else if(armPositionEncoder < 968 && armPositionValue <= 225 && armPositionValue > 0) {
+							Arm.setSoftLimits(968, 0);
+							armPositionValue--;
+						}
+					}
+				}
+			} else {
+				RobotMap.arm_right.set(ControlMode.PercentOutput, 0);
+				RobotMap.arm_left.set(ControlMode.PercentOutput, 0);
+
+			}
+			// Make the setPointSet to false, so if in dead band, the PID can reset
+			setPointSet = false;
+		} // End Deadband
 	}
 
 	protected boolean isFinished() {

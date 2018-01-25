@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Command;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.team2337.robot.Robot;
 import com.team2337.robot.RobotMap;
 import com.team2337.robot.subsystems.Arm;
@@ -26,6 +27,11 @@ public class lifter_joystickControl extends Command {
 	public boolean setPointSet = false;
 	public static boolean isAtTop = false;
 	public static double potValue;
+	
+	public static TalonSRX frontRight = RobotMap.lift_rightFront;
+	public static TalonSRX frontLeft = RobotMap.lift_leftFront;
+	public static TalonSRX backRight = RobotMap.lift_leftBack;
+	
 	
 	public lifter_joystickControl() {
 		requires(Robot.lifter);

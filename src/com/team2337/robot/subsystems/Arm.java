@@ -118,4 +118,29 @@ public class Arm extends PIDSubsystem {
 	    	setSetpoint(pos);
 	}
 	
+	public void moveForward(double power) {
+		armLeft.set(ControlMode.PercentOutput, power);
+		armRight.set(ControlMode.PercentOutput, power);
+	}
+	public void moveBackward(double power) {
+		armLeft.set(ControlMode.PercentOutput, -power);
+		armRight.set(ControlMode.PercentOutput, -power);
+	}
+	public void stop() {
+		armLeft.set(ControlMode.PercentOutput, 0);
+		armRight.set(ControlMode.PercentOutput, 0);
+	}
+	
+	public static void setSoftLimits(int forward, int reverse) {
+		RobotMap.arm_left.configForwardSoftLimitThreshold(forward, 0);
+		RobotMap.arm_right.configForwardSoftLimitThreshold(forward, 0);
+		
+		RobotMap.arm_left.configReverseSoftLimitThreshold(reverse, 0);
+		RobotMap.arm_right.configReverseSoftLimitThreshold(reverse, 0);
+		
+		SmartDashboard.putNumber("forwardSoftLimit", forward);
+		SmartDashboard.putNumber("reverseSoftLimit", reverse);
+		
+	}
+	
 }

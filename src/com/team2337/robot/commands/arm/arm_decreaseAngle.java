@@ -10,6 +10,7 @@ package com.team2337.robot.commands.arm;
 import edu.wpi.first.wpilibj.command.Command;
 
 import com.team2337.robot.Robot;
+import com.team2337.robot.RobotMap;
 import com.team2337.robot.subsystems.Arm;
 
 /**
@@ -18,6 +19,7 @@ import com.team2337.robot.subsystems.Arm;
 public class arm_decreaseAngle extends Command {
 	public static double armAngle = 0;
 	public double potValue;
+	public double armPosition;
 	boolean on = true;
 	
 	public arm_decreaseAngle() {
@@ -34,17 +36,19 @@ public class arm_decreaseAngle extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
+		armPosition = RobotMap.arm_right.getSelectedSensorPosition(0);
 		potValue = com.team2337.robot.commands.lifter.lifter_joystickControl.potValue;
-		if(on && Arm.armAngle > 0) {
+		
+		if(on && armPosition > 0) {
 		if(com.team2337.robot.commands.lifter.lifter_joystickControl.isAtTop==false) {
-			if(Arm.armAngle > 85) {
+			if(armPosition > 944.44) {
 			Arm.armAngle -= 1;
 			}
 		}
 		else if(com.team2337.robot.commands.lifter.lifter_joystickControl.isAtTop==true) {
 			Arm.armAngle -=1;
 		}
-		else if(Arm.armAngle < 85) {
+		else if(armPosition < 944.44) {
 			Arm.armAngle -=1;
 		}
 		else {

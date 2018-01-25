@@ -1,5 +1,6 @@
 package com.team2337.robot;
 
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.team2337.fusion.drive.*;
 import com.team2337.fusion.vision.VisionProcessing;
@@ -7,7 +8,9 @@ import com.team2337.robot.subsystems.Lifter;
 import com.team2337.robot.Constants;
 
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.hal.EncoderJNI;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -46,9 +49,12 @@ public class RobotMap {
 	//Ejector 
 	public static Solenoid ejector_push;
 	
-	//Extender 
+	//Arm 
 	public static TalonSRX arm_left;
 	public static TalonSRX arm_right;
+	
+	public static Encoder enc;
+	//public static double encoderValue = enc.get();
 	
 	//Claw
 	public static Solenoid claw_left;
@@ -134,6 +140,15 @@ public class RobotMap {
 		arm_left = new TalonSRX(0);  //7
 		arm_right = new TalonSRX(13); //8
 		arm_right.setInverted(true);
+		
+		enc = new Encoder(0, 1, true, Encoder.EncodingType.k4X);
+		
+		arm_right.setStatusFramePeriod(0, 0, 0);
+		arm_right.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
+		
+		RobotMap.arm_left.configForwardSoftLimitEnable(true, 0);
+		RobotMap.arm_right.configForwardSoftLimitEnable(true, 0);
+		
 		
 		/*
 		 * Claw

@@ -11,6 +11,7 @@ import com.team2337.robot.subsystems.Chassis;
 import com.team2337.robot.subsystems.Claw;
 import com.team2337.robot.subsystems.Climber;
 import com.team2337.robot.subsystems.Ejector;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.team2337.robot.subsystems.Arm;
 import com.team2337.robot.subsystems.Intake;
 import com.team2337.robot.subsystems.LED;
@@ -144,6 +145,11 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putBoolean("atSetPoint?", com.team2337.robot.commands.lifter.lifter_joystickControl.isAtTop);
 		SmartDashboard.putNumber("potValue", com.team2337.robot.commands.lifter.lifter_joystickControl.potValue);
 		SmartDashboard.putNumber("armAnglePosition", Arm.armAngle);
+		SmartDashboard.putNumber("armEncoderPosition", RobotMap.arm_right.getSelectedSensorPosition(0));
+		SmartDashboard.putNumber("armValue", com.team2337.robot.commands.arm.arm_increaseAngle.armPosition);
+		SmartDashboard.putNumber("rightFront", RobotMap.lift_rightFront.getMotorOutputPercent());
+		SmartDashboard.putNumber("leftFront", RobotMap.lift_leftFront.getMotorOutputPercent());
+		SmartDashboard.putNumber("armPositionValue", com.team2337.robot.commands.arm.arm_joystickControl.armPositionValue);
 	}
 
 	/**
