@@ -1,4 +1,4 @@
-package com.team2337.robot.subsystems.PixyCam;
+package com.team2337.fusion.PixyCam;
 
 /**
  * This exception represents the case where a vision target was not found.

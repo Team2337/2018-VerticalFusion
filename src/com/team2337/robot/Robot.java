@@ -15,8 +15,9 @@ import com.team2337.robot.subsystems.Extender;
 import com.team2337.robot.subsystems.Intake;
 import com.team2337.robot.subsystems.LED;
 import com.team2337.robot.subsystems.Lifter;
+import com.team2337.robot.subsystems.PixyCam;
 import com.team2337.robot.subsystems.Shifter;
-import com.team2337.robot.subsystems.PixyCam.PixyCam;
+import com.team2337.fusion.PixyCam.PixySPI;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -61,6 +62,7 @@ public class Robot extends TimedRobot {
 		climber = new Climber();
 		shifter = new Shifter();
 		led = new LED();
+		pixyCam = new PixyCam();
 		
 		oi = new OI();
 		

@@ -1,6 +1,5 @@
 package com.team2337.robot.commands.chassis;
 
-//import org.usfirst.frc3467.robot.CommandBase;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -11,13 +10,12 @@ import com.team2337.robot.RobotMap;
 import com.team2337.robot.RobotMap.*;
 import com.team2337.fusion.drive.*;
 import com.team2337.robot.subsystems.PixyCam.*;
-
-import com.team2337.robot.subsystems.PixyCam.NoTargetException;
+import com.team2337.fusion.PixyCam.NoTargetException;
+import com.team2337.fusion.PixyCam.PixyException;
 
 public class chassis_PixyCamDrive extends Command {
 
 	// Configurable parameters
-	//public static final double ANGLE_PRECISION = 1.0;
 
 	int pixyState;
 	public static final int PIXY_READCAMERA = 1;
@@ -33,7 +31,7 @@ public class chassis_PixyCamDrive extends Command {
 	double turn, move, movement, moveSpeed;
 	double angleX;
 	
-	private Joystick driverJoystick = Robot.oi.driverJoystick;
+	//private Joystick driverJoystick = Robot.oi.driverJoystick;
 	
 	public chassis_PixyCamDrive() {
 		requires(Robot.pixyCam);
@@ -79,7 +77,7 @@ public class chassis_PixyCamDrive extends Command {
 			
     		
     		turn = angleX/10; ///////************************
-    		moveSpeed = -driverJoystick.getRawAxis(1); //Left Y
+    		moveSpeed = -Robot.oi.driverJoystick.getRawAxis(1); //Left Y
     		RobotMap.drive.arcadeDrive(moveSpeed,turn);
     		break;
     	}
@@ -92,7 +90,7 @@ public class chassis_PixyCamDrive extends Command {
 		double [] pixyData = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 
 		// Read PixyCam
-		pixyData = Robot.pixyCam.getBasicPixyData();
+		//pixyData = Robot.pixyCam.getBasicPixyData();
 
 		// Display the returned data
 	   	SmartDashboard.putString("PIXY:","cX" + pixyData[0] +"cY = " + pixyData[1]);
