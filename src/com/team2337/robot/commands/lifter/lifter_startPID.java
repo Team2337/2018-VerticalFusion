@@ -26,9 +26,9 @@ public class lifter_startPID extends Command {
 
 	protected void initialize() {
 		Robot.lifter.startPID();
-		if(!this.set) {
+		if(!lifter_startPID.set) {
 		Robot.lifter.setPosition(Robot.lifter.getPosition());
-		set = true;
+		lifter_startPID.set = true;
 		}
 		
 	}

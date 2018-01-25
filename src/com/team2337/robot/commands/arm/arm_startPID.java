@@ -26,9 +26,9 @@ public class arm_startPID extends Command {
 
 	protected void initialize() {
 		Robot.arm.startPID();
-		if(!this.set) {
+		if(!arm_startPID.set) {
 			Robot.arm.setPosition(Robot.arm.getPosition());
-			set = true;
+			arm_startPID.set = true;
 		}
 		
 	}
