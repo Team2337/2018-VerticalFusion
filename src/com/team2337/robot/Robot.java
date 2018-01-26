@@ -149,7 +149,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("armValue", com.team2337.robot.commands.arm.arm_increaseAngle.armPosition);
 		SmartDashboard.putNumber("rightFront", RobotMap.lift_rightFront.getMotorOutputPercent());
 		SmartDashboard.putNumber("leftFront", RobotMap.lift_leftFront.getMotorOutputPercent());
-		SmartDashboard.putNumber("armPositionValue", com.team2337.robot.commands.arm.arm_joystickControl.armPositionValue);
+		//SmartDashboard.putNumber("armPositionValue", com.team2337.robot.commands.arm.arm_joystickControl.armPositionValue);
 	}
 
 	/**

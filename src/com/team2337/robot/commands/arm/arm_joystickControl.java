@@ -8,6 +8,7 @@
 package com.team2337.robot.commands.arm;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.team2337.robot.Robot;
@@ -22,10 +23,10 @@ import com.team2337.robot.subsystems.Arm;
  */
 public class arm_joystickControl extends Command {
 
-	public boolean setPointSet = false;
-	public static double armPositionValue = 0;
-	public static double armPositionEncoder;
-	public static boolean isAtTop;
+	boolean setPointSet = false;
+	double armPositionValue = 0;
+	double armPositionEncoder;
+	boolean isAtTop;
 
 	public arm_joystickControl() {
 		requires(Robot.arm);
@@ -34,11 +35,14 @@ public class arm_joystickControl extends Command {
 	protected void initialize() {
 		setPointSet = false;
 		Robot.arm.disable();
+		Arm.setSoftLimits(1080, 1);
 	}
 
 	protected void execute() {
 		armPositionEncoder = RobotMap.arm_right.getSelectedSensorPosition(0);
 		isAtTop = com.team2337.robot.commands.lifter.lifter_joystickControl.isAtTop;
+		
+		SmartDashboard.putNumber("PIDArmPosition", Robot.arm.getPosition());
 
 		// armPositionValue = Robot.oi.operatorJoystick.getRawAxis(5);
 		double armJoystickX = Robot.oi.operatorJoystick.getRawAxis(5);
@@ -46,16 +50,23 @@ public class arm_joystickControl extends Command {
 
 		// Check the joystick for a dead band, if in do...
 		if ((armJoystickX > -.2) && (armJoystickX < .2)) { // Dead band
-
+			//Robot.arm.enable();
 			armJoystickX = 0; // Set Motor to 0 if in dead band
 			// If setPointSet, is not set (so false), run this ONCE and
 			// enable the arm PID and set the PID to where the arm is
-
+			if (!setPointSet) {
+    			Robot.arm.enable(); //Enable Lift Pid
+    			Robot.arm.setSetpoint(Robot.arm.getPosition()); //Set the arm
+    			//Make setPointSet true so this statement true so it won't loop
+    			setPointSet = true; 
+			}
 		} else { // If the Joystick is out of the dead band, do..
 			Robot.arm.disable(); // Disable the arm PID
 			// Make the motor be controlled by the joystick but at a multiplied speed
-			if ((armJoystickX > .1)) {
-				if (armPositionEncoder <= 2500 && !isAtTop && armPositionValue >= 0 && armPositionValue < 225) {
+			if ((armJoystickX > 0)) {
+				Arm.moveForward(armJoystickX);
+				//Arm.setSoftLimits(1080, 1);
+				/*if (armPositionEncoder <= 2500 && !isAtTop && armPositionValue >= 0 && armPositionValue < 225) {
 					Arm.setSoftLimits(968, 0);
 					
 					RobotMap.arm_right.set(ControlMode.PercentOutput, armJoystickX);
@@ -74,8 +85,10 @@ public class arm_joystickControl extends Command {
 					System.out.println("Stop");
 				}*/
 
-			} else if (armJoystickX < -.1) {
-				 if (armPositionEncoder <= 2560 && armPositionEncoder > 0 && armPositionValue <= 225 && armPositionValue >0) {
+			} else if (armJoystickX < 0) {
+				Arm.moveBackward(armJoystickX);
+				//Arm.setSoftLimits(1080, 1);
+				/* if (armPositionEncoder <= 2560 && armPositionEncoder > 0 && armPositionValue <= 225 && armPositionValue >0) {
 					if (isAtTop) {
 						Arm.setSoftLimits(2560, 0);
 						armPositionValue--;
@@ -91,7 +104,7 @@ public class arm_joystickControl extends Command {
 							armPositionValue--;
 						}
 					}
-				}
+				}*/
 			} else {
 				RobotMap.arm_right.set(ControlMode.PercentOutput, 0);
 				RobotMap.arm_left.set(ControlMode.PercentOutput, 0);
@@ -107,6 +120,7 @@ public class arm_joystickControl extends Command {
 	}
 
 	protected void end() {
+		
 	}
 
 	protected void interrupted() {

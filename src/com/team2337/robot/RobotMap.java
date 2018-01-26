@@ -145,9 +145,12 @@ public class RobotMap {
 		
 		arm_right.setStatusFramePeriod(0, 0, 0);
 		arm_right.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
+		arm_right.setSensorPhase(true);
 		
 		RobotMap.arm_left.configForwardSoftLimitEnable(true, 0);
 		RobotMap.arm_right.configForwardSoftLimitEnable(true, 0);
+		
+		RobotMap.arm_right.configReverseSoftLimitEnable(true, 0);
 		
 		
 		/*
