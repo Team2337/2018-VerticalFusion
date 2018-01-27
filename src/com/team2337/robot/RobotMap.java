@@ -2,6 +2,7 @@ package com.team2337.robot;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.team2337.fusion.drive.*;
 import com.team2337.fusion.vision.VisionProcessing;
 import com.team2337.robot.subsystems.Lifter;
@@ -25,12 +26,12 @@ import edu.wpi.first.wpilibj.hal.EncoderJNI;
 public class RobotMap {
 	
 	public static TalonSRX chassis_leftFront;
-	public static TalonSRX chassis_leftMid;
-	public static TalonSRX chassis_leftRear;
+	public static VictorSPX chassis_leftMid;
+	public static VictorSPX chassis_leftRear;
 	
 	public static TalonSRX chassis_rightFront;
-	public static TalonSRX chassis_rightMid;
-	public static TalonSRX chassis_rightRear;
+	public static VictorSPX chassis_rightMid;
+	public static VictorSPX chassis_rightRear;
 	
 	public static NerdyDrive drive;
 	
@@ -74,35 +75,48 @@ public class RobotMap {
 	public static VisionProcessing vision;
 	
 	public static void init () {
-			/*
-			 * Drive Left
-			 */
-			chassis_leftFront = new TalonSRX(8); //13
-			chassis_leftMid = new TalonSRX(14); //14
-			chassis_leftRear = new TalonSRX(15); //15
-			
-			chassis_leftFront.setInverted(true); 
-			chassis_leftMid.follow(chassis_leftFront);
-			chassis_leftMid.setInverted(true);
-			chassis_leftRear.follow(chassis_leftFront);
-			chassis_leftRear.setInverted(true);
+		/*
+		 * Drive Left
+		 */
+		chassis_leftFront = new TalonSRX(13); //13
+		chassis_leftFront.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
+		chassis_leftFront.setSensorPhase(false);
 		
-			/*
-			 * Drive Right 
-			 */
-			chassis_rightFront = new TalonSRX(7); //0
-			chassis_rightMid = new TalonSRX(1); //1
-			chassis_rightRear = new TalonSRX(2); //2
-			
-	
-			chassis_rightMid.follow(chassis_rightFront);
-			chassis_rightRear.follow(chassis_rightFront);
+		
+		chassis_leftMid = new VictorSPX(14); //14
+		chassis_leftRear = new VictorSPX(15); //15
+		
+		chassis_leftFront.setInverted(true); 
+		chassis_leftMid.setInverted(true);
+		chassis_leftRear.setInverted(true);
+		
+		chassis_leftRear.follow(chassis_leftFront);
+		chassis_leftMid.follow(chassis_leftFront);
+		
+		/*
+		 * Drive Right 
+		 */
+		chassis_rightFront = new TalonSRX(2); //2
+		chassis_rightFront.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
+		chassis_rightFront.setSensorPhase(false);
+		
+
+		chassis_rightMid = new VictorSPX(1); //1
+		chassis_rightRear = new VictorSPX(0); //0
+		
+		chassis_rightFront.setInverted(true);
+		chassis_rightMid.setInverted(true);
+		chassis_rightRear.setInverted(true);
+		
+		chassis_rightMid.follow(chassis_rightFront);
+		chassis_rightRear.follow(chassis_rightFront);
+
 	
 			/*
 			 * NerdyDrive Instance
 			 */
 			drive = new NerdyDrive(chassis_leftFront, chassis_rightFront);
-			drive.setSensitivity(0.5);
+			
 			
 		
 		/*

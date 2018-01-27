@@ -3,65 +3,152 @@
  * @author Team2337 - Enginerds
  */
 
-
-
 package com.team2337.fusion.drive;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 public class NerdyDrive {
-	private TalonSRX left; 
+	private TalonSRX left;
 	private TalonSRX right;
-	
-	private double turnSensitivtiy = 1;
-	private double deadband = 0.2;
-	
+
+	public double m_quickStopAccumulator = 0.0;
+	public double m_quickStopThreshold = 0.2;
+	public double m_quickStopAlpha = 0.1;
+	public double m_maxOutput = 1.0;
+	public double m_deadband = 0.2;
+
 	/**
 	 * NerdyDrive - A custom RobotDrive
-	 * @param left Left TalonSRX Motor Controller
-	 * @param right Right TaonSRX Motor Controller
+	 * 
+	 * @param left
+	 *            Left TalonSRX Motor Controller
+	 * @param right
+	 *            Right TaonSRX Motor Controller
 	 */
-	public NerdyDrive(TalonSRX left,TalonSRX right)  {
+	public NerdyDrive(TalonSRX left, TalonSRX right) {
 		this.left = left;
 		this.right = right;
 	}
+
 	/**
 	 * Arcade Drive - Allows for power and turn simply
-	 * @param power - Power for moving forward
-	 * @param turn - Power for turning
+	 * 
+	 * @param power
+	 *            - Power for moving forward
+	 * @param turn
+	 *            - Power for turning
 	 */
-	public void arcadeDrive(double power, double turn)
-	{
-		if (Math.abs(power) < this.deadband) {
-			power = 0;
+	public void arcadeDrive(double xSpeed, double zRotation, boolean squaredInputs) {
+		xSpeed = limit(xSpeed);
+		xSpeed = applyDeadband(xSpeed, m_deadband);
+
+		zRotation = limit(zRotation);
+		zRotation = applyDeadband(zRotation, m_deadband);
+
+		// Square the inputs (while preserving the sign) to increase fine control
+		// while permitting full power.
+		if (squaredInputs) {
+			xSpeed = Math.copySign(xSpeed * xSpeed, xSpeed);
+			zRotation = Math.copySign(zRotation * zRotation, zRotation);
 		}
-		if (Math.abs(turn) < this.deadband) {
-			turn = 0;
+
+		double leftMotorOutput;
+		double rightMotorOutput;
+
+		double maxInput = Math.copySign(Math.max(Math.abs(xSpeed), Math.abs(zRotation)), xSpeed);
+
+		if (xSpeed >= 0.0) {
+			// First quadrant, else second quadrant
+			if (zRotation >= 0.0) {
+				leftMotorOutput = maxInput;
+				rightMotorOutput = xSpeed - zRotation;
+			} else {
+				leftMotorOutput = xSpeed + zRotation;
+				rightMotorOutput = maxInput;
+			}
+		} else {
+			// Third quadrant, else fourth quadrant
+			if (zRotation >= 0.0) {
+				leftMotorOutput = xSpeed + zRotation;
+				rightMotorOutput = maxInput;
+			} else {
+				leftMotorOutput = maxInput;
+				rightMotorOutput = xSpeed - zRotation;
+			}
 		}
-		
-		double left = power + (turn * this.turnSensitivtiy); 
-		double right = power - (turn * this.turnSensitivtiy); 
-		if (Math.abs(left) > 1) {
-			right = right / Math.abs(left);
-			left = left / Math.abs(left);	
-		}
-		if (Math.abs(right) > 1) {
-			left = left / Math.abs(right);
-			right = right / Math.abs(right);
-		}
-	
-		this.left.set(ControlMode.PercentOutput, left);
-		this.right.set(ControlMode.PercentOutput, right);
-		
+
+		this.left.set(ControlMode.PercentOutput, limit(leftMotorOutput) * m_maxOutput);
+		this.right.set(ControlMode.PercentOutput, -limit(rightMotorOutput) * m_maxOutput);
+
 	}
-	/**
-	 * Setting the sensitivity of the turn
-	 * @param sensitivity - Sensitivity of the turn (lower the number faster it goes)
-	 */
-	public void setSensitivity(double sensitivity) {
-		this.turnSensitivtiy = sensitivity;
+	public void curvatureDrive(double speed, double zRotation, boolean isQuickTurn) {
+
+		double angularPower;
+		boolean overPower;
+
+		if (isQuickTurn) {
+			if (Math.abs(speed) < m_quickStopThreshold) {
+				m_quickStopAccumulator = (1 - m_quickStopAlpha) * m_quickStopAccumulator
+						+ m_quickStopAlpha * limit(zRotation) * 2;
+			}
+			overPower = true;
+			angularPower = zRotation;
+		} else {
+			overPower = false;
+			angularPower = Math.abs(speed) * zRotation - m_quickStopAccumulator;
+
+			if (m_quickStopAccumulator > 1) {
+				m_quickStopAccumulator -= 1;
+			} else if (m_quickStopAccumulator < -1) {
+				m_quickStopAccumulator += 1;
+			} else {
+				m_quickStopAccumulator = 0.0;
+			}
+		}
+
+		double leftMotorOutput = speed + angularPower;
+		double rightMotorOutput = speed - angularPower;
+
+		// If rotation is overpowered, reduce both outputs to within acceptable range
+		if (overPower) {
+			if (leftMotorOutput > 1.0) {
+				rightMotorOutput -= leftMotorOutput - 1.0;
+				leftMotorOutput = 1.0;
+			} else if (rightMotorOutput > 1.0) {
+				leftMotorOutput -= rightMotorOutput - 1.0;
+				rightMotorOutput = 1.0;
+			} else if (leftMotorOutput < -1.0) {
+				rightMotorOutput -= leftMotorOutput + 1.0;
+				leftMotorOutput = -1.0;
+			} else if (rightMotorOutput < -1.0) {
+				leftMotorOutput -= rightMotorOutput + 1.0;
+				rightMotorOutput = -1.0;
+			}
+		}
+		this.left.set(ControlMode.PercentOutput, leftMotorOutput);
+		this.right.set(ControlMode.PercentOutput, rightMotorOutput);
 	}
 
+	protected double limit(double value) {
+		if (value > 1.0) {
+			return 1.0;
+		}
+		if (value < -1.0) {
+			return -1.0;
+		}
+		return value;
+	}
+
+	protected double applyDeadband(double value, double deadband) {
+		if (Math.abs(value) > deadband) {
+			if (value > 0.0) {
+				return (value - deadband) / (1.0 - deadband);
+			} else {
+				return (value + deadband) / (1.0 - deadband);
+			}
+		} else {
+			return 0.0;
+		}
+	}
 }
-
