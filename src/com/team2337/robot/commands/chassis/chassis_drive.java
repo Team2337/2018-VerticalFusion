@@ -24,7 +24,7 @@ public class chassis_drive extends Command {
 		double moveSpeed = -driverJoystick.getRawAxis(1); //Left Y
 		double turnSpeed = driverJoystick.getRawAxis(4); //Right X
 
-		RobotMap.drive.arcadeDrive(moveSpeed, turnSpeed);
+		RobotMap.drive.arcadeDrive(moveSpeed, turnSpeed, true);
 		
 	}
 

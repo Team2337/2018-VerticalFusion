@@ -4,9 +4,12 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.team2337.robot.RobotMap;
 import com.team2337.robot.commands.lifter.lifter_joystickControl;
+import com.team2337.robot.commands.lifter.lifter_joystickControl2;
+import com.team2337.robot.commands.lifter.lifter_joystickControl3;
 
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 /**
@@ -17,11 +20,11 @@ import edu.wpi.first.wpilibj.command.PIDSubsystem;
  */
 public class Lifter extends PIDSubsystem {
 
-	private final AnalogPotentiometer potentiometer = RobotMap.lift_potentiometer;
-	private final TalonSRX leftBack = RobotMap.lift_leftBack;
-	private final TalonSRX rightBack = RobotMap.lift_rightBack;
-	private final TalonSRX leftFront = RobotMap.lift_leftFront;
-	private final TalonSRX rightFront = RobotMap.lift_rightFront;
+	public final static AnalogPotentiometer potentiometer = RobotMap.lift_potentiometer;
+	//private final TalonSRX leftBack = RobotMap.lift_leftBack;
+	//private final TalonSRX rightBack = RobotMap.lift_rightBack;
+	private final static TalonSRX leftFront = RobotMap.lift_leftFront;
+	private final static TalonSRX rightFront = RobotMap.lift_rightFront;
 
 	private boolean PIDStatus = false;
 
@@ -31,7 +34,7 @@ public class Lifter extends PIDSubsystem {
 	private double maxSpeedDown = -0.5;
 
 	protected void initDefaultCommand() {
-		setDefaultCommand(new lifter_joystickControl());
+		setDefaultCommand(new lifter_joystickControl3());
 	}
 
 	public Lifter() {
@@ -55,8 +58,9 @@ public class Lifter extends PIDSubsystem {
 		// Return your input value for the PID loop
 		// e.g. a sensor, like a potentiometer:
 		// yourPot.getAverageVoltage() / kYourMaxVoltage;
-
-		return potentiometer.get();
+		SmartDashboard.putNumber("frontRightPIDInput", rightFront.getSensorCollection().getQuadraturePosition());
+		//SmartDashboard.putNumber("frontLeftPIDInput", leftFront.getSensorCollection().getQuadraturePosition());
+		return potentiometer.get();//RobotMap.lift_stringPot.pidGet();
 	}
 	
 	/**
@@ -65,9 +69,10 @@ public class Lifter extends PIDSubsystem {
 	protected void usePIDOutput(double output) {
 		// Use output to drive your system, like a motor
 		// e.g. yourMotor.set(output);
-
-		leftFront.set(ControlMode.PercentOutput, -output);
+		SmartDashboard.putNumber("liftNumberOutput", output);
+		//leftFront.set(ControlMode.PercentOutput, -output);
 		rightFront.set(ControlMode.PercentOutput, output);
+		leftFront.set(ControlMode.PercentOutput, output);
 
 	}
 
@@ -127,6 +132,36 @@ public class Lifter extends PIDSubsystem {
 	 */
 	public void setPosition(double pos){
 	    	setSetpoint(pos);
+	}
+	public static void setSoftLimits(int forward, int reverse) {
+		RobotMap.lift_leftFront.configForwardSoftLimitThreshold(forward, 0);
+		RobotMap.lift_rightFront.configForwardSoftLimitThreshold(forward, 0);
+		
+		RobotMap.lift_leftBack.configForwardSoftLimitThreshold(forward, 0);
+		RobotMap.lift_rightBack.configForwardSoftLimitThreshold(forward, 0);
+		
+		RobotMap.lift_leftFront.configReverseSoftLimitThreshold(reverse, 0);
+		RobotMap.lift_rightFront.configReverseSoftLimitThreshold(reverse, 0);
+	
+		RobotMap.lift_leftBack.configReverseSoftLimitThreshold(reverse, 0);
+		RobotMap.lift_rightBack.configReverseSoftLimitThreshold(reverse, 0);	
+		
+		SmartDashboard.putNumber("forwardLIFTSoftLimit", forward);
+		SmartDashboard.putNumber("reverseLIFTSoftLimit", reverse);
+		
+		SmartDashboard.putBoolean("forwardLIFTBoolean", RobotMap.arm_right.getSensorCollection().isFwdLimitSwitchClosed());
+		SmartDashboard.putBoolean("reverseLIFTBoolean", RobotMap.arm_right.getSensorCollection().isRevLimitSwitchClosed());
+	}
+	
+	public static void stop() {
+		leftFront.set(ControlMode.PercentOutput, 0);
+		rightFront.set(ControlMode.PercentOutput, 0);
+	}
+	
+	public static void liftSoftPoints(double forward, double reverse) {
+		if(forward < 1 && forward > 0.9) {
+			stop();
+		}
 	}
 	
 }

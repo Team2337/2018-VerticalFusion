@@ -21,7 +21,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Arm extends PIDSubsystem {
 
 	private final static TalonSRX armLeft = RobotMap.arm_left;
-	private final static TalonSRX armRight = RobotMap.arm_right;
+	public final static TalonSRX armRight = RobotMap.arm_right;
 
 	private boolean PIDStatus = false;
 
@@ -30,15 +30,15 @@ public class Arm extends PIDSubsystem {
 	private double maxSpeedDown = -0.5;
 
 	protected void initDefaultCommand() {
-		setDefaultCommand(new arm_joystickControl());
+		setDefaultCommand(new arm_joystickControl2());
 	}
 
 	public Arm() {
 
 		super("Arm", 4.0, 0.0, 0.0);
-		setAbsoluteTolerance(5);
+		setAbsoluteTolerance(70);
 		getPIDController().setContinuous(false);
-		getPIDController().setInputRange(0, 10000);
+		getPIDController().setInputRange(0, 4096);
 	}
 	
 	/**
@@ -47,7 +47,7 @@ public class Arm extends PIDSubsystem {
 	public double returnPIDInput() {
 
 		SmartDashboard.putNumber("armPIDInput", armRight.getSensorCollection().getQuadraturePosition());
-		return armRight.getSensorCollection().getQuadraturePosition();
+		return RobotMap.arm_right.getSelectedSensorPosition(0);
 //		return SmartDashboard.getNumber("ArmPosition", 0.5);
 	}
 	
@@ -58,7 +58,7 @@ public class Arm extends PIDSubsystem {
 
 		/*armLeft.set(ControlMode.PercentOutput, -output);
 		armRight.set(ControlMode.PercentOutput, output);*/
-		
+		SmartDashboard.putNumber("numberOutput", output);
 		Arm.moveForward(output);
 
 	}

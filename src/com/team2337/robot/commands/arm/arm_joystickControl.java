@@ -26,6 +26,7 @@ public class arm_joystickControl extends Command {
 	boolean setPointSet = false;
 	double armPositionValue = 0;
 	double armPositionEncoder;
+	double armJoystickX;
 	boolean isAtTop;
 
 	public arm_joystickControl() {
@@ -40,13 +41,18 @@ public class arm_joystickControl extends Command {
 
 	protected void execute() {
 		armPositionEncoder = RobotMap.arm_right.getSelectedSensorPosition(0);
+		
+		SmartDashboard.putBoolean("armSetSetpoint", setPointSet);
+		SmartDashboard.putNumber("PIDArmPosition", RobotMap.arm_right.getSelectedSensorPosition(0));
+		SmartDashboard.putNumber("selectedSensorPosition", armPositionEncoder);
+		SmartDashboard.putNumber("ArmJoystickValue", armJoystickX);
+		
 		isAtTop = com.team2337.robot.commands.lifter.lifter_joystickControl.isAtTop;
 		
 		SmartDashboard.putNumber("PIDArmPosition", Robot.arm.getPosition());
 
 		// armPositionValue = Robot.oi.operatorJoystick.getRawAxis(5);
-		double armJoystickX = Robot.oi.operatorJoystick.getRawAxis(5);
-		armJoystickX = -armJoystickX;
+		armJoystickX = -Robot.oi.operatorJoystick.getRawAxis(5);
 
 		// Check the joystick for a dead band, if in do...
 		if ((armJoystickX > -.2) && (armJoystickX < .2)) { // Dead band
@@ -56,7 +62,7 @@ public class arm_joystickControl extends Command {
 			// enable the arm PID and set the PID to where the arm is
 			if (!setPointSet) {
     			Robot.arm.enable(); //Enable Lift Pid
-    			Robot.arm.setSetpoint(Robot.arm.getPosition()); //Set the arm
+    			Robot.arm.setSetpoint(RobotMap.arm_right.getSelectedSensorPosition(0)); //Set the arm
     			//Make setPointSet true so this statement true so it won't loop
     			setPointSet = true; 
 			}
@@ -105,10 +111,6 @@ public class arm_joystickControl extends Command {
 						}
 					}
 				}*/
-			} else {
-				RobotMap.arm_right.set(ControlMode.PercentOutput, 0);
-				RobotMap.arm_left.set(ControlMode.PercentOutput, 0);
-
 			}
 			// Make the setPointSet to false, so if in dead band, the PID can reset
 			setPointSet = false;
