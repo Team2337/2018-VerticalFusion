@@ -39,6 +39,12 @@ public class RobotMap {
 =======
 	public static VictorSPX chassis_leftMid;
 	public static VictorSPX chassis_leftRear;
+	public static VictorSPX chassis_leftMid;
+	public static VictorSPX chassis_leftRear;
+	
+	public static TalonSRX chassis_rightFront;
+	public static VictorSPX chassis_rightMid;
+	public static VictorSPX chassis_rightRear;
 	
 	public static TalonSRX chassis_rightFront;
 	public static VictorSPX chassis_rightMid;
