@@ -28,29 +28,16 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class RobotMap {
 
 	public static TalonSRX chassis_leftFront;
-<<<<<<< HEAD
-	public static TalonSRX chassis_leftMid;
-	public static TalonSRX chassis_leftRear;
 
-	public static TalonSRX chassis_rightFront;
-	public static TalonSRX chassis_rightMid;
-	public static TalonSRX chassis_rightRear;
 
-=======
-	public static VictorSPX chassis_leftMid;
-	public static VictorSPX chassis_leftRear;
+
 	public static VictorSPX chassis_leftMid;
 	public static VictorSPX chassis_leftRear;
 	
 	public static TalonSRX chassis_rightFront;
 	public static VictorSPX chassis_rightMid;
 	public static VictorSPX chassis_rightRear;
-	
-	public static TalonSRX chassis_rightFront;
-	public static VictorSPX chassis_rightMid;
-	public static VictorSPX chassis_rightRear;
-	
->>>>>>> 424053ff30e39b235bb5d770b4b20e37b9cba20d
+
 	public static NerdyDrive drive;
 
 	// Lift
@@ -92,39 +79,6 @@ public class RobotMap {
 	public static Solenoid led_info;
 
 	public static VisionProcessing vision;
-<<<<<<< HEAD
-
-	public static void init() {
-		/*
-		 * Drive Left
-		 */
-		chassis_leftFront = new TalonSRX(8); // 13
-		chassis_leftMid = new TalonSRX(14); // 14
-		chassis_leftRear = new TalonSRX(15); // 15
-
-		chassis_leftFront.setInverted(true);
-		chassis_leftMid.follow(chassis_leftFront);
-		chassis_leftMid.setInverted(true);
-		chassis_leftRear.follow(chassis_leftFront);
-		chassis_leftRear.setInverted(true);
-
-		/*
-		 * Drive Right
-		 */
-		chassis_rightFront = new TalonSRX(7); // 0
-		chassis_rightMid = new TalonSRX(1); // 1
-		chassis_rightRear = new TalonSRX(2); // 2
-
-		chassis_rightMid.follow(chassis_rightFront);
-		chassis_rightRear.follow(chassis_rightFront);
-
-		/*
-		 * NerdyDrive Instance
-		 */
-		drive = new NerdyDrive(chassis_leftFront, chassis_rightFront);
-		drive.setSensitivity(0.5);
-
-=======
 	
 	public static void init () {
 		/*
@@ -169,9 +123,6 @@ public class RobotMap {
 			 */
 			drive = new NerdyDrive(chassis_leftFront, chassis_rightFront);
 			
-			
-		
->>>>>>> 424053ff30e39b235bb5d770b4b20e37b9cba20d
 		/*
 		 * Lift
 		 */
