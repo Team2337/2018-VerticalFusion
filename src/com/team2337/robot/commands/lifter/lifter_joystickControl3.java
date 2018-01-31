@@ -18,6 +18,7 @@ import com.team2337.robot.Robot;
 import com.team2337.robot.OI;
 import com.team2337.robot.RobotMap;
 import com.team2337.robot.subsystems.Arm;
+import com.team2337.robot.subsystems.Lifter;
 
 /**
  * Lifter: JOYSTICKCONTROL - Moves the lifter based joystick
@@ -44,7 +45,7 @@ public class lifter_joystickControl3 extends Command {
 		isAtTop = false;
 		setPointSet = false; 
     	Robot.lifter.disable();
-    	//Arm.setSoftLimits(5, -5);
+    	Lifter.setSoftLimits(5, -5);
 	}
 
 	protected void execute() {
@@ -75,8 +76,8 @@ public class lifter_joystickControl3 extends Command {
     		//enable the Lift PID and set the PID to where the lift is
     		if (!setPointSet) {
     			Robot.lifter.enable(); //Enable Lift Pid
-    			//SmartDashboard.putNumber("getStringPotValue", Robot.lifter.getPosition());
-    			Robot.lifter.setSetpoint(Robot.lifter.getPosition()); //Set the Lift
+    			SmartDashboard.putNumber("selectedSensorPositionLIFTER", Math.abs(RobotMap.lift_rightFront.getSelectedSensorPosition(0)));
+    			Robot.lifter.setSetpoint(Math.abs(RobotMap.lift_rightFront.getSelectedSensorPosition(0))); //Set the Lift
     			//Make setPointSet true so this statement true so it won't loop
     			setPointSet = true; 
     		}

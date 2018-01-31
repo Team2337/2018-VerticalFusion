@@ -70,7 +70,7 @@ public class lifter_joystickControl2 extends Command {
     		
     		if (!setPointSet) {
     			Robot.lifter.enable();
-    			Robot.lifter.setSetpoint(stringPotValue);
+    			Robot.lifter.setSetpoint(RobotMap.lift_rightFront.getSelectedSensorPosition(0));
     			
     			SmartDashboard.putNumber("PIDSetPositionLIFTER", Robot.lifter.getPosition());
     
@@ -80,16 +80,16 @@ public class lifter_joystickControl2 extends Command {
     		Robot.lifter.disable(); 
     		if  ((liftJoystickY > .1) ) {
      			RobotMap.lift_rightFront.set(ControlMode.PercentOutput, liftJoystickY);
-    			RobotMap.lift_leftFront.set(ControlMode.PercentOutput, -liftJoystickY);
+    			//RobotMap.lift_leftFront.set(ControlMode.PercentOutput, -liftJoystickY);
     			
     		} 
     		else if (liftJoystickY < -.1) {
     			RobotMap.lift_rightFront.set(ControlMode.PercentOutput, liftJoystickY);
-    			RobotMap.lift_leftFront.set(ControlMode.PercentOutput, -liftJoystickY);
+    			//RobotMap.lift_leftFront.set(ControlMode.PercentOutput, -liftJoystickY);
     		}
     		else {
     			RobotMap.lift_rightFront.set(ControlMode.PercentOutput, 0);
-    			RobotMap.lift_leftFront.set(ControlMode.PercentOutput, 0);
+    			//RobotMap.lift_leftFront.set(ControlMode.PercentOutput, 0);
     			
     		}
     		setPointSet = false;

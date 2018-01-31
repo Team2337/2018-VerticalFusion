@@ -58,9 +58,9 @@ public class Lifter extends PIDSubsystem {
 		// Return your input value for the PID loop
 		// e.g. a sensor, like a potentiometer:
 		// yourPot.getAverageVoltage() / kYourMaxVoltage;
-		SmartDashboard.putNumber("frontRightPIDInput", rightFront.getSensorCollection().getQuadraturePosition());
+		SmartDashboard.putNumber("frontRightLIFTERSoftPoint", Math.abs(RobotMap.lift_rightFront.getSelectedSensorPosition(0)));
 		//SmartDashboard.putNumber("frontLeftPIDInput", leftFront.getSensorCollection().getQuadraturePosition());
-		return potentiometer.get();//RobotMap.lift_stringPot.pidGet();
+		return Math.abs(RobotMap.lift_rightFront.getSelectedSensorPosition(0));//RobotMap.lift_stringPot.pidGet();
 	}
 	
 	/**
@@ -70,9 +70,9 @@ public class Lifter extends PIDSubsystem {
 		// Use output to drive your system, like a motor
 		// e.g. yourMotor.set(output);
 		SmartDashboard.putNumber("liftNumberOutput", output);
-		//leftFront.set(ControlMode.PercentOutput, -output);
+		leftFront.set(ControlMode.PercentOutput, -output);
 		rightFront.set(ControlMode.PercentOutput, output);
-		leftFront.set(ControlMode.PercentOutput, output);
+		
 
 	}
 
@@ -163,5 +163,6 @@ public class Lifter extends PIDSubsystem {
 			stop();
 		}
 	}
+	
 	
 }

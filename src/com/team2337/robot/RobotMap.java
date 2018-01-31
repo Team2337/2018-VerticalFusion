@@ -128,6 +128,8 @@ public class RobotMap {
 		 */
 
 		lift_rightFront = new TalonSRX(5); // 5
+		lift_rightFront.configSelectedFeedbackSensor(FeedbackDevice.Analog, 0, 0);
+		lift_rightFront.setSensorPhase(true);
 		
 		lift_rightBack = new TalonSRX(6); // 6
 		lift_rightBack.follow(lift_rightFront);
@@ -142,10 +144,10 @@ public class RobotMap {
 		
 		lift_potentiometer = new AnalogPotentiometer(2, 10.0, 0.068);
 
-		lift_rightFront.configForwardSoftLimitEnable(false, 0);
+		lift_rightFront.configForwardSoftLimitEnable(true, 0);
 		lift_leftFront.configForwardSoftLimitEnable(false, 0);
 
-		lift_rightFront.configReverseSoftLimitEnable(false, 0);
+		lift_rightFront.configReverseSoftLimitEnable(true, 0);
 		lift_leftFront.configReverseSoftLimitEnable(false, 0);
 
 		lift_rightBack.configForwardSoftLimitEnable(false, 0);

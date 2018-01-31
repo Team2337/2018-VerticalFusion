@@ -51,7 +51,7 @@ public class arm_joystickControl2 extends Command {
 
 		armJoystickX = -Robot.oi.operatorJoystick.getRawAxis(5);
 
-		stringPot = Robot.lifter.getPosition();
+		stringPot = Math.abs(RobotMap.lift_rightFront.getSelectedSensorPosition(0));
 
 		if ((armJoystickX > -.2) && (armJoystickX < .2)) {
 
