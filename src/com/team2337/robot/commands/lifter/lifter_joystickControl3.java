@@ -26,15 +26,18 @@ import com.team2337.robot.subsystems.Lifter;
  * @category LIFTER
  * @author - Bryce
  */
-public class lifter_joystickControl extends Command {
+public class lifter_joystickControl3 extends Command {
 	public boolean setPointSet = false;
 	public static boolean isAtTop = false;
 	public static double potValue;
 	double liftJoystickY;
 	
 	public static TalonSRX frontRight = RobotMap.lift_rightFront;
+//	public static TalonSRX frontLeft = RobotMap.lift_leftFront;
+	//public static TalonSRX backRight = RobotMap.lift_leftBack;
 	
-	public lifter_joystickControl() {
+	
+	public lifter_joystickControl3() {
 		requires(Robot.lifter);
 	}
 
@@ -42,14 +45,13 @@ public class lifter_joystickControl extends Command {
 		isAtTop = false;
 		setPointSet = false; 
     	Robot.lifter.disable();
-    	Lifter.setSoftLimits(1, 0);
+    	Lifter.setSoftLimits(5, -5);
 	}
 
 	protected void execute() {
-		SmartDashboard.putNumber("lifter" , liftJoystickY);
-		SmartDashboard.putNumber("getStringPotValue", Robot.lifter.potentiometer.get());
-		SmartDashboard.putNumber("PIDLifterSetPoint", RobotMap.lift_stringPot.getValue());
-		liftJoystickY = OI.operatorJoystick.getRawAxis(1);
+		liftJoystickY = -Robot.oi.operatorJoystick.getRawAxis(1);
+		
+		SmartDashboard.putNumber("LIFTERJOYSTICKVALUE", liftJoystickY);
 		/*if(Arm.armAngle <= 85) {
 		liftJoystickY = -liftJoystickY;
 		}
@@ -57,15 +59,15 @@ public class lifter_joystickControl extends Command {
 			liftJoystickY = +liftJoystickY;
 		}*/
 		
-		potValue = RobotMap.lift_potentiometer.get() * 1000;
-		
+		//potValue = RobotMap.lift_potentiometer.get();
+		/*
 		if(potValue <= 1.1 && potValue > 1.025) {
 			isAtTop = true; 
 			
 		}
 		else if(potValue <= 1.0) {
 			isAtTop = false; 
-		}
+		}*/
     	//Check the joystick for a dead band, if in do...
     	if ((liftJoystickY > -.2 ) && (liftJoystickY < .2)) { 	//Dead band
     		
@@ -74,9 +76,8 @@ public class lifter_joystickControl extends Command {
     		//enable the Lift PID and set the PID to where the lift is
     		if (!setPointSet) {
     			Robot.lifter.enable(); //Enable Lift Pid
-    			
-    			
-    			Robot.lifter.setSetpoint(RobotMap.lift_stringPot.pidGet()); //Set the Lift
+    			SmartDashboard.putNumber("selectedSensorPositionLIFTER", Math.abs(RobotMap.lift_rightFront.getSelectedSensorPosition(0)));
+    			Robot.lifter.setSetpoint(Math.abs(RobotMap.lift_rightFront.getSelectedSensorPosition(0))); //Set the Lift
     			//Make setPointSet true so this statement true so it won't loop
     			setPointSet = true; 
     		}
@@ -84,16 +85,17 @@ public class lifter_joystickControl extends Command {
     		Robot.lifter.disable(); //Disable the Lift PID
     		//Make the motor be controlled by the joystick but at a multiplied speed
     		if  ((liftJoystickY > .1)) {
-    			RobotMap.lift_rightFront.set(ControlMode.PercentOutput, -liftJoystickY);
-    		//	RobotMap.lift_leftFront.set(ControlMode.PercentOutput, -liftJoystickY);
+    			RobotMap.lift_rightFront.set(ControlMode.PercentOutput, liftJoystickY);
+    			RobotMap.lift_leftFront.set(ControlMode.PercentOutput, -liftJoystickY);
     			//System.out.println("UP!");
     			
     		} 
     		else if (liftJoystickY < -.1) {
-    			RobotMap.lift_rightFront.set(ControlMode.PercentOutput, -liftJoystickY);
-    			//RobotMap.lift_leftFront.set(ControlMode.PercentOutput, -liftJoystickY);
+    			RobotMap.lift_rightFront.set(ControlMode.PercentOutput, liftJoystickY);
+    			RobotMap.lift_leftFront.set(ControlMode.PercentOutput, -liftJoystickY);
     			//System.out.println("HEY, This should be going down!");
     		}
+    		
     		//Make the setPointSet to false, so if in dead band, the PID can reset
     		setPointSet = false;
     	}	// End Deadband

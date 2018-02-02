@@ -8,13 +8,18 @@ import com.team2337.fusion.vision.VisionProcessing;
 import com.team2337.robot.subsystems.Lifter;
 import com.team2337.robot.Constants;
 
+<<<<<<< HEAD
 import edu.wpi.cscore.UsbCamera;
+=======
+import edu.wpi.first.wpilibj.AnalogInput;
+>>>>>>> 370b0bf23649c7fb0306204550e971d9b581f1d5
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.hal.EncoderJNI;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -29,6 +34,9 @@ import edu.wpi.first.wpilibj.hal.EncoderJNI;
 public class RobotMap {
 
 	public static TalonSRX chassis_leftFront;
+
+
+
 	public static VictorSPX chassis_leftMid;
 	public static VictorSPX chassis_leftRear;
 
@@ -36,7 +44,10 @@ public class RobotMap {
 	public static VictorSPX chassis_rightMid;
 	public static VictorSPX chassis_rightRear;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 370b0bf23649c7fb0306204550e971d9b581f1d5
 	public static NerdyDrive drive;
 
 	// Lift
@@ -45,6 +56,11 @@ public class RobotMap {
 	public static TalonSRX lift_leftBack;
 	public static TalonSRX lift_rightBack;
 	public static AnalogPotentiometer lift_potentiometer; // Use for string pot
+<<<<<<< HEAD
+=======
+
+	public static AnalogInput lift_stringPot;
+>>>>>>> 370b0bf23649c7fb0306204550e971d9b581f1d5
 
 	// Intake
 	public static TalonSRX intake_left;
@@ -115,27 +131,46 @@ public class RobotMap {
 		chassis_rightMid.follow(chassis_rightFront);
 		chassis_rightRear.follow(chassis_rightFront);
 
-		/*
-		 * NerdyDrive Instance
-		 */
-		drive = new NerdyDrive(chassis_leftFront, chassis_rightFront);
-
+	
+			/*
+			 * NerdyDrive Instance
+			 */
+			drive = new NerdyDrive(chassis_leftFront, chassis_rightFront);
+			
 		/*
 		 * Lift
 		 */
+
+		lift_rightFront = new TalonSRX(5); // 5
+		lift_rightFront.configSelectedFeedbackSensor(FeedbackDevice.Analog, 0, 0);
+		lift_rightFront.setSensorPhase(true);
+		
+		lift_rightBack = new TalonSRX(6); // 6
+		lift_rightBack.follow(lift_rightFront);
+		
 		lift_leftFront = new TalonSRX(3); // 3
+//		lift_leftFront.setInverted(true);
 
 		lift_leftBack = new TalonSRX(4); // 4
 		lift_leftBack.follow(lift_leftFront);
+//		lift_leftBack.setInverted(true);
 
-		lift_rightFront = new TalonSRX(5); // 5
-		lift_rightFront.setInverted(true);
-
-		lift_rightBack = new TalonSRX(6); // 6
-		lift_rightBack.follow(lift_rightFront);
-		lift_rightFront.setInverted(true);
-
+		
 		lift_potentiometer = new AnalogPotentiometer(2, 10.0, 0.068);
+
+		lift_rightFront.configForwardSoftLimitEnable(true, 0);
+		lift_leftFront.configForwardSoftLimitEnable(false, 0);
+
+		lift_rightFront.configReverseSoftLimitEnable(true, 0);
+		lift_leftFront.configReverseSoftLimitEnable(false, 0);
+
+		lift_rightBack.configForwardSoftLimitEnable(false, 0);
+		lift_leftBack.configForwardSoftLimitEnable(false, 0);
+
+		lift_rightBack.configReverseSoftLimitEnable(false, 0);
+		lift_leftBack.configReverseSoftLimitEnable(false, 0);
+
+		lift_stringPot = new AnalogInput(0);
 
 		/*
 		 * Intake
@@ -154,7 +189,11 @@ public class RobotMap {
 		 */
 		arm_left = new TalonSRX(0); // 7
 		arm_right = new TalonSRX(13); // 8
+<<<<<<< HEAD
 		arm_right.setInverted(true);
+=======
+		arm_right.setInverted(false);
+>>>>>>> 370b0bf23649c7fb0306204550e971d9b581f1d5
 
 		enc = new Encoder(0, 1, true, Encoder.EncodingType.k4X);
 

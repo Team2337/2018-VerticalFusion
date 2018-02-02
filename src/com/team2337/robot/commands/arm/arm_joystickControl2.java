@@ -26,10 +26,11 @@ public class arm_joystickControl2 extends Command {
 	boolean setPointSet = false;
 	double armPositionValue = 0;
 	double armPositionEncoder;
+	double stringPot;
 	boolean isAtTop;
 
 	double armJoystickX;
-	
+
 	public arm_joystickControl2() {
 		requires(Robot.arm);
 	}
@@ -37,41 +38,70 @@ public class arm_joystickControl2 extends Command {
 	protected void initialize() {
 		setPointSet = false;
 		Robot.arm.disable();
-		Arm.setSoftLimits(1080, 1);
+		Arm.setSoftLimits(968, 1);
 	}
 
 	protected void execute() {
 		armPositionEncoder = RobotMap.arm_right.getSelectedSensorPosition(0);
-		
+
 		SmartDashboard.putBoolean("armSetSetpoint", setPointSet);
 		SmartDashboard.putNumber("PIDArmPosition", RobotMap.arm_right.getSelectedSensorPosition(0));
 		SmartDashboard.putNumber("selectedSensorPosition", armPositionEncoder);
+		SmartDashboard.putNumber("ArmJoystickValue", armJoystickX);
 
 		armJoystickX = -Robot.oi.operatorJoystick.getRawAxis(5);
 
-		if ((armJoystickX > -.2) && (armJoystickX < .2)) { 
-			
-			armJoystickX = 0; 
+		stringPot = Math.abs(RobotMap.lift_rightFront.getSelectedSensorPosition(0));
+
+		if ((armJoystickX > -.2) && (armJoystickX < .2)) {
+
+			armJoystickX = 0;
 
 			if (!setPointSet) {
-    			Robot.arm.enable();
-    			Robot.arm.setSetpoint(RobotMap.arm_right.getSelectedSensorPosition(0)); 
-    			
-    			setPointSet = true; 
+				Robot.arm.enable();
+				Robot.arm.setSetpoint(RobotMap.arm_right.getSelectedSensorPosition(0));
+
+				SmartDashboard.putNumber("PIDSetPosition", Robot.arm.getPosition());
+
+				setPointSet = true;
 			}
-		} else { 
-			Robot.arm.disable(); 
-			
+		} else {
+			Robot.arm.disable();
+			SmartDashboard.putNumber("StringPotValueInArm", stringPot);
+
 			if ((armJoystickX > 0)) {
-				Arm.moveForward(armJoystickX);
-			
-			} else if (armJoystickX < 0) {
-				Arm.moveBackward(armJoystickX);
+				if (stringPot > 1.0) {
+					Arm.setSoftLimits(2560, 1);
+					Arm.moveForward(armJoystickX);
+				} else if (stringPot > 0.7 && stringPot < 1.0) {
+					if (armPositionEncoder > 1080) {
+						Arm.setSoftLimits(1080, 1);
+						Arm.moveForward(armJoystickX);
+					} else if (armPositionEncoder < 968) {
+						Arm.setSoftLimits(968, 1);
+						Arm.moveForward(armJoystickX);
+					}
+				}
+
+			} else {
+				if (stringPot > 0.7) {
+					Arm.setSoftLimits(2560, 1);
+					Arm.moveBackward(armJoystickX);
+				} else if (stringPot > 0.7 && stringPot < 1.0) {
+					if (armPositionEncoder > 1080) {
+						Arm.setSoftLimits(1080, 1);
+						Arm.moveBackward(armJoystickX);
+					} else if (armPositionEncoder < 968) {
+						Arm.setSoftLimits(968, 1);
+						Arm.moveBackward(armJoystickX);
+					}
+				}
 				
+
 			}
-			
+
 			setPointSet = false;
-		} 
+		}
 	}
 
 	protected boolean isFinished() {
@@ -79,7 +109,7 @@ public class arm_joystickControl2 extends Command {
 	}
 
 	protected void end() {
-		
+
 	}
 
 	protected void interrupted() {
