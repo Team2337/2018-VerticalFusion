@@ -161,9 +161,9 @@ public class VisionProcessing {
 	 * @return TRUE or FALSE if we do
 	 */
 	public boolean hasContours() {
-		Number center[];
+		double center[];
 		NetworkTableEntry data = table.getEntry("centerX");
-		center = data.getNumberArray(null);
+		center = data.getDoubleArray(defaultValue);
 		if (center.length >= 1) 
 			return true;
 		return false;
@@ -174,14 +174,14 @@ public class VisionProcessing {
  	 * @return Area
 	 */
 	public double getAverageArea() {
-		Number contoursAREA[];
+		double contoursAREA[];
 		NetworkTableEntry data = table.getEntry("centerX");
-		contoursAREA = data.getNumberArray(null);
+		contoursAREA = data.getDoubleArray(defaultValue);
 		
 		double area = 0;
 		if (hasContours()) {
 			if(contoursAREA.length >= 1) { //TODO Remove: DUPLICATE STATMENT AS hasContours()
-			 area = (contoursAREA[0].doubleValue()+ contoursAREA[1].doubleValue()) / 2;
+			 area = (contoursAREA[0]+ contoursAREA[1]) / 2;
 			}
 		}
 		return area;
@@ -192,13 +192,13 @@ public class VisionProcessing {
 	 * @return Center Point of the goal (middle) of 2 contours
 	 */
 	public double getAverageCenter() {
-		Number contoursX[];
+		double contoursX[];
 		NetworkTableEntry data = table.getEntry("centerX");
-		contoursX = data.getNumberArray(null);
+		contoursX = data.getDoubleArray(defaultValue);
 		double center = 0;
 		if (hasContours()) {
 			if(contoursX.length >= 1) { //TODO Remove: DUPLICATE STATMENT AS hasContours()
-				center = contoursX[0].doubleValue();
+				center = contoursX[0];
 			}
 		}
 		return center;
@@ -239,9 +239,9 @@ public class VisionProcessing {
 	 * @return getAngle
 	 */
 	public double getAngle() {
-		Number center[];
+		double center[];
 		NetworkTableEntry data = table.getEntry("centerX");
-		center = data.getNumberArray(null);
+		center = data.getDoubleArray(defaultValue);
 		//Set angle to nothing
 		double angleToGoal = 0;
 		
@@ -251,10 +251,9 @@ public class VisionProcessing {
 			if(center.length >= 1){ 
 				double turnPixel;
 				if (getAverageCenter() > CENTER_OF_CONTOURS) {
-				 turnPixel = (getAverageCenter() - CENTER_OF_CONTOURS) * -1;			
+					turnPixel = (getAverageCenter() - CENTER_OF_CONTOURS) * -1;			
 				} else {
-				 turnPixel = (CENTER_OF_CONTOURS - getAverageCenter()) * 1;	
-				 
+					turnPixel = (CENTER_OF_CONTOURS - getAverageCenter()) * 1;	
 				}
 				angleToGoal = turnPixel/ANGLE_CONSTANT; //This is the degrees per pixel
 				
@@ -275,9 +274,9 @@ public class VisionProcessing {
 	 * @return revolutions
 	 */
 	public double getRevAngle() {
-		Number center[];
+		double[] center;
 		NetworkTableEntry data = table.getEntry("centerX");
-		center = data.getNumberArray(null);
+		center = data.getDoubleArray(defaultValue);
 		//Set angle to nothing
 		double angleToGoal = 0;
 		

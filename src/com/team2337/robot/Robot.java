@@ -54,6 +54,7 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 
 		RobotMap.init();
+		RobotMap.startCamera();
 		chassis = new Chassis();
 		lifter = new Lifter();
 		intake = new Intake();
@@ -63,7 +64,9 @@ public class Robot extends TimedRobot {
 		shifter = new Shifter();
 		led = new LED();
 		claw = new Claw();
-
+		
+		
+		
 		oi = new OI();
 
 		// m_chooser.addDefault("Default Auto", new ExampleCommand());
@@ -101,7 +104,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		m_autonomousCommand = m_chooser.getSelected();
-
+	
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
 		 * switch(autoSelected) { case "My Auto": autonomousCommand = new
@@ -122,7 +125,6 @@ public class Robot extends TimedRobot {
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
 	}
-
 	@Override
 	public void teleopInit() {
 		// This makes sure that the autonomous stops running when
@@ -150,6 +152,10 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("rightFront", RobotMap.lift_rightFront.getMotorOutputPercent());
 		SmartDashboard.putNumber("leftFront", RobotMap.lift_leftFront.getMotorOutputPercent());
 		//SmartDashboard.putNumber("armPositionValue", com.team2337.robot.commands.arm.arm_joystickControl.armPositionValue);
+	
+		SmartDashboard.putNumber("centerX", RobotMap.vision.getRevAngle());
+		//
+		System.out.print(RobotMap.vision.getRevAngle());
 	}
 
 	/**
