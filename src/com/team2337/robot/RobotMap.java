@@ -8,11 +8,9 @@ import com.team2337.fusion.vision.VisionProcessing;
 import com.team2337.robot.subsystems.Lifter;
 import com.team2337.robot.Constants;
 
-<<<<<<< HEAD
 import edu.wpi.cscore.UsbCamera;
-=======
+import edu.wpi.cscore.VideoMode.PixelFormat;
 import edu.wpi.first.wpilibj.AnalogInput;
->>>>>>> 370b0bf23649c7fb0306204550e971d9b581f1d5
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -44,10 +42,6 @@ public class RobotMap {
 	public static VictorSPX chassis_rightMid;
 	public static VictorSPX chassis_rightRear;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 370b0bf23649c7fb0306204550e971d9b581f1d5
 	public static NerdyDrive drive;
 
 	// Lift
@@ -56,11 +50,8 @@ public class RobotMap {
 	public static TalonSRX lift_leftBack;
 	public static TalonSRX lift_rightBack;
 	public static AnalogPotentiometer lift_potentiometer; // Use for string pot
-<<<<<<< HEAD
-=======
 
 	public static AnalogInput lift_stringPot;
->>>>>>> 370b0bf23649c7fb0306204550e971d9b581f1d5
 
 	// Intake
 	public static TalonSRX intake_left;
@@ -189,11 +180,7 @@ public class RobotMap {
 		 */
 		arm_left = new TalonSRX(0); // 7
 		arm_right = new TalonSRX(13); // 8
-<<<<<<< HEAD
-		arm_right.setInverted(true);
-=======
 		arm_right.setInverted(false);
->>>>>>> 370b0bf23649c7fb0306204550e971d9b581f1d5
 
 		enc = new Encoder(0, 1, true, Encoder.EncodingType.k4X);
 
@@ -221,13 +208,13 @@ public class RobotMap {
 		/*
 		 * Shifter
 		 */
-		shifter_left = new Solenoid(1, 3); // 1,0
-		shifter_right = new Solenoid(1, 4); // 1,0
+		shifter_left = new Solenoid(0, 4); // 1,0
+		shifter_right = new Solenoid(0, 5); // 1,0
 
 		/*
 		 * LED
 		 */
-		led_info = new Solenoid(1, 5);
+		led_info = new Solenoid(0, 6);
 
 		/*
 		 * VisionProcessing for PixyCam
@@ -252,6 +239,9 @@ public class RobotMap {
 	public static void startCamera() {
 		try {
 			camera = CameraServer.getInstance().startAutomaticCapture("cam0", "/dev/video0");
+			camera.setFPS(30);
+			camera.setResolution(544, 288);
+			camera.setPixelFormat(PixelFormat.kYUYV);
 		} catch (Exception e) {
 			DriverStation.reportWarning("[Camera] Could not start the camera!", true);
 		}
