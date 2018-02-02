@@ -75,11 +75,10 @@ public class OI {
 	JoystickPOVButton		operator_POVUpLeft		= new JoystickPOVButton(operatorJoystick, 315);
 	
 
-	/*
-	 * OperatorControl
-	 */
+	
+	
 	public static Joystick				operatorControls		= new Joystick(2);
-
+	/*
 	JoystickButton			operatorInt_GreenButton				= new JoystickButton(operatorJoystick, 19);
 	JoystickButton			operatorInt_RedButton				= new JoystickButton(operatorJoystick, 20);
     JoystickButton 			operatorInt_ClearSwitch				= new JoystickButton(operatorJoystick, 15);
@@ -90,7 +89,8 @@ public class OI {
 	JoystickButton 			operatorInt_YellowButton			= new JoystickButton(operatorJoystick, 13);
 	JoystickButton 			operatorInt_BlackButton 			= new JoystickButton(operatorJoystick, 11);
 	JoystickButton 			operatorInt_BlueButton				= new JoystickButton(operatorJoystick, 12);
-    
+     * OperatorControl
+	 */
 	
 	public OI() {
 		
@@ -156,7 +156,7 @@ public class OI {
 		////////////////////////////////////
 		
 		
-		/* ===== DRIVER STATION CONTROLS ===== */
+		/* ===== DRIVER STATION CONTROLS ===== 
 		
 		//operatorInt_GreenButton	.whenPressed(new _DoNothing());
 		//operatorInt_RedButton	.whenPressed(new _DoNothing());
@@ -170,7 +170,7 @@ public class OI {
 		operatorInt_BlueButton	.whenPressed(new DoNothing());
 		operatorInt_YellowButton.whenPressed(new DoNothing());
 		operatorInt_WhiteButton	.whenPressed(new DoNothing());
-		
+		*/
 		///////////////////////////////////////// 
 	}
 
