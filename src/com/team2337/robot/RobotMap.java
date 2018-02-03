@@ -178,8 +178,8 @@ public class RobotMap {
 		/*
 		 * Arm
 		 */
-		arm_left = new TalonSRX(0); // 7
-		arm_right = new TalonSRX(13); // 8
+		arm_left = new TalonSRX(7); // 7
+		arm_right = new TalonSRX(8); // 8
 		arm_right.setInverted(false);
 
 		enc = new Encoder(0, 1, true, Encoder.EncodingType.k4X);
