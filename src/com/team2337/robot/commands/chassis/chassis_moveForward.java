@@ -19,12 +19,12 @@ public class chassis_moveForward extends Command {
 
     protected void initialize() {
     	setTimeout(this.time);
-    	RobotMap.drive.arcadeDrive(1, 0, true);
+    	//RobotMap.drive.arcadeDrive(1, 0, true);
     }
     protected void execute() {}
     protected boolean isFinished() { return isTimedOut();}
     protected void end() {
-    	RobotMap.drive.arcadeDrive(0, 0, true);
+    	//RobotMap.drive.arcadeDrive(0, 0, true);
     }
     protected void interrupted() {this.end();}
 }

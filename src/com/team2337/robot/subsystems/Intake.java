@@ -8,6 +8,7 @@ import com.team2337.robot.commands.DoNothing;
 import com.team2337.robot.commands.intake.intake_doNothing;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Allows for cubes to be intaked or blooped (released)
@@ -19,7 +20,8 @@ public class Intake extends Subsystem {
 
 	public static TalonSRX right = RobotMap.intake_right; //Right motor of intake
 	public static TalonSRX left = RobotMap.intake_left; //Left motor of intake
-	
+	//public double Ppowerin;
+	//public double Ppowerout;
 	public void initDefaultCommand() {
 		setDefaultCommand(new intake_doNothing());
 	}
@@ -30,6 +32,7 @@ public class Intake extends Subsystem {
 	public void moveIn(double power) {
 		right.set(ControlMode.PercentOutput, power);
 		left.set(ControlMode.PercentOutput, power);
+		//Ppowerin = power;
 	}
 	/**
 	 * Move the intake outwards (release/bloop it)
@@ -38,6 +41,7 @@ public class Intake extends Subsystem {
 	public void moveOut(double power) {
 		right.set(ControlMode.PercentOutput, -power);
 		left.set(ControlMode.PercentOutput, -power);
+		//Ppowerout = -power;
 	}
 	/**
 	 * Stop the intake

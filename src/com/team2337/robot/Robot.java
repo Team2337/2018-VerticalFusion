@@ -21,6 +21,7 @@ import com.team2337.robot.subsystems.Lifter;
 import com.team2337.robot.subsystems.Shifter;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -50,6 +51,8 @@ public class Robot extends TimedRobot {
 	Command m_autonomousCommand;
 	SendableChooser<Command> autonchooser = new SendableChooser<>();
 
+	
+	//public static Preferences prefs;
 	/**
 	 * This function is run when the robot is first started up and should be used
 	 * for any initialization code.
@@ -170,6 +173,12 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("armValue", com.team2337.robot.commands.arm.arm_increaseAngle.armPosition);
 		SmartDashboard.putNumber("rightFront", RobotMap.lift_rightFront.getMotorOutputPercent());
 		SmartDashboard.putNumber("leftFront", RobotMap.lift_leftFront.getMotorOutputPercent());
+		SmartDashboard.putNumber("Right vel", RobotMap.chassis_rightFront.getSelectedSensorVelocity(0));
+		SmartDashboard.putNumber("Left vel", RobotMap.chassis_leftFront.getSelectedSensorVelocity(0));
+		SmartDashboard.putNumber("rightFrontD", RobotMap.chassis_rightFront.getMotorOutputPercent());
+		SmartDashboard.putNumber("leftFrontD", RobotMap.chassis_leftFront.getMotorOutputPercent());
+
+		
 		//SmartDashboard.putNumber("armPositionValue", com.team2337.robot.commands.arm.arm_joystickControl.armPositionValue);
 	}
 
