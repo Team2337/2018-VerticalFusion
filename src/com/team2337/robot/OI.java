@@ -52,6 +52,7 @@ public class OI {
 	/*
 	 * OperatorJoystick
 	 */
+	
 	public static Joystick				operatorJoystick		= new Joystick(1);
 	JoystickButton			operator_GreenA			= new JoystickButton(operatorJoystick, 1);
 	JoystickButton			operator_RedB			= new JoystickButton(operatorJoystick, 2);
@@ -74,7 +75,43 @@ public class OI {
 	JoystickPOVButton		operator_POVLeft		= new JoystickPOVButton(operatorJoystick, 270);
 	JoystickPOVButton		operator_POVUpLeft		= new JoystickPOVButton(operatorJoystick, 315);
 	
-
+	
+	public static Joystick				operatorThrottleJoystick		= new Joystick(4);
+	JoystickButton			operator_RightTrigger				= new JoystickButton(operatorJoystick, 1);	//Digital trigger on the back of the joystick
+	JoystickButton			operator_StripedButton				= new JoystickButton(operatorJoystick, 2);	//The orange and black striped button on joystick
+	JoystickButton			operator_RightKnucleButton			= new JoystickButton(operatorJoystick, 3);	//The button on the top-right of the joytstick
+	JoystickButton			operator_L3							= new JoystickButton(operatorJoystick, 4);	//Button on the front right of the joystick
+	
+	JoystickButton			operator_ThrottleTopThumbButton		= new JoystickButton(operatorJoystick, 5);	//The highest button of the throttle's thumb buttons
+	JoystickButton			operator_ThrottleMidThumbButton		= new JoystickButton(operatorJoystick, 6);	//The middle button of the throttle's thumb buttons
+	JoystickButton			operator_ThrottleBottomThumbButton	= new JoystickButton(operatorJoystick, 7);	//The lowest button of the throttle's thumb buttons
+	
+	JoystickButton			operator_PalmButton					= new JoystickButton(operatorJoystick, 8);	//The button on the palmrest of the throttle
+	JoystickButton			operator_TopIndexButton 			= new JoystickButton(operatorJoystick, 9);	//The higher button on the back right of the throttle
+	JoystickButton			operator_BottomIndexButton			= new JoystickButton(operatorJoystick, 10);	//The lower button on the back right of the throttle
+	
+	//JoystickButton		operator_SE							= new JoystickButton(operatorJoystick, 11); //The "SE" button on the throttle
+	//JoystickButton		operator_ST							= new JoystickButton(operatorJoystick, 12); //The "ST" button on the throttle
+	
+	JoystickPOVButton		operator_JoystickPOVUp				= new JoystickPOVButton(operatorJoystick, 0);
+	JoystickPOVButton		operator_JoystickPOVUpRight			= new JoystickPOVButton(operatorJoystick, 45);
+	JoystickPOVButton		operator_JoystickPOVRight			= new JoystickPOVButton(operatorJoystick, 90);
+	JoystickPOVButton		operator_JoystickPOVDownRight		= new JoystickPOVButton(operatorJoystick, 135);
+	JoystickPOVButton		operator_JoystickPOVDown			= new JoystickPOVButton(operatorJoystick, 180);
+	JoystickPOVButton		operator_JoystickPOVDownLeft		= new JoystickPOVButton(operatorJoystick, 225);
+	JoystickPOVButton		operator_JoystickPOVLeft			= new JoystickPOVButton(operatorJoystick, 270);
+	JoystickPOVButton		operator_JoystickPOVUpLeft			= new JoystickPOVButton(operatorJoystick, 315);
+	
+	/*
+		AXIS:
+		#	Description		Direction   			Positive
+		--	---------------	---------------------	--------
+		0	Joystick tilt	Right/Left				Right
+		1	Joystick tilt	Forward/back			Back
+		2	Throttle tilt	Forward/Back			Back
+		3	Joystick rotate	Right/Left (Rotation)	Right
+		4	Throttle rocker	Right/Left (Rocker)		Right
+	 */
 	
 	
 	public static Joystick				operatorControls		= new Joystick(2);
@@ -153,7 +190,34 @@ public class OI {
 		operator_POVLeft	    .whenPressed(new DoNothing());
 		//operator_POVUpLeft	.whenPressed(new _DoNothing());
 		
-		////////////////////////////////////
+	    
+	    ////////////////////////////////////
+	    operator_RightTrigger			       .whenPressed(new DoNothing());
+	    operator_StripedButton			       .whenPressed(new DoNothing());
+	    operator_RightKnucleButton		       .whenPressed(new DoNothing());
+	    operator_L3						       .whenPressed(new DoNothing());
+	                                           
+	    operator_ThrottleTopThumbButton		   .whenPressed(new DoNothing());
+	    operator_ThrottleMidThumbButton		   .whenPressed(new DoNothing());
+	    operator_ThrottleBottomThumbButton	   .whenPressed(new DoNothing());
+	                                           
+	    operator_PalmButton				       .whenPressed(new DoNothing());
+	    operator_TopIndexButton 		       .whenPressed(new DoNothing());
+	    operator_BottomIndexButton		       .whenPressed(new DoNothing());
+
+	    //operator_SE						   .whenPressed(new DoNothing());
+	    //operator_ST						   .whenPressed(new DoNothing());
+	                                          
+	    operator_JoystickPOVUp			       .whenPressed(new DoNothing());
+	    operator_JoystickPOVUpRight		       .whenPressed(new DoNothing());
+	    operator_JoystickPOVRight		       .whenPressed(new DoNothing());
+	    operator_JoystickPOVDownRight	       .whenPressed(new DoNothing());
+	    operator_JoystickPOVDown		       .whenPressed(new DoNothing());
+	    operator_JoystickPOVDownLeft	       .whenPressed(new DoNothing());
+	    operator_JoystickPOVLeft		       .whenPressed(new DoNothing());
+	    operator_JoystickPOVUpLeft		       .whenPressed(new DoNothing());
+	    
+	    ////////////////////////////////////
 		
 		
 		/* ===== DRIVER STATION CONTROLS ===== 
