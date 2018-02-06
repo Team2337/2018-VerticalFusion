@@ -148,6 +148,8 @@ public class Robot extends TimedRobot {
 	}
 	@Override
 	public void teleopInit() {
+		claw.close();
+		
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
@@ -173,10 +175,10 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("rightFront", RobotMap.lift_rightFront.getMotorOutputPercent());
 		SmartDashboard.putNumber("leftFront", RobotMap.lift_leftFront.getMotorOutputPercent());
 		//SmartDashboard.putNumber("armPositionValue", com.team2337.robot.commands.arm.arm_joystickControl.armPositionValue);
-	
+		SmartDashboard.putBoolean("crate", RobotMap.crateSensor.get());
 		SmartDashboard.putNumber("centerX", RobotMap.vision.getRevAngle());
 		//
-		System.out.print(RobotMap.vision.getRevAngle());
+		//System.out.print(RobotMap.vision.getRevAngle());
 	}
 
 	/**

@@ -1,7 +1,9 @@
 package com.team2337.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.team2337.robot.RobotMap;
 
 import com.team2337.robot.commands.DoNothing;
@@ -17,11 +19,15 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Intake extends Subsystem {
 
-	public static TalonSRX right = RobotMap.intake_right; //Right motor of intake
+	//public static TalonSRX right = RobotMap.intake_right; //Right motor of intake 
+	public static VictorSPX right = RobotMap.intake_right;
 	public static TalonSRX left = RobotMap.intake_left; //Left motor of intake
 	
 	public void initDefaultCommand() {
 		setDefaultCommand(new intake_doNothing());
+	}
+	public boolean hasCrate() {
+		return !RobotMap.crateSensor.get();
 	}
 	/**
 	 * Move the intake inwards (intake)
@@ -43,7 +49,8 @@ public class Intake extends Subsystem {
 	 * Stop the intake
 	 */
 	public void stop() {
-		right.set(ControlMode.PercentOutput, 0);
-		left.set(ControlMode.PercentOutput, 0);
+
+		right.neutralOutput();
+		left.neutralOutput();
 	}
 }
