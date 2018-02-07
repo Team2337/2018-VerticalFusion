@@ -10,7 +10,10 @@ package com.team2337.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- * An example subsystem. You can replace me with your own Subsystem.
+ * BIGBROTHER IS ALWAYS WATCHING
+ * 
+ * @category BIGBROTHER
+ * @author Team2337 - EngiNERDs
  */
 public class BigBrother extends Subsystem {
 	int liftPoints[][] = new int[3][5];
@@ -26,7 +29,5 @@ public class BigBrother extends Subsystem {
 		liftPoints[0][0] = 0;
 		liftPoints[1][0] = 10;
 		liftPoints[2][0] = 13; 
-		
 	}
-
 }

@@ -13,6 +13,7 @@ import edu.wpi.cscore.VideoMode.PixelFormat;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -32,8 +33,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class RobotMap {
 
 	public static TalonSRX chassis_leftFront;
-
-
 
 	public static VictorSPX chassis_leftMid;
 	public static VictorSPX chassis_leftRear;
@@ -55,8 +54,9 @@ public class RobotMap {
 
 	// Intake
 	public static TalonSRX intake_left;
-	public static TalonSRX intake_right;
-
+	public static VictorSPX intake_right;
+	public static DigitalInput crateSensor;
+	
 	// Ejector
 	public static Solenoid ejector_push;
 
@@ -68,8 +68,8 @@ public class RobotMap {
 	// public static double encoderValue = enc.get();
 
 	// Claw
-	public static Solenoid claw_left;
-	public static Solenoid claw_right;
+	public static Solenoid claw_hugger;
+	public static Solenoid claw_claw;
 
 	// Climber
 	public static TalonSRX climber_left;
@@ -166,9 +166,12 @@ public class RobotMap {
 		/*
 		 * Intake
 		 */
-		intake_left = new TalonSRX(12); // 6
+		intake_left = new TalonSRX(6); // 6
 		intake_left.setInverted(true);
-		intake_right = new TalonSRX(11); // 5
+		intake_right = new VictorSPX(5); // 5
+		//intake_right = new TalonSRX(5); // 5
+		intake_right.setInverted(false);
+		crateSensor = new DigitalInput(0);
 
 		/*
 		 * Ejector
@@ -196,8 +199,9 @@ public class RobotMap {
 		/*
 		 * Claw
 		 */
-		claw_left = new Solenoid(0, 2);
-		claw_right = new Solenoid(0, 3);
+		claw_hugger = new Solenoid(0, 2);
+		claw_claw = new Solenoid(0, 3);
+
 
 		/*
 		 * Climber

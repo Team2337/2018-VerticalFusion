@@ -1,10 +1,3 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package com.team2337.robot;
 
 import com.team2337.robot.subsystems.Chassis;
@@ -57,8 +50,14 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 
+		// Initialize all of the Robots Mappings
 		RobotMap.init();
+		// Also start the camera(s)
 		RobotMap.startCamera();
+
+		
+		// Reference all of the subsystems
+		 
 		chassis = new Chassis();
 		lifter = new Lifter();
 		intake = new Intake();
@@ -68,21 +67,21 @@ public class Robot extends TimedRobot {
 		shifter = new Shifter();
 		led = new LED();
 		claw = new Claw();
-		
-		
-		
+
+		// Include the Operator Interface
 		oi = new OI();
 
-		 autonchooser.addDefault("Cross the Line", new DoNothing());
-		 autonchooser.addObject("Center Switch", new auto_centerSwitch());
-		 autonchooser.addObject("Do Nothing", new DoNothing());
-		 autonchooser.addObject("Right Switch", new DoNothing());
-		 autonchooser.addObject("Right Scale", new DoNothing());
-		 autonchooser.addObject("Right Switch Scale", new DoNothing());
-		 autonchooser.addObject("Right Scale Switch", new DoNothing());
-		 autonchooser.addObject("Right Switch No cross", new DoNothing());
-		 autonchooser.addObject("Right Scale No cross", new DoNothing());
-		 autonchooser.addObject("Make them cry", new DoNothing());
+		// Also include the Auton Chooser
+		autonchooser.addDefault("Cross the Line", new DoNothing());
+		autonchooser.addObject("Center Switch", new auto_centerSwitch());
+		autonchooser.addObject("Do Nothing", new DoNothing());
+		autonchooser.addObject("Right Switch", new DoNothing());
+		autonchooser.addObject("Right Scale", new DoNothing());
+		autonchooser.addObject("Right Switch Scale", new DoNothing());
+		autonchooser.addObject("Right Scale Switch", new DoNothing());
+		autonchooser.addObject("Right Switch No cross", new DoNothing());
+		autonchooser.addObject("Right Scale No cross", new DoNothing());
+		autonchooser.addObject("Make them cry", new DoNothing());
 		SmartDashboard.putData("Auto mode", autonchooser);
 	}
 
@@ -93,19 +92,20 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void disabledInit() {
-
+		this.allInit();
 	}
 
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
+		this.allPeriodic();
+		
 		String gameData;
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
-		
+
 		ourswitch = gameData.charAt(0);
 		scale = gameData.charAt(1);
 		oppswitch = gameData.charAt(2);
-		
 
 	}
 
@@ -123,7 +123,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-
+		this.allInit();
 		m_autonomousCommand = autonchooser.getSelected();
 
 		/*
@@ -145,9 +145,12 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+		this.allPeriodic();
 	}
+
 	@Override
 	public void teleopInit() {
+		this.allInit();
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
@@ -163,6 +166,9 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		this.allPeriodic();
+		
+		
 		SmartDashboard.putNumber("pot", RobotMap.lift_potentiometer.get());
 		SmartDashboard.putNumber("SetPoint", Robot.lifter.getSetpoint());
 		SmartDashboard.putBoolean("atSetPoint?", com.team2337.robot.commands.lifter.lifter_joystickControl.isAtTop);
@@ -172,8 +178,9 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("armValue", com.team2337.robot.commands.arm.arm_increaseAngle.armPosition);
 		SmartDashboard.putNumber("rightFront", RobotMap.lift_rightFront.getMotorOutputPercent());
 		SmartDashboard.putNumber("leftFront", RobotMap.lift_leftFront.getMotorOutputPercent());
-		//SmartDashboard.putNumber("armPositionValue", com.team2337.robot.commands.arm.arm_joystickControl.armPositionValue);
-	
+		// SmartDashboard.putNumber("armPositionValue",
+		// com.team2337.robot.commands.arm.arm_joystickControl.armPositionValue);
+
 		SmartDashboard.putNumber("centerX", RobotMap.vision.getRevAngle());
 		//
 		System.out.print(RobotMap.vision.getRevAngle());
@@ -184,5 +191,23 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void testPeriodic() {
+		this.allPeriodic();
 	}
+	
+	//////////////////////////////////////////////
+
+	/**
+	 * This method is called once during all modes when selected (disabled, auton, teleop and test)
+	 */
+	public void allInit() {
+		
+	}
+	/**
+	 * This method is called periodically during all modes (disabled, auton, teleop and test)
+	 */
+	public void allPeriodic() {
+		
+	}	
+	
+	
 }
