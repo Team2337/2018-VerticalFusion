@@ -91,12 +91,12 @@ public class RobotMap {
 		/*
 		 * z Drive Left
 		 */
-		chassis_leftFront = new TalonSRX(13); // 13
+		chassis_leftFront = new TalonSRX(15); // 15
 		chassis_leftFront.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
 		chassis_leftFront.setSensorPhase(false);
 
 		chassis_leftMid = new VictorSPX(14); // 14
-		chassis_leftRear = new VictorSPX(15); // 15
+		chassis_leftRear = new VictorSPX(13); // 13
 
 		chassis_leftFront.setInverted(true);
 		chassis_leftMid.setInverted(true);
@@ -108,12 +108,12 @@ public class RobotMap {
 		/*
 		 * Drive Right
 		 */
-		chassis_rightFront = new TalonSRX(2); // 2
+		chassis_rightFront = new TalonSRX(0); // 0
 		chassis_rightFront.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
 		chassis_rightFront.setSensorPhase(false);
 
 		chassis_rightMid = new VictorSPX(1); // 1
-		chassis_rightRear = new VictorSPX(0); // 0
+		chassis_rightRear = new VictorSPX(2); // 2
 
 		chassis_rightFront.setInverted(true);
 		chassis_rightMid.setInverted(true);
