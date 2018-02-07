@@ -6,6 +6,7 @@ import com.team2337.fusion.controller.JoystickPOVButton;
 import com.team2337.robot.commands.*;
 import com.team2337.robot.commands.arm.arm_decreaseAngle;
 import com.team2337.robot.commands.arm.arm_increaseAngle;
+import com.team2337.robot.commands.auto.*;
 import com.team2337.robot.commands.ejector.*;
 import com.team2337.robot.commands.intake.*;
 import com.team2337.robot.commands.shifter.*;
@@ -138,7 +139,7 @@ public class OI {
 		driver_BlueX			.whenPressed(new lifter_setPID(0.1)); 
 		driver_YellowY			.whenPressed(new lifter_stopPID());
 		
-		driver_BumperLeft		.whenPressed(new DoNothing());
+		driver_BumperLeft		.whenPressed(new auto_gyroMMTurn());
 		driver_BumperRight		.whenPressed(new DoNothing());
 		
 		driver_Back				.whileHeld(new DoNothing()); 

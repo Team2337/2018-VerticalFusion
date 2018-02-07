@@ -148,6 +148,7 @@ public class Robot extends TimedRobot {
 	}
 	@Override
 	public void teleopInit() {
+
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
@@ -155,6 +156,8 @@ public class Robot extends TimedRobot {
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
 		}
+		RobotMap.chassis_leftFront.setSelectedSensorPosition(0, 0, 0);
+		RobotMap.chassis_rightFront.setSelectedSensorPosition(0, 0, 0);
 	}
 
 	/**
@@ -163,6 +166,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		/*
 		SmartDashboard.putNumber("pot", RobotMap.lift_potentiometer.get());
 		SmartDashboard.putNumber("SetPoint", Robot.lifter.getSetpoint());
 		SmartDashboard.putBoolean("atSetPoint?", com.team2337.robot.commands.lifter.lifter_joystickControl.isAtTop);
@@ -172,6 +176,15 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("armValue", com.team2337.robot.commands.arm.arm_increaseAngle.armPosition);
 		SmartDashboard.putNumber("rightFront", RobotMap.lift_rightFront.getMotorOutputPercent());
 		SmartDashboard.putNumber("leftFront", RobotMap.lift_leftFront.getMotorOutputPercent());
+		*/
+		SmartDashboard.putNumber("leftFrontPOS", RobotMap.chassis_leftFront.getSelectedSensorPosition(0));
+		SmartDashboard.putNumber("rightFrontPOS", RobotMap.chassis_rightFront.getSelectedSensorPosition(0));
+		SmartDashboard.putNumber("leftFrontVEL", RobotMap.chassis_leftFront.getSelectedSensorVelocity(0));
+		SmartDashboard.putNumber("rightFrontVEL", RobotMap.chassis_rightFront.getSelectedSensorVelocity(0));
+		SmartDashboard.putNumber("leftFrontERR", RobotMap.chassis_leftFront.getClosedLoopError(0));
+		SmartDashboard.putNumber("rightFrontERR", RobotMap.chassis_rightFront.getClosedLoopError(0));
+		//SmartDashboard.putNumber("leftFrontTAR", RobotMap.chassis_leftFront.getClosedLoopTarget(0));
+		//SmartDashboard.putNumber("rightFrontTAR", RobotMap.chassis_rightFront.getClosedLoopTarget(0));
 		//SmartDashboard.putNumber("armPositionValue", com.team2337.robot.commands.arm.arm_joystickControl.armPositionValue);
 	
 		SmartDashboard.putNumber("centerX", RobotMap.vision.getRevAngle());

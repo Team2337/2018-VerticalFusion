@@ -3,6 +3,7 @@ package com.team2337.robot;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.ctre.phoenix.sensors.PigeonIMU;
 import com.team2337.fusion.drive.*;
 import com.team2337.fusion.vision.VisionProcessing;
 import com.team2337.robot.subsystems.Lifter;
@@ -44,6 +45,7 @@ public class RobotMap {
 
 	public static NerdyDrive drive;
 
+	public static PigeonIMU pidgey;
 	// Lift
 	public static TalonSRX lift_leftFront;
 	public static TalonSRX lift_rightFront;
@@ -110,7 +112,7 @@ public class RobotMap {
 		 */
 		chassis_rightFront = new TalonSRX(0); // 0
 		chassis_rightFront.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
-		chassis_rightFront.setSensorPhase(false);
+		chassis_rightFront.setSensorPhase(true);
 
 		chassis_rightMid = new VictorSPX(1); // 1
 		chassis_rightRear = new VictorSPX(2); // 2
@@ -128,6 +130,7 @@ public class RobotMap {
 			 */
 			drive = new NerdyDrive(chassis_leftFront, chassis_rightFront);
 			
+			
 		/*
 		 * Lift
 		 */
@@ -138,6 +141,7 @@ public class RobotMap {
 		
 		lift_rightBack = new TalonSRX(6); // 6
 		lift_rightBack.follow(lift_rightFront);
+		
 		
 		lift_leftFront = new TalonSRX(3); // 3
 //		lift_leftFront.setInverted(true);
@@ -163,6 +167,7 @@ public class RobotMap {
 
 		lift_stringPot = new AnalogInput(0);
 
+		pidgey = new PigeonIMU(lift_rightBack);
 		/*
 		 * Intake
 		 */
