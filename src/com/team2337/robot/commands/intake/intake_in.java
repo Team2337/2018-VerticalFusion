@@ -18,7 +18,7 @@ import com.team2337.robot.RobotMap;
  * @author Brendan
  */
 public class intake_in extends Command {
-	private double power = 1;
+	private double power;
 	
 	
 	private int time = 0;

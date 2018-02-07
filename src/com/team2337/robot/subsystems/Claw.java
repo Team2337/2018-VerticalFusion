@@ -28,10 +28,10 @@ public class Claw extends Subsystem {
 		
 	}
 	public void give60Hugs() {
-		hugger.set(true);
+		hugger.set(false);
 	}
 	public void give30Hugs() {
-		hugger.set(false);
+		hugger.set(true);
 	}
 	
 	public void open() {
@@ -39,7 +39,6 @@ public class Claw extends Subsystem {
 	}
 
 	public void close() {
-		claw.set(true
-				);
+		claw.set(true);
 	}
 }

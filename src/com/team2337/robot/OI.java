@@ -151,8 +151,8 @@ public class OI {
 		driver_LeftStick		.whenPressed(new DoNothing()); 
 		driver_RightStick		.whenPressed(new DoNothing()); 
 		
-		driver_TriggerLeft		.whileHeld(new intake_out(0.75));
-		driver_TriggerRight		.whileHeld(new intake_in(0.75));
+		driver_TriggerLeft		.whileHeld(new intake_out(1));
+		driver_TriggerRight		.whileHeld(new intake_in(1));
 		
 		driver_POVUp			.whenPressed(new DoNothing());  
 		//driver_POVUpRight		.whenPressed(new _DoNothing()); 
