@@ -285,8 +285,8 @@ public class setPointsChecking extends Command {
 	protected void execute() {
 		double sensorPosition = RobotMap.lift_rightFront.getSelectedSensorPosition(0);
 		
-		trolleyStick = OI.throttleJoystick.getRawAxis(1);
-		throttleValue = -OI.throttleJoystick.getRawAxis(2);
+		trolleyStick = OI.operatorThrottleJoystick.getRawAxis(1);
+		throttleValue = -OI.operatorThrottleJoystick.getRawAxis(2);
 		throttleValue = (int) (throttleValue*10)+10;;
 		
 		armRight =  RobotMap.arm_right.getSelectedSensorPosition(0);

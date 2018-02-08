@@ -12,6 +12,8 @@ import com.team2337.robot.subsystems.Claw;
 import com.team2337.robot.subsystems.Climber;
 import com.team2337.robot.subsystems.Ejector;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.team2337.robot.commands.DoNothing;
+import com.team2337.robot.commands.auto.*;
 import com.team2337.robot.subsystems.Arm;
 import com.team2337.robot.subsystems.BigBrother;
 import com.team2337.robot.subsystems.Intake;
@@ -19,6 +21,7 @@ import com.team2337.robot.subsystems.LED;
 import com.team2337.robot.subsystems.Trolley;
 import com.team2337.robot.subsystems.Shifter;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -44,10 +47,10 @@ public class Robot extends TimedRobot {
 	public static Claw claw;
 	public static BigBrother bigBrother;
 	public static OI oi;
+	public static char ourswitch, scale, oppswitch;
 
 	Command m_autonomousCommand;
-	public static double throttleValue;
-	SendableChooser<Command> m_chooser = new SendableChooser<>();
+	SendableChooser<Command> autonchooser = new SendableChooser<>();
 
 	/**
 	 * This function is run when the robot is first started up and should be used
@@ -57,6 +60,7 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 
 		RobotMap.init();
+		RobotMap.startCamera();
 		chassis = new Chassis();
 		trolley = new Trolley();
 		intake = new Intake();
@@ -70,9 +74,17 @@ public class Robot extends TimedRobot {
 
 		oi = new OI();
 
-		// m_chooser.addDefault("Default Auto", new ExampleCommand());
-		// chooser.addObject("My Auto", new MyAutoCommand());
-		SmartDashboard.putData("Auto mode", m_chooser);
+		 autonchooser.addDefault("Cross the Line", new DoNothing());
+		 autonchooser.addObject("Center Switch", new auto_centerSwitch());
+		 autonchooser.addObject("Do Nothing", new DoNothing());
+		 autonchooser.addObject("Right Switch", new DoNothing());
+		 autonchooser.addObject("Right Scale", new DoNothing());
+		 autonchooser.addObject("Right Switch Scale", new DoNothing());
+		 autonchooser.addObject("Right Scale Switch", new DoNothing());
+		 autonchooser.addObject("Right Switch No cross", new DoNothing());
+		 autonchooser.addObject("Right Scale No cross", new DoNothing());
+		 autonchooser.addObject("Make them cry", new DoNothing());
+		SmartDashboard.putData("Auto mode", autonchooser);
 	}
 
 	/**
@@ -88,6 +100,14 @@ public class Robot extends TimedRobot {
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
+		String gameData;
+		gameData = DriverStation.getInstance().getGameSpecificMessage();
+		
+		ourswitch = gameData.charAt(0);
+		scale = gameData.charAt(1);
+		oppswitch = gameData.charAt(2);
+		
+
 	}
 
 	/**
@@ -104,7 +124,8 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		m_autonomousCommand = m_chooser.getSelected();
+
+		m_autonomousCommand = autonchooser.getSelected();
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
@@ -126,9 +147,10 @@ public class Robot extends TimedRobot {
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
 	}
-
 	@Override
 	public void teleopInit() {
+		claw.close();
+		
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
@@ -155,6 +177,10 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("rightFront", RobotMap.lift_rightFront.getMotorOutputPercent());
 		SmartDashboard.putNumber("leftFront", RobotMap.lift_leftFront.getMotorOutputPercent());
 		//SmartDashboard.putNumber("armPositionValue", com.team2337.robot.commands.arm.arm_joystickControl.armPositionValue);
+		SmartDashboard.putBoolean("crate", RobotMap.crateSensor.get());
+		SmartDashboard.putNumber("centerX", RobotMap.vision.getRevAngle());
+		//
+		//System.out.print(RobotMap.vision.getRevAngle());
 	}
 
 	/**

@@ -20,6 +20,7 @@ public class claw_open extends Command {
 	}
 	@Override
 	protected void initialize() {
+		
 		Robot.claw.open();
 	}
 	@Override
@@ -27,10 +28,11 @@ public class claw_open extends Command {
 	}
 	@Override
 	protected boolean isFinished() {
-		return false;
+		return true;
 	}
 	@Override
 	protected void end() {
+		Robot.claw.give30Hugs();
 	}
 	@Override
 	protected void interrupted() {

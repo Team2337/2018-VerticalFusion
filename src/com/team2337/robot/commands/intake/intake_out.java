@@ -31,6 +31,7 @@ public class intake_out extends Command {
 	protected boolean isFinished() {return false;}
 	
 	protected void end() {
+		Robot.claw.give30Hugs();
 		Robot.intake.stop();
 	}
 	

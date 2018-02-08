@@ -17,21 +17,28 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * An example subsystem. You can replace me with your own Subsystem.
  */
 public class Claw extends Subsystem {
-	public static Solenoid left = RobotMap.claw_left;
-	public static Solenoid right = RobotMap.claw_right; 
-
+	public static Solenoid hugger = RobotMap.claw_hugger;
+	public static Solenoid claw = RobotMap.claw_claw;
+	public Claw() {
+		//this.close();
+	}
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
 		setDefaultCommand(new claw_DoNothing());
+		
 	}
-
+	public void give60Hugs() {
+		hugger.set(false);
+	}
+	public void give30Hugs() {
+		hugger.set(true);
+	}
+	
 	public void open() {
-		left.set(true);
-		right.set(true);
+		claw.set(false);
 	}
 
 	public void close() {
-		left.set(false);
-		right.set(false);
+		claw.set(true);
 	}
 }
