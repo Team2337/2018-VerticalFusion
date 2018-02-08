@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package com.team2337.robot.commands.lifter;
+package com.team2337.robot.commands.trolley;
 
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -17,7 +17,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.team2337.robot.Robot;
 import com.team2337.robot.RobotMap;
 import com.team2337.robot.subsystems.Arm;
-import com.team2337.robot.subsystems.Lifter;
+import com.team2337.robot.subsystems.Trolley;
 
 /**
  * Lifter: JOYSTICKCONTROL - Moves the lifter based joystick
@@ -25,7 +25,7 @@ import com.team2337.robot.subsystems.Lifter;
  * @category LIFTER
  * @author - Bryce
  */
-public class lifter_joystickControl2 extends Command {
+public class trolley_joystickControl2 extends Command {
 	public boolean setPointSet = false;
 	public static boolean isAtTop = false;
 	boolean isAtBottom = false; 
@@ -38,16 +38,16 @@ public class lifter_joystickControl2 extends Command {
 	public static TalonSRX backRight = RobotMap.lift_leftBack;
 	
 	
-	public lifter_joystickControl2() {
-		requires(Robot.lifter);
+	public trolley_joystickControl2() {
+		requires(Robot.trolley);
 	}
 
 	protected void initialize() {
 		isAtTop = false;
 		setPointSet = false; 
 		isAtBottom = false;
-    	Robot.lifter.disable();
-    	Lifter.setSoftLimits(2, 0);
+    	Robot.trolley.disable();
+    	Trolley.setSoftLimits(2, 0);
 	}
 
 	protected void execute() {
@@ -69,15 +69,15 @@ public class lifter_joystickControl2 extends Command {
     		liftJoystickY = 0;  
     		
     		if (!setPointSet) {
-    			Robot.lifter.enable();
-    			Robot.lifter.setSetpoint(RobotMap.lift_rightFront.getSelectedSensorPosition(0));
+    			Robot.trolley.enable();
+    			Robot.trolley.setSetpoint(RobotMap.lift_rightFront.getSelectedSensorPosition(0));
     			
-    			SmartDashboard.putNumber("PIDSetPositionLIFTER", Robot.lifter.getPosition());
+    			SmartDashboard.putNumber("PIDSetPositionLIFTER", Robot.trolley.getPosition());
     
     			setPointSet = true; 
     		}
     	} else {				
-    		Robot.lifter.disable(); 
+    		Robot.trolley.disable(); 
     		if  ((liftJoystickY > .1) ) {
      			RobotMap.lift_rightFront.set(ControlMode.PercentOutput, liftJoystickY);
     			//RobotMap.lift_leftFront.set(ControlMode.PercentOutput, -liftJoystickY);

@@ -5,7 +5,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.team2337.robot.RobotMap;
 import com.team2337.robot.commands.arm.arm_joystickControl;
 import com.team2337.robot.commands.arm.arm_joystickControl2;
-import com.team2337.robot.commands.lifter.lifter_joystickControl;
+import com.team2337.robot.commands.trolley.trolley_joystickControl;
 
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;

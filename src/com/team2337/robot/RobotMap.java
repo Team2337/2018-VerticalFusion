@@ -5,7 +5,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.team2337.fusion.drive.*;
 import com.team2337.fusion.vision.VisionProcessing;
-import com.team2337.robot.subsystems.Lifter;
+import com.team2337.robot.subsystems.Trolley;
 import com.team2337.robot.Constants;
 
 import edu.wpi.first.wpilibj.AnalogInput;
@@ -39,7 +39,7 @@ public class RobotMap {
 	public static VictorSPX chassis_rightRear;
 
 	public static NerdyDrive drive;
-
+	
 	// Lift
 	public static TalonSRX lift_leftFront;
 	public static TalonSRX lift_rightFront;
@@ -52,7 +52,7 @@ public class RobotMap {
 	// Intake
 	public static TalonSRX intake_left;
 	public static TalonSRX intake_right;
-
+	
 	// Ejector
 	public static Solenoid ejector_push;
 
@@ -129,25 +129,27 @@ public class RobotMap {
 
 		lift_rightFront = new TalonSRX(5); // 5
 		lift_rightFront.configSelectedFeedbackSensor(FeedbackDevice.Analog, 0, 0);
-		lift_rightFront.setSensorPhase(true);
+		lift_rightFront.setSensorPhase(false);
+		lift_rightFront.setInverted(true);
 		
 		lift_rightBack = new TalonSRX(6); // 6
 		lift_rightBack.follow(lift_rightFront);
+		lift_rightBack.setInverted(true);
 		
 		lift_leftFront = new TalonSRX(3); // 3
-//		lift_leftFront.setInverted(true);
+		lift_leftFront.setInverted(true);
 
 		lift_leftBack = new TalonSRX(4); // 4
 		lift_leftBack.follow(lift_leftFront);
-//		lift_leftBack.setInverted(true);
+		lift_leftBack.setInverted(true);
 
 		
 		lift_potentiometer = new AnalogPotentiometer(2, 10.0, 0.068);
 
-		lift_rightFront.configForwardSoftLimitEnable(true, 0);
+		lift_rightFront.configForwardSoftLimitEnable(false, 0);
 		lift_leftFront.configForwardSoftLimitEnable(false, 0);
 
-		lift_rightFront.configReverseSoftLimitEnable(true, 0);
+		lift_rightFront.configReverseSoftLimitEnable(false, 0);
 		lift_leftFront.configReverseSoftLimitEnable(false, 0);
 
 		lift_rightBack.configForwardSoftLimitEnable(false, 0);
@@ -161,10 +163,10 @@ public class RobotMap {
 		/*
 		 * Intake
 		 */
-		intake_left = new TalonSRX(12); // 6
+		intake_left = new TalonSRX(6); // 6
 		intake_left.setInverted(true);
-		intake_right = new TalonSRX(11); // 5
-
+		intake_right = new TalonSRX(5); // 5
+		
 		/*
 		 * Ejector
 		 */
@@ -173,15 +175,15 @@ public class RobotMap {
 		/*
 		 * Arm
 		 */
-		arm_left = new TalonSRX(0); // 7
-		arm_right = new TalonSRX(13); // 8
+		arm_left = new TalonSRX(7); // 7
+		arm_right = new TalonSRX(8); // 8
 		arm_right.setInverted(false);
 
 		enc = new Encoder(0, 1, true, Encoder.EncodingType.k4X);
 
 		arm_right.setStatusFramePeriod(0, 0, 0);
 		arm_right.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
-		arm_right.setSensorPhase(true);
+		arm_right.setSensorPhase(false);
 
 		RobotMap.arm_left.configForwardSoftLimitEnable(true, 0);
 		RobotMap.arm_right.configForwardSoftLimitEnable(true, 0);
@@ -198,7 +200,7 @@ public class RobotMap {
 		 * Climber
 		 */
 		climber_left = new TalonSRX(9); // 9
-		climber_right = new TalonSRX(10); //
+		climber_right = new TalonSRX(10); // 10
 
 		/*
 		 * Shifter

@@ -2,10 +2,14 @@ package com.team2337.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.team2337.robot.Robot;
 import com.team2337.robot.RobotMap;
-import com.team2337.robot.commands.lifter.lifter_joystickControl;
-import com.team2337.robot.commands.lifter.lifter_joystickControl2;
-import com.team2337.robot.commands.lifter.lifter_joystickControl3;
+import com.team2337.robot.commands.bigBrother.setPointsChecking;
+import com.team2337.robot.commands.trolley.trolley_joystickControl;
+import com.team2337.robot.commands.trolley.trolley_joystickControl2;
+import com.team2337.robot.commands.trolley.trolley_joystickControl3;
+import com.team2337.robot.commands.trolley.trolley_setPID;
+import com.team2337.robot.commands.trolley.trolley_startPID;
 
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
@@ -18,7 +22,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * @category LIFTER
  * @author Brendan, Bryce
  */
-public class Lifter extends PIDSubsystem {
+public class Trolley extends PIDSubsystem {
 
 	public final static AnalogPotentiometer potentiometer = RobotMap.lift_potentiometer;
 	//private final TalonSRX leftBack = RobotMap.lift_leftBack;
@@ -34,16 +38,16 @@ public class Lifter extends PIDSubsystem {
 	private double maxSpeedDown = -0.5;
 
 	protected void initDefaultCommand() {
-		setDefaultCommand(new lifter_joystickControl3());
+		setDefaultCommand(new trolley_startPID());
 	}
 
-	public Lifter() {
+	public Trolley() {
 
-		super("Lift", 4.0, 0.0, 0.0);
-		setAbsoluteTolerance(0.05);
+		super("Lift", 0.01, 0.0, 0.0);
+		setAbsoluteTolerance(2);
 		getPIDController().setContinuous(false);
 
-		getPIDController().setInputRange(0, 5);
+		getPIDController().setInputRange(-1000, 1000);
 
 		// Use these to get going:
 		// setSetpoint() - Sets where the PID controller should move the system
@@ -58,9 +62,9 @@ public class Lifter extends PIDSubsystem {
 		// Return your input value for the PID loop
 		// e.g. a sensor, like a potentiometer:
 		// yourPot.getAverageVoltage() / kYourMaxVoltage;
-		SmartDashboard.putNumber("frontRightLIFTERSoftPoint", Math.abs(RobotMap.lift_rightFront.getSelectedSensorPosition(0)));
+		SmartDashboard.putNumber("frontRightLIFTERSoftPoint", RobotMap.lift_rightFront.getSelectedSensorPosition(0));
 		//SmartDashboard.putNumber("frontLeftPIDInput", leftFront.getSensorCollection().getQuadraturePosition());
-		return Math.abs(RobotMap.lift_rightFront.getSelectedSensorPosition(0));//RobotMap.lift_stringPot.pidGet();
+		return (RobotMap.lift_rightFront.getSelectedSensorPosition(0));//RobotMap.lift_stringPot.pidGet();
 	}
 	
 	/**
@@ -79,7 +83,7 @@ public class Lifter extends PIDSubsystem {
 	// StopPID, toggle option for stopping it.
 	/**
 	 * Disables the PID subsystem on the lift.
-	 */
+	 */   
 	public void stopPID() {
 		this.PIDStatus = true;
 		this.disable();
@@ -137,32 +141,26 @@ public class Lifter extends PIDSubsystem {
 		RobotMap.lift_leftFront.configForwardSoftLimitThreshold(forward, 0);
 		RobotMap.lift_rightFront.configForwardSoftLimitThreshold(forward, 0);
 		
-		RobotMap.lift_leftBack.configForwardSoftLimitThreshold(forward, 0);
-		RobotMap.lift_rightBack.configForwardSoftLimitThreshold(forward, 0);
+		//RobotMap.lift_leftBack.configForwardSoftLimitThreshold(forward, 0);
+		//RobotMap.lift_rightBack.configForwardSoftLimitThreshold(forward, 0);
 		
 		RobotMap.lift_leftFront.configReverseSoftLimitThreshold(reverse, 0);
 		RobotMap.lift_rightFront.configReverseSoftLimitThreshold(reverse, 0);
 	
-		RobotMap.lift_leftBack.configReverseSoftLimitThreshold(reverse, 0);
-		RobotMap.lift_rightBack.configReverseSoftLimitThreshold(reverse, 0);	
+		//RobotMap.lift_leftBack.configReverseSoftLimitThreshold(reverse, 0);
+		//RobotMap.lift_rightBack.configReverseSoftLimitThreshold(reverse, 0);	
 		
 		SmartDashboard.putNumber("forwardLIFTSoftLimit", forward);
 		SmartDashboard.putNumber("reverseLIFTSoftLimit", reverse);
 		
-		SmartDashboard.putBoolean("forwardLIFTBoolean", RobotMap.arm_right.getSensorCollection().isFwdLimitSwitchClosed());
-		SmartDashboard.putBoolean("reverseLIFTBoolean", RobotMap.arm_right.getSensorCollection().isRevLimitSwitchClosed());
+		SmartDashboard.putBoolean("forwardLIFTBoolean", RobotMap.lift_rightFront.getSensorCollection().isFwdLimitSwitchClosed());
+		SmartDashboard.putBoolean("reverseLIFTBoolean", RobotMap.lift_rightFront.getSensorCollection().isRevLimitSwitchClosed());
+		
 	}
 	
 	public static void stop() {
 		leftFront.set(ControlMode.PercentOutput, 0);
 		rightFront.set(ControlMode.PercentOutput, 0);
 	}
-	
-	public static void liftSoftPoints(double forward, double reverse) {
-		if(forward < 1 && forward > 0.9) {
-			stop();
-		}
-	}
-	
 	
 }

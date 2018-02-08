@@ -9,8 +9,8 @@ import com.team2337.robot.commands.arm.arm_increaseAngle;
 import com.team2337.robot.commands.ejector.*;
 import com.team2337.robot.commands.intake.*;
 import com.team2337.robot.commands.shifter.*;
-import com.team2337.robot.commands.lifter.lifter_setPID;
-import com.team2337.robot.commands.lifter.lifter_stopPID;
+import com.team2337.robot.commands.trolley.trolley_setPID;
+import com.team2337.robot.commands.trolley.trolley_stopPID;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -78,7 +78,7 @@ public class OI {
 	/*
 	 * OperatorControl
 	 */
-	public static Joystick				operatorControls		= new Joystick(2);
+	public static Joystick				operatorControls		= new Joystick(3);
 
 	JoystickButton			operatorInt_GreenButton				= new JoystickButton(operatorJoystick, 19);
 	JoystickButton			operatorInt_RedButton				= new JoystickButton(operatorJoystick, 20);
@@ -91,15 +91,16 @@ public class OI {
 	JoystickButton 			operatorInt_BlackButton 			= new JoystickButton(operatorJoystick, 11);
 	JoystickButton 			operatorInt_BlueButton				= new JoystickButton(operatorJoystick, 12);
     
+	public static Joystick				throttleJoystick	    = new Joystick(2);
 	
 	public OI() {
 		
 		/* ====== DRIVER JOYSTICK ===== */
 		
-		driver_GreenA			.whenPressed(new lifter_setPID(0.7));
-		driver_RedB				.whenPressed(new lifter_setPID(0.6));
-		driver_BlueX			.whenPressed(new lifter_setPID(0.1)); 
-		driver_YellowY			.whenPressed(new lifter_stopPID());
+		driver_GreenA			.whenPressed(new trolley_setPID(0.7));
+		driver_RedB				.whenPressed(new trolley_setPID(0.6));
+		driver_BlueX			.whenPressed(new trolley_setPID(0.1)); 
+		driver_YellowY			.whenPressed(new trolley_stopPID());
 		
 		driver_BumperLeft		.whenPressed(new DoNothing());
 		driver_BumperRight		.whenPressed(new DoNothing());
@@ -127,10 +128,10 @@ public class OI {
 	    
 		/* ====== OPERATOR JOYSTICK ===== */
 	    
-		operator_GreenA			.whenPressed(new lifter_setPID(0.7));
-		operator_RedB			.whenPressed(new lifter_setPID(0.9));
-		operator_BlueX			.whenPressed(new lifter_setPID(1.1));
-		operator_YellowY		.whenPressed(new lifter_stopPID());
+		operator_GreenA			.whenPressed(new trolley_setPID(0.7));
+		operator_RedB			.whenPressed(new trolley_setPID(0.9));
+		operator_BlueX			.whenPressed(new trolley_setPID(1.1));
+		operator_YellowY		.whenPressed(new trolley_stopPID());
 		
 		operator_BumperLeft		.whileHeld(new arm_increaseAngle());
 		operator_BumperRight	.whileHeld(new arm_decreaseAngle());

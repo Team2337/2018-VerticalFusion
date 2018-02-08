@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package com.team2337.robot.commands.lifter;
+package com.team2337.robot.commands.trolley;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.PIDCommand;
@@ -18,17 +18,17 @@ import com.team2337.robot.Robot;
  * @category LIFTER
  * @author - Bryce
  */
-public class lifter_startPID extends Command {
+public class trolley_startPID extends Command {
 	public static boolean set = false; 
-	public lifter_startPID() {
-		requires(Robot.lifter);
+	public trolley_startPID() {
+		requires(Robot.trolley);
 	}
 
 	protected void initialize() {
-		Robot.lifter.startPID();
-		if(!lifter_startPID.set) {
-		Robot.lifter.setPosition(Robot.lifter.getPosition());
-		lifter_startPID.set = true;
+		Robot.trolley.startPID();
+		if(!trolley_startPID.set) {
+		Robot.trolley.setPosition(Robot.trolley.getPosition());
+		trolley_startPID.set = true;
 		}
 		
 	}

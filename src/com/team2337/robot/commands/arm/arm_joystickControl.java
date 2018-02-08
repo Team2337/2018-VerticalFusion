@@ -47,7 +47,7 @@ public class arm_joystickControl extends Command {
 		SmartDashboard.putNumber("selectedSensorPosition", armPositionEncoder);
 		SmartDashboard.putNumber("ArmJoystickValue", armJoystickX);
 		
-		isAtTop = com.team2337.robot.commands.lifter.lifter_joystickControl.isAtTop;
+		isAtTop = com.team2337.robot.commands.trolley.trolley_joystickControl.isAtTop;
 		
 		SmartDashboard.putNumber("PIDArmPosition", Robot.arm.getPosition());
 

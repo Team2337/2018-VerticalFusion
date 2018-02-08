@@ -7,26 +7,35 @@
 
 package com.team2337.robot.subsystems;
 
+import com.team2337.robot.commands.bigBrother.setPointsChecking;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  * An example subsystem. You can replace me with your own Subsystem.
  */
 public class BigBrother extends Subsystem {
-	int liftPoints[][] = new int[3][5];
+	public int points[][] = new int[21][11];
 	/*
-	 * 
+	 * 0: lift SP1
+	 * 1: lift SP2
+	 * 2: lift SP3
+	 * 3: trolley SP
+	 * 4: trolley max
+	 * 5: trolley min
+	 * 6: arm SP
+	 * 7: arm Forward SL
+	 * 8: arm Reverse SL
+	 * 9: arm max
+	 *10: arm min
 	 */
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
-		// setDefaultCommand(new MySpecialCommand());
+		setDefaultCommand(new setPointsChecking());
 	}
 
-	public void points() {
-		liftPoints[0][0] = 0;
-		liftPoints[1][0] = 10;
-		liftPoints[2][0] = 13; 
-		
+	public void points(int x, int y, int value) {
+		points[y][x] = value;
 	}
 
 }

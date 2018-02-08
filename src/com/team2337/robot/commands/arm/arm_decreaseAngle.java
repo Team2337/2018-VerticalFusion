@@ -37,15 +37,15 @@ public class arm_decreaseAngle extends Command {
 	@Override
 	protected void execute() {
 		armPosition = RobotMap.arm_right.getSelectedSensorPosition(0);
-		potValue = com.team2337.robot.commands.lifter.lifter_joystickControl.potValue;
+		potValue = com.team2337.robot.commands.trolley.trolley_joystickControl.potValue;
 		
 		if(on && armPosition > 0) {
-		if(com.team2337.robot.commands.lifter.lifter_joystickControl.isAtTop==false) {
+		if(com.team2337.robot.commands.trolley.trolley_joystickControl.isAtTop==false) {
 			if(armPosition > 944.44) {
 			Arm.armAngle -= 1;
 			}
 		}
-		else if(com.team2337.robot.commands.lifter.lifter_joystickControl.isAtTop==true) {
+		else if(com.team2337.robot.commands.trolley.trolley_joystickControl.isAtTop==true) {
 			Arm.armAngle -=1;
 		}
 		else if(armPosition < 944.44) {

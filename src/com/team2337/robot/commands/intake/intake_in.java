@@ -13,26 +13,34 @@ import com.team2337.robot.Robot;
 
 /**
  * Intake: IN - Move the intake in
+ * 
  * @category INTAKE
  * @author Brendan
  */
 public class intake_in extends Command {
 	private double power = 1;
+
 	public intake_in(double power) {
 		requires(Robot.intake);
 		this.power = power;
 	}
+
 	protected void initialize() {
 		Robot.intake.moveIn(this.power);
 	}
-	
-	protected void execute() {}
-	protected boolean isFinished() {return false;}
-	
+
+	protected void execute() {
+		
+	}
+
+	protected boolean isFinished() {
+		return false;
+	}
+
 	protected void end() {
 		Robot.intake.stop();
 	}
-	
+
 	protected void interrupted() {
 		this.end();
 	}

@@ -18,7 +18,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Claw extends Subsystem {
 	public static Solenoid left = RobotMap.claw_left;
-	public static Solenoid right = RobotMap.claw_right;
+	public static Solenoid right = RobotMap.claw_right; 
 
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
@@ -31,7 +31,7 @@ public class Claw extends Subsystem {
 	}
 
 	public void close() {
-		left.set(true);
-		right.set(true);
+		left.set(false);
+		right.set(false);
 	}
 }

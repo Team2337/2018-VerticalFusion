@@ -5,35 +5,45 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package com.team2337.robot.commands.lifter;
+package com.team2337.robot.commands.trolley;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 import com.team2337.robot.Robot;
 
 /**
- * Lifter: STOPPID - Stops the PID of the lift
+ * Lifter: SETPID - Moves the lifter based of a PID set
  * 
  * @category LIFTER
  * @author - Bryce
  */
-public class lifter_stopPID extends Command {
-	public lifter_stopPID() {
-		requires(Robot.lifter);
+public class trolley_setPID extends Command {
+	private double pos = 0;
+
+	public trolley_setPID(double pos) {
+		requires(Robot.trolley);
+
+		this.pos = pos;
 	}
 
 	protected void initialize() {
-		Robot.lifter.stopPID();
+		Robot.trolley.enable(); // Sets the position of the lifter PID (variable grabbed from OI)
+		Robot.trolley.setPosition(this.pos);
 	}
 
 	protected void execute() {
+
 	}
 
 	protected boolean isFinished() {
-		return true;
+		return (Robot.trolley.onTarget());
 	}
 
 	protected void end() {
+		Robot.trolley.enable();
+		Robot.trolley.setPosition(Robot.trolley.getPosition());
+		// When the command ends or is interrupted it will keep the lifter from dropping
+		// back to a bad position
 	}
 
 	protected void interrupted() {

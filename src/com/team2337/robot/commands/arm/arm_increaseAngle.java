@@ -36,18 +36,18 @@ public class arm_increaseAngle extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		potValue = com.team2337.robot.commands.lifter.lifter_joystickControl.potValue;
+		potValue = com.team2337.robot.commands.trolley.trolley_joystickControl.potValue;
 		armPosition = RobotMap.arm_right.getSelectedSensorPosition(0);
 
-		if (armPosition >= 944.44 && com.team2337.robot.commands.lifter.lifter_joystickControl.isAtTop == false) {
+		if (armPosition >= 944.44 && com.team2337.robot.commands.trolley.trolley_joystickControl.isAtTop == false) {
 			System.out.println("IM INCREASING");
 			this.end();
 	}
 		else if (armPosition < 2500) {
-			if (com.team2337.robot.commands.lifter.lifter_joystickControl.isAtTop == true && on) {
+			if (com.team2337.robot.commands.trolley.trolley_joystickControl.isAtTop == true && on) {
 				System.out.println("1");
 				Arm.armAngle += 1;
-			} else if (com.team2337.robot.commands.lifter.lifter_joystickControl.isAtTop == false
+			} else if (com.team2337.robot.commands.trolley.trolley_joystickControl.isAtTop == false
 					&& armPosition < 944.44 
 					&& on) {
 				System.out.println("2");

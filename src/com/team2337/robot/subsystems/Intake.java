@@ -30,6 +30,7 @@ public class Intake extends Subsystem {
 	public void moveIn(double power) {
 		right.set(ControlMode.PercentOutput, power);
 		left.set(ControlMode.PercentOutput, power);
+		
 	}
 	/**
 	 * Move the intake outwards (release/bloop it)
@@ -46,4 +47,5 @@ public class Intake extends Subsystem {
 		right.set(ControlMode.PercentOutput, 0);
 		left.set(ControlMode.PercentOutput, 0);
 	}
+
 }

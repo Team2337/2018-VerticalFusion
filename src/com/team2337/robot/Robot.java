@@ -13,9 +13,10 @@ import com.team2337.robot.subsystems.Climber;
 import com.team2337.robot.subsystems.Ejector;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.team2337.robot.subsystems.Arm;
+import com.team2337.robot.subsystems.BigBrother;
 import com.team2337.robot.subsystems.Intake;
 import com.team2337.robot.subsystems.LED;
-import com.team2337.robot.subsystems.Lifter;
+import com.team2337.robot.subsystems.Trolley;
 import com.team2337.robot.subsystems.Shifter;
 
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -37,13 +38,15 @@ public class Robot extends TimedRobot {
 	public static Arm arm;
 	public static Intake intake;
 	public static LED led;
-	public static Lifter lifter;
+	public static Trolley trolley;
 	public static Shifter shifter;
 	public static Climber climber;
 	public static Claw claw;
+	public static BigBrother bigBrother;
 	public static OI oi;
 
 	Command m_autonomousCommand;
+	public static double throttleValue;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
 
 	/**
@@ -55,7 +58,7 @@ public class Robot extends TimedRobot {
 
 		RobotMap.init();
 		chassis = new Chassis();
-		lifter = new Lifter();
+		trolley = new Trolley();
 		intake = new Intake();
 		ejector = new Ejector();
 		arm = new Arm();
@@ -63,6 +66,7 @@ public class Robot extends TimedRobot {
 		shifter = new Shifter();
 		led = new LED();
 		claw = new Claw();
+		bigBrother = new BigBrother();
 
 		oi = new OI();
 
@@ -140,10 +144,11 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		
 		SmartDashboard.putNumber("pot", RobotMap.lift_potentiometer.get());
-		SmartDashboard.putNumber("SetPoint", Robot.lifter.getSetpoint());
-		SmartDashboard.putBoolean("atSetPoint?", com.team2337.robot.commands.lifter.lifter_joystickControl.isAtTop);
-		SmartDashboard.putNumber("potValue", com.team2337.robot.commands.lifter.lifter_joystickControl.potValue);
+		SmartDashboard.putNumber("SetPoint", Robot.trolley.getSetpoint());
+		SmartDashboard.putBoolean("atSetPoint?", com.team2337.robot.commands.trolley.trolley_joystickControl.isAtTop);
+		SmartDashboard.putNumber("potValue", com.team2337.robot.commands.trolley.trolley_joystickControl.potValue);
 		SmartDashboard.putNumber("armAnglePosition", Arm.armAngle);
 		SmartDashboard.putNumber("armEncoderPosition", RobotMap.arm_right.getSelectedSensorPosition(0));
 		SmartDashboard.putNumber("armValue", com.team2337.robot.commands.arm.arm_increaseAngle.armPosition);
