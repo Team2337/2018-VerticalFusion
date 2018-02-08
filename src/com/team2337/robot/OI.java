@@ -117,6 +117,7 @@ public class OI {
 		4	Throttle rocker	Right/Left (Rocker)		Right
 	 */
 	
+	
 	public static Joystick				operatorControls		= new Joystick(2);
 	/*
 	JoystickButton			operatorInt_GreenButton				= new JoystickButton(operatorJoystick, 19);
@@ -130,6 +131,7 @@ public class OI {
 	JoystickButton 			operatorInt_BlackButton 			= new JoystickButton(operatorJoystick, 11);
 	JoystickButton 			operatorInt_BlueButton				= new JoystickButton(operatorJoystick, 12);
      * OperatorControl
+	 */
 	
 	public OI() {
 		
