@@ -4,6 +4,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.team2337.robot.commands.chassis.chassis_drive;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The main chasiss runtime
@@ -46,5 +47,9 @@ public class Chassis extends Subsystem {
 	public void setBrakeMode(NeutralMode mode) {
 		RobotMap.chassis_rightFront.setNeutralMode(mode);
 		RobotMap.chassis_leftFront.setNeutralMode(mode);
+	}
+	
+	public void periodic() {
+
 	}
 }

@@ -11,7 +11,7 @@ import com.team2337.robot.subsystems.Chassis;
 import com.team2337.robot.subsystems.Claw;
 import com.team2337.robot.subsystems.Climber;
 import com.team2337.robot.subsystems.Ejector;
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.team2337.fusion.gyro.Pigeon;
 import com.team2337.robot.commands.DoNothing;
 import com.team2337.robot.commands.auto.*;
 import com.team2337.robot.subsystems.Arm;
@@ -45,6 +45,7 @@ public class Robot extends TimedRobot {
 	public static Climber climber;
 	public static Claw claw;
 	public static OI oi;
+	public static Pigeon gyro;
 	public static char ourswitch, scale, oppswitch;
 
 	Command m_autonomousCommand;
@@ -68,11 +69,13 @@ public class Robot extends TimedRobot {
 		shifter = new Shifter();
 		led = new LED();
 		claw = new Claw();
+		gyro = new Pigeon();
 		
 		
 		
 		oi = new OI();
-
+	
+		
 		 autonchooser.addDefault("Cross the Line", new DoNothing());
 		 autonchooser.addObject("Center Switch", new auto_centerSwitch());
 		 autonchooser.addObject("Do Nothing", new DoNothing());
@@ -83,7 +86,8 @@ public class Robot extends TimedRobot {
 		 autonchooser.addObject("Right Switch No cross", new DoNothing());
 		 autonchooser.addObject("Right Scale No cross", new DoNothing());
 		 autonchooser.addObject("Make them cry", new DoNothing());
-		SmartDashboard.putData("Auto mode", autonchooser);
+		 SmartDashboard.putData("Auto mode", autonchooser);
+		
 	}
 
 	/**
@@ -93,7 +97,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void disabledInit() {
-
+		Pigeon.pidgey.setFusedHeading(0.0, 10);
 	}
 
 	@Override
@@ -105,7 +109,13 @@ public class Robot extends TimedRobot {
 		ourswitch = gameData.charAt(0);
 		scale = gameData.charAt(1);
 		oppswitch = gameData.charAt(2);
-		
+
+		SmartDashboard.putNumber("FusedHeading2", Pigeon.pidgey.getFusedHeading());
+		SmartDashboard.putNumber("AbsoluteCompass", gyro.getThing());
+		SmartDashboard.putNumber("Yaw", gyro.getYaw());
+		SmartDashboard.putNumber("Pitch", gyro.getPitch());
+		SmartDashboard.putNumber("Roll", gyro.getRoll());
+
 
 	}
 
@@ -158,6 +168,7 @@ public class Robot extends TimedRobot {
 		}
 		RobotMap.chassis_leftFront.setSelectedSensorPosition(0, 0, 0);
 		RobotMap.chassis_rightFront.setSelectedSensorPosition(0, 0, 0);
+		Pigeon.pidgey.setFusedHeading(0.0, 10);
 	}
 
 	/**
@@ -190,6 +201,8 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("centerX", RobotMap.vision.getRevAngle());
 		//
 		System.out.print(RobotMap.vision.getRevAngle());
+		
+
 	}
 
 	/**
@@ -198,4 +211,6 @@ public class Robot extends TimedRobot {
 	@Override
 	public void testPeriodic() {
 	}
+	
+	
 }

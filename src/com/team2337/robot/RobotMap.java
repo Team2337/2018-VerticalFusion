@@ -45,7 +45,7 @@ public class RobotMap {
 
 	public static NerdyDrive drive;
 
-	public static PigeonIMU pidgey;
+	//public static PigeonIMU pidgey;
 	// Lift
 	public static TalonSRX lift_leftFront;
 	public static TalonSRX lift_rightFront;
@@ -88,21 +88,23 @@ public class RobotMap {
 	
 	
 	public static UsbCamera camera;
+
+	
 	public static void init() {
 		
 		/*
 		 * z Drive Left
 		 */
-		chassis_leftFront = new TalonSRX(15); // 15
+		chassis_leftFront = new TalonSRX(0); 
 		chassis_leftFront.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
 		chassis_leftFront.setSensorPhase(false);
 
-		chassis_leftMid = new VictorSPX(14); // 14
-		chassis_leftRear = new VictorSPX(13); // 13
+		chassis_leftMid = new VictorSPX(1); 
+		chassis_leftRear = new VictorSPX(2);
 
-		chassis_leftFront.setInverted(true);
-		chassis_leftMid.setInverted(true);
-		chassis_leftRear.setInverted(true);
+		chassis_leftFront.setInverted(false);
+		chassis_leftMid.setInverted(false);
+		chassis_leftRear.setInverted(false);
 
 		chassis_leftRear.follow(chassis_leftFront);
 		chassis_leftMid.follow(chassis_leftFront);
@@ -110,16 +112,16 @@ public class RobotMap {
 		/*
 		 * Drive Right
 		 */
-		chassis_rightFront = new TalonSRX(0); // 0
+		chassis_rightFront = new TalonSRX(15); 
 		chassis_rightFront.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
-		chassis_rightFront.setSensorPhase(true);
+		chassis_rightFront.setSensorPhase(false);
 
-		chassis_rightMid = new VictorSPX(1); // 1
-		chassis_rightRear = new VictorSPX(2); // 2
+		chassis_rightMid = new VictorSPX(14); 
+		chassis_rightRear = new VictorSPX(13);
 
-		chassis_rightFront.setInverted(true);
-		chassis_rightMid.setInverted(true);
-		chassis_rightRear.setInverted(true);
+		chassis_rightFront.setInverted(false);
+		chassis_rightMid.setInverted(false);
+		chassis_rightRear.setInverted(false);
 
 		chassis_rightMid.follow(chassis_rightFront);
 		chassis_rightRear.follow(chassis_rightFront);
@@ -167,7 +169,9 @@ public class RobotMap {
 
 		lift_stringPot = new AnalogInput(0);
 
-		pidgey = new PigeonIMU(lift_rightBack);
+		
+
+		
 		/*
 		 * Intake
 		 */
@@ -220,6 +224,8 @@ public class RobotMap {
 		 * LED
 		 */
 		led_info = new Solenoid(0, 6);
+
+		
 
 		/*
 		 * VisionProcessing for PixyCam
