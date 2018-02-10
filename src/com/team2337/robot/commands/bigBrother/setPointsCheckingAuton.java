@@ -11,9 +11,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * Control the Lift-Trolley-Arm based on throttle/joystick input
+ * Use to run Arm/Trolley/Lift during Auton???
  */
-public class setPointsChecking extends Command {
+public class setPointsCheckingAuton extends Command {
 
 	int points[][] = Robot.bigBrother.points;
 	
@@ -30,12 +30,20 @@ public class setPointsChecking extends Command {
 	
 	public double trolleyStick; 
 	public static double throttleValue;
+	double throttleLever;
 	
-	public setPointsChecking() {
+	public setPointsCheckingAuton(double throttle, double trolleyAdj, double armAdj) {
 		requires(Robot.bigBrother);
+		
+		throttleLever = armAdj;
+		trolleyStick = trolleyAdj;
+		throttleValue = throttle;
+		throttleValue = (int) (throttleValue*10)+10;
+		
 	}
 
 	protected void initialize() {
+		//Robot.trolley.enable();
 		setPointSet = false;
 		fineValue = ((double) points[(int) throttleValue][0]);
 		
@@ -284,12 +292,8 @@ public class setPointsChecking extends Command {
 	}
 
 	protected void execute() {
-		double liftPot = RobotMap.lift_right.getSelectedSensorPosition(0);
-		
-		trolleyStick = OI.operatorThrottleJoystick.getRawAxis(1);
-		throttleValue = -OI.operatorThrottleJoystick.getRawAxis(2);
-		throttleValue = (int) (throttleValue*10)+10;;
-		
+		liftPot = RobotMap.lift_right.getSelectedSensorPosition(0);
+		trolleyPot = RobotMap.trolley_right.getSelectedSensorPosition(0);
 		armEncoder =  RobotMap.arm_right.getSelectedSensorPosition(0);
 		/* 
 		 * Points for X
@@ -318,27 +322,15 @@ public class setPointsChecking extends Command {
 		else {
 		fineValue = ((double) points[(int) throttleValue][0]);
 		trolleyAdj = 2;
-		if((double) points[(int) throttleValue][1] >= armEncoder || ((double) points[(int) throttleValue][1] <= armEncoder)) {
+			if((double) points[(int) throttleValue][1] >= armEncoder || ((double) points[(int) throttleValue][1] <= armEncoder)) {
 			Robot.trolley.setPosition((double) points[10][0]);
-		}
-		else {
-			Robot.trolley.setPosition((double) points[(int) throttleValue][0]);
-		}
-		}
-			
-		//Lifter.setSoftLimits(-60, -530);
-		
-		SmartDashboard.putNumber("trolleyStick", trolleyStick);
-		SmartDashboard.putNumber("LIFTLocationPID", Robot.trolley.getSetpoint());
-		SmartDashboard.putNumber("selectedSensorPositionLIFTER", RobotMap.lift_right.getSelectedSensorPosition(0));
-		SmartDashboard.putNumber("throttleValue", throttleValue);
-		SmartDashboard.putNumber("throttleArrayValue", points[(int) throttleValue][0]);
-		SmartDashboard.putNumber("throttleSetPoints", points[(int) throttleValue][0]);
-		SmartDashboard.putNumber("test", fineValue);
-		
-		//System.out.println("The point is " + points[0][0] + "and " + points[(int)throttleValue][0]);
-		//System.out.println(throttleValue);
 			}
+			else {
+			Robot.trolley.setPosition((double) points[(int) throttleValue][0]);
+			}
+		}
+
+	}
 
 	protected boolean isFinished() {
 		return false;

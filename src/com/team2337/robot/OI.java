@@ -13,8 +13,6 @@ import com.team2337.robot.commands.claw.claw_open;
 import com.team2337.robot.commands.ejector.*;
 import com.team2337.robot.commands.intake.*;
 import com.team2337.robot.commands.shifter.*;
-import com.team2337.robot.commands.trolley.trolley_setPID;
-import com.team2337.robot.commands.trolley.trolley_stopPID;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -137,10 +135,10 @@ public class OI {
 		
 		/* ====== DRIVER JOYSTICK ===== */
 		
-		driver_GreenA			.whenPressed(new trolley_setPID(0.7));
-		driver_RedB				.whenPressed(new trolley_setPID(0.6));
-		driver_BlueX			.whenPressed(new trolley_setPID(0.1)); 
-		driver_YellowY			.whenPressed(new trolley_stopPID());
+		driver_GreenA			.whenPressed(new DoNothing()); //.whenPressed(new trolley_setPID(0.7));
+		driver_RedB				.whenPressed(new DoNothing()); //.whenPressed(new trolley_setPID(0.6));
+		driver_BlueX			.whenPressed(new DoNothing()); //.whenPressed(new trolley_setPID(0.1)); 
+		driver_YellowY			.whenPressed(new DoNothing()); //.whenPressed(new trolley_stopPID());
 		
 		driver_BumperLeft		.whenPressed(new claw_close());
 		driver_BumperRight		.whenPressed(new claw_open());
@@ -168,10 +166,10 @@ public class OI {
 	    
 		/* ====== OPERATOR JOYSTICK ===== */
 	    
-		operator_GreenA			.whenPressed(new trolley_setPID(0.7));
-		operator_RedB			.whenPressed(new trolley_setPID(0.9));
-		operator_BlueX			.whenPressed(new trolley_setPID(1.1));
-		operator_YellowY		.whenPressed(new trolley_stopPID());
+		operator_GreenA			.whenPressed(new DoNothing()); //.whenPressed(new trolley_setPID(0.7));
+		operator_RedB			.whenPressed(new DoNothing()); //.whenPressed(new trolley_setPID(0.9));
+		operator_BlueX			.whenPressed(new DoNothing()); //.whenPressed(new trolley_setPID(1.1));
+		operator_YellowY		.whenPressed(new DoNothing()); //.whenPressed(new trolley_stopPID());
 		
 		operator_BumperLeft		.whileHeld(new arm_increaseAngle());
 		operator_BumperRight	.whileHeld(new arm_decreaseAngle());
