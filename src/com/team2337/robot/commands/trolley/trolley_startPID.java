@@ -23,9 +23,9 @@ public class trolley_startPID extends Command {
 	public trolley_startPID() {
 		requires(Robot.trolley);
 	}
-
+//  NOT NEEDED for TALONS
 	protected void initialize() {
-		Robot.trolley.startPID();
+		//Robot.trolley.startPID();
 		if(!trolley_startPID.set) {
 		Robot.trolley.setPosition(Robot.trolley.getPosition());
 		trolley_startPID.set = true;

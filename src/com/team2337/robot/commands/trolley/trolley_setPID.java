@@ -10,6 +10,7 @@ package com.team2337.robot.commands.trolley;
 import edu.wpi.first.wpilibj.command.Command;
 
 import com.team2337.robot.Robot;
+import com.team2337.robot.RobotMap;
 
 /**
  * Lifter: SETPID - Moves the lifter based of a PID set
@@ -27,7 +28,7 @@ public class trolley_setPID extends Command {
 	}
 
 	protected void initialize() {
-		Robot.trolley.enable(); // Sets the position of the lifter PID (variable grabbed from OI)
+		//Robot.trolley.enable(); // Sets the position of the lifter PID (variable grabbed from OI)
 		Robot.trolley.setPosition(this.pos);
 	}
 
@@ -36,11 +37,14 @@ public class trolley_setPID extends Command {
 	}
 
 	protected boolean isFinished() {
-		return (Robot.trolley.onTarget());
+		//return (Robot.trolley.onTarget());
+		//return (RobotMap.trolley_right.getSensorCollection().)  //TOD check on if finished state
+		
+		return true;
 	}
 
 	protected void end() {
-		Robot.trolley.enable();
+		//Robot.trolley.enable();
 		Robot.trolley.setPosition(Robot.trolley.getPosition());
 		// When the command ends or is interrupted it will keep the lifter from dropping
 		// back to a bad position

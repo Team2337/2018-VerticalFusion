@@ -1,10 +1,3 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package com.team2337.robot.commands.trolley;
 
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
@@ -20,9 +13,9 @@ import com.team2337.robot.subsystems.Arm;
 import com.team2337.robot.subsystems.Trolley;
 
 /**
- * Lifter: JOYSTICKCONTROL - Moves the lifter based joystick
+ * Lifter: JOYSTICKCONTROL - Moves the trolley based joystick
  * 
- * @category LIFTER
+ * @category TROLLEY
  * @author - Bryce
  */
 public class trolley_joystickControl2 extends Command {
@@ -30,13 +23,12 @@ public class trolley_joystickControl2 extends Command {
 	public static boolean isAtTop = false;
 	boolean isAtBottom = false; 
 	public static double potValue;
-	double liftJoystickY;
+	double trolleyJoystickY;
 	public static int stringPotValue;  
 	
-	public static TalonSRX frontRight = RobotMap.lift_rightFront;
-	public static TalonSRX frontLeft = RobotMap.lift_leftFront;
-	public static TalonSRX backRight = RobotMap.lift_leftBack;
-	
+	public static TalonSRX frontRight = RobotMap.trolley_right;
+	public static TalonSRX frontLeft = RobotMap.trolley_left;
+
 	
 	public trolley_joystickControl2() {
 		requires(Robot.trolley);
@@ -46,49 +38,50 @@ public class trolley_joystickControl2 extends Command {
 		isAtTop = false;
 		setPointSet = false; 
 		isAtBottom = false;
-    	Robot.trolley.disable();
+    	//Robot.trolley.disable();
     	Trolley.setSoftLimits(2, 0);
 	}
 
 	protected void execute() {
-		stringPotValue = ((int) (RobotMap.lift_stringPot.pidGet()));
+		stringPotValue = ((int) (RobotMap.trolley_right.getSelectedSensorPosition(0)));
 		
-		SmartDashboard.putBoolean("liftSetSetpoint", setPointSet);
+		SmartDashboard.putBoolean("trolleySetSetpoint", setPointSet);
 		//SmartDashboard.putNumber("PIDLiftPosition", stringPotValue);
-		SmartDashboard.putNumber("stringPotPosition", potValue);
-		SmartDashboard.putNumber("LiftJoystickValue", liftJoystickY);
-		SmartDashboard.putBoolean("isAtBottom?", isAtBottom);
-		SmartDashboard.putNumber("StringPotValue", RobotMap.lift_stringPot.pidGet());
+		SmartDashboard.putNumber("Trolley stringPotPosition", potValue);
+		SmartDashboard.putNumber("TrolleyJoystickValue", trolleyJoystickY);
+		SmartDashboard.putBoolean("Trolley isAtBottom?", isAtBottom);
+		SmartDashboard.putNumber("TrolleyStringPotValue,selected sensor", RobotMap.trolley_right.getSelectedSensorPosition(0));
 		
-		liftJoystickY = Robot.oi.operatorJoystick.getRawAxis(1);
+    	trolleyJoystickY = Robot.oi.operatorJoystick.getRawAxis(1);    //////correct axix???????
+    	//TODO
 
 		potValue = stringPotValue;
 		
-    	if ((liftJoystickY > -.2 ) && (liftJoystickY < .2)) { 	//Dead band
+    	if ((trolleyJoystickY > -.2 ) && (trolleyJoystickY < .2)) { 	//Dead band
     		
-    		liftJoystickY = 0;  
+    		trolleyJoystickY = 0;  
     		
     		if (!setPointSet) {
-    			Robot.trolley.enable();
-    			Robot.trolley.setSetpoint(RobotMap.lift_rightFront.getSelectedSensorPosition(0));
+    			//Robot.trolley.enable();
+    			Robot.trolley.setPosition(RobotMap.trolley_right.getSelectedSensorPosition(0));
     			
     			SmartDashboard.putNumber("PIDSetPositionLIFTER", Robot.trolley.getPosition());
     
     			setPointSet = true; 
     		}
     	} else {				
-    		Robot.trolley.disable(); 
-    		if  ((liftJoystickY > .1) ) {
-     			RobotMap.lift_rightFront.set(ControlMode.PercentOutput, liftJoystickY);
+    		//Robot.trolley.disable(); 
+    		if  ((trolleyJoystickY > .1) ) {
+     			RobotMap.trolley_right.set(ControlMode.PercentOutput, trolleyJoystickY);
     			//RobotMap.lift_leftFront.set(ControlMode.PercentOutput, -liftJoystickY);
     			
     		} 
-    		else if (liftJoystickY < -.1) {
-    			RobotMap.lift_rightFront.set(ControlMode.PercentOutput, liftJoystickY);
+    		else if (trolleyJoystickY < -.1) {
+    			RobotMap.trolley_right.set(ControlMode.PercentOutput, trolleyJoystickY);
     			//RobotMap.lift_leftFront.set(ControlMode.PercentOutput, -liftJoystickY);
     		}
     		else {
-    			RobotMap.lift_rightFront.set(ControlMode.PercentOutput, 0);
+    			RobotMap.trolley_right.set(ControlMode.PercentOutput, 0);
     			//RobotMap.lift_leftFront.set(ControlMode.PercentOutput, 0);
     			
     		}

@@ -1,10 +1,3 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package com.team2337.robot.commands.trolley;
 
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
@@ -30,9 +23,9 @@ public class trolley_joystickControl extends Command {
 	public boolean setPointSet = false;
 	public static boolean isAtTop = false;
 	public static double potValue;
-	double liftJoystickY;
+	double trolleyJoystickY;
 	
-	public static TalonSRX frontRight = RobotMap.lift_rightFront;
+	//public static TalonSRX frontRight = RobotMap.trolley_right;
 	
 	public trolley_joystickControl() {
 		requires(Robot.trolley);
@@ -41,15 +34,16 @@ public class trolley_joystickControl extends Command {
 	protected void initialize() {
 		isAtTop = false;
 		setPointSet = false; 
-    	Robot.trolley.disable();
+    	//Robot.trolley.disable();
     	Trolley.setSoftLimits(1, 0);
 	}
 
 	protected void execute() {
-		SmartDashboard.putNumber("trolley" , liftJoystickY);
-		SmartDashboard.putNumber("getStringPotValue", Robot.trolley.potentiometer.get());
-		SmartDashboard.putNumber("PIDtrolleySetPoint", RobotMap.lift_stringPot.getValue());
-		liftJoystickY = OI.operatorJoystick.getRawAxis(1);
+		SmartDashboard.putNumber("trolley" , trolleyJoystickY);
+		SmartDashboard.putNumber("Trolley getStringPotValue", RobotMap.trolley_right.getSelectedSensorPosition(0));
+		//SmartDashboard.putNumber("PIDtrolleySetPoint NOT", RobotMap.trolley_right.getSelectedSensorPosition(0));
+		
+		trolleyJoystickY = OI.operatorJoystick.getRawAxis(1);    ///correct axix????
 		/*if(Arm.armAngle <= 85) {
 		liftJoystickY = -liftJoystickY;
 		}
@@ -57,7 +51,7 @@ public class trolley_joystickControl extends Command {
 			liftJoystickY = +liftJoystickY;
 		}*/
 		
-		potValue = RobotMap.lift_potentiometer.get() * 1000;
+		potValue = RobotMap.trolley_right.getSelectedSensorPosition(0) * 1000;
 		
 		if(potValue <= 1.1 && potValue > 1.025) {
 			isAtTop = true; 
@@ -67,30 +61,30 @@ public class trolley_joystickControl extends Command {
 			isAtTop = false; 
 		}
     	//Check the joystick for a dead band, if in do...
-    	if ((liftJoystickY > -.2 ) && (liftJoystickY < .2)) { 	//Dead band
+    	if ((trolleyJoystickY > -.2 ) && (trolleyJoystickY < .2)) { 	//Dead band
     		
-    		liftJoystickY = 0;  //Set Motor to 0 if in dead band
+    		trolleyJoystickY = 0;  //Set Motor to 0 if in dead band
     		//If setPointSet, is not set (so false), run this ONCE and
     		//enable the Lift PID and set the PID to where the lift is
     		if (!setPointSet) {
-    			Robot.trolley.enable(); //Enable Lift Pid
+    			//Robot.trolley.enable(); //Enable Lift Pid
     			
     			
-    			Robot.trolley.setSetpoint(RobotMap.lift_stringPot.pidGet()); //Set the Lift
+    			Robot.trolley.setPosition(RobotMap.trolley_right.getSelectedSensorPosition(0)); //Set the Lift
     			//Make setPointSet true so this statement true so it won't loop
     			setPointSet = true; 
     		}
     	} else {		//If the Joystick is out of the dead band, do..		
-    		Robot.trolley.disable(); //Disable the Lift PID
+    		//Robot.trolley.disable(); //Disable the Lift PID
     		//Make the motor be controlled by the joystick but at a multiplied speed
-    		if  ((liftJoystickY > .1)) {
-    			RobotMap.lift_rightFront.set(ControlMode.PercentOutput, -liftJoystickY);
+    		if  ((trolleyJoystickY > .1)) {
+    			RobotMap.lift_right.set(ControlMode.PercentOutput, -trolleyJoystickY);
     		//	RobotMap.lift_leftFront.set(ControlMode.PercentOutput, -liftJoystickY);
     			//System.out.println("UP!");
     			
     		} 
-    		else if (liftJoystickY < -.1) {
-    			RobotMap.lift_rightFront.set(ControlMode.PercentOutput, -liftJoystickY);
+    		else if (trolleyJoystickY < -.1) {
+    			RobotMap.lift_right.set(ControlMode.PercentOutput, -trolleyJoystickY);
     			//RobotMap.lift_leftFront.set(ControlMode.PercentOutput, -liftJoystickY);
     			//System.out.println("HEY, This should be going down!");
     		}

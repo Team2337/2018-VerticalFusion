@@ -30,9 +30,9 @@ public class trolley_joystickControl3 extends Command {
 	public boolean setPointSet = false;
 	public static boolean isAtTop = false;
 	public static double potValue;
-	double liftJoystickY;
+	double trolleyJoystickY;
 	
-	public static TalonSRX frontRight = RobotMap.lift_rightFront;
+	public static TalonSRX frontRight = RobotMap.lift_right;
 //	public static TalonSRX frontLeft = RobotMap.lift_leftFront;
 	//public static TalonSRX backRight = RobotMap.lift_leftBack;
 	
@@ -44,14 +44,14 @@ public class trolley_joystickControl3 extends Command {
 	protected void initialize() {
 		isAtTop = false;
 		setPointSet = false; 
-    	Robot.trolley.disable();
+    	//Robot.trolley.disable();
     	//Lifter.setSoftLimits(5, -5);
 	}
 
 	protected void execute() {
-		liftJoystickY = -Robot.oi.operatorJoystick.getRawAxis(1);
+		trolleyJoystickY = -Robot.oi.operatorJoystick.getRawAxis(1);
 		
-		SmartDashboard.putNumber("LIFTERJOYSTICKVALUE", liftJoystickY);
+		SmartDashboard.putNumber("TROLLEYJOYSTICKVALUE", trolleyJoystickY);
 		/*if(Arm.armAngle <= 85) {
 		liftJoystickY = -liftJoystickY;
 		}
@@ -69,9 +69,9 @@ public class trolley_joystickControl3 extends Command {
 			isAtTop = false; 
 		}*/
     	//Check the joystick for a dead band, if in do...
-    	if ((liftJoystickY > -.2 ) && (liftJoystickY < .2)) { 	//Dead band
+    	if ((trolleyJoystickY > -.2 ) && (trolleyJoystickY < .2)) { 	//Dead band
     		
-    		liftJoystickY = 0;  //Set Motor to 0 if in dead band
+    		trolleyJoystickY = 0;  //Set Motor to 0 if in dead band
     		//If setPointSet, is not set (so false), run this ONCE and
     		//enable the Lift PID and set the PID to where the lift is
     		if (!setPointSet) {
@@ -82,17 +82,17 @@ public class trolley_joystickControl3 extends Command {
     			setPointSet = true; 
     		}
     	} else {		//If the Joystick is out of the dead band, do..		
-    		Robot.trolley.disable(); //Disable the Lift PID
+    		//Robot.trolley.disable(); //Disable the Lift PID
     		//Make the motor be controlled by the joystick but at a multiplied speed
-    		if  ((liftJoystickY > .1)) {
-    			RobotMap.lift_rightFront.set(ControlMode.PercentOutput, liftJoystickY);
-    			RobotMap.lift_leftFront.set(ControlMode.PercentOutput, -liftJoystickY);
+    		if  ((trolleyJoystickY > .1)) {
+    			RobotMap.lift_right.set(ControlMode.PercentOutput, trolleyJoystickY);
+    			RobotMap.lift_left.set(ControlMode.PercentOutput, -trolleyJoystickY);
     			//System.out.println("UP!");
     			
     		} 
-    		else if (liftJoystickY < -.1) {
-    			RobotMap.lift_rightFront.set(ControlMode.PercentOutput, liftJoystickY);
-    			RobotMap.lift_leftFront.set(ControlMode.PercentOutput, -liftJoystickY);
+    		else if (trolleyJoystickY < -.1) {
+    			RobotMap.lift_right.set(ControlMode.PercentOutput, trolleyJoystickY);
+    			RobotMap.lift_left.set(ControlMode.PercentOutput, -trolleyJoystickY);
     			//System.out.println("HEY, This should be going down!");
     		}
     		

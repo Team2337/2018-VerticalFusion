@@ -167,15 +167,15 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 		
-		SmartDashboard.putNumber("pot", RobotMap.lift_potentiometer.get());
-		SmartDashboard.putNumber("SetPoint", Robot.trolley.getSetpoint());
+		//SmartDashboard.putNumber("pot", RobotMap.lift_potentiometer.get());
+		//SmartDashboard.putNumber("SetPoint", RobotMap.trolley_right.getClosedLoopTarget());
 		SmartDashboard.putBoolean("atSetPoint?", com.team2337.robot.commands.trolley.trolley_joystickControl.isAtTop);
 		SmartDashboard.putNumber("potValue", com.team2337.robot.commands.trolley.trolley_joystickControl.potValue);
 		SmartDashboard.putNumber("armAnglePosition", Arm.armAngle);
 		SmartDashboard.putNumber("armEncoderPosition", RobotMap.arm_right.getSelectedSensorPosition(0));
 		SmartDashboard.putNumber("armValue", com.team2337.robot.commands.arm.arm_increaseAngle.armPosition);
-		SmartDashboard.putNumber("rightFront", RobotMap.lift_rightFront.getMotorOutputPercent());
-		SmartDashboard.putNumber("leftFront", RobotMap.lift_leftFront.getMotorOutputPercent());
+		SmartDashboard.putNumber("rightFront", RobotMap.lift_right.getMotorOutputPercent());
+		SmartDashboard.putNumber("leftFront", RobotMap.lift_left.getMotorOutputPercent());
 		//SmartDashboard.putNumber("armPositionValue", com.team2337.robot.commands.arm.arm_joystickControl.armPositionValue);
 		SmartDashboard.putBoolean("crate", RobotMap.crateSensor.get());
 		SmartDashboard.putNumber("centerX", RobotMap.vision.getRevAngle());

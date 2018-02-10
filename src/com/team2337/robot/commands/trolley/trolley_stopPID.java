@@ -23,7 +23,8 @@ public class trolley_stopPID extends Command {
 	}
 
 	protected void initialize() {
-		Robot.trolley.stopPID();
+	//	Robot.trolley.stopPID();   //  NOT NEEDED FOR TALONS
+		
 	}
 
 	protected void execute() {
