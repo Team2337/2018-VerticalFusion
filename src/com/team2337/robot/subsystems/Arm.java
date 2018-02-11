@@ -170,5 +170,8 @@ public class Arm extends PIDSubsystem {
 			return false;
 		}
 	}
+	public void periodic() {
+		
+	}
 
 }

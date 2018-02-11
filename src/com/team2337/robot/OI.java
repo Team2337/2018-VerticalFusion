@@ -6,7 +6,7 @@ import com.team2337.fusion.controller.JoystickPOVButton;
 import com.team2337.robot.commands.*;
 import com.team2337.robot.commands.arm.arm_decreaseAngle;
 import com.team2337.robot.commands.arm.arm_increaseAngle;
-import com.team2337.robot.commands.bigBrother.setPointsChecking;
+import com.team2337.robot.commands.bigBrother.alt_Control_Import;
 import com.team2337.robot.commands.claw.claw_close;
 import com.team2337.robot.commands.claw.claw_giveLessHugs;
 import com.team2337.robot.commands.claw.claw_giveMoreHugs;

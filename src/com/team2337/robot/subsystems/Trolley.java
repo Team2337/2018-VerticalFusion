@@ -6,7 +6,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import com.team2337.robot.RobotMap;
 import com.team2337.robot.Robot;
-import com.team2337.robot.commands.bigBrother.setPointsChecking;
+import com.team2337.robot.commands.bigBrother.alt_Control_Import;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;

@@ -8,33 +8,17 @@
 package com.team2337.robot.subsystems;
 
 import com.team2337.robot.commands.bigBrother.setPoints;
-import com.team2337.robot.commands.bigBrother.setPointsChecking;
+import com.team2337.robot.commands.bigBrother.alt_Control_Import;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- * An example subsystem. You can replace me with your own Subsystem.
+ * Importing important points since 2018
  */
 public class BigBrother extends Subsystem {
-	/* 
-	 * Columns
-	 * 0: trolley set points
-	 * 1: lift set points A
-	 * 2: lift set points B
-	 * 3: lift set points C
-	 * 4: arm set points
-	 * 5: trolley forward soft limits 
-	 * 6: trolley reverse soft limits
-	 * 7: arm forward soft limits
-	 * 8: arm reverse soft limits
-	 * 9: trolley positive adjustment
-	 *10: trolley negative adjustment
-	 *11: arm positive adjustment 
-	 *12: arm negative adjustment
-	 */
 	
-	int totalColumns = 13;
-	int totalRows = 21;
+	int totalRows = 20;
+	int totalColumns = 12;
 	
 	public double points[][] = new double[totalRows][totalColumns];
 	
@@ -42,22 +26,9 @@ public class BigBrother extends Subsystem {
 		startFilling();
 	}
 	public void initDefaultCommand() {
-		// Set the default command for a subsystem here.
-		setDefaultCommand(new setPointsChecking());
-	}
-
-	public void points(int x, int y, int value) {
-		points[y][x] = value;
+		setDefaultCommand(new alt_Control_Import());
 	}
 	void startFilling() {
-		startFilling(setPoints.points);
+		points = setPoints.points;
 	}
-	void startFilling(double[][] pointsIn) {
-		for(int column=0; column<totalColumns; column++) {
-			for(int row=0; row<totalRows; row++) {
-				points[row][column] = pointsIn[row][column];
-			}
-		}
-	}
-
 }
