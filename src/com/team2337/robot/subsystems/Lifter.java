@@ -18,10 +18,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * @category TROLLEY
  * @author Bryce
  */
-public class Trolley extends Subsystem {
+public class Lifter extends Subsystem {
 
 	private final static TalonSRX leftFront = RobotMap.trolley_left;  //4
 	private final static TalonSRX rightFront = RobotMap.trolley_right; //3
+	
+	public static int levelOfLift = 1;
 	
 	private int absolutePosition;  //used to set relative position encoder
 	private double maxSpeed = 0.5;
@@ -31,17 +33,16 @@ public class Trolley extends Subsystem {
 	private double kI = 0;
 	private double kD = 0;
 	private int allowableError = 50;
-
-	int forwardSoftLimit = -60;
-	int reverseSoftLimit = -530;
 	
+	int forwardSoftLimit = 0;
+	int reverseSoftLimit = 100;
+
 	protected void initDefaultCommand() {
 		//setDefaultCommand(new trolley_startPID());
 	}
 
-	public Trolley() {
+	public Lifter() {
 		setSoftLimits(forwardSoftLimit, reverseSoftLimit);
-		
 		/* set the peak and nominal outputs, 12V? means full */
 		rightFront.configNominalOutputForward(nominalSpeed, 0);
 		rightFront.configNominalOutputReverse(nominalSpeed, 0);
@@ -75,6 +76,7 @@ public class Trolley extends Subsystem {
 		// if sensor out of phase:  			absolutePosition *= -1;  //TODO
 		/* set the quadrature (relative) sensor to match absolute */
 		rightFront.setSelectedSensorPosition(absolutePosition, 0, 0);
+		
 	}
 	
 	/**
@@ -114,5 +116,7 @@ public class Trolley extends Subsystem {
 		SmartDashboard.putNumber("reverseLIFTSoftLimit", reverse);
 			
 	}
-	
+	public void liftLeveler(int liftLevel) {
+		levelOfLift = liftLevel;
+	}
 }

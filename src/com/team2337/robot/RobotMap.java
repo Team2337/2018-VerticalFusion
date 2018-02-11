@@ -143,6 +143,7 @@ public class RobotMap {
 		lift_right.configSelectedFeedbackSensor(FeedbackDevice.Analog, 0, 0); //string pot
 		lift_right.setSensorPhase(false);
 		lift_right.setInverted(true);
+		lift_right.setStatusFramePeriod(0, 0, 0);
 		
 		lift_left = new TalonSRX(12); // 6
 		lift_left.follow(lift_right);
@@ -152,6 +153,7 @@ public class RobotMap {
 		trolley_right.configSelectedFeedbackSensor(FeedbackDevice.Analog, 0, 0);  //string pot
 		trolley_right.setSensorPhase(false);
 		trolley_right.setInverted(true);
+		trolley_right.setStatusFramePeriod(0, 0, 0);
 
 		trolley_left = new TalonSRX(4); // 4
 		trolley_left.follow(trolley_right);

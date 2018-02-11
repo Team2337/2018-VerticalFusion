@@ -6,12 +6,14 @@ import com.team2337.fusion.controller.JoystickPOVButton;
 import com.team2337.robot.commands.*;
 import com.team2337.robot.commands.arm.arm_decreaseAngle;
 import com.team2337.robot.commands.arm.arm_increaseAngle;
+import com.team2337.robot.commands.bigBrother.setPointsChecking;
 import com.team2337.robot.commands.claw.claw_close;
 import com.team2337.robot.commands.claw.claw_giveLessHugs;
 import com.team2337.robot.commands.claw.claw_giveMoreHugs;
 import com.team2337.robot.commands.claw.claw_open;
 import com.team2337.robot.commands.ejector.*;
 import com.team2337.robot.commands.intake.*;
+import com.team2337.robot.commands.lifter.liftLevelAdjuster;
 import com.team2337.robot.commands.shifter.*;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -78,7 +80,7 @@ public class OI {
 	JoystickPOVButton		operator_POVUpLeft		= new JoystickPOVButton(operatorJoystick, 315);
 	
 	
-	public static Joystick				operatorThrottleJoystick		= new Joystick(4);
+	public static Joystick				operatorThrottleJoystick		= new Joystick(2);
 	JoystickButton			operator_RightTrigger				= new JoystickButton(operatorJoystick, 1);	//Digital trigger on the back of the joystick
 	JoystickButton			operator_StripedButton				= new JoystickButton(operatorJoystick, 2);	//The orange and black striped button on joystick
 	JoystickButton			operator_RightKnucleButton			= new JoystickButton(operatorJoystick, 3);	//The button on the top-right of the joytstick
@@ -116,7 +118,7 @@ public class OI {
 	 */
 	
 	
-	public static Joystick				operatorControls		= new Joystick(2);
+	public static Joystick				operatorControls		= new Joystick(4);
 	/*
 	JoystickButton			operatorInt_GreenButton				= new JoystickButton(operatorJoystick, 19);
 	JoystickButton			operatorInt_RedButton				= new JoystickButton(operatorJoystick, 20);
@@ -199,9 +201,9 @@ public class OI {
 	    operator_RightKnucleButton		       .whenPressed(new DoNothing());
 	    operator_L3						       .whenPressed(new DoNothing());
 	                                           
-	    operator_ThrottleTopThumbButton		   .whenPressed(new DoNothing());
-	    operator_ThrottleMidThumbButton		   .whenPressed(new DoNothing());
-	    operator_ThrottleBottomThumbButton	   .whenPressed(new DoNothing());
+	    operator_ThrottleTopThumbButton		   .whenPressed(new liftLevelAdjuster(1));
+	    operator_ThrottleMidThumbButton		   .whenPressed(new liftLevelAdjuster(2));
+	    operator_ThrottleBottomThumbButton	   .whenPressed(new liftLevelAdjuster(3));
 	                                           
 	    operator_PalmButton				       .whenPressed(new DoNothing());
 	    operator_TopIndexButton 		       .whenPressed(new DoNothing());

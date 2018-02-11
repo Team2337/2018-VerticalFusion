@@ -1,11 +1,8 @@
 package com.team2337.robot.commands.bigBrother;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.team2337.robot.OI;
 import com.team2337.robot.Robot;
 import com.team2337.robot.RobotMap;
-import com.team2337.robot.commands.trolley.trolley_setPID;
-import com.team2337.robot.subsystems.Trolley;
+
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -13,7 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  * Control the Lift-Trolley-Arm based on throttle/joystick input
  */
-public class setPointsChecking extends Command {
+public class setPointsCheckingAuto extends Command {
 
 	double points[][] = Robot.bigBrother.points;
 	
@@ -27,20 +24,27 @@ public class setPointsChecking extends Command {
 	double liftPot;
 	double trolleyPot;
 	double armSetPoint;
+	int autolevelOfLift;
 	
 	int liftSetPointColumn;
 	
-	double throttleToggle;
+	//double throttleToggle;
 	double trolleyStick; 
 	double throttleValue;
 	
-	public setPointsChecking() {
+	int calcThrottlePos;
+	double armAdj;
+	
+	public setPointsCheckingAuto(int calcThrottlePos, double armAdj, int autolevelOfLift) {
 		requires(Robot.bigBrother);
+		calcThrottlePos = this.calcThrottlePos;
+		armAdj = this.armAdj;
+		autolevelOfLift = this.autolevelOfLift;
 	}
 
 	protected void initialize() {
 		
-		
+		Robot.lifter.liftLeveler(autolevelOfLift);
 		
 		//trolley set points
 		points(0, 0, -225); // trolley set point at -98
@@ -333,11 +337,9 @@ public class setPointsChecking extends Command {
 	protected void execute() {
 		double liftPot = RobotMap.lift_right.getSelectedSensorPosition(0);
 		
-		trolleyStick = OI.operatorThrottleJoystick.getRawAxis(1);
-		throttleValue = -OI.operatorThrottleJoystick.getRawAxis(2);
-		throttleValue = (int) (throttleValue*10)+10;
+		//trolleyStick = OI.operatorThrottleJoystick.getRawAxis(1);
 		
-		throttleToggle = OI.operatorThrottleJoystick.getRawAxis(4);
+		throttleValue = calcThrottlePos;
 		
 		trolleySetPoint = ((double) points[(int) throttleValue][4]);
 		armAdjPos = ((double) points[(int) throttleValue][11]);
@@ -367,36 +369,31 @@ public class setPointsChecking extends Command {
 		
 		trolleySetPoint = ((double) points[(int) throttleValue][0]);
 		
-		if(Math.abs(trolleyStick) > 0.1) {
-			trolleySetPoint = trolleySetPoint + (trolleyStick * trolleyAdj); 
-			System.out.println("1");
-		}
-
 		if(!Robot.arm.sameSide(armEncoder, trolleySetPoint)) {
 			trolleySetPoint = (double) points[10][0];
-			System.out.println("Not On The Same Side");
+		//	System.out.println("Not On The Same Side");
 		}
 		else {
-			System.out.println("On The Same Side");
+			//System.out.println("On The Same Side");
 		}
 		
 		//Arm set point logic
 		
 		armSetPoint = ((double) points[(int) throttleValue][4]);
 		
-		if((throttleToggle) > 0.1) {
-			armSetPoint = armSetPoint + (throttleToggle * armAdjPos); 
+		if((armAdj) > 0.1) {
+			armSetPoint = armSetPoint + (armAdj * armAdjPos); 
 			System.out.println("1");
 		}
-		else if(throttleToggle < -0.1) {
-			armSetPoint = armSetPoint + (throttleToggle * armAdjNeg);
+		else if(armAdj < -0.1) {
+			armSetPoint = armSetPoint + (armAdj * armAdjNeg);
 		}
 		
 		//Set Points and Soft Points
 		
 		Robot.trolley.setPosition(trolleySetPoint);
 		Robot.arm.setPosition(armSetPoint);
-		Robot.lifter.setPosition((double) points[(int) throttleValue][Robot.lifter.levelOfLift]); 
+		Robot.lifter.setPosition((double) points[(int) throttleValue][autolevelOfLift]); 
 		
 		Robot.arm.setSoftLimits((int)(points[(int) throttleValue][7]), (int)(points[(int) throttleValue][8]));
 			

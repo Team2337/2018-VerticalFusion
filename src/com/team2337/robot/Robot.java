@@ -18,6 +18,7 @@ import com.team2337.robot.subsystems.Arm;
 import com.team2337.robot.subsystems.BigBrother;
 import com.team2337.robot.subsystems.Intake;
 import com.team2337.robot.subsystems.LED;
+import com.team2337.robot.subsystems.Lifter;
 import com.team2337.robot.subsystems.Trolley;
 import com.team2337.robot.subsystems.Shifter;
 
@@ -46,8 +47,9 @@ public class Robot extends TimedRobot {
 	public static Climber climber;
 	public static Claw claw;
 	public static BigBrother bigBrother;
+	public static Lifter lifter;
 	public static OI oi;
-	public static char ourswitch, scale, oppswitch;
+	//public static char ourswitch, scale, oppswitch;
 
 	Command m_autonomousCommand;
 	SendableChooser<Command> autonchooser = new SendableChooser<>();
@@ -71,6 +73,7 @@ public class Robot extends TimedRobot {
 		led = new LED();
 		claw = new Claw();
 		bigBrother = new BigBrother();
+		lifter = new Lifter();
 
 		oi = new OI();
 
@@ -103,9 +106,9 @@ public class Robot extends TimedRobot {
 		String gameData;
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
 		
-		ourswitch = gameData.charAt(0);
-		scale = gameData.charAt(1);
-		oppswitch = gameData.charAt(2);
+		//ourswitch = gameData.charAt(0);
+		//scale = gameData.charAt(1);
+		//oppswitch = gameData.charAt(2);
 		
 
 	}
@@ -174,8 +177,8 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("armAnglePosition", Arm.armAngle);
 		SmartDashboard.putNumber("armEncoderPosition", RobotMap.arm_right.getSelectedSensorPosition(0));
 		SmartDashboard.putNumber("armValue", com.team2337.robot.commands.arm.arm_increaseAngle.armPosition);
-		SmartDashboard.putNumber("rightFront", RobotMap.lift_right.getMotorOutputPercent());
-		SmartDashboard.putNumber("leftFront", RobotMap.lift_left.getMotorOutputPercent());
+		//SmartDashboard.putNumber("rightFront", RobotMap.lift_right.getMotorOutputPercent());
+		//SmartDashboard.putNumber("leftFront", RobotMap.lift_left.getMotorOutputPercent());
 		//SmartDashboard.putNumber("armPositionValue", com.team2337.robot.commands.arm.arm_joystickControl.armPositionValue);
 		SmartDashboard.putBoolean("crate", RobotMap.crateSensor.get());
 		SmartDashboard.putNumber("centerX", RobotMap.vision.getRevAngle());

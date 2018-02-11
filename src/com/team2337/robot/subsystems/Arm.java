@@ -2,6 +2,7 @@ package com.team2337.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.team2337.robot.Robot;
 import com.team2337.robot.RobotMap;
 import com.team2337.robot.commands.arm.arm_joystickControl;
 import com.team2337.robot.commands.arm.arm_joystickControl2;
@@ -10,7 +11,6 @@ import com.team2337.robot.commands.trolley.trolley_joystickControl;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 
 /**
  * The subsystem to control the arm via a PID
@@ -28,6 +28,9 @@ public class Arm extends PIDSubsystem {
 	public static double armAngle = 0;
 	private double maxSpeedUp = 0.5;
 	private double maxSpeedDown = -0.5;
+	
+	int forwardSoftLimit = 100;
+	int reverseSoftLimit = 0;
 
 	protected void initDefaultCommand() {
 		setDefaultCommand(new arm_joystickControl2());
@@ -39,25 +42,29 @@ public class Arm extends PIDSubsystem {
 		setAbsoluteTolerance(70);
 		getPIDController().setContinuous(false);
 		getPIDController().setInputRange(0, 4096);
+		
+		setSoftLimits(forwardSoftLimit, reverseSoftLimit);
 	}
-	
+
 	/**
-	 * Returns the input of the PID 
+	 * Returns the input of the PID
 	 */
 	public double returnPIDInput() {
 
 		SmartDashboard.putNumber("armPIDInput", armRight.getSensorCollection().getQuadraturePosition());
 		return RobotMap.arm_right.getSelectedSensorPosition(0);
-//		return SmartDashboard.getNumber("ArmPosition", 0.5);
+		// return SmartDashboard.getNumber("ArmPosition", 0.5);
 	}
-	
+
 	/**
 	 * Returns the Output of the PID
 	 */
 	protected void usePIDOutput(double output) {
 
-		/*armLeft.set(ControlMode.PercentOutput, -output);
-		armRight.set(ControlMode.PercentOutput, output);*/
+		/*
+		 * armLeft.set(ControlMode.PercentOutput, -output);
+		 * armRight.set(ControlMode.PercentOutput, output);
+		 */
 		SmartDashboard.putNumber("numberOutput", output);
 		Arm.moveForward(output);
 
@@ -114,42 +121,54 @@ public class Arm extends PIDSubsystem {
 	public void setTeleopArmSpeed() {
 		getPIDController().setOutputRange(maxSpeedDown, maxSpeedUp); // For the lift PID
 	}
+
 	/**
 	 * Sets the position of the lifter
 	 */
-	public void setPosition(double pos){
-	    	setSetpoint(pos);
+	public void setPosition(double pos) {
+		setSetpoint(pos);
 	}
-	
+
 	public static void moveForward(double power) {
 		armLeft.set(ControlMode.PercentOutput, power);
 		armRight.set(ControlMode.PercentOutput, power);
 	}
+
 	public static void moveBackward(double power) {
 		armLeft.set(ControlMode.PercentOutput, power);
 		armRight.set(ControlMode.PercentOutput, power);
 	}
+
 	public void stop() {
 		armLeft.set(ControlMode.PercentOutput, 0);
 		armRight.set(ControlMode.PercentOutput, 0);
 	}
-	
+
 	public static void setSoftLimits(int forward, int reverse) {
 		RobotMap.arm_left.configForwardSoftLimitThreshold(forward, 0);
 		RobotMap.arm_right.configForwardSoftLimitThreshold(forward, 0);
-		
+
 		RobotMap.arm_left.configReverseSoftLimitThreshold(reverse, 0);
 		RobotMap.arm_right.configReverseSoftLimitThreshold(reverse, 0);
-		
+
 		SmartDashboard.putNumber("forwardSoftLimit", forward);
 		SmartDashboard.putNumber("reverseSoftLimit", reverse);
-		
+
 		SmartDashboard.putBoolean("forwardBoolean", RobotMap.arm_right.getSensorCollection().isFwdLimitSwitchClosed());
 		SmartDashboard.putBoolean("reverseBoolean", RobotMap.arm_right.getSensorCollection().isRevLimitSwitchClosed());
-		
+
 	}
-	public static void armAngle(double angle) {
-		
+
+	public boolean sameSide(double currentPosition, double desiredPosition) {
+		SmartDashboard.putNumber("currentArmPosition", currentPosition);
+		SmartDashboard.putNumber("desiredArmPosition", desiredPosition);
+		if (currentPosition <= 968 && desiredPosition <= 968) {
+			return true;
+		} else if (currentPosition >= 1080 && desiredPosition >= 1080) {
+			return true;
+		} else {
+			return false;
+		}
 	}
-	
+
 }
