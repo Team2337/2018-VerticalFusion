@@ -4,6 +4,7 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.team2337.fusion.drive.*;
+import com.team2337.fusion.led.BlinkIn;
 import com.team2337.fusion.vision.VisionProcessing;
 import com.team2337.robot.subsystems.Lifter;
 import com.team2337.robot.Constants;
@@ -80,8 +81,9 @@ public class RobotMap {
 	public static Solenoid shifter_right;
 
 	// LEDs
-	public static Solenoid led_info;
-
+	public static BlinkIn blinkin;
+	
+	// VISIION
 	public static VisionProcessing vision;
 	
 	
@@ -172,7 +174,7 @@ public class RobotMap {
 		//intake_right = new TalonSRX(5); // 5
 		intake_right.setInverted(false);
 		crateSensor = new DigitalInput(0);
-
+		
 		/*
 		 * Ejector
 		 */
@@ -185,7 +187,7 @@ public class RobotMap {
 		arm_right = new TalonSRX(8); // 8
 		arm_right.setInverted(false);
 
-		enc = new Encoder(0, 1, true, Encoder.EncodingType.k4X);
+		//enc = new Encoder(0, 1, true, Encoder.EncodingType.k4X);
 
 		arm_right.setStatusFramePeriod(0, 0, 0);
 		arm_right.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
@@ -216,14 +218,15 @@ public class RobotMap {
 		shifter_right = new Solenoid(0, 5); // 1,0
 
 		/*
-		 * LED
-		 */
-		led_info = new Solenoid(0, 6);
-
-		/*
 		 * VisionProcessing for PixyCam
 		 */
 
+		
+		/*
+		 * BlinkIn 
+		 */
+		blinkin = new BlinkIn(0);
+		
 		vision = new VisionProcessing("GRIP/vision");
 		vision.setCameraVerticalOffset(Constants.TargetingCamera_VerticalOffset); // Offset from front of robot
 		vision.setCameraHorizontalOffset(Constants.TargetingCamera_HorizontalOffset); // Offset from front of robot

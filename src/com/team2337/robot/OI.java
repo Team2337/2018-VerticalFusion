@@ -6,6 +6,10 @@ import com.team2337.fusion.controller.JoystickPOVButton;
 import com.team2337.robot.commands.*;
 import com.team2337.robot.commands.arm.arm_decreaseAngle;
 import com.team2337.robot.commands.arm.arm_increaseAngle;
+import com.team2337.robot.commands.claw.claw_close;
+import com.team2337.robot.commands.claw.claw_giveLessHugs;
+import com.team2337.robot.commands.claw.claw_giveMoreHugs;
+import com.team2337.robot.commands.claw.claw_open;
 import com.team2337.robot.commands.ejector.*;
 import com.team2337.robot.commands.intake.*;
 import com.team2337.robot.commands.shifter.*;
@@ -138,17 +142,17 @@ public class OI {
 		driver_BlueX			.whenPressed(new lifter_setPID(0.1)); 
 		driver_YellowY			.whenPressed(new lifter_stopPID());
 		
-		driver_BumperLeft		.whenPressed(new DoNothing());
-		driver_BumperRight		.whenPressed(new DoNothing());
+		driver_BumperLeft		.whenPressed(new claw_close());
+		driver_BumperRight		.whenPressed(new claw_open());
 		
-		driver_Back				.whileHeld(new DoNothing()); 
-		driver_Start			.whileHeld(new DoNothing());
+		driver_Back				.whileHeld(new claw_giveLessHugs()); 
+		driver_Start			.whileHeld(new claw_giveMoreHugs());
 		
 		driver_LeftStick		.whenPressed(new DoNothing()); 
 		driver_RightStick		.whenPressed(new DoNothing()); 
 		
-		driver_TriggerLeft		.whileHeld(new intake_in(0.5));
-		driver_TriggerRight		.whileHeld(new intake_out(0.5));
+		driver_TriggerLeft		.whileHeld(new intake_out(0.75));
+		driver_TriggerRight		.whileHeld(new intake_in(0.75));
 		
 		driver_POVUp			.whenPressed(new DoNothing());  
 		//driver_POVUpRight		.whenPressed(new _DoNothing()); 
