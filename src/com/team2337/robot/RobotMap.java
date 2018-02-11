@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.hal.EncoderJNI;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -83,6 +84,8 @@ public class RobotMap {
 
 	// LEDs
 	public static Solenoid led_info;
+	
+	public static Spark blinkin;
 
 	public static VisionProcessing vision;
 	
@@ -197,10 +200,10 @@ public class RobotMap {
 		arm_right.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
 		arm_right.setSensorPhase(true);
 
-		RobotMap.arm_left.configForwardSoftLimitEnable(true, 0);
-		RobotMap.arm_right.configForwardSoftLimitEnable(true, 0);
+		arm_left.configForwardSoftLimitEnable(true, 0);
+		arm_right.configForwardSoftLimitEnable(true, 0);
 
-		RobotMap.arm_right.configReverseSoftLimitEnable(true, 0);
+		arm_right.configReverseSoftLimitEnable(true, 0);
 
 		/*
 		 * Claw
@@ -224,6 +227,8 @@ public class RobotMap {
 		 * LED
 		 */
 		led_info = new Solenoid(0, 6);
+		
+		blinkin = new Spark(0);
 
 		
 

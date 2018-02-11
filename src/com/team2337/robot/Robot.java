@@ -110,11 +110,7 @@ public class Robot extends TimedRobot {
 		scale = gameData.charAt(1);
 		oppswitch = gameData.charAt(2);
 
-		SmartDashboard.putNumber("FusedHeading2", Pigeon.pidgey.getFusedHeading());
-		SmartDashboard.putNumber("AbsoluteCompass", gyro.getThing());
-		SmartDashboard.putNumber("Yaw", gyro.getYaw());
-		SmartDashboard.putNumber("Pitch", gyro.getPitch());
-		SmartDashboard.putNumber("Roll", gyro.getRoll());
+		allPeriodic();
 
 
 	}
@@ -155,6 +151,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+		allPeriodic();
 	}
 	@Override
 	public void teleopInit() {
@@ -177,6 +174,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		allPeriodic();
 		/*
 		SmartDashboard.putNumber("pot", RobotMap.lift_potentiometer.get());
 		SmartDashboard.putNumber("SetPoint", Robot.lifter.getSetpoint());
@@ -210,7 +208,11 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void testPeriodic() {
+		allPeriodic();
 	}
 	
+	public void allPeriodic() {
+
+	}
 	
 }

@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class led_doNothing extends Command {
 	
     public led_doNothing() {
-    	requires(Robot.intake);
+    	requires(Robot.led);
     }
 
     protected void initialize() {}

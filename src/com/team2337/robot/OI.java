@@ -9,6 +9,7 @@ import com.team2337.robot.commands.arm.arm_increaseAngle;
 import com.team2337.robot.commands.auto.*;
 import com.team2337.robot.commands.ejector.*;
 import com.team2337.robot.commands.intake.*;
+import com.team2337.robot.commands.led.*;
 import com.team2337.robot.commands.shifter.*;
 import com.team2337.robot.commands.lifter.lifter_setPID;
 import com.team2337.robot.commands.lifter.lifter_stopPID;
@@ -151,13 +152,17 @@ public class OI {
 		driver_TriggerLeft		.whileHeld(new intake_in(0.5));
 		driver_TriggerRight		.whileHeld(new intake_out(0.5));
 		
-		driver_POVUp			.whenPressed(new DoNothing());  
+		driver_POVUp			.whenPressed(new blinkinControllerGreen());  
+		driver_POVUp			.whenPressed(new blinkinControllerGreenStrobe()); 
 		//driver_POVUpRight		.whenPressed(new _DoNothing()); 
-	    driver_POVRight			.whenPressed(new DoNothing()); 
+	    driver_POVRight			.whenPressed(new blinkinControllerRed()); 
+	    driver_POVRight			.whenReleased(new blinkinControllerRedStrobe()); 
 	   	//driver_POVDownRight	.whenPressed(new _DoNothing()); 
-	    driver_POVDown			.whenPressed(new DoNothing()); 
+	    driver_POVDown			.whenPressed(new blinkinControllerYellow()); 
+	    driver_POVDown			.whenReleased(new blinkinControllerYellowStrobe()); 
 	   	//driver_POVDownLeft	.whenPressed(new _DoNothing()); 
-	    driver_POVLeft			.whenPressed(new DoNothing()); 
+	    driver_POVLeft			.whileHeld(new blinkinControllerBlue()); 
+	    driver_POVLeft			.whenReleased(new blinkinControllerOff()); 
 	   	//driver_POVUpLeft		.whenPressed(new _DoNothing()); 
 	    
 	    //////////////////////////////////
