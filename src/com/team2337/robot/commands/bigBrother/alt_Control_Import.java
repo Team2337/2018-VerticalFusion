@@ -35,6 +35,29 @@ public class alt_Control_Import extends Command {
 	double trolleyStick; 
 	double throttleValue;
 	
+	/* 
+	 * Columns
+	 * 0: trolley set points
+	 * 1: lift set points A
+	 * 2: lift set points B
+	 * 3: lift set points C
+	 * 4: arm set points
+	 * 5: arm forward soft limits
+	 * 6: arm reverse soft limits
+	 * 7: arm positive adjustment 
+	 * 8: arm negative adjustment
+	 */
+	
+	int trolleySetPoints = 0;
+	int liftSetPointsA = 1;
+	int liftSetPointsB = 2;
+	int liftSetPointsC = 3;
+	int armSetPoints = 4;
+	int armForwardSoftLimits = 5;
+	int armReverseSoftLimits = 6;
+	int armPositiveAdj = 7;
+	int armNegativeAdj = 8;
+	
 	public alt_Control_Import() {
 		requires(Robot.bigBrother);
 	}
@@ -44,8 +67,14 @@ public class alt_Control_Import extends Command {
 	}
 
 	protected void execute() {
-		//liftPot = RobotMap.lift_right.getSelectedSensorPosition(0);
+		if(RobotMap.endOfAuto) {
+			Robot.bigBrother.stopAltControl();
+			if(OI.operatorThrottleJoystick.getRawButton(8)) {
+				RobotMap.endOfAuto = false;
+			}
+		}
 		
+		//liftPot = RobotMap.lift_right.getSelectedSensorPosition(0);
 		
 		//Read Joystick and Throttle Input
 		trolleyStick = OI.operatorThrottleJoystick.getRawAxis(1);
@@ -54,41 +83,23 @@ public class alt_Control_Import extends Command {
 		
 		throttleToggle = OI.operatorThrottleJoystick.getRawAxis(4);
 			
-		/* 
-		 * Points for X
-		 * 0: trolley set points
-		 * 1: lift set points A
-		 * 2: lift set points B
-		 * 3: lift set points C
-		 * 4: arm set points
-		 * 5: trolley forward soft limits                          //not needed?   set in subsystem???
-		 * 6: trolley reverse soft limits
-		 * 7: arm forward soft limits
-		 * 8: arm reverse soft limits
-		 * 9: trolley positive adjustment                           //same positive and negative??  just set above as fixed??
-		 *10: trolley negative adjustment
-		 *11: arm positive adjustment 
-		 *12: arm negative adjustment
-		 */
-
 		//Read values from array based on Throttle input
-		trolleySetPoint = ( points[(int) throttleValue][0]); 
-		armSetPoint = ((double) points[(int) throttleValue][4]);
-		armAdjPos = (points[(int) throttleValue][11]);
-		armAdjNeg = (points[(int) throttleValue][12]);
+		trolleySetPoint = ( points[(int) throttleValue][trolleySetPoints]); 
+		armSetPoint = ((double) points[(int) throttleValue][armSetPoints]);
+		armAdjPos = (points[(int) throttleValue][armPositiveAdj]);
+		armAdjNeg = (points[(int) throttleValue][armNegativeAdj]);
 		
 		//Trolley set point logic
 				
 		//Adjust trolley setpoint based on joystick input
 		if(Math.abs(trolleyStick) > 0.1) {
 			trolleySetPoint = trolleySetPoint + (trolleyStick * trolleyAdj); 
-			System.out.println("1");
 		}
 		
 		//Override trolley setpoint to the top position if arm needs to change sides
 		armEncoder =  RobotMap.arm_right.getSelectedSensorPosition(0);
-		if(!Robot.arm.sameSide(armEncoder, trolleySetPoint)) {							/// should be armSetPoint????
-			trolleySetPoint = (double) points[10][0];                        //Assuming position 10 is at the top
+		if(!Robot.arm.sameSide(armEncoder, armSetPoint)) {							
+			trolleySetPoint = (double) points[10][trolleySetPoints];                      //Assuming position 10 is at the top
 			System.out.println("Not On The Same Side");
 		}
 		else {
@@ -97,35 +108,31 @@ public class alt_Control_Import extends Command {
 		
 		//Arm set point logic
 		
-		//Adjust arm setpoint based on throttle toggle input.  Different adjustments for positive and negative toggle positions.
+		//Adjust arm set point based on throttle toggle input.  Different adjustments for positive and negative toggle positions.
 		if((throttleToggle) > 0.1) {
 			armSetPoint = armSetPoint + (throttleToggle * armAdjPos); 
-			System.out.println("1");
 		}
 		else if(throttleToggle < -0.1) {
 			armSetPoint = armSetPoint + (throttleToggle * armAdjNeg);
 		}
 		
-		//Set Setpoints and Soft Limits
-		
+		//Set Set points
 		Robot.trolley.setPosition(trolleySetPoint);
 		Robot.arm.setPosition(armSetPoint);
 		Robot.lifter.setPosition((double) points[(int) throttleValue][Robot.lifter.levelOfLift]); 
 		
-		Robot.arm.setSoftLimits((int)(points[(int) throttleValue][7]), (int)(points[(int) throttleValue][8]));
-			
-		//Lifter.setSoftLimits(-60, -530);
-		
+		//Soft Limits
+		Robot.arm.setSoftLimits((int)(points[(int) throttleValue][armForwardSoftLimits]), (int)(points[(int) throttleValue][armReverseSoftLimits]));
+
+		if(RobotMap.alt_ControlDebug) {
 		SmartDashboard.putBoolean("sameSide", Robot.arm.sameSide(armEncoder, trolleySetPoint));
 		SmartDashboard.putNumber("trolleyStick", trolleyStick);
 		SmartDashboard.putNumber("TrolleySetPoint", Robot.trolley.getSetpoint());
 		SmartDashboard.putNumber("TrolleyPosition", RobotMap.trolley_right.getSelectedSensorPosition(0));
 		SmartDashboard.putNumber("throttleValue", throttleValue);
-		SmartDashboard.putNumber("TrolleyArrayValue", points[(int) throttleValue][0]);
+		SmartDashboard.putNumber("TrolleyArrayValue", points[(int) throttleValue][trolleySetPoints]);
 		SmartDashboard.putNumber("ArmSetPosition", armSetPoint);
-		
-		//System.out.println("The point is " + points[0][0] + "and " + points[(int)throttleValue][0]);
-		//System.out.println(throttleValue);
+		}
 			}
 
 	protected boolean isFinished() {

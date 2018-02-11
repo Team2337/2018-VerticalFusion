@@ -13,20 +13,20 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 /**
- * The system to move Trolley up and down
+ * The system to move lift up and down
  * 
- * @category TROLLEY
+ * @category lift
  * @author Bryce
  */
 public class Lift extends Subsystem {
 
-	private final static TalonSRX leftFront = RobotMap.trolley_left;  //4
-	private final static TalonSRX rightFront = RobotMap.trolley_right; //3
+	private final static TalonSRX leftFront = RobotMap.lift_left;  //4
+	private final static TalonSRX rightFront = RobotMap.lift_right; //3
 	
 	public static int levelOfLift = 1;
 	
 	private int absolutePosition;  //used to set relative position encoder
-	private double maxSpeed = 0.5;
+	private double maxSpeed = 0.2;
 	private double nominalSpeed = 0;
 	private double kF = 0;
 	private double kP = 0.1;
@@ -38,7 +38,7 @@ public class Lift extends Subsystem {
 	int reverseSoftLimit = 100;
 
 	protected void initDefaultCommand() {
-		//setDefaultCommand(new trolley_startPID());
+		//setDefaultCommand(new lift_startPID());
 	}
 
 	public Lift() {
@@ -70,17 +70,17 @@ public class Lift extends Subsystem {
 		 * position, and intitally set the relative sensor to match. may need to make negative if sensors phase inverted
 		 * may also need to adjust to make it within the range we want to use.....//TODO
 		 */
-		absolutePosition = rightFront.getSensorCollection().getPulseWidthPosition();
+//		absolutePosition = rightFront.getSensorCollection().getPulseWidthPosition();
 		/* mask out overflows, keep bottom 12 bits */
-		absolutePosition &= 0xFFF;
+//		absolutePosition &= 0xFFF;
 		// if sensor out of phase:  			absolutePosition *= -1;  //TODO
 		/* set the quadrature (relative) sensor to match absolute */
-		rightFront.setSelectedSensorPosition(absolutePosition, 0, 0);
+//		rightFront.setSelectedSensorPosition(absolutePosition, 0, 0);
 		
 	}
 	
 	/**
-	 * Sets the position of the trolley
+	 * Sets the position of the lift
 	 */
 	public void setPosition(double pos){
 		rightFront.set(ControlMode.Position, pos);
@@ -88,14 +88,14 @@ public class Lift extends Subsystem {
 	}
 	
 	/**
-	 * Gets the set point of the trolley
+	 * Gets the set point of the lift
 	 */
 	public double getSetpoint(){
 		return rightFront.getClosedLoopError(0);
 	}
 	
 	/**
-	 * Gets the position of the trolley
+	 * Gets the position of the lift
 	 */
 	public double getPosition(){
 		return rightFront.getSelectedSensorPosition(0);
@@ -103,7 +103,7 @@ public class Lift extends Subsystem {
 	
 	
 	/**
-	 * Set the software limits of the trolley
+	 * Set the software limits of the lift
 	 */
 	public static void setSoftLimits(int forward, int reverse) {
 		rightFront.configForwardSoftLimitThreshold(forward, 0);
@@ -112,8 +112,10 @@ public class Lift extends Subsystem {
 		rightFront.configReverseSoftLimitThreshold(reverse, 0);
 		leftFront.configReverseSoftLimitThreshold(reverse, 0);
 			
+		if(RobotMap.alt_ControlDebug) {
 		SmartDashboard.putNumber("forwardLIFTSoftLimit", forward);
 		SmartDashboard.putNumber("reverseLIFTSoftLimit", reverse);
+		}
 			
 	}
 	public void liftLeveler(int liftLevel) {

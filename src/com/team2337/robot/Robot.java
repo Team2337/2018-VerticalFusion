@@ -10,8 +10,6 @@ package com.team2337.robot;
 import com.team2337.robot.subsystems.Chassis;
 import com.team2337.robot.subsystems.Claw;
 import com.team2337.robot.subsystems.Climber;
-import com.team2337.robot.subsystems.Ejector;
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.team2337.robot.commands.DoNothing;
 import com.team2337.robot.commands.auto.*;
 import com.team2337.robot.subsystems.Arm;
@@ -38,7 +36,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends TimedRobot {
 	public static Chassis chassis;
-	public static Ejector ejector;
 	public static Arm arm;
 	public static Intake intake;
 	public static LED led;
@@ -66,7 +63,6 @@ public class Robot extends TimedRobot {
 		chassis = new Chassis();
 		trolley = new Trolley();
 		intake = new Intake();
-		ejector = new Ejector();
 		arm = new Arm();
 		climber = new Climber();
 		shifter = new Shifter();
@@ -152,6 +148,7 @@ public class Robot extends TimedRobot {
 	}
 	@Override
 	public void teleopInit() {
+		RobotMap.endOfAuto = true;
 		claw.close();
 		
 		// This makes sure that the autonomous stops running when

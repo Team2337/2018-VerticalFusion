@@ -90,20 +90,52 @@ public class RobotMap {
 	
 	public static UsbCamera camera;
 	
+	//Debug
+	public static Boolean alt_ControlDebug = false;
 	public static Boolean chassisDebug = false;
 	
+	//Public Variables
+	public static Boolean endOfAuto = true;  //Also set to true in Robot.TeleOpInit
+	
+	//CAN Ports
+	static int chassisRightFront  = 0;
+	static int chassisRightMid    = 1;
+	static int chassisRightRear   = 2;
+	static int trolleyRight       = 3;
+	static int trolleyLeft        = 4;
+	static int intakeRight        = 5;
+	static int intakeLeft         = 6;
+	static int armRight           = 7;
+	static int armLeft            = 8;
+	static int climberRight       = 9;
+	static int climberLeft        = 10;
+	static int liftRight          = 11;
+	static int liftLeft           = 12;
+	static int chassisLeftRear    = 13;
+	static int chassisLeftMid     = 14;
+	static int chassisLeftFront   = 15;
+	
+	//Pnuematics
+	//PCMs
+	static int PCM_0 = 0;
+	//Ports
+	static int clawHugger    = 2;
+	static int clawClaw      = 3;
+	static int shifterLeft   = 4;
+	static int shifterRight  = 5;
+	static int ledInfo       = 6;
 	
 	public static void init() {
 		
 		/*
 		 * z Drive Left
 		 */
-		chassis_leftFront = new TalonSRX(15);
+		chassis_leftFront = new TalonSRX(chassisLeftFront);
 		chassis_leftFront.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
 		chassis_leftFront.setSensorPhase(false);
 
-		chassis_leftMid = new VictorSPX(14);
-		chassis_leftRear = new VictorSPX(13);
+		chassis_leftMid = new VictorSPX(chassisLeftMid);
+		chassis_leftRear = new VictorSPX(chassisLeftRear);
 
 		chassis_leftFront.setInverted(true);
 		chassis_leftMid.setInverted(true);
@@ -115,12 +147,12 @@ public class RobotMap {
 		/*
 		 * Drive Right
 		 */
-		chassis_rightFront = new TalonSRX(0);
+		chassis_rightFront = new TalonSRX(chassisRightFront);
 		chassis_rightFront.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
 		chassis_rightFront.setSensorPhase(false);
 
-		chassis_rightMid = new VictorSPX(1); 
-		chassis_rightRear = new VictorSPX(2); 
+		chassis_rightMid = new VictorSPX(chassisRightMid); 
+		chassis_rightRear = new VictorSPX(chassisRightRear); 
 
 		chassis_rightFront.setInverted(true);
 		chassis_rightMid.setInverted(true);
@@ -139,28 +171,25 @@ public class RobotMap {
 		 * Lift    //***********************************************
 		 */
 
-		lift_right = new TalonSRX(11); // 5
+		lift_right = new TalonSRX(liftRight); // 5
 		lift_right.configSelectedFeedbackSensor(FeedbackDevice.Analog, 0, 0); //string pot
 		lift_right.setSensorPhase(false);
 		lift_right.setInverted(true);
 		lift_right.setStatusFramePeriod(0, 0, 0);
 		
-		lift_left = new TalonSRX(12); // 6
+		lift_left = new TalonSRX(liftLeft); // 6
 		lift_left.follow(lift_right);
 		lift_left.setInverted(true);
 		
-		trolley_right = new TalonSRX(3); // 3
+		trolley_right = new TalonSRX(trolleyRight); // 3
 		trolley_right.configSelectedFeedbackSensor(FeedbackDevice.Analog, 0, 0);  //string pot
 		trolley_right.setSensorPhase(false);
 		trolley_right.setInverted(true);
 		trolley_right.setStatusFramePeriod(0, 0, 0);
 
-		trolley_left = new TalonSRX(4); // 4
+		trolley_left = new TalonSRX(trolleyLeft); // 4
 		trolley_left.follow(trolley_right);
 		trolley_left.setInverted(true);
-
-		
-		//lift_potentiometer = new AnalogPotentiometer(2, 10.0, 0.068);  //not needed
 
 		lift_right.configForwardSoftLimitEnable(false, 0);
 		lift_left.configForwardSoftLimitEnable(false, 0);
@@ -173,36 +202,25 @@ public class RobotMap {
 
 		trolley_right.configReverseSoftLimitEnable(false, 0);
 		trolley_left.configReverseSoftLimitEnable(false, 0);
-
-		//lift_stringPot = new AnalogInput(0);   //not needed
 	
 
 		/*
 		 * Intake
 		 */
-		intake_left = new TalonSRX(6); // 6
+		intake_left = new TalonSRX(intakeLeft); // 6
 		intake_left.setInverted(true);
 		
-		intake_right = new VictorSPX(5); // 5
-		//intake_right = new TalonSRX(5); // 5
+		intake_right = new VictorSPX(intakeRight); // 5
 		intake_right.setInverted(false);
 		
 		crateSensor = new DigitalInput(0);
 		
-		
-		/*
-		 * Ejector
-		 */
-		ejector_push = new Solenoid(0, 1); // 1,0   //not needed
-
 		/*
 		 * Arm
 		 */
-		arm_right = new TalonSRX(8); // 8
+		arm_right = new TalonSRX(armRight); // 7
 		arm_right.setInverted(false);
-		arm_left = new TalonSRX(7); // 7
-		
-		//enc = new Encoder(0, 1, true, Encoder.EncodingType.k4X);
+		arm_left = new TalonSRX(armLeft); // 8
 
 		arm_right.setStatusFramePeriod(0, 0, 0);
 		arm_right.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
@@ -217,25 +235,25 @@ public class RobotMap {
 		/*
 		 * Claw
 		 */
-		claw_hugger = new Solenoid(0, 2);
-		claw_claw = new Solenoid(0, 3);
+		claw_hugger = new Solenoid(PCM_0, clawHugger);
+		claw_claw = new Solenoid(PCM_0, clawClaw);
 
 		/*
 		 * Climber
 		 */
-		climber_left = new TalonSRX(9); // 9
-		climber_right = new TalonSRX(10); // 10
+		climber_left = new TalonSRX(climberLeft); // 10
+		climber_right = new TalonSRX(climberRight); // 9
 
 		/*
 		 * Shifter
 		 */
-		shifter_left = new Solenoid(0, 4); // 1,0
-		shifter_right = new Solenoid(0, 5); // 1,0
+		shifter_left = new Solenoid(PCM_0, shifterLeft); // 1,0
+		shifter_right = new Solenoid(PCM_0, shifterRight); // 1,0
 
 		/*
 		 * LED
 		 */
-		led_info = new Solenoid(0, 6);
+		led_info = new Solenoid(PCM_0, ledInfo);
 
 		/*
 		 * VisionProcessing for PixyCam

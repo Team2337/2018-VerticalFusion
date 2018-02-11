@@ -11,7 +11,6 @@ import com.team2337.robot.commands.claw.claw_close;
 import com.team2337.robot.commands.claw.claw_giveLessHugs;
 import com.team2337.robot.commands.claw.claw_giveMoreHugs;
 import com.team2337.robot.commands.claw.claw_open;
-import com.team2337.robot.commands.ejector.*;
 import com.team2337.robot.commands.intake.*;
 import com.team2337.robot.commands.lifter.liftLevelAdjuster;
 import com.team2337.robot.commands.shifter.*;

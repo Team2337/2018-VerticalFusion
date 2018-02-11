@@ -36,7 +36,7 @@ public class arm_joystickControl extends Command {
 	protected void initialize() {
 		setPointSet = false;
 		Robot.arm.disable();
-		Arm.setSoftLimits(1080, 1);
+		Robot.arm.setSoftLimits(1080, 1);
 	}
 
 	protected void execute() {

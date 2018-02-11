@@ -24,7 +24,7 @@ public class Trolley extends Subsystem {
 	private final static TalonSRX rightFront = RobotMap.trolley_right; //3
 	
 	private int absolutePosition;  //used to set relative position encoder
-	private double maxSpeed = 0.5;
+	private double maxSpeed = 0.2;
 	private double nominalSpeed = 0;
 	private double kF = 0;
 	private double kP = 0.1;
@@ -69,12 +69,12 @@ public class Trolley extends Subsystem {
 		 * position, and intitally set the relative sensor to match. may need to make negative if sensors phase inverted
 		 * may also need to adjust to make it within the range we want to use.....//TODO
 		 */
-		absolutePosition = rightFront.getSensorCollection().getPulseWidthPosition();
+		//absolutePosition = rightFront.getSensorCollection().getPulseWidthPosition();
 		/* mask out overflows, keep bottom 12 bits */
-		absolutePosition &= 0xFFF;
+		//absolutePosition &= 0xFFF;
 		// if sensor out of phase:  			absolutePosition *= -1;  //TODO
 		/* set the quadrature (relative) sensor to match absolute */
-		rightFront.setSelectedSensorPosition(absolutePosition, 0, 0);
+		//rightFront.setSelectedSensorPosition(absolutePosition, 0, 0);
 	}
 	
 	/**
@@ -82,7 +82,6 @@ public class Trolley extends Subsystem {
 	 */
 	public void setPosition(double pos){
 		rightFront.set(ControlMode.Position, pos);
-	    	//setSetpoint(pos);
 	}
 	
 	/**
@@ -110,8 +109,10 @@ public class Trolley extends Subsystem {
 		rightFront.configReverseSoftLimitThreshold(reverse, 0);
 		leftFront.configReverseSoftLimitThreshold(reverse, 0);
 			
-		SmartDashboard.putNumber("forwardLIFTSoftLimit", forward);
-		SmartDashboard.putNumber("reverseLIFTSoftLimit", reverse);
+		if(RobotMap.alt_ControlDebug) {
+		SmartDashboard.putNumber("forwardTROLLEYSoftLimit", forward);
+		SmartDashboard.putNumber("reverseTROLLEYSoftLimit", reverse);
+		}
 			
 	}
 	

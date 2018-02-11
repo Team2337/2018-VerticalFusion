@@ -38,7 +38,7 @@ public class arm_joystickControl2 extends Command {
 	protected void initialize() {
 		setPointSet = false;
 		Robot.arm.disable();
-		Arm.setSoftLimits(968, 1);
+		Robot.arm.setSoftLimits(968, 1);
 	}
 
 	protected void execute() {
@@ -71,28 +71,28 @@ public class arm_joystickControl2 extends Command {
 
 			if ((armJoystickX > 0)) {
 				if (stringPot > 1.0) {
-					Arm.setSoftLimits(2560, 1);
+					Robot.arm.setSoftLimits(2560, 1);
 					Arm.moveForward(armJoystickX);
 				} else if (stringPot > 0.7 && stringPot < 1.0) {
 					if (armPositionEncoder > 1080) {
-						Arm.setSoftLimits(1080, 1);
+						Robot.arm.setSoftLimits(1080, 1);
 						Arm.moveForward(armJoystickX);
 					} else if (armPositionEncoder < 968) {
-						Arm.setSoftLimits(968, 1);
+						Robot.arm.setSoftLimits(968, 1);
 						Arm.moveForward(armJoystickX);
 					}
 				}
 
 			} else {
 				if (stringPot > 0.7) {
-					Arm.setSoftLimits(2560, 1);
+					Robot.arm.setSoftLimits(2560, 1);
 					Arm.moveBackward(armJoystickX);
 				} else if (stringPot > 0.7 && stringPot < 1.0) {
 					if (armPositionEncoder > 1080) {
-						Arm.setSoftLimits(1080, 1);
+						Robot.arm.setSoftLimits(1080, 1);
 						Arm.moveBackward(armJoystickX);
 					} else if (armPositionEncoder < 968) {
-						Arm.setSoftLimits(968, 1);
+						Robot.arm.setSoftLimits(968, 1);
 						Arm.moveBackward(armJoystickX);
 					}
 				}

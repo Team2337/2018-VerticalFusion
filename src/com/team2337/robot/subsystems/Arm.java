@@ -26,8 +26,8 @@ public class Arm extends PIDSubsystem {
 	private boolean PIDStatus = false;
 
 	public static double armAngle = 0;
-	private double maxSpeedUp = 0.5;
-	private double maxSpeedDown = -0.5;
+	private double maxSpeedUp = 0.2;
+	private double maxSpeedDown = -0.2;
 	
 	int forwardSoftLimit = 100;
 	int reverseSoftLimit = 0;
@@ -38,7 +38,7 @@ public class Arm extends PIDSubsystem {
 
 	public Arm() {
 
-		super("Arm", 4.0, 0.0, 0.0);
+		super("Arm", 0.01, 0.0, 0.0);
 		setAbsoluteTolerance(70);
 		getPIDController().setContinuous(false);
 		getPIDController().setInputRange(0, 4096);
@@ -144,24 +144,28 @@ public class Arm extends PIDSubsystem {
 		armRight.set(ControlMode.PercentOutput, 0);
 	}
 
-	public static void setSoftLimits(int forward, int reverse) {
+	public void setSoftLimits(int forward, int reverse) {
 		RobotMap.arm_left.configForwardSoftLimitThreshold(forward, 0);
 		RobotMap.arm_right.configForwardSoftLimitThreshold(forward, 0);
 
 		RobotMap.arm_left.configReverseSoftLimitThreshold(reverse, 0);
 		RobotMap.arm_right.configReverseSoftLimitThreshold(reverse, 0);
 
+		if(RobotMap.alt_ControlDebug) {
 		SmartDashboard.putNumber("forwardSoftLimit", forward);
 		SmartDashboard.putNumber("reverseSoftLimit", reverse);
 
 		SmartDashboard.putBoolean("forwardBoolean", RobotMap.arm_right.getSensorCollection().isFwdLimitSwitchClosed());
 		SmartDashboard.putBoolean("reverseBoolean", RobotMap.arm_right.getSensorCollection().isRevLimitSwitchClosed());
 
+		}
 	}
 
 	public boolean sameSide(double currentPosition, double desiredPosition) {
+		if(RobotMap.alt_ControlDebug) {
 		SmartDashboard.putNumber("currentArmPosition", currentPosition);
 		SmartDashboard.putNumber("desiredArmPosition", desiredPosition);
+		}
 		if (currentPosition <= 968 && desiredPosition <= 968) {
 			return true;
 		} else if (currentPosition >= 1080 && desiredPosition >= 1080) {

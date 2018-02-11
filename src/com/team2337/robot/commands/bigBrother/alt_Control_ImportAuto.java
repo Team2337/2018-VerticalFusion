@@ -60,20 +60,16 @@ public class alt_Control_ImportAuto extends Command {
 		armEncoder =  RobotMap.arm_right.getSelectedSensorPosition(0);
 		liftPot = RobotMap.lift_right.getSelectedSensorPosition(0);
 		/* 
-		 * Points for X
+		 * Columns
 		 * 0: trolley set points
 		 * 1: lift set points A
 		 * 2: lift set points B
 		 * 3: lift set points C
 		 * 4: arm set points
-		 * 5: trolley forward soft limits 
-		 * 6: trolley reverse soft limits
-		 * 7: arm forward soft limits
-		 * 8: arm reverse soft limits
-		 * 9: trolley positive adjustment
-		 *10: trolley negative adjustment
-		 *11: arm positive adjustment 
-		 *12: arm negative adjustment
+		 * 5: arm forward soft limits
+		 * 6: arm reverse soft limits
+		 * 7: arm positive adjustment 
+		 * 8: arm negative adjustment
 		 */
 		
 		//Trolley set point logic
