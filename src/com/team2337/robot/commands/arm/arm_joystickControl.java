@@ -70,7 +70,7 @@ public class arm_joystickControl extends Command {
 			Robot.arm.disable(); // Disable the arm PID
 			// Make the motor be controlled by the joystick but at a multiplied speed
 			if ((armJoystickX > 0)) {
-				Arm.moveForward(armJoystickX);
+				Arm.moveArm(armJoystickX);
 				//Arm.setSoftLimits(1080, 1);
 				/*if (armPositionEncoder <= 2500 && !isAtTop && armPositionValue >= 0 && armPositionValue < 225) {
 					Arm.setSoftLimits(968, 0);

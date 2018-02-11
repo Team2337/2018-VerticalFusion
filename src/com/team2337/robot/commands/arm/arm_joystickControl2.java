@@ -72,14 +72,14 @@ public class arm_joystickControl2 extends Command {
 			if ((armJoystickX > 0)) {
 				if (stringPot > 1.0) {
 					Robot.arm.setSoftLimits(2560, 1);
-					Arm.moveForward(armJoystickX);
+					Arm.moveArm(armJoystickX);
 				} else if (stringPot > 0.7 && stringPot < 1.0) {
 					if (armPositionEncoder > 1080) {
 						Robot.arm.setSoftLimits(1080, 1);
-						Arm.moveForward(armJoystickX);
+						Arm.moveArm(armJoystickX);
 					} else if (armPositionEncoder < 968) {
 						Robot.arm.setSoftLimits(968, 1);
-						Arm.moveForward(armJoystickX);
+						Arm.moveArm(armJoystickX);
 					}
 				}
 

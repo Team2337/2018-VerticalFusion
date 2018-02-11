@@ -66,7 +66,7 @@ public class Arm extends PIDSubsystem {
 		 * armRight.set(ControlMode.PercentOutput, output);
 		 */
 		SmartDashboard.putNumber("numberOutput", output);
-		Arm.moveForward(output);
+		Arm.moveArm(output);
 
 	}
 
@@ -129,7 +129,7 @@ public class Arm extends PIDSubsystem {
 		setSetpoint(pos);
 	}
 
-	public static void moveForward(double power) {
+	public static void moveArm(double power) {
 		armLeft.set(ControlMode.PercentOutput, power);
 		armRight.set(ControlMode.PercentOutput, power);
 	}
