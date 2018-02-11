@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * Control the Lift-Trolley-Arm based on throttle/joystick input
+ * Control the Lift-Trolley-Arm based in Autonomous
  */
 public class alt_Control_ImportAuto extends Command {
 
@@ -50,17 +50,15 @@ public class alt_Control_ImportAuto extends Command {
 	}
 
 	protected void execute() {
-		double liftPot = RobotMap.lift_right.getSelectedSensorPosition(0);
-		
-		//trolleyStick = OI.operatorThrottleJoystick.getRawAxis(1);
-		
+
 		throttleValue = calcThrottlePos;
 		
-		trolleySetPoint = ((double) points[(int) throttleValue][4]);
+		trolleySetPoint = ((double) points[(int) throttleValue][4]);  ////////////////twice?????????   update from regcommand hcanges???
 		armAdjPos = ((double) points[(int) throttleValue][11]);
 		armAdjNeg = ((double) points[(int) throttleValue][12]);
 		
 		armEncoder =  RobotMap.arm_right.getSelectedSensorPosition(0);
+		liftPot = RobotMap.lift_right.getSelectedSensorPosition(0);
 		/* 
 		 * Points for X
 		 * 0: trolley set points
@@ -77,19 +75,13 @@ public class alt_Control_ImportAuto extends Command {
 		 *11: arm positive adjustment 
 		 *12: arm negative adjustment
 		 */
-
-		//System.out.println("Beofre Logic");
 		
 		//Trolley set point logic
 		
-		trolleySetPoint = ((double) points[(int) throttleValue][0]);
+		trolleySetPoint = ((double) points[(int) throttleValue][0]);  ////////////////twice?????????
 		
 		if(!Robot.arm.sameSide(armEncoder, trolleySetPoint)) {
 			trolleySetPoint = (double) points[10][0];
-		//	System.out.println("Not On The Same Side");
-		}
-		else {
-			//System.out.println("On The Same Side");
 		}
 		
 		//Arm set point logic

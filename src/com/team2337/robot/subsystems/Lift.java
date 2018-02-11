@@ -18,7 +18,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * @category TROLLEY
  * @author Bryce
  */
-public class Lifter extends Subsystem {
+public class Lift extends Subsystem {
 
 	private final static TalonSRX leftFront = RobotMap.trolley_left;  //4
 	private final static TalonSRX rightFront = RobotMap.trolley_right; //3
@@ -41,7 +41,7 @@ public class Lifter extends Subsystem {
 		//setDefaultCommand(new trolley_startPID());
 	}
 
-	public Lifter() {
+	public Lift() {
 		setSoftLimits(forwardSoftLimit, reverseSoftLimit);
 		/* set the peak and nominal outputs, 12V? means full */
 		rightFront.configNominalOutputForward(nominalSpeed, 0);

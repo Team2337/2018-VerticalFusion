@@ -18,7 +18,7 @@ import com.team2337.robot.subsystems.Arm;
 import com.team2337.robot.subsystems.BigBrother;
 import com.team2337.robot.subsystems.Intake;
 import com.team2337.robot.subsystems.LED;
-import com.team2337.robot.subsystems.Lifter;
+import com.team2337.robot.subsystems.Lift;
 import com.team2337.robot.subsystems.Trolley;
 import com.team2337.robot.subsystems.Shifter;
 
@@ -47,7 +47,7 @@ public class Robot extends TimedRobot {
 	public static Climber climber;
 	public static Claw claw;
 	public static BigBrother bigBrother;
-	public static Lifter lifter;
+	public static Lift lifter;
 	public static OI oi;
 	//public static char ourswitch, scale, oppswitch;
 
@@ -73,7 +73,7 @@ public class Robot extends TimedRobot {
 		led = new LED();
 		claw = new Claw();
 		bigBrother = new BigBrother();
-		lifter = new Lifter();
+		lifter = new Lift();
 
 		oi = new OI();
 

@@ -20,15 +20,16 @@ public class alt_Control_Import extends Command {
 	boolean setPointSet = false;
 	
 	double trolleySetPoint;
-	double fineArm;
-	double armAdjPos, armAdjNeg;
-	double trolleyAdj = 2;   //TODO determne rightamount
-	double armEncoder;
-	double liftPot;
-	double trolleyPot;
 	double armSetPoint;
+	//double fineArm;
+	double armAdjPos;
+	double armAdjNeg;
+	double trolleyAdj = 2;                                                   //TODO determne rightamount
+	double armEncoder;
+	//double liftPot;
+	//double trolleyPot;
 	
-	int liftSetPointColumn;
+	//int liftSetPointColumn;
 	
 	double throttleToggle;
 	double trolleyStick; 
@@ -43,19 +44,16 @@ public class alt_Control_Import extends Command {
 	}
 
 	protected void execute() {
-		double liftPot = RobotMap.lift_right.getSelectedSensorPosition(0);
+		//liftPot = RobotMap.lift_right.getSelectedSensorPosition(0);
 		
+		
+		//Read Joystick and Throttle Input
 		trolleyStick = OI.operatorThrottleJoystick.getRawAxis(1);
 		throttleValue = -OI.operatorThrottleJoystick.getRawAxis(2);
 		throttleValue = (throttleValue*10)+10;
 		
 		throttleToggle = OI.operatorThrottleJoystick.getRawAxis(4);
-		
-		trolleySetPoint = ( points[(int) throttleValue][0]);
-		armAdjPos = (points[(int) throttleValue][11]);
-		armAdjNeg = (points[(int) throttleValue][12]);
-		
-		armEncoder =  RobotMap.arm_right.getSelectedSensorPosition(0);
+			
 		/* 
 		 * Points for X
 		 * 0: trolley set points
@@ -63,29 +61,34 @@ public class alt_Control_Import extends Command {
 		 * 2: lift set points B
 		 * 3: lift set points C
 		 * 4: arm set points
-		 * 5: trolley forward soft limits 
+		 * 5: trolley forward soft limits                          //not needed?   set in subsystem???
 		 * 6: trolley reverse soft limits
 		 * 7: arm forward soft limits
 		 * 8: arm reverse soft limits
-		 * 9: trolley positive adjustment
+		 * 9: trolley positive adjustment                           //same positive and negative??  just set above as fixed??
 		 *10: trolley negative adjustment
 		 *11: arm positive adjustment 
 		 *12: arm negative adjustment
 		 */
 
-		//System.out.println("Beofre Logic");
+		//Read values from array based on Throttle input
+		trolleySetPoint = ( points[(int) throttleValue][0]); 
+		armSetPoint = ((double) points[(int) throttleValue][4]);
+		armAdjPos = (points[(int) throttleValue][11]);
+		armAdjNeg = (points[(int) throttleValue][12]);
 		
 		//Trolley set point logic
-		
-		trolleySetPoint = ((double) points[(int) throttleValue][0]);
-		
+				
+		//Adjust trolley setpoint based on joystick input
 		if(Math.abs(trolleyStick) > 0.1) {
 			trolleySetPoint = trolleySetPoint + (trolleyStick * trolleyAdj); 
 			System.out.println("1");
 		}
-
-		if(!Robot.arm.sameSide(armEncoder, trolleySetPoint)) {
-			trolleySetPoint = (double) points[10][0];
+		
+		//Override trolley setpoint to the top position if arm needs to change sides
+		armEncoder =  RobotMap.arm_right.getSelectedSensorPosition(0);
+		if(!Robot.arm.sameSide(armEncoder, trolleySetPoint)) {							/// should be armSetPoint????
+			trolleySetPoint = (double) points[10][0];                        //Assuming position 10 is at the top
 			System.out.println("Not On The Same Side");
 		}
 		else {
@@ -94,8 +97,7 @@ public class alt_Control_Import extends Command {
 		
 		//Arm set point logic
 		
-		armSetPoint = ((double) points[(int) throttleValue][4]);
-		
+		//Adjust arm setpoint based on throttle toggle input.  Different adjustments for positive and negative toggle positions.
 		if((throttleToggle) > 0.1) {
 			armSetPoint = armSetPoint + (throttleToggle * armAdjPos); 
 			System.out.println("1");
@@ -104,7 +106,7 @@ public class alt_Control_Import extends Command {
 			armSetPoint = armSetPoint + (throttleToggle * armAdjNeg);
 		}
 		
-		//Set Points and Soft Points
+		//Set Setpoints and Soft Limits
 		
 		Robot.trolley.setPosition(trolleySetPoint);
 		Robot.arm.setPosition(armSetPoint);

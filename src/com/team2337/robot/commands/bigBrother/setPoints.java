@@ -12,12 +12,12 @@ public class setPoints {
 		 * 2: lift set points B
 		 * 3: lift set points C
 		 * 4: arm set points
-		 * 5: trolley forward soft limits 
-		 * 6: trolley reverse soft limits
+		 * 5: trolley forward soft limits                           //not needed?   set in subsystem???
+		 * 6: trolley reverse soft limits                          //not needed?   set in subsystem???
 		 * 7: arm forward soft limits
 		 * 8: arm reverse soft limits
-		 * 9: trolley positive adjustment
-		 *10: trolley negative adjustment
+		 * 9: trolley positive adjustment                          //not needed ??same positive and negative??  just set above as fixed?? in command??
+		 *10: trolley negative adjustment                         //not needed ??same positive and negative??  just set above as fixed?? in command??
 		 *11: arm positive adjustment 
 		 *12: arm negative adjustment
 		 */
