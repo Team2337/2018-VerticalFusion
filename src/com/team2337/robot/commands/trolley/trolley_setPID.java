@@ -29,7 +29,7 @@ public class trolley_setPID extends Command {
 
 	protected void initialize() {
 		//Robot.trolley.enable(); // Sets the position of the lifter PID (variable grabbed from OI)
-		Robot.trolley.setPosition(this.pos);
+		Robot.trolley.setSetpoint(this.pos);
 	}
 
 	protected void execute() {
@@ -45,7 +45,7 @@ public class trolley_setPID extends Command {
 
 	protected void end() {
 		//Robot.trolley.enable();
-		Robot.trolley.setPosition(Robot.trolley.getPosition());
+		Robot.trolley.setSetpoint(Robot.trolley.getPosition());
 		// When the command ends or is interrupted it will keep the lifter from dropping
 		// back to a bad position
 	}

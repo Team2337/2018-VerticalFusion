@@ -46,7 +46,7 @@ public class TEST_ONLY_trolley_joystickControl extends Command {
     		
     		if (!setPointSet) {
     			//Robot.trolley.enable();
-    			Robot.trolley.setPosition(RobotMap.trolley_right.getSelectedSensorPosition(0));
+    			Robot.trolley.setSetpoint(RobotMap.trolley_right.getSelectedSensorPosition(0));
     			setPointSet = true; 
     		}
     		

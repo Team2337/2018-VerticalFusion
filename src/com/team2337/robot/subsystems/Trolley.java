@@ -23,7 +23,7 @@ public class Trolley extends Subsystem {
 	private final static TalonSRX leftFront = RobotMap.trolley_left;  //4
 	private final static TalonSRX rightFront = RobotMap.trolley_right; //3
 	
-	private int absolutePosition;  //used to set relative position encoder
+	//private int absolutePosition;  //used to set relative position encoder
 	private double maxSpeed = 0.2;
 	private double nominalSpeed = 0;
 	private double kF = 0;
@@ -64,23 +64,13 @@ public class Trolley extends Subsystem {
 		rightFront.config_kP(0, kP, 0);
 		rightFront.config_kI(0, kI, 0);
 		rightFront.config_kD(0, kD, 0);
-		/*
-		 * lets grab the 360 degree position of the MagEncoder's absolute
-		 * position, and intitally set the relative sensor to match. may need to make negative if sensors phase inverted
-		 * may also need to adjust to make it within the range we want to use.....//TODO
-		 */
-		//absolutePosition = rightFront.getSensorCollection().getPulseWidthPosition();
-		/* mask out overflows, keep bottom 12 bits */
-		//absolutePosition &= 0xFFF;
-		// if sensor out of phase:  			absolutePosition *= -1;  //TODO
-		/* set the quadrature (relative) sensor to match absolute */
-		//rightFront.setSelectedSensorPosition(absolutePosition, 0, 0);
+
 	}
 	
 	/**
 	 * Sets the position of the trolley
 	 */
-	public void setPosition(double pos){
+	public void setSetpoint(double pos){
 		rightFront.set(ControlMode.Position, pos);
 	}
 	
@@ -88,6 +78,13 @@ public class Trolley extends Subsystem {
 	 * Gets the set point of the trolley
 	 */
 	public double getSetpoint(){
+		return rightFront.getClosedLoopTarget(0);
+	}
+	
+	/**
+	 * Gets the set point error of the trolley
+	 */
+	public double getError(){
 		return rightFront.getClosedLoopError(0);
 	}
 	
@@ -97,7 +94,6 @@ public class Trolley extends Subsystem {
 	public double getPosition(){
 		return rightFront.getSelectedSensorPosition(0);
 	}
-	
 	
 	/**
 	 * Set the software limits of the trolley

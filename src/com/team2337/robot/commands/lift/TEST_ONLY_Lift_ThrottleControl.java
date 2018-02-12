@@ -46,7 +46,7 @@ public class TEST_ONLY_Lift_ThrottleControl extends Command {
     		
     		if (!setPointSet) {
     			//Robot.trolley.enable();
-    			Robot.trolley.setPosition(RobotMap.lift_right.getSelectedSensorPosition(0));
+    			Robot.trolley.setSetpoint(RobotMap.lift_right.getSelectedSensorPosition(0));
     			setPointSet = true; 
     		}
     		

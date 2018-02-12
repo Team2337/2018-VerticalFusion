@@ -122,9 +122,9 @@ public class alt_Control_Import extends Command {
 		//Set Set points
 		//TODO add check if endOfAuto??? to disable/skip sets????
 		
-		Robot.trolley.setPosition(trolleySetPoint);
-		Robot.arm.setPosition(armSetPoint);
-		Robot.lift.setPosition((double) points[(int) throttleValue][Robot.lift.levelOfLift]); 
+		Robot.trolley.setSetpoint(trolleySetPoint);
+		Robot.arm.setSetpoint(armSetPoint);
+		Robot.lift.setSetpoint((double) points[(int) throttleValue][Robot.lift.levelOfLift]); 
 		
 		//Soft Limits
 		Robot.arm.setSoftLimits((int)(points[(int) throttleValue][armForwardSoftLimits]), (int)(points[(int) throttleValue][armReverseSoftLimits]));

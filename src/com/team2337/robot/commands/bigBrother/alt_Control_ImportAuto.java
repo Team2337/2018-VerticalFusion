@@ -94,9 +94,9 @@ public class alt_Control_ImportAuto extends Command {
 		
 		//Set Points and Soft Points
 		
-		Robot.trolley.setPosition(trolleySetPoint);
-		Robot.arm.setPosition(armSetPoint);
-		Robot.lift.setPosition((double) points[(int) throttleValue][autolevelOfLift]); 
+		Robot.trolley.setSetpoint(trolleySetPoint);
+		Robot.arm.setSetpoint(armSetPoint);
+		Robot.lift.setSetpoint((double) points[(int) throttleValue][autolevelOfLift]); 
 		
 		Robot.arm.setSoftLimits((int)(points[(int) throttleValue][7]), (int)(points[(int) throttleValue][8]));
 			

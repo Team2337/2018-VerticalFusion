@@ -222,15 +222,17 @@ public class RobotMap {
 		 */
 		arm_right = new TalonSRX(armRight);
 		arm_right.setInverted(false);
+		arm_right.setNeutralMode(NeutralMode.Brake);
+		
 		arm_left = new TalonSRX(armLeft);
 		arm_left.setInverted(true);
 		arm_left.follow(arm_right);
 		arm_left.setNeutralMode(NeutralMode.Brake);
 
 		arm_right.setStatusFramePeriod(0, 0, 0);
-		arm_right.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
+		arm_right.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
+		//arm_right.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
 		arm_right.setSensorPhase(false);
-		arm_right.setNeutralMode(NeutralMode.Brake);
 
 		arm_right.configForwardSoftLimitEnable(true, 0);
 		arm_left.configForwardSoftLimitEnable(false, 0);

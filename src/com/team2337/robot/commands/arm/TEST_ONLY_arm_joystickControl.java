@@ -39,7 +39,6 @@ public class TEST_ONLY_arm_joystickControl extends Command {
 
 	protected void initialize() {
 		setPointSet = false;
-		Robot.arm.disable();
 		//Robot.arm.setSoftLimits(forwardTopSL, forwardBottomSL);
 	}
 
@@ -61,7 +60,6 @@ public class TEST_ONLY_arm_joystickControl extends Command {
 
 			if (!setPointSet) {
 				System.out.println("Inside of deadband");
-				Robot.arm.enable();
 				Robot.arm.setSetpoint(RobotMap.arm_right.getSelectedSensorPosition(0));
 
 				SmartDashboard.putNumber("PIDSetPosition", Robot.arm.getPosition());
@@ -70,7 +68,6 @@ public class TEST_ONLY_arm_joystickControl extends Command {
 			}
 		} else {
 			System.out.println("Outside of deadband");
-			Robot.arm.disable();
 			setPointSet = false;
 			
 			SmartDashboard.putNumber("StringPotValueInArm", stringPot);

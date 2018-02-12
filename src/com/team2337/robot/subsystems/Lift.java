@@ -82,7 +82,7 @@ public class Lift extends Subsystem {
 	/**
 	 * Sets the position of the lift
 	 */
-	public void setPosition(double pos){
+	public void setSetpoint(double pos){
 		rightFront.set(ControlMode.Position, pos);
 	    	//setSetpoint(pos);
 	}

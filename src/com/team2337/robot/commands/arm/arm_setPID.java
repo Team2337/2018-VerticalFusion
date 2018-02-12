@@ -27,8 +27,7 @@ public class arm_setPID extends Command {
 	}
 
 	protected void initialize() {
-		Robot.arm.enable(); // Sets the position of the arm PID (variable grabbed from OI)
-		Robot.arm.setPosition(this.pos);
+		Robot.arm.setSetpoint(this.pos);
 	}
 
 	protected void execute() {
@@ -36,12 +35,12 @@ public class arm_setPID extends Command {
 	}
 
 	protected boolean isFinished() {
-		return (Robot.arm.onTarget());
+		return true;   //TODO how to determine if on target ??(Robot.arm.onTarget());
+
 	}
 
 	protected void end() {
-		Robot.arm.enable();
-		Robot.arm.setPosition(Robot.arm.getPosition());
+		Robot.arm.setSetpoint(Robot.arm.getPosition());
 		// When the command ends or is interrupted it will keep the arm from dropping
 		// back to a bad position
 	}
