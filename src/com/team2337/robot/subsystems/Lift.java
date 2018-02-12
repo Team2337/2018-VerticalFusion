@@ -32,17 +32,17 @@ public class Lift extends Subsystem {
 	private double kP = 0.1;
 	private double kI = 0;
 	private double kD = 0;
-	private int allowableError = 50;
+	private int allowableError = 50;     						 ///need to set *****************//TODO
 	
-	int forwardSoftLimit = 0;
-	int reverseSoftLimit = 100;
+	public static int forwardLIFTSoftLimit = 0;					 ///need to set *****************//TODO
+	public static  int reverseLIFTSoftLimit = 100;				 ///need to set *****************//TODO
 
 	protected void initDefaultCommand() {
 		//setDefaultCommand(new lift_startPID());
 	}
 
 	public Lift() {
-		setSoftLimits(forwardSoftLimit, reverseSoftLimit);
+		setSoftLimits(forwardLIFTSoftLimit, reverseLIFTSoftLimit);
 		/* set the peak and nominal outputs, 12V? means full */
 		rightFront.configNominalOutputForward(nominalSpeed, 0);
 		rightFront.configNominalOutputReverse(nominalSpeed, 0);
@@ -58,7 +58,7 @@ public class Lift extends Subsystem {
 		 * neutral within this range. See Table in Section 17.2.1 for native
 		 * units per rotation.
 		 */
-		rightFront.configAllowableClosedloopError(allowableError, 0, 0);  ///need to set *****************//TODO
+		rightFront.configAllowableClosedloopError(allowableError, 0, 0); 
 		
 		/* set closed loop gains in slot0, typically kF stays zero. */
 		rightFront.config_kF(0, kF, 0);
@@ -101,24 +101,34 @@ public class Lift extends Subsystem {
 		return rightFront.getSelectedSensorPosition(0);
 	}
 	
+	/**
+	 * Set the motion array of the lift based on the input from the buttons on the side of the throttle stick.
+	 */	
+	public void liftLeveler(int liftLevel) {
+		levelOfLift = liftLevel;
+	}
 	
 	/**
 	 * Set the software limits of the lift
 	 */
 	public static void setSoftLimits(int forward, int reverse) {
-		rightFront.configForwardSoftLimitThreshold(forward, 0);
-		leftFront.configForwardSoftLimitThreshold(forward, 0);
+		forwardLIFTSoftLimit = forward;
+		reverseLIFTSoftLimit = reverse;
+		
+		rightFront.configForwardSoftLimitThreshold(forwardLIFTSoftLimit, 0);
+		leftFront.configForwardSoftLimitThreshold(forwardLIFTSoftLimit, 0);
 			
-		rightFront.configReverseSoftLimitThreshold(reverse, 0);
-		leftFront.configReverseSoftLimitThreshold(reverse, 0);
-			
-		if(RobotMap.alt_ControlDebug) {
-		SmartDashboard.putNumber("forwardLIFTSoftLimit", forward);
-		SmartDashboard.putNumber("reverseLIFTSoftLimit", reverse);
-		}
-			
+		rightFront.configReverseSoftLimitThreshold(reverseLIFTSoftLimit, 0);
+		leftFront.configReverseSoftLimitThreshold(reverseLIFTSoftLimit, 0);			
 	}
-	public void liftLeveler(int liftLevel) {
-		levelOfLift = liftLevel;
+
+	/**
+	 * Debug, turn on/off in RobotMap
+	 */
+	public void periodic() {
+		if(RobotMap.alt_ControlDebug) {
+			SmartDashboard.putNumber("forwardLIFTSoftLimit", forwardLIFTSoftLimit);
+			SmartDashboard.putNumber("reverseLIFTSoftLimit", reverseLIFTSoftLimit);
+		}
 	}
 }

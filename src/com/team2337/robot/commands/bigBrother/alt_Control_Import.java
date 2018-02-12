@@ -67,11 +67,13 @@ public class alt_Control_Import extends Command {
 	}
 
 	protected void execute() {
+		SmartDashboard.putBoolean("endOfAuto - before", RobotMap.endOfAuto);
 		/*if(RobotMap.endOfAuto) {
 			Robot.bigBrother.stopAltControl();
+				SmartDashboard.putBoolean("endOfAuto - middle", RobotMap.endOfAuto);
 			if(OI.operatorThrottleJoystick.getRawButton(8)) {
-				System.out.println("UITHLUUHuktyigu7g");
 				RobotMap.endOfAuto = false;
+				SmartDashboard.putBoolean("endOfAuto - after", RobotMap.endOfAuto);
 			}
 		}*/
 		
@@ -118,9 +120,11 @@ public class alt_Control_Import extends Command {
 		}
 		
 		//Set Set points
+		//TODO add check if endOfAuto??? to disable/skip sets????
+		
 		Robot.trolley.setPosition(trolleySetPoint);
 		Robot.arm.setPosition(armSetPoint);
-		Robot.lifter.setPosition((double) points[(int) throttleValue][Robot.lifter.levelOfLift]); 
+		Robot.lift.setPosition((double) points[(int) throttleValue][Robot.lift.levelOfLift]); 
 		
 		//Soft Limits
 		Robot.arm.setSoftLimits((int)(points[(int) throttleValue][armForwardSoftLimits]), (int)(points[(int) throttleValue][armReverseSoftLimits]));

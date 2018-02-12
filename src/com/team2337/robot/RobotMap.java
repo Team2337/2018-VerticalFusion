@@ -60,9 +60,6 @@ public class RobotMap {
 	public static VictorSPX intake_right;
 	//public static TalonSRX intake_right;
 
-	// Ejector
-	public static Solenoid ejector_push;    //** not needed?
-
 	// Arm
 	public static TalonSRX arm_left;
 	public static TalonSRX arm_right;
@@ -92,45 +89,48 @@ public class RobotMap {
 	
 	public static UsbCamera camera;
 	
+	//*********************************************************************************************************
 	//Debug
 	public static Boolean alt_ControlDebug = true;
 	public static Boolean chassisDebug = false;
+	public static Boolean intakeDebug = false;
 	
 	//Public Variables
-	public static Boolean endOfAuto = true;  //Also set to true in Robot.TeleOpInit
+	public static Boolean endOfAuto = true;  		//Also set to true in Robot.TeleOpInit
 	
 	//CAN Ports
-	static int chassisRightFront  = 0;
-	static int chassisRightMid    = 1;
-	static int chassisRightRear   = 2;
-	static int trolleyLeft        = 3;
-	static int trolleyRight       = 4;
-	static int intakeRight        = 5;
-	static int intakeLeft         = 6;
-	static int armRight           = 7;
-	static int armLeft            = 8;
-	static int climberRight       = 9;
-	static int climberLeft        = 10;
-	static int liftRight          = 11;
-	static int liftLeft           = 12;
-	static int chassisLeftRear    = 13;
-	static int chassisLeftMid     = 14;
-	static int chassisLeftFront   = 15;
+	private final static int chassisRightFront  = 0;
+	private final static int chassisRightMid    = 1;
+	private final static int chassisRightRear   = 2;
+	private final static int trolleyLeft        = 3;
+	private final static int trolleyRight       = 4;
+	private final static int intakeRight        = 5;
+	private final static int intakeLeft         = 6;
+	private final static int armRight           = 7;
+	private final static int armLeft            = 8;
+	private final static int climberRight       = 9;
+	private final static int climberLeft        = 10;
+	private final static int liftRight          = 11;
+	private final static int liftLeft           = 12;
+	private final static int chassisLeftRear    = 13;
+	private final static int chassisLeftMid     = 14;
+	private final static int chassisLeftFront   = 15;
 	
 	//Pnuematics
 	//PCMs
-	static int PCM_0 = 0;
+	private final static int PCM_0 		   = 0;
+	
 	//Ports
-	static int clawHugger    = 2;
-	static int clawClaw      = 3;
-	static int shifterLeft   = 4;
-	static int shifterRight  = 5;
-	static int ledInfo       = 6;
+	private final static int clawHugger    = 2;
+	private final static int clawClaw      = 3;
+	private final static int shifterLeft   = 4;
+	private final static int shifterRight  = 5;
+	private final static int ledInfo       = 6;
 	
 	public static void init() {
 		
 		/*
-		 * z Drive Left
+		 * Drive Left
 		 */
 		chassis_leftFront = new TalonSRX(chassisLeftFront);
 		chassis_leftFront.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
@@ -170,7 +170,7 @@ public class RobotMap {
 			drive = new NerdyDrive(chassis_leftFront, chassis_rightFront);
 			
 		/*
-		 * Lift    //***********************************************
+		 * Lift
 		 */
 
 		lift_right = new TalonSRX(liftRight); // 5
@@ -209,10 +209,10 @@ public class RobotMap {
 		/*
 		 * Intake
 		 */
-		intake_left = new TalonSRX(intakeLeft); // 6
+		intake_left = new TalonSRX(intakeLeft);
 		intake_left.setInverted(true);
 		
-		intake_right = new VictorSPX(intakeRight); // 5
+		intake_right = new VictorSPX(intakeRight);
 		intake_right.setInverted(false);
 		
 		crateSensor = new DigitalInput(0);
@@ -220,9 +220,9 @@ public class RobotMap {
 		/*
 		 * Arm
 		 */
-		arm_right = new TalonSRX(armRight); // 7
+		arm_right = new TalonSRX(armRight);
 		arm_right.setInverted(false);
-		arm_left = new TalonSRX(armLeft); // 8
+		arm_left = new TalonSRX(armLeft);
 		arm_left.setInverted(true);
 		arm_left.follow(arm_right);
 		arm_left.setNeutralMode(NeutralMode.Brake);
@@ -234,7 +234,6 @@ public class RobotMap {
 
 		arm_right.configForwardSoftLimitEnable(true, 0);
 		arm_left.configForwardSoftLimitEnable(false, 0);
-
 
 		arm_right.configReverseSoftLimitEnable(true, 0);
 		arm_left.configReverseSoftLimitEnable(false, 0);
@@ -263,7 +262,7 @@ public class RobotMap {
 		led_info = new Solenoid(PCM_0, ledInfo);
 
 		/*
-		 * VisionProcessing for PixyCam
+		 * VisionProcessing for ?
 		 */
 
 		vision = new VisionProcessing("GRIP/vision");

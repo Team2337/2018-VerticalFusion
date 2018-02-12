@@ -1,10 +1,3 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package com.team2337.robot;
 
 import com.team2337.robot.subsystems.Chassis;
@@ -44,7 +37,7 @@ public class Robot extends TimedRobot {
 	public static Climber climber;
 	public static Claw claw;
 	public static BigBrother bigBrother;
-	public static Lift lifter;
+	public static Lift lift;
 	public static OI oi;
 	//public static char ourswitch, scale, oppswitch;
 
@@ -69,7 +62,7 @@ public class Robot extends TimedRobot {
 		led = new LED();
 		claw = new Claw();
 		bigBrother = new BigBrother();
-		lifter = new Lift();
+		lift = new Lift();
 
 		oi = new OI();
 
@@ -102,6 +95,7 @@ public class Robot extends TimedRobot {
 		String gameData;
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
 		
+		//TODO
 		//ourswitch = gameData.charAt(0);
 		//scale = gameData.charAt(1);
 		//oppswitch = gameData.charAt(2);
@@ -167,17 +161,6 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 		
-		//SmartDashboard.putNumber("pot", RobotMap.lift_potentiometer.get());
-		//SmartDashboard.putNumber("SetPoint", RobotMap.trolley_right.getClosedLoopTarget());
-		SmartDashboard.putBoolean("atSetPoint?", com.team2337.robot.commands.trolley.trolley_joystickControl.isAtTop);
-		SmartDashboard.putNumber("potValue", com.team2337.robot.commands.trolley.trolley_joystickControl.potValue);
-		SmartDashboard.putNumber("armAnglePosition", Arm.armAngle);
-		SmartDashboard.putNumber("armEncoderPosition", RobotMap.arm_right.getSelectedSensorPosition(0));
-		SmartDashboard.putNumber("armValue", com.team2337.robot.commands.arm.arm_increaseAngle.armPosition);
-		//SmartDashboard.putNumber("rightFront", RobotMap.lift_right.getMotorOutputPercent());
-		//SmartDashboard.putNumber("leftFront", RobotMap.lift_left.getMotorOutputPercent());
-		//SmartDashboard.putNumber("armPositionValue", com.team2337.robot.commands.arm.arm_joystickControl.armPositionValue);
-		SmartDashboard.putBoolean("crate", RobotMap.crateSensor.get());
 		SmartDashboard.putNumber("centerX", RobotMap.vision.getRevAngle());
 		//
 		//System.out.print(RobotMap.vision.getRevAngle());

@@ -5,11 +5,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.team2337.robot.Robot;
 import com.team2337.robot.RobotMap;
 import com.team2337.robot.commands.arm.TEST_ONLY_arm_joystickControl;
-import com.team2337.robot.commands.arm.arm_joystickControl;
-import com.team2337.robot.commands.arm.arm_joystickControl2;
-import com.team2337.robot.commands.trolley.trolley_joystickControl;
 
-import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -26,12 +22,19 @@ public class Arm extends PIDSubsystem {
 
 	private boolean PIDStatus = false;
 
-	public static double armAngle = 0;
-	private double maxSpeedUp = 0.3;
-	private double maxSpeedDown = -0.3;
+	public static final double armAngle 	= 0;
 	
-	int forwardSoftLimit = 5320;
-	int reverseSoftLimit = 3400;
+	private static final double maxSpeedUp 		= 0.3;
+	private static final double maxSpeedDown 	= -0.3;
+	
+	public static final int forwardSoftLimit 	= 5320;
+	public static final int forwardTopSL 		= 4538;
+	public static final int reverseTopSL 		= 4023;
+	public static final int reverseSoftLimit 	= 3400;
+	
+	public static final double stringpotTopPos 		= 1.0;
+	public static final double stringpotMidPos 		= 0.7;
+	public static final double stringpotBottomPos 	= 0.1;
 
 	protected void initDefaultCommand() {
 		//setDefaultCommand(new TEST_ONLY_arm_joystickControl());
@@ -49,14 +52,7 @@ public class Arm extends PIDSubsystem {
 	}
 
 	
-	public void periodic() {
-		if(RobotMap.alt_ControlDebug) {
-		SmartDashboard.putNumber("armEncoderPosition", RobotMap.arm_right.getSelectedSensorPosition(0));
-		
-		SmartDashboard.putNumber("StringPotValue", RobotMap.trolley_right.getSelectedSensorPosition(0));
-		}
-	}
-	
+
 	/**
 	 * Returns the input of the PID
 	 */
@@ -165,28 +161,37 @@ public class Arm extends PIDSubsystem {
 		RobotMap.arm_right.configReverseSoftLimitThreshold(reverse, 0);
 
 		if(RobotMap.alt_ControlDebug) {
-		SmartDashboard.putNumber("forwardSoftLimit", forward);
-		SmartDashboard.putNumber("reverseSoftLimit", reverse);
+		SmartDashboard.putNumber("forwardArmSoftLimit", forward);
+		SmartDashboard.putNumber("reverseArmSoftLimit", reverse);
 
-		SmartDashboard.putBoolean("forwardBoolean", RobotMap.arm_right.getSensorCollection().isFwdLimitSwitchClosed());
-		SmartDashboard.putBoolean("reverseBoolean", RobotMap.arm_right.getSensorCollection().isRevLimitSwitchClosed());
+		SmartDashboard.putBoolean("forwardArmLimitSwitch", RobotMap.arm_right.getSensorCollection().isFwdLimitSwitchClosed());
+		SmartDashboard.putBoolean("reverseArmLimitSwitch", RobotMap.arm_right.getSensorCollection().isRevLimitSwitchClosed());
 
 		}
 	}
 
 	public boolean sameSide(double currentPosition, double desiredPosition) {
 		if(RobotMap.alt_ControlDebug) {
-		SmartDashboard.putNumber("currentArmPosition", currentPosition);
-		SmartDashboard.putNumber("desiredArmPosition", desiredPosition);
+		SmartDashboard.putNumber("currentArmPositionSS", currentPosition);
+		SmartDashboard.putNumber("desiredArmPositionSS", desiredPosition);
 		}
-		if (currentPosition <= 968 && desiredPosition <= 968) {
+		if (currentPosition <= reverseTopSL && desiredPosition <= reverseTopSL) {
 			return true;
-		} else if (currentPosition >= 1080 && desiredPosition >= 1080) {
+		} else if (currentPosition >= forwardTopSL && desiredPosition >= forwardTopSL) {
 			return true;
 		} else {
 			return false;
 		}
 	}
-
-
+	/**
+	 * Debug, turn on/off in RobotMap
+	 */
+	public void periodic() {
+		if(RobotMap.alt_ControlDebug) {
+			
+		SmartDashboard.putNumber("armEncoderPosition", RobotMap.arm_right.getSelectedSensorPosition(0));
+		
+		SmartDashboard.putNumber("trolleyStringPotValue(in arm)", RobotMap.trolley_right.getSelectedSensorPosition(0));
+		}
+	}
 }

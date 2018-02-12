@@ -4,16 +4,16 @@ import com.team2337.fusion.controller.JoystickAnalogButton;
 import com.team2337.fusion.controller.JoystickPOVButton;
 
 import com.team2337.robot.commands.*;
-import com.team2337.robot.commands.arm.arm_decreaseAngle;
-import com.team2337.robot.commands.arm.arm_increaseAngle;
-import com.team2337.robot.commands.bigBrother.alt_Control_Import;
-import com.team2337.robot.commands.claw.claw_close;
-import com.team2337.robot.commands.claw.claw_giveLessHugs;
-import com.team2337.robot.commands.claw.claw_giveMoreHugs;
-import com.team2337.robot.commands.claw.claw_open;
+import com.team2337.robot.commands.arm.*;
+import com.team2337.robot.commands.bigBrother.*;
+import com.team2337.robot.commands.chassis.*;
+import com.team2337.robot.commands.claw.*;
+import com.team2337.robot.commands.climber.*;
 import com.team2337.robot.commands.intake.*;
-import com.team2337.robot.commands.lifter.liftLevelAdjuster;
+import com.team2337.robot.commands.led.*;
+import com.team2337.robot.commands.lift.*;
 import com.team2337.robot.commands.shifter.*;
+import com.team2337.robot.commands.trolley.*;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -172,8 +172,8 @@ public class OI {
 		operator_BlueX			.whenPressed(new DoNothing()); //.whenPressed(new trolley_setPID(1.1));
 		operator_YellowY		.whenPressed(new DoNothing()); //.whenPressed(new trolley_stopPID());
 		
-		operator_BumperLeft		.whileHeld(new arm_increaseAngle());
-		operator_BumperRight	.whileHeld(new arm_decreaseAngle());
+		operator_BumperLeft		.whileHeld(new DoNothing());
+		operator_BumperRight	.whileHeld(new DoNothing());
 		
 		operator_Back			.whenPressed(new DoNothing());
 		operator_Start			.whenPressed(new DoNothing());

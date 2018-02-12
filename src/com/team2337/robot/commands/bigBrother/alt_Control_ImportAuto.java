@@ -44,7 +44,7 @@ public class alt_Control_ImportAuto extends Command {
 
 	protected void initialize() {
 		
-		Robot.lifter.liftLeveler(autolevelOfLift);
+		Robot.lift.liftLeveler(autolevelOfLift);
 		
 		
 	}
@@ -96,7 +96,7 @@ public class alt_Control_ImportAuto extends Command {
 		
 		Robot.trolley.setPosition(trolleySetPoint);
 		Robot.arm.setPosition(armSetPoint);
-		Robot.lifter.setPosition((double) points[(int) throttleValue][autolevelOfLift]); 
+		Robot.lift.setPosition((double) points[(int) throttleValue][autolevelOfLift]); 
 		
 		Robot.arm.setSoftLimits((int)(points[(int) throttleValue][7]), (int)(points[(int) throttleValue][8]));
 			

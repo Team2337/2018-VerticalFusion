@@ -1,15 +1,14 @@
 package com.team2337.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.team2337.robot.RobotMap;
 
-import com.team2337.robot.commands.DoNothing;
 import com.team2337.robot.commands.intake.intake_doNothing;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Allows for cubes to be intaked or blooped (released)
@@ -53,6 +52,11 @@ public class Intake extends Subsystem {
 
 		right.neutralOutput();
 		left.neutralOutput();
+	}
+	public void periodic() {
+		if (RobotMap.intakeDebug) {
+			SmartDashboard.putBoolean("crate", RobotMap.crateSensor.get());
+		}
 	}
 
 }

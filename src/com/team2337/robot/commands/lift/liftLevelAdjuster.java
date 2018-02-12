@@ -1,23 +1,23 @@
-package com.team2337.robot.commands.lifter;
+package com.team2337.robot.commands.lift;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 import com.team2337.robot.Robot;
 
 /**
- * An example command. You can replace me with your own command.
+ * called by throttle side buttons to set motion array of lift based on scale position.
  */
 public class liftLevelAdjuster extends Command {
 	int liftLevel;
 
 	public liftLevelAdjuster(int liftLevel) {
 		this.liftLevel = liftLevel;
-		requires(Robot.lifter);
+		requires(Robot.lift);
 	}
 
 	@Override
 	protected void initialize() {
-		Robot.lifter.liftLeveler(liftLevel);
+		Robot.lift.liftLeveler(liftLevel);
 	}
 
 	@Override

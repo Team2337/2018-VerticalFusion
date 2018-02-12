@@ -23,10 +23,10 @@ public class TEST_ONLY_arm_joystickControl extends Command {
 	
 	private static final double deadband = 0.2;
 	
-	private static final int forwardBottomSL = 5320;
-	private static final int forwardTopSL = 4538;
-	private static final int reverseTopSL = 4023;
-	private static final int reverseBottomSL = 2839;
+	private static final int forwardBottomSL = Robot.arm.forwardSoftLimit;
+	private static final int forwardTopSL = Robot.arm.forwardTopSL;
+	private static final int reverseTopSL = Robot.arm.reverseTopSL;
+	private static final int reverseBottomSL = Robot.arm.reverseSoftLimit;
 	
 	private static final double stringpotTopPos = 1.0;
 	private static final double stringpotMidPos = 0.7;

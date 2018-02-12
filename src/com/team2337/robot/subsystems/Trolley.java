@@ -32,15 +32,15 @@ public class Trolley extends Subsystem {
 	private double kD = 0;
 	private int allowableError = 50;
 
-	int forwardSoftLimit = -60;
-	int reverseSoftLimit = -530;
+	public static int forwardTrolleySoftLimit = -60;
+	public static int reverseTrolleySoftLimit = -530;
 	
 	protected void initDefaultCommand() {
 		//setDefaultCommand(new trolley_startPID());
 	}
 
 	public Trolley() {
-		setSoftLimits(forwardSoftLimit, reverseSoftLimit);
+		setSoftLimits(forwardTrolleySoftLimit, reverseTrolleySoftLimit);
 		
 		/* set the peak and nominal outputs, 12V? means full */
 		rightFront.configNominalOutputForward(nominalSpeed, 0);
@@ -103,17 +103,25 @@ public class Trolley extends Subsystem {
 	 * Set the software limits of the trolley
 	 */
 	public static void setSoftLimits(int forward, int reverse) {
-		rightFront.configForwardSoftLimitThreshold(forward, 0);
-		leftFront.configForwardSoftLimitThreshold(forward, 0);
+		forwardTrolleySoftLimit = forward;
+		reverseTrolleySoftLimit = reverse;
+		
+		rightFront.configForwardSoftLimitThreshold(forwardTrolleySoftLimit, 0);
+		leftFront.configForwardSoftLimitThreshold(forwardTrolleySoftLimit, 0);
 			
-		rightFront.configReverseSoftLimitThreshold(reverse, 0);
-		leftFront.configReverseSoftLimitThreshold(reverse, 0);
-			
+		rightFront.configReverseSoftLimitThreshold(reverseTrolleySoftLimit, 0);
+		leftFront.configReverseSoftLimitThreshold(reverseTrolleySoftLimit, 0);
+	}
+	
+	/**
+	 * Debug, turn on/off in RobotMap
+	 */
+	public void periodic() {
 		if(RobotMap.alt_ControlDebug) {
-		SmartDashboard.putNumber("forwardTROLLEYSoftLimit", forward);
-		SmartDashboard.putNumber("reverseTROLLEYSoftLimit", reverse);
+		SmartDashboard.putNumber("forwardTROLLEYSoftLimit", forwardTrolleySoftLimit);
+		SmartDashboard.putNumber("reverseTROLLEYSoftLimit", reverseTrolleySoftLimit);
 		}
-			
+		
 	}
 	
 }

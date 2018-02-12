@@ -1,4 +1,4 @@
-package com.team2337.robot.commands.lifter;
+package com.team2337.robot.commands.lift;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -25,7 +25,7 @@ public class TEST_ONLY_Lift_ThrottleControl extends Command {
 	static TalonSRX frontLeft = RobotMap.lift_left;
 
 	public TEST_ONLY_Lift_ThrottleControl() {
-		requires(Robot.lifter);
+		requires(Robot.lift);
 	}
 
 	protected void initialize() {

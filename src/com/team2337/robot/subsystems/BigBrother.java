@@ -1,10 +1,9 @@
 package com.team2337.robot.subsystems;
 
-import com.team2337.robot.commands.bigBrother.setPoints;
+import com.team2337.robot.commands.bigBrother.*;
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.team2337.robot.Robot;
 import com.team2337.robot.RobotMap;
-import com.team2337.robot.commands.bigBrother.alt_Control_Import;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -26,7 +25,10 @@ public class BigBrother extends Subsystem {
 	}
 
 	void startFilling() {
-		points = setPoints.points;
+		points = setPointsTest.points;
+		//points = setPoints.points;
+		//points = setPointsPracticeBot.points;
+		//points = setPointsCompBot.points;
 	}
 	public void stopAltControl() {
 		RobotMap.trolley_right.set(ControlMode.PercentOutput, 0);
