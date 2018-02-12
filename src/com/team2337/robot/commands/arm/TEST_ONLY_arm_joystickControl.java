@@ -23,10 +23,10 @@ public class TEST_ONLY_arm_joystickControl extends Command {
 	
 	private static final double deadband = 0.2;
 	
-	private static final int forwardBottomSL = 1;
-	private static final int forwardTopSL = 968;
-	private static final int reverseTopSL = 1080;
-	private static final int reverseBottomSL = 2560;
+	private static final int forwardBottomSL = 5320;
+	private static final int forwardTopSL = 4538;
+	private static final int reverseTopSL = 4023;
+	private static final int reverseBottomSL = 2839;
 	
 	private static final double stringpotTopPos = 1.0;
 	private static final double stringpotMidPos = 0.7;
@@ -40,7 +40,7 @@ public class TEST_ONLY_arm_joystickControl extends Command {
 	protected void initialize() {
 		setPointSet = false;
 		Robot.arm.disable();
-		Robot.arm.setSoftLimits(forwardTopSL, forwardBottomSL);
+		//Robot.arm.setSoftLimits(forwardTopSL, forwardBottomSL);
 	}
 
 	protected void execute() {
@@ -51,15 +51,16 @@ public class TEST_ONLY_arm_joystickControl extends Command {
 		SmartDashboard.putNumber("selectedSensorPosition", armPositionEncoder);
 		SmartDashboard.putNumber("ArmJoystickValue", armJoystickX);
 
-		armJoystickX = -Robot.oi.operatorJoystick.getRawAxis(1);  //uses flightStick to Test
+		armJoystickX = -Robot.oi.operatorThrottleJoystick.getRawAxis(1);  //uses flightStick to Test
 
 		stringPot = (RobotMap.lift_right.getSelectedSensorPosition(0));  /// absolute???? removed
 
 		if ((armJoystickX > -deadband) && (armJoystickX < deadband)) {
-
+			System.out.println("im here");
 			armJoystickX = 0;
 
 			if (!setPointSet) {
+				System.out.println("Inside of deadband");
 				Robot.arm.enable();
 				Robot.arm.setSetpoint(RobotMap.arm_right.getSelectedSensorPosition(0));
 
@@ -68,11 +69,12 @@ public class TEST_ONLY_arm_joystickControl extends Command {
 				setPointSet = true;
 			}
 		} else {
+			System.out.println("Outside of deadband");
 			Robot.arm.disable();
 			setPointSet = false;
 			
 			SmartDashboard.putNumber("StringPotValueInArm", stringPot);
-									
+			/*					
 				if (stringPot > stringpotTopPos) {
 					Robot.arm.setSoftLimits(reverseBottomSL, forwardBottomSL);
 				} else if (stringPot > stringpotMidPos) {
@@ -88,7 +90,7 @@ public class TEST_ONLY_arm_joystickControl extends Command {
 						Robot.arm.setSoftLimits(forwardTopSL, forwardBottomSL);
 					}
 				}
-			
+			*/
 				Robot.arm.moveArm(armJoystickX);
 
 		}

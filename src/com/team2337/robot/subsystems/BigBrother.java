@@ -33,5 +33,8 @@ public class BigBrother extends Subsystem {
 		RobotMap.lift_right.set(ControlMode.PercentOutput, 0);
 		RobotMap.arm_right.set(ControlMode.PercentOutput, 0);
 	}
+	public void startAltControl(double pos) {
+
+	}
 
 }

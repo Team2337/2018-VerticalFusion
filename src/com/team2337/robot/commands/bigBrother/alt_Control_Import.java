@@ -67,12 +67,13 @@ public class alt_Control_Import extends Command {
 	}
 
 	protected void execute() {
-		if(RobotMap.endOfAuto) {
+		/*if(RobotMap.endOfAuto) {
 			Robot.bigBrother.stopAltControl();
 			if(OI.operatorThrottleJoystick.getRawButton(8)) {
+				System.out.println("UITHLUUHuktyigu7g");
 				RobotMap.endOfAuto = false;
 			}
-		}
+		}*/
 		
 		//liftPot = RobotMap.lift_right.getSelectedSensorPosition(0);
 		
@@ -125,7 +126,7 @@ public class alt_Control_Import extends Command {
 		Robot.arm.setSoftLimits((int)(points[(int) throttleValue][armForwardSoftLimits]), (int)(points[(int) throttleValue][armReverseSoftLimits]));
 
 		if(RobotMap.alt_ControlDebug) {
-		SmartDashboard.putBoolean("sameSide", Robot.arm.sameSide(armEncoder, trolleySetPoint));
+		SmartDashboard.putBoolean("sameSide", Robot.arm.sameSide(armEncoder, armSetPoint));
 		SmartDashboard.putNumber("trolleyStick", trolleyStick);
 		SmartDashboard.putNumber("TrolleySetPoint", Robot.trolley.getSetpoint());
 		SmartDashboard.putNumber("TrolleyPosition", RobotMap.trolley_right.getSelectedSensorPosition(0));

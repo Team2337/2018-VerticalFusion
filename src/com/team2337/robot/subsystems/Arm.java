@@ -4,6 +4,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.team2337.robot.Robot;
 import com.team2337.robot.RobotMap;
+import com.team2337.robot.commands.arm.TEST_ONLY_arm_joystickControl;
 import com.team2337.robot.commands.arm.arm_joystickControl;
 import com.team2337.robot.commands.arm.arm_joystickControl2;
 import com.team2337.robot.commands.trolley.trolley_joystickControl;
@@ -26,32 +27,42 @@ public class Arm extends PIDSubsystem {
 	private boolean PIDStatus = false;
 
 	public static double armAngle = 0;
-	private double maxSpeedUp = 0.2;
-	private double maxSpeedDown = -0.2;
+	private double maxSpeedUp = 0.3;
+	private double maxSpeedDown = -0.3;
 	
-	int forwardSoftLimit = 100;
-	int reverseSoftLimit = 0;
+	int forwardSoftLimit = 5320;
+	int reverseSoftLimit = 3400;
 
 	protected void initDefaultCommand() {
-		setDefaultCommand(new arm_joystickControl2());
+		//setDefaultCommand(new TEST_ONLY_arm_joystickControl());
 	}
 
 	public Arm() {
 
-		super("Arm", 0.01, 0.0, 0.0);
+		super("Arm", 0.004, 0.0, 0.0);
 		setAbsoluteTolerance(70);
 		getPIDController().setContinuous(false);
-		getPIDController().setInputRange(0, 4096);
+		getPIDController().setInputRange(0, 8000);
 		
 		setSoftLimits(forwardSoftLimit, reverseSoftLimit);
+		setTeleopArmSpeed();
 	}
 
+	
+	public void periodic() {
+		if(RobotMap.alt_ControlDebug) {
+		SmartDashboard.putNumber("armEncoderPosition", RobotMap.arm_right.getSelectedSensorPosition(0));
+		
+		SmartDashboard.putNumber("StringPotValue", RobotMap.trolley_right.getSelectedSensorPosition(0));
+		}
+	}
+	
 	/**
 	 * Returns the input of the PID
 	 */
 	public double returnPIDInput() {
 
-		SmartDashboard.putNumber("armPIDInput", armRight.getSensorCollection().getQuadraturePosition());
+
 		return RobotMap.arm_right.getSelectedSensorPosition(0);
 		// return SmartDashboard.getNumber("ArmPosition", 0.5);
 	}
@@ -127,10 +138,12 @@ public class Arm extends PIDSubsystem {
 	 */
 	public void setPosition(double pos) {
 		setSetpoint(pos);
+		//RobotMap.arm_right.set(ControlMode.Position, pos);
+		enable();
 	}
 
 	public static void moveArm(double power) {
-		armLeft.set(ControlMode.PercentOutput, power);
+		//armLeft.set(ControlMode.PercentOutput, power);
 		armRight.set(ControlMode.PercentOutput, power);
 	}
 
@@ -174,8 +187,6 @@ public class Arm extends PIDSubsystem {
 			return false;
 		}
 	}
-	public void periodic() {
-		
-	}
+
 
 }

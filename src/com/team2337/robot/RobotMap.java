@@ -1,10 +1,12 @@
 package com.team2337.robot;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.team2337.fusion.drive.*;
 import com.team2337.fusion.vision.VisionProcessing;
+import com.team2337.robot.subsystems.Arm;
 import com.team2337.robot.subsystems.Trolley;
 import com.team2337.robot.Constants;
 
@@ -91,7 +93,7 @@ public class RobotMap {
 	public static UsbCamera camera;
 	
 	//Debug
-	public static Boolean alt_ControlDebug = false;
+	public static Boolean alt_ControlDebug = true;
 	public static Boolean chassisDebug = false;
 	
 	//Public Variables
@@ -101,8 +103,8 @@ public class RobotMap {
 	static int chassisRightFront  = 0;
 	static int chassisRightMid    = 1;
 	static int chassisRightRear   = 2;
-	static int trolleyRight       = 3;
-	static int trolleyLeft        = 4;
+	static int trolleyLeft        = 3;
+	static int trolleyRight       = 4;
 	static int intakeRight        = 5;
 	static int intakeLeft         = 6;
 	static int armRight           = 7;
@@ -221,16 +223,21 @@ public class RobotMap {
 		arm_right = new TalonSRX(armRight); // 7
 		arm_right.setInverted(false);
 		arm_left = new TalonSRX(armLeft); // 8
+		arm_left.setInverted(true);
+		arm_left.follow(arm_right);
+		arm_left.setNeutralMode(NeutralMode.Brake);
 
 		arm_right.setStatusFramePeriod(0, 0, 0);
 		arm_right.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
 		arm_right.setSensorPhase(false);
+		arm_right.setNeutralMode(NeutralMode.Brake);
 
 		arm_right.configForwardSoftLimitEnable(true, 0);
-		arm_left.configForwardSoftLimitEnable(true, 0);
+		arm_left.configForwardSoftLimitEnable(false, 0);
+
 
 		arm_right.configReverseSoftLimitEnable(true, 0);
-		arm_left.configReverseSoftLimitEnable(true, 0);
+		arm_left.configReverseSoftLimitEnable(false, 0);
 		
 		/*
 		 * Claw
