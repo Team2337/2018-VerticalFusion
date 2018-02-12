@@ -13,6 +13,9 @@ public class BlinkIn {
 			blinkin.set(color);
 		}
 	}
+	public double getColor() {
+		return setColor;
+	}
 	public void flow() {
 		blinkin.set(-1.02);
 	}

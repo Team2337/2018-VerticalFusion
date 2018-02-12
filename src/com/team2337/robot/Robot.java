@@ -5,6 +5,7 @@ import com.team2337.robot.subsystems.Claw;
 import com.team2337.robot.subsystems.Climber;
 import com.team2337.robot.subsystems.Ejector;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.team2337.fusion.wrappers.command.auto.AutoCommandManager;
 import com.team2337.robot.commands.DoNothing;
 import com.team2337.robot.commands.auto.*;
 import com.team2337.robot.subsystems.Arm;
@@ -81,7 +82,7 @@ public class Robot extends TimedRobot {
 		autonchooser.addObject("Right Scale Switch", new DoNothing());
 		autonchooser.addObject("Right Switch No cross", new DoNothing());
 		autonchooser.addObject("Right Scale No cross", new DoNothing());
-		autonchooser.addObject("Make them cry", new DoNothing());
+		autonchooser.addObject("Make them cry with leds", new auto_ActionColorExample());
 		SmartDashboard.putData("Auto mode", autonchooser);
 	}
 
@@ -99,14 +100,6 @@ public class Robot extends TimedRobot {
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
 		this.allPeriodic();
-		
-		String gameData;
-		gameData = DriverStation.getInstance().getGameSpecificMessage();
-
-		ourswitch = gameData.charAt(0);
-		scale = gameData.charAt(1);
-		oppswitch = gameData.charAt(2);
-
 	}
 
 	/**

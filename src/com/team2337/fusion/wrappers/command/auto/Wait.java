@@ -1,35 +1,28 @@
-package com.team2337.robot.commands.chassis;
+package com.team2337.fusion.wrappers.command.auto;
 
-import com.team2337.fusion.wrappers.command.auto.AutoCommand;
 import com.team2337.robot.Robot;
 import com.team2337.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-/**
- * MoveForward - Move the robot forward for specified time
- * @category CHASSSIS AUTON
- * @author Jennah
- */
-public class chassis_moveForward extends AutoCommand {
+public class Wait extends AutoCommand {
 	private double time = 10;
-    public chassis_moveForward(double time) {
+    public Wait(double time) {
     	requires(Robot.chassis);
     	this.time = time;
     }
-    
     protected void initialize() {
     	setTimeout(this.time);
-    	RobotMap.drive.arcadeDrive(1, 0, true);
+ 
     }
     protected void execute() {
-    	RobotMap.drive.arcadeDrive(1, 0, true);
+    
     }
     protected boolean isFinished() { 
     	return isTimedOut();
     }
     protected void end() {
-    	RobotMap.drive.arcadeDrive(0, 0, true);
+ 
     }
     protected void interrupted() {this.end();}
 }

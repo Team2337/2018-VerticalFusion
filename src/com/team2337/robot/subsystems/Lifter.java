@@ -27,7 +27,7 @@ public class Lifter extends PIDSubsystem {
 	private final static TalonSRX rightFront = RobotMap.lift_rightFront;
 
 	private boolean PIDStatus = false;
-
+	public int levelOfLift = 1;
 	public double potValue = RobotMap.lift_potentiometer.get();
 	
 	private double maxSpeedUp = 0.5;
