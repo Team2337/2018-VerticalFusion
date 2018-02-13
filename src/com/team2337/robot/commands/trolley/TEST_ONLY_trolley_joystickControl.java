@@ -45,15 +45,13 @@ public class TEST_ONLY_trolley_joystickControl extends Command {
     		trolleyJoystickY = 0;  
     		
     		if (!setPointSet) {
-    			//Robot.trolley.enable();
     			Robot.trolley.setSetpoint(RobotMap.trolley_right.getSelectedSensorPosition(0));
     			setPointSet = true; 
     		}
     		
-    	} else {				
-    		//Robot.trolley.disable(); 
+    	} else { 
     		setPointSet = false;
-     		RobotMap.trolley_right.set(ControlMode.PercentOutput, trolleyJoystickY);
+    		Robot.trolley.move(trolleyJoystickY);  //run in percentVbus mode
     		}
 	}
 

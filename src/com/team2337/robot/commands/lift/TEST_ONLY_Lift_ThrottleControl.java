@@ -45,15 +45,13 @@ public class TEST_ONLY_Lift_ThrottleControl extends Command {
     		liftThrottle = 0;  
     		
     		if (!setPointSet) {
-    			//Robot.trolley.enable();
     			Robot.trolley.setSetpoint(RobotMap.lift_right.getSelectedSensorPosition(0));
     			setPointSet = true; 
     		}
     		
-    	} else {				
-    		//Robot.trolley.disable(); 
+    	} else {
     		setPointSet = false;
-     		RobotMap.lift_right.set(ControlMode.PercentOutput, liftThrottle);
+     		Robot.lift.move(liftThrottle);  //run lift by %Vbus
     		}
 	}
 

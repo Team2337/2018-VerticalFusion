@@ -1,12 +1,9 @@
 package com.team2337.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-
-import com.team2337.robot.RobotMap;
 import com.team2337.robot.Robot;
-import com.team2337.robot.commands.bigBrother.alt_Control_Import;
+import com.team2337.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -20,9 +17,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Trolley extends Subsystem {
 
-	private final static TalonSRX leftFront = RobotMap.trolley_left;  //4
 	private final static TalonSRX rightFront = RobotMap.trolley_right; //3
-	
+	//private final static TalonSRX leftFront = RobotMap.trolley_left;  //4
+
 	//private int absolutePosition;  //used to set relative position encoder
 	private double maxSpeed = 0.2;
 	private double nominalSpeed = 0;
@@ -48,10 +45,10 @@ public class Trolley extends Subsystem {
 		rightFront.configPeakOutputForward(maxSpeed, 0);
 		rightFront.configPeakOutputReverse(-maxSpeed, 0);
 		
-		leftFront.configNominalOutputForward(nominalSpeed, 0);
-		leftFront.configNominalOutputReverse(nominalSpeed, 0);
-		leftFront.configPeakOutputForward(maxSpeed, 0);
-		leftFront.configPeakOutputReverse(-maxSpeed, 0);
+		//leftFront.configNominalOutputForward(nominalSpeed, 0);
+		//leftFront.configNominalOutputReverse(nominalSpeed, 0);
+		//leftFront.configPeakOutputForward(maxSpeed, 0);
+		//leftFront.configPeakOutputReverse(-maxSpeed, 0);
 		/*
 		 * set the allowable closed-loop error, Closed-Loop output will be
 		 * neutral within this range. See Table in Section 17.2.1 for native
@@ -66,6 +63,21 @@ public class Trolley extends Subsystem {
 		rightFront.config_kD(0, kD, 0);
 
 	}
+	
+	/**
+	 * Returns if trolley is at top, so that arm can go over
+	 */
+	public boolean isAtTop(){
+		return (getPosition() > 0.95 * forwardTrolleySoftLimit);
+	}
+	
+	/**
+	 * Returns if trolley is above midpoint
+	 */
+	public boolean isAboveMid(){
+		return (getPosition() > (0.5 * (forwardTrolleySoftLimit - reverseTrolleySoftLimit) + reverseTrolleySoftLimit));
+	}
+	
 	
 	/**
 	 * Sets the position of the trolley
@@ -94,6 +106,17 @@ public class Trolley extends Subsystem {
 	public double getPosition(){
 		return rightFront.getSelectedSensorPosition(0);
 	}
+	/**
+	 * Runs the trolley by joystick
+	 */
+
+	public void move(double power) {
+		rightFront.set(ControlMode.PercentOutput, power);
+	}
+
+	public void stop() {
+		rightFront.set(ControlMode.PercentOutput, 0);
+	}
 	
 	/**
 	 * Set the software limits of the trolley
@@ -103,10 +126,10 @@ public class Trolley extends Subsystem {
 		reverseTrolleySoftLimit = reverse;
 		
 		rightFront.configForwardSoftLimitThreshold(forwardTrolleySoftLimit, 0);
-		leftFront.configForwardSoftLimitThreshold(forwardTrolleySoftLimit, 0);
+		//leftFront.configForwardSoftLimitThreshold(forwardTrolleySoftLimit, 0);
 			
 		rightFront.configReverseSoftLimitThreshold(reverseTrolleySoftLimit, 0);
-		leftFront.configReverseSoftLimitThreshold(reverseTrolleySoftLimit, 0);
+		//leftFront.configReverseSoftLimitThreshold(reverseTrolleySoftLimit, 0);
 	}
 	
 	/**

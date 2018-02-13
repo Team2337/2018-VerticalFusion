@@ -88,7 +88,7 @@ public class TEST_ONLY_arm_joystickControl extends Command {
 					}
 				}
 			*/
-				Robot.arm.moveArm(armJoystickX);
+				Robot.arm.move(armJoystickX);
 
 		}
 	}

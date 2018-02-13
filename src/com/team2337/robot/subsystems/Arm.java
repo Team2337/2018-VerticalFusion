@@ -2,9 +2,7 @@ package com.team2337.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.team2337.robot.Robot;
 import com.team2337.robot.RobotMap;
-import com.team2337.robot.commands.arm.TEST_ONLY_arm_joystickControl;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -12,13 +10,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  * The subsystem to control the arm via a PID
  * 
- * @category LIFTER
+ * @category ARM
  * @author 2337
  */
 public class Arm extends Subsystem {
 
 	private final static TalonSRX armRight = RobotMap.arm_right;
-	private final static TalonSRX armLeft = RobotMap.arm_left;
 
 	//private boolean PIDStatus = false;
 	
@@ -33,15 +30,18 @@ public class Arm extends Subsystem {
 	private double nominalSpeed = 0;
 	
 	public static final int forwardSoftLimit 	= 1238;
+	public static final int forwardLevel 		= 900;    ///??
 	public static final int forwardTopSL 		= 548;
+
 	public static final int reverseTopSL 		= 55;
+	public static final int reverseLevel 		= 550;		///??
 	public static final int reverseSoftLimit 	= -1100;
 	
 	//public static final double stringpotTopPos 		= 1.0;
 	//public static final double stringpotMidPos 		= 0.7;
 	//public static final double stringpotBottomPos 	= 0.1;
 	
-	private int absolutePosition;  //used to set relative position of the encoder based on absolute encoder
+	//private int absolutePosition;  //used to set relative position of the encoder based on absolute encoder
 
 	protected void initDefaultCommand() {
 		//setDefaultCommand(new TEST_ONLY_arm_joystickControl());
@@ -130,15 +130,24 @@ public class Arm extends Subsystem {
 		armRight.configClosedloopRamp(arg0, arg1);
 	}
 
-	public static void moveArm(double power) {
-		//armLeft.set(ControlMode.PercentOutput, power);
+	public void move(double power) {
 		armRight.set(ControlMode.PercentOutput, power);
 	}
 
 	public void stop() {
-		armLeft.set(ControlMode.PercentOutput, 0);
 		armRight.set(ControlMode.PercentOutput, 0);
 	}
+	
+	public boolean armIsDown() {
+		return (getPosition() > 0.95 * forwardSoftLimit);
+	}
+	public boolean armIsReverse() {
+		return (getPosition() < reverseSoftLimit);
+	}
+	public boolean armIsForward() {
+		return (getPosition() > forwardSoftLimit);
+	}
+
 
 	public void setSoftLimits(int forward, int reverse) {
 		RobotMap.arm_left.configForwardSoftLimitThreshold(forward, 0);
