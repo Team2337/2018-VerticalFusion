@@ -210,10 +210,10 @@ public class RobotMap {
 		 * Intake
 		 */
 		intake_left = new TalonSRX(intakeLeft);
-		intake_left.setInverted(true);
+		intake_left.setInverted(false);
 		
 		intake_right = new VictorSPX(intakeRight);
-		intake_right.setInverted(false);
+		intake_right.setInverted(true);
 		
 		crateSensor = new DigitalInput(0);
 		
@@ -230,8 +230,8 @@ public class RobotMap {
 		arm_left.setNeutralMode(NeutralMode.Brake);
 
 		arm_right.setStatusFramePeriod(0, 0, 0);
-		arm_right.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
-		//arm_right.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
+		//arm_right.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
+		arm_right.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
 		arm_right.setSensorPhase(false);
 
 		arm_right.configForwardSoftLimitEnable(true, 0);

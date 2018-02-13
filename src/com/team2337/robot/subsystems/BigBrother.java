@@ -25,7 +25,7 @@ public class BigBrother extends Subsystem {
 	}
 
 	void startFilling() {
-		points = setPointsTest.points;
+		points = setPointsTestPickUpOnly.points;
 		//points = setPoints.points;
 		//points = setPointsPracticeBot.points;
 		//points = setPointsCompBot.points;

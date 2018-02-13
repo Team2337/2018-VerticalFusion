@@ -23,19 +23,19 @@ public class Arm extends Subsystem {
 	//private boolean PIDStatus = false;
 	
 	private double kF = 0;
-	private double kP = 0.1;
+	private double kP = 1.1;
 	private double kI = 0;
 	private double kD = 0;
-	private int allowableError = 70;                ///need to set *****************//TODO
+	private int allowableError = 1;                ///need to set *****************//TODO
 
-	private static final double maxSpeedUp 		= 0.3;
-	private static final double maxSpeedDown 	= -0.3;
+	private static final double maxSpeedUp 		= 1;
+	private static final double maxSpeedDown 	= -1;
 	private double nominalSpeed = 0;
 	
-	public static final int forwardSoftLimit 	= 5320;
-	public static final int forwardTopSL 		= 4538;
-	public static final int reverseTopSL 		= 4023;
-	public static final int reverseSoftLimit 	= 3400;
+	public static final int forwardSoftLimit 	= 1238;
+	public static final int forwardTopSL 		= 548;
+	public static final int reverseTopSL 		= 55;
+	public static final int reverseSoftLimit 	= -1100;
 	
 	//public static final double stringpotTopPos 		= 1.0;
 	//public static final double stringpotMidPos 		= 0.7;
@@ -56,12 +56,12 @@ public class Arm extends Subsystem {
 				
 		/* set the peak and nominal outputs, 12V? means full */
 		armRight.configNominalOutputForward(nominalSpeed, 0);
-		armRight.configNominalOutputReverse(nominalSpeed, 0);
+		armRight.configNominalOutputReverse(-nominalSpeed, 0);
 		armRight.configPeakOutputForward(maxSpeedUp, 0);
 		armRight.configPeakOutputReverse(maxSpeedDown, 0);
-		
+		/*
 		armLeft.configNominalOutputForward(nominalSpeed, 0);
-		armLeft.configNominalOutputReverse(nominalSpeed, 0);
+		armLeft.configNominalOutputReverse(-nominalSpeed, 0);
 		armLeft.configPeakOutputForward(maxSpeedUp, 0);
 		armLeft.configPeakOutputReverse(maxSpeedDown, 0);
 		/*
@@ -69,7 +69,7 @@ public class Arm extends Subsystem {
 		 * neutral within this range. See Table in Section 17.2.1 for native
 		 * units per rotation.
 		 */
-		armRight.configAllowableClosedloopError(allowableError, 0, 0);  
+		armRight.configAllowableClosedloopError(0, allowableError, 0);  
 		
 		/* set closed loop gains in slot0, typically kF stays zero. */
 		armRight.config_kF(0, kF, 0);
@@ -81,13 +81,13 @@ public class Arm extends Subsystem {
 		 * position, and intitally set the relative sensor to match. may need to make negative if sensors phase inverted
 		 * may also need to adjust to make it within the range we want to use.....//TODO
 		 */
-		absolutePosition = armRight.getSensorCollection().getPulseWidthPosition();
+		//absolutePosition = armRight.getSensorCollection().getPulseWidthPosition();
 		/* mask out overflows, keep bottom 12 bits */
-		absolutePosition &= 0xFFF;
+		//absolutePosition &= 0xFFF;
 		// if sensor out of phase:  			absolutePosition *= -1;  //TODO
 		// motor inverted:           			absolutePosition *= -1;  //TODO    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!           
 		/* set the quadrature (relative) sensor to match absolute */
-		armRight.setSelectedSensorPosition(absolutePosition, 0, 0);
+		//armRight.setSelectedSensorPosition(absolutePosition, 0, 0);
 	}
 
 	/**
@@ -111,13 +111,6 @@ public class Arm extends Subsystem {
 		return armRight.getClosedLoopError(0);
 	}
 	
-	/**
-	 * Attempts to determine if on target
-	 */
-	public boolean closeToTarget(){
-		return (armRight.getClosedLoopError(0) < allowableError);
-	}
-
 	/**
 	 * Returns the PID input/position of the Arm PID
 	 */
@@ -183,7 +176,11 @@ public class Arm extends Subsystem {
 	public void periodic() {
 		if(RobotMap.alt_ControlDebug) {
 			
-		SmartDashboard.putNumber("armEncoderPosition", RobotMap.arm_right.getSelectedSensorPosition(0));
+		SmartDashboard.putNumber("armGetSetpoint", getSetpoint());
+		SmartDashboard.putNumber("armEncoderPositionPWM", RobotMap.arm_right.getSensorCollection().getPulseWidthPosition());
+		SmartDashboard.putNumber("armGetSelectedSensorPos", RobotMap.arm_right.getSelectedSensorPosition(0));
+		SmartDashboard.putString("controlMode", RobotMap.arm_right.getControlMode().toString());
+		SmartDashboard.putNumber("armRight MotorOutput %", RobotMap.arm_right.getMotorOutputPercent());
 		
 		SmartDashboard.putNumber("trolleyStringPotValue(in arm)", RobotMap.trolley_right.getSelectedSensorPosition(0));
 		}
