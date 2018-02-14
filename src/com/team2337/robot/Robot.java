@@ -91,6 +91,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void disabledPeriodic() {
+		SmartDashboard.putNumber("trolleyJoystickValue", Robot.oi.operatorThrottleJoystick.getRawAxis(2));
 		Scheduler.getInstance().run();
 		String gameData;
 		gameData = DriverStation.getInstance().getGameSpecificMessage();

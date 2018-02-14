@@ -31,6 +31,7 @@ public class alt_Control_Import extends Command {
 	
 	double throttleToggle;
 	double trolleyStick; 
+	double throttleStick;
 	double throttleValue;
 	
 	/* 
@@ -80,8 +81,8 @@ public class alt_Control_Import extends Command {
 		
 		//Read Joystick and Throttle Input
 		trolleyStick = OI.operatorThrottleJoystick.getRawAxis(1);
-		throttleValue = -OI.operatorThrottleJoystick.getRawAxis(2);
-		throttleValue = (throttleValue*10)+10;
+		throttleStick = -OI.operatorThrottleJoystick.getRawAxis(2);
+		throttleValue = (throttleStick*10)+10;
 		
 		throttleToggle = OI.operatorThrottleJoystick.getRawAxis(4);
 			
@@ -151,12 +152,12 @@ public class alt_Control_Import extends Command {
 		//Set Set points, suspend PID if at pickup position
 		//TODO add check if endOfAuto??? to disable/skip sets????
 		
-		if ( (throttleToggle > 0.9) & (trolleyStick < -0.9) & (Robot.arm.armIsDown()) ) {
+		if ( (throttleToggle > 0.9) && (throttleStick > 0.9) && (Robot.arm.armIsLevel()) ) {
 			//TODO add .... if (lift is down) & (trolley is down)[i.e. pick up position]
 				Robot.arm.stop();
 				Robot.lift.stop();
 				Robot.trolley.stop();
-			}else {
+			} else {
 				Robot.trolley.setSetpoint(trolleySetPoint);
 				Robot.arm.setSetpoint(armSetPoint);
 				Robot.lift.setSetpoint((double) points[(int) throttleValue][Robot.lift.levelOfLift]); 

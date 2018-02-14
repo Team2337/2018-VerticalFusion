@@ -4,6 +4,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.team2337.robot.Robot;
 import com.team2337.robot.RobotMap;
+import com.team2337.robot.commands.trolley.TEST_ONLY_trolley_joystickControl;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -21,19 +22,19 @@ public class Trolley extends Subsystem {
 	//private final static TalonSRX leftFront = RobotMap.trolley_left;  //4
 
 	//private int absolutePosition;  //used to set relative position encoder
-	private double maxSpeed = 0.2;
+	private double maxSpeed = 1.0;
 	private double nominalSpeed = 0;
 	private double kF = 0;
-	private double kP = 0.1;
+	private double kP = 4;
 	private double kI = 0;
 	private double kD = 0;
-	private int allowableError = 50;
+	private int allowableError = 0;
 
-	public static int forwardTrolleySoftLimit = -60;
-	public static int reverseTrolleySoftLimit = -530;
+	public static int forwardTrolleySoftLimit = 530;
+	public static int reverseTrolleySoftLimit = 60;
 	
 	protected void initDefaultCommand() {
-		//setDefaultCommand(new trolley_startPID());
+		setDefaultCommand(new TEST_ONLY_trolley_joystickControl());
 	}
 
 	public Trolley() {
@@ -41,7 +42,7 @@ public class Trolley extends Subsystem {
 		
 		/* set the peak and nominal outputs, 12V? means full */
 		rightFront.configNominalOutputForward(nominalSpeed, 0);
-		rightFront.configNominalOutputReverse(nominalSpeed, 0);
+		rightFront.configNominalOutputReverse(-nominalSpeed, 0);
 		rightFront.configPeakOutputForward(maxSpeed, 0);
 		rightFront.configPeakOutputReverse(-maxSpeed, 0);
 		
@@ -54,7 +55,7 @@ public class Trolley extends Subsystem {
 		 * neutral within this range. See Table in Section 17.2.1 for native
 		 * units per rotation.
 		 */
-		rightFront.configAllowableClosedloopError(allowableError, 0, 0);  ///need to set *****************//TODO
+		rightFront.configAllowableClosedloopError(0, allowableError, 0);  ///need to set *****************//TODO
 		
 		/* set closed loop gains in slot0, typically kF stays zero. */
 		rightFront.config_kF(0, kF, 0);
@@ -83,6 +84,7 @@ public class Trolley extends Subsystem {
 	 * Sets the position of the trolley
 	 */
 	public void setSetpoint(double pos){
+		SmartDashboard.putNumber("trolleySetPointXXXXXXXX", pos);
 		rightFront.set(ControlMode.Position, pos);
 	}
 	

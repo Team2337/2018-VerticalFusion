@@ -34,7 +34,7 @@ public class Arm extends Subsystem {
 	public static final int forwardTopSL 		= 548;
 
 	public static final int reverseTopSL 		= 55;
-	public static final int reverseLevel 		= 550;		///??
+	public static final int reverseLevel 		= -550;		///??
 	public static final int reverseSoftLimit 	= -1100;
 	
 	//public static final double stringpotTopPos 		= 1.0;
@@ -138,8 +138,8 @@ public class Arm extends Subsystem {
 		armRight.set(ControlMode.PercentOutput, 0);
 	}
 	
-	public boolean armIsDown() {
-		return (getPosition() > 0.95 * forwardSoftLimit);
+	public boolean armIsLevel() {
+		return (getPosition() > 0.95 * forwardLevel);
 	}
 	public boolean armIsReverse() {
 		return (getPosition() < reverseSoftLimit);

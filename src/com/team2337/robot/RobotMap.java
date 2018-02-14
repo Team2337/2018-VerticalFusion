@@ -45,11 +45,11 @@ public class RobotMap {
 	public static NerdyDrive drive;
 	
 	// Lift
-	public static TalonSRX lift_left;
+	public static VictorSPX lift_left;
 	public static TalonSRX lift_right;
 	
 	//Trolley ******
-	public static TalonSRX trolley_left;
+	public static VictorSPX trolley_left;
 	public static TalonSRX trolley_right;
 	
 	//public static AnalogPotentiometer lift_potentiometer; // Use for string pot  ***** in talon *****
@@ -61,7 +61,7 @@ public class RobotMap {
 	//public static TalonSRX intake_right;
 
 	// Arm
-	public static TalonSRX arm_left;
+	public static VictorSPX arm_left;
 	public static TalonSRX arm_right;
 
 	public static Encoder enc;
@@ -102,16 +102,16 @@ public class RobotMap {
 	private final static int chassisRightFront  = 0;
 	private final static int chassisRightMid    = 1;
 	private final static int chassisRightRear   = 2;
-	private final static int trolleyLeft        = 3;
+	private final static int climberRight       = 3; //9??  PTO off of lift
 	private final static int trolleyRight       = 4;
 	private final static int intakeRight        = 5;
 	private final static int intakeLeft         = 6;
 	private final static int armRight           = 7;
-	private final static int armLeft            = 8;
-	private final static int climberRight       = 9;
-	private final static int climberLeft        = 10;
-	private final static int liftRight          = 11;
-	private final static int liftLeft           = 12;
+	private final static int liftRight          = 8; //11
+	private final static int liftLeft           = 9; //12
+	private final static int armLeft            = 10; //8
+	private final static int trolleyLeft        = 11; //3
+	private final static int climberLeft        = 12; //10;??  PTO off of lift
 	private final static int chassisLeftRear    = 13;
 	private final static int chassisLeftMid     = 14;
 	private final static int chassisLeftFront   = 15;
@@ -178,26 +178,32 @@ public class RobotMap {
 		lift_right.setSensorPhase(false);
 		lift_right.setInverted(true);
 		lift_right.setStatusFramePeriod(0, 0, 0);
+		lift_right.setNeutralMode(NeutralMode.Brake);
 		
-		lift_left = new TalonSRX(liftLeft); // 6
+		lift_left = new VictorSPX(liftLeft); // 6
 		lift_left.follow(lift_right);
-		lift_left.setInverted(true);
+		lift_left.setInverted(false);
 		
-		trolley_right = new TalonSRX(trolleyRight); // 3
-		trolley_right.configSelectedFeedbackSensor(FeedbackDevice.Analog, 0, 0);  //string pot
-		trolley_right.setSensorPhase(false);
-		trolley_right.setInverted(true);
-		trolley_right.setStatusFramePeriod(0, 0, 0);
-
-		trolley_left = new TalonSRX(trolleyLeft); // 4
-		trolley_left.follow(trolley_right);
-		trolley_left.setInverted(true);
-
 		lift_right.configForwardSoftLimitEnable(false, 0);
 		lift_left.configForwardSoftLimitEnable(false, 0);
 
 		lift_right.configReverseSoftLimitEnable(false, 0);
 		lift_left.configReverseSoftLimitEnable(false, 0);
+		
+		/*
+		 * Trolley
+		 */
+		
+		trolley_right = new TalonSRX(trolleyRight); // 4
+		trolley_right.configSelectedFeedbackSensor(FeedbackDevice.Analog, 0, 0);  //string pot
+		trolley_right.setSensorPhase(true);
+		trolley_right.setInverted(true);
+		trolley_right.setStatusFramePeriod(0, 0, 0);
+		trolley_right.setNeutralMode(NeutralMode.Brake);
+
+		trolley_left = new VictorSPX(trolleyLeft); // 11
+		trolley_left.follow(trolley_right);
+		trolley_left.setInverted(false);
 
 		trolley_right.configForwardSoftLimitEnable(false, 0);
 		trolley_left.configForwardSoftLimitEnable(false, 0);
@@ -224,7 +230,7 @@ public class RobotMap {
 		arm_right.setInverted(false);
 		arm_right.setNeutralMode(NeutralMode.Brake);
 		
-		arm_left = new TalonSRX(armLeft);
+		arm_left = new VictorSPX(armLeft);
 		arm_left.setInverted(true);
 		arm_left.follow(arm_right);
 		arm_left.setNeutralMode(NeutralMode.Brake);

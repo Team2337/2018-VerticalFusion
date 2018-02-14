@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.team2337.robot.Robot;
 import com.team2337.robot.RobotMap;
 
@@ -22,7 +23,7 @@ public class TEST_ONLY_Lift_ThrottleControl extends Command {
 	double stringPotValue;  
 	
 	static TalonSRX frontRight = RobotMap.lift_right;
-	static TalonSRX frontLeft = RobotMap.lift_left;
+	static VictorSPX frontLeft = RobotMap.lift_left;
 
 	public TEST_ONLY_Lift_ThrottleControl() {
 		requires(Robot.lift);

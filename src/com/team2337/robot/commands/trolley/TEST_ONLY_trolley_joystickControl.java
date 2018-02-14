@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.team2337.robot.Robot;
 import com.team2337.robot.RobotMap;
 
@@ -19,10 +20,11 @@ public class TEST_ONLY_trolley_joystickControl extends Command {
 	boolean setPointSet = false;
 	
 	double trolleyJoystickY;
+	double throttleJoyStick;
 	static int stringPotValue;  
 	
 	static TalonSRX frontRight = RobotMap.trolley_right;
-	static TalonSRX frontLeft = RobotMap.trolley_left;
+	static VictorSPX frontLeft = RobotMap.trolley_left;
 
 	public TEST_ONLY_trolley_joystickControl() {
 		requires(Robot.trolley);
@@ -37,8 +39,11 @@ public class TEST_ONLY_trolley_joystickControl extends Command {
 		stringPotValue = ((int) (RobotMap.trolley_right.getSelectedSensorPosition(0)));
 		
 		SmartDashboard.putNumber("TrolleyStringPotValue,selected sensor", RobotMap.trolley_right.getSelectedSensorPosition(0));
+		SmartDashboard.putNumber("trolleyOutputPercent", RobotMap.trolley_right.getMotorOutputPercent());
+		SmartDashboard.putNumber("trolleyJoystickValue", Robot.oi.operatorThrottleJoystick.getRawAxis(2));
+		SmartDashboard.putBoolean("troleySetPointSet", setPointSet);
 		
-    	trolleyJoystickY = Robot.oi.operatorJoystick.getRawAxis(1);  //uses flight joystick to test
+    	trolleyJoystickY = Robot.oi.operatorThrottleJoystick.getRawAxis(2);  //uses flight joystick to test
 
     	if ((trolleyJoystickY > -.2 ) && (trolleyJoystickY < .2)) { 	//Dead band
     		
