@@ -2,6 +2,7 @@ package com.team2337.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.team2337.robot.Robot;
 import com.team2337.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -33,6 +34,8 @@ public class Arm extends Subsystem {
 	public static final int forwardLevel 		= 900;    ///??
 	public static final int forwardTopSL 		= 548;
 
+	public static final int centerPosition 		= 333;
+	
 	public static final int reverseTopSL 		= 55;
 	public static final int reverseLevel 		= -550;		///??
 	public static final int reverseSoftLimit 	= -1100;
@@ -171,14 +174,29 @@ public class Arm extends Subsystem {
 		SmartDashboard.putNumber("currentArmPositionSS", currentPosition);
 		SmartDashboard.putNumber("desiredArmPositionSS", desiredPosition);
 		}
-		if (currentPosition <= reverseTopSL && desiredPosition <= reverseTopSL) {
+		if (desiredPosition >= Robot.bigBrother.points[10][4] && currentPosition >= Robot.bigBrother.points[10][4]) {
 			return true;
-		} else if (currentPosition >= forwardTopSL && desiredPosition >= forwardTopSL) {
+		} else if (currentPosition <= Robot.bigBrother.points[11][4] && desiredPosition <= Robot.bigBrother.points[11][4]) {
 			return true;
 		} else {
 			return false;
 		}
 	}
+	
+	public boolean isScore() {
+		if(getPosition() < centerPosition) {
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean isPickUp() {
+		if(getPosition() >= centerPosition) {
+			return true;
+		}
+		return false;
+	}
+	
 	/**
 	 * Debug, turn on/off in RobotMap
 	 */

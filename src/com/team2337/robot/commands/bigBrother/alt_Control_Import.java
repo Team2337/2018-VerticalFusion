@@ -13,40 +13,33 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class alt_Control_Import extends Command {
 
 	double points[][] = Robot.bigBrother.points;
-	
+
 	boolean setPointSet = false;
-	
+
 	double trolleySetPoint;
 	double armSetPoint;
-	//double fineArm;
+	// double fineArm;
 	double armAdjPos;
 	double armAdjNeg;
-	double trolleyAdj = 2;                                                   //TODO determne rightamount
+	double trolleyAdj = 2; // TODO determne rightamount
 	double armEncoder;
-	//double liftPot;
+	// double liftPot;
 	double trolleyPot;
 	int reverse, forward;
-	
-	//int liftSetPointColumn;
-	
+
+	// int liftSetPointColumn;
+
 	double throttleToggle;
-	double trolleyStick; 
+	double trolleyStick;
 	double throttleStick;
 	double throttleValue;
-	
-	/* 
-	 * Columns
-	 * 0: trolley set points
-	 * 1: lift set points A
-	 * 2: lift set points B
-	 * 3: lift set points C
-	 * 4: arm set points
-	 * 5: arm forward soft limits
-	 * 6: arm reverse soft limits
-	 * 7: arm positive adjustment 
-	 * 8: arm negative adjustment
+
+	/*
+	 * Columns 0: trolley set points 1: lift set points A 2: lift set points B 3:
+	 * lift set points C 4: arm set points 5: arm forward soft limits 6: arm reverse
+	 * soft limits 7: arm positive adjustment 8: arm negative adjustment
 	 */
-	
+
 	int trolleySetPoints = 0;
 	int liftSetPointsA = 1;
 	int liftSetPointsB = 2;
@@ -56,124 +49,137 @@ public class alt_Control_Import extends Command {
 	int armReverseSoftLimits = 6;
 	int armPositiveAdj = 7;
 	int armNegativeAdj = 8;
-	
+
+	boolean sameSide = true;
+
 	public alt_Control_Import() {
 		requires(Robot.bigBrother);
 	}
 
 	protected void initialize() {
-		
+
 	}
 
 	protected void execute() {
 		SmartDashboard.putBoolean("endOfAuto - before", RobotMap.endOfAuto);
-		//Disable after Autonomous util......//TODO
-		/*if(RobotMap.endOfAuto) {
-			Robot.bigBrother.stopAltControl();
-				SmartDashboard.putBoolean("endOfAuto - middle", RobotMap.endOfAuto);
-			if(OI.operatorThrottleJoystick.getRawButton(8)) {
-				RobotMap.endOfAuto = false;
-				SmartDashboard.putBoolean("endOfAuto - after", RobotMap.endOfAuto);
-			}
-		}*/
-		
-		//liftPot = RobotMap.lift_right.getSelectedSensorPosition(0);
-		
-		//Read Joystick and Throttle Input
+		// Disable after Autonomous util......//TODO
+		/*
+		 * if(RobotMap.endOfAuto) { Robot.bigBrother.stopAltControl();
+		 * SmartDashboard.putBoolean("endOfAuto - middle", RobotMap.endOfAuto);
+		 * if(OI.operatorThrottleJoystick.getRawButton(8)) { RobotMap.endOfAuto = false;
+		 * SmartDashboard.putBoolean("endOfAuto - after", RobotMap.endOfAuto); } }
+		 */
+
+		// liftPot = RobotMap.lift_right.getSelectedSensorPosition(0);
+
+		// Read Joystick and Throttle Input
 		trolleyStick = OI.operatorThrottleJoystick.getRawAxis(1);
 		throttleStick = -OI.operatorThrottleJoystick.getRawAxis(2);
-		throttleValue = (throttleStick*10)+10;
-		
+		throttleValue = (throttleStick * 10) + 10;
+
 		throttleToggle = OI.operatorThrottleJoystick.getRawAxis(4);
-			
-		//Read values from array based on Throttle input
-		trolleySetPoint = ( points[(int) throttleValue][trolleySetPoints]); 
+
+		// Read values from array based on Throttle input
+		trolleySetPoint = (points[(int) throttleValue][trolleySetPoints]);
 		armSetPoint = ((double) points[(int) throttleValue][armSetPoints]);
 		armAdjPos = (points[(int) throttleValue][armPositiveAdj]);
 		armAdjNeg = (points[(int) throttleValue][armNegativeAdj]);
-		
-		//Trolley set point logic
-				
-		//Adjust trolley setpoint based on joystick input
-		if(Math.abs(trolleyStick) > 0.1) {
-			trolleySetPoint = trolleySetPoint + (trolleyStick * trolleyAdj); 
+
+		// Trolley set point logic
+
+		// Adjust trolley setpoint based on joystick input
+		if (Math.abs(trolleyStick) > 0.1) {
+			trolleySetPoint = trolleySetPoint + (trolleyStick * trolleyAdj);
 		}
-		
-		//Override trolley setpoint to the top position if arm needs to change sides
-		armEncoder =  RobotMap.arm_right.getSelectedSensorPosition(0);
-		
-		if(!Robot.arm.sameSide(armEncoder, armSetPoint)) {							
-			trolleySetPoint = (double) points[10][trolleySetPoints];                      //Assuming position 10 is at the top
-			System.out.println("Not On The Same Side");
-		}
-		else {
-			System.out.println("On The Same Side");
-		}
-		
-		//Arm set point logic
-		
-		//Adjust arm set point based on throttle toggle input.  Different adjustments for positive and negative toggle positions.
-		if((throttleToggle) > 0.1) {
-			armSetPoint = armSetPoint + (throttleToggle * armAdjPos); 
-		}
-		else if(throttleToggle < -0.1) {
+
+		// Override trolley setpoint to the top position if arm needs to change sides
+		armEncoder = RobotMap.arm_right.getSelectedSensorPosition(0);
+
+		if ((!Robot.arm.sameSide(armEncoder, armSetPoint))) {
+			trolleySetPoint = points[10][trolleySetPoints];
+
+			if (Robot.trolley.getPosition() < Robot.trolley.trolleyPassover) {
+
+				if (armEncoder >= points[10][armSetPoints]) {// Assuming position 10 is at the top
+					armSetPoint = points[10][armSetPoints];
+				} // Setting arm set point to array 10 till trolley is at top
+				else if (armEncoder <= points[11][armSetPoints]) {
+					armSetPoint = points[11][armSetPoints];
+				}
+				sameSide = false;
+				System.out.println("**OVERRIDING ARM SET POINTS**");
+
+			}
+		} else
+			sameSide = true;
+
+		// Arm set point logic
+
+		// Adjust arm set point based on throttle toggle input. Different adjustments
+		// for positive and negative toggle positions.
+		if ((throttleToggle) > 0.1) {
+			armSetPoint = armSetPoint + (throttleToggle * armAdjPos);
+		} else if (throttleToggle < -0.1) {
 			armSetPoint = armSetPoint + (throttleToggle * armAdjNeg);
 		}
-		
-		
-		//Soft Limits for ARM ,  set py position, not array....???
-				
-		if (Robot.trolley.isAtTop()) {
-			forward = Robot.arm.forwardSoftLimit;
-			reverse = Robot.arm.reverseSoftLimit;
-			
-		} else if (Robot.trolley.isAboveMid()) {
-			if (Robot.arm.armIsReverse()) {
-				forward =  Robot.arm.reverseTopSL;
-				reverse = Robot.arm.reverseSoftLimit;
-			} else if (Robot.arm.armIsForward()) {
-				forward = Robot.arm.forwardSoftLimit;
-				reverse = Robot.arm.forwardTopSL;
-			}
-		}else {
-			if (Robot.arm.armIsReverse()) {
-				forward = Robot.arm.reverseTopSL;
-				reverse = Robot.arm.reverseLevel;
-			} else if (Robot.arm.armIsForward()) {
-				forward = Robot.arm.forwardLevel;
-				reverse = Robot.arm.forwardTopSL;
-			}
-		}
-		//Robot.arm.setSoftLimits((int)(points[(int) throttleValue][armForwardSoftLimits]), (int)(points[(int) throttleValue][armReverseSoftLimits]));
-		
-		Robot.arm.setSoftLimits(forward, reverse);
-	
-		
-		//Set Set points, suspend PID if at pickup position
-		//TODO add check if endOfAuto??? to disable/skip sets????
-		
-		if ( (throttleToggle > 0.9) && (throttleStick > 0.9) && (Robot.arm.armIsLevel()) ) {
-			//TODO add .... if (lift is down) & (trolley is down)[i.e. pick up position]
-				Robot.arm.stop();
-				Robot.lift.stop();
-				Robot.trolley.stop();
-			} else {
-				Robot.trolley.setSetpoint(trolleySetPoint);
-				Robot.arm.setSetpoint(armSetPoint);
-				Robot.lift.setSetpoint((double) points[(int) throttleValue][Robot.lift.levelOfLift]); 
-		}
-		
 
-		if(RobotMap.alt_ControlDebug) {
-		SmartDashboard.putBoolean("sameSide", Robot.arm.sameSide(armEncoder, armSetPoint));
-		SmartDashboard.putNumber("trolleyStick", trolleyStick);
-		SmartDashboard.putNumber("TrolleySetPoint", Robot.trolley.getSetpoint());
-		SmartDashboard.putNumber("TrolleyPosition", RobotMap.trolley_right.getSelectedSensorPosition(0));
-		SmartDashboard.putNumber("throttleValue", throttleValue);
-		SmartDashboard.putNumber("TrolleyArrayValue", points[(int) throttleValue][trolleySetPoints]);
-		SmartDashboard.putNumber("ArmSetPosition", armSetPoint);
+		// Soft Limits for ARM , set py position, not array....???
+		/*
+		 * if (Robot.trolley.isAtTop()) { forward = Robot.arm.forwardSoftLimit; reverse
+		 * = Robot.arm.reverseSoftLimit;
+		 * 
+		 * } else if (Robot.trolley.isAboveMid()) { if (Robot.arm.armIsReverse()) {
+		 * forward = Robot.arm.reverseTopSL; reverse = Robot.arm.reverseSoftLimit; }
+		 * else if (Robot.arm.armIsForward()) { forward = Robot.arm.forwardSoftLimit;
+		 * reverse = Robot.arm.forwardTopSL; } }else { if (Robot.arm.armIsReverse()) {
+		 * forward = Robot.arm.reverseTopSL; reverse = Robot.arm.reverseLevel; } else if
+		 * (Robot.arm.armIsForward()) { forward = Robot.arm.forwardLevel; reverse =
+		 * Robot.arm.forwardTopSL; } }
+		 * 
+		 * //Robot.arm.setSoftLimits((int)(points[(int)
+		 * throttleValue][armForwardSoftLimits]), (int)(points[(int)
+		 * throttleValue][armReverseSoftLimits]));
+		 * 
+		 * Robot.arm.setSoftLimits(forward, reverse);
+		 */
+
+		// Set Set points, suspend PID if at pickup position
+		// TODO add check if endOfAuto??? to disable/skip sets????
+
+		if ((throttleToggle > 0.9) && (throttleStick > 0.9) && (Robot.arm.armIsLevel())) {
+			// TODO add .... if (lift is down) & (trolley is down)[i.e. pick up position]
+			Robot.arm.stop();
+			Robot.lift.stop();
+			// Robot.trolley.stop();
+		} else {
+			// Robot.trolley.setSetpoint(trolleySetPoint);
+			Robot.arm.setSetpoint(armSetPoint);
+			Robot.lift.setSetpoint((double) points[(int) throttleValue][Robot.lift.levelOfLift]);
 		}
-			}
+		if (RobotMap.trolley_right.getSelectedSensorPosition(0) < 61 && trolleySetPoint < 61) {
+			Robot.trolley.stop();
+		} else {
+			Robot.trolley.setSetpoint(trolleySetPoint);
+		}
+
+		if (RobotMap.alt_ControlDebug) {
+			SmartDashboard.putBoolean("sameSide", Robot.arm.sameSide(armEncoder, armSetPoint));
+			SmartDashboard.putNumber("trolleyStick", trolleyStick);
+			SmartDashboard.putNumber("TrolleySetPoint", Robot.trolley.getSetpoint());
+			SmartDashboard.putNumber("TrolleyPosition", RobotMap.trolley_right.getSelectedSensorPosition(0));
+			SmartDashboard.putNumber("throttleValue", throttleValue);
+			SmartDashboard.putNumber("ArmSetPosition", armSetPoint);
+			// SmartDashboard.putNumber("trolleyOutputPercent",
+			// RobotMap.trolley_right.getMotorOutputPercent());
+			SmartDashboard.putNumber("trolleyOutputXXXXXXXX", RobotMap.trolley_right.getMotorOutputPercent());
+			SmartDashboard.putBoolean("XXXsameSideXXX", sameSide);
+
+			// SmartDashboard.putNumber("TrolleyArrayValue", points[(int)
+			// throttleValue][trolleySetPoints]);
+			// this may be setting the array to the throttle, then getting to the logic
+			// above
+		}
+	}
 
 	protected boolean isFinished() {
 		return false;
@@ -185,5 +191,5 @@ public class alt_Control_Import extends Command {
 	protected void interrupted() {
 		this.end();
 	}
-	
+
 }

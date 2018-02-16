@@ -22,19 +22,22 @@ public class Trolley extends Subsystem {
 	//private final static TalonSRX leftFront = RobotMap.trolley_left;  //4
 
 	//private int absolutePosition;  //used to set relative position encoder
-	private double maxSpeed = 1.0;
+	private double maxSpeedUp = 1.0;
+	private double maxSpeedDown = 0.5; //0.01
 	private double nominalSpeed = 0;
 	private double kF = 0;
-	private double kP = 4;
+	private double kP = 7;
 	private double kI = 0;
 	private double kD = 0;
 	private int allowableError = 0;
+	
+	public double trolleyPassover = 540;
 
-	public static int forwardTrolleySoftLimit = 530;
-	public static int reverseTrolleySoftLimit = 60;
+	public static int forwardTrolleySoftLimit = 585;
+	public static int reverseTrolleySoftLimit = 50;
 	
 	protected void initDefaultCommand() {
-		setDefaultCommand(new TEST_ONLY_trolley_joystickControl());
+		//setDefaultCommand(new TEST_ONLY_trolley_joystickControl());
 	}
 
 	public Trolley() {
@@ -43,8 +46,8 @@ public class Trolley extends Subsystem {
 		/* set the peak and nominal outputs, 12V? means full */
 		rightFront.configNominalOutputForward(nominalSpeed, 0);
 		rightFront.configNominalOutputReverse(-nominalSpeed, 0);
-		rightFront.configPeakOutputForward(maxSpeed, 0);
-		rightFront.configPeakOutputReverse(-maxSpeed, 0);
+		rightFront.configPeakOutputForward(maxSpeedUp, 0);
+		rightFront.configPeakOutputReverse(-maxSpeedDown, 0);
 		
 		//leftFront.configNominalOutputForward(nominalSpeed, 0);
 		//leftFront.configNominalOutputReverse(nominalSpeed, 0);
@@ -84,7 +87,6 @@ public class Trolley extends Subsystem {
 	 * Sets the position of the trolley
 	 */
 	public void setSetpoint(double pos){
-		SmartDashboard.putNumber("trolleySetPointXXXXXXXX", pos);
 		rightFront.set(ControlMode.Position, pos);
 	}
 	

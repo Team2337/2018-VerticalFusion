@@ -21,12 +21,12 @@ public class BigBrother extends Subsystem {
 	}
 
 	public void initDefaultCommand() {
-		//setDefaultCommand(new alt_Control_Import());
+		setDefaultCommand(new alt_Control_Import());
 	}
 
 	void startFilling() {
-		//points = setPointsTestPickUpOnly.points;
-		points = setPoints.points;
+		points = setPointsTestPickUpOnly.points;
+		//points = setPoints.points;
 		//points = setPointsPracticeBot.points;
 		//points = setPointsCompBot.points;
 	}
