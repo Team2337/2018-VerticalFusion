@@ -3,14 +3,14 @@ package com.team2337.robot;
 import com.team2337.robot.subsystems.Chassis;
 import com.team2337.robot.subsystems.Claw;
 import com.team2337.robot.subsystems.Climber;
-import com.team2337.robot.subsystems.Ejector;
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.team2337.robot.commands.DoNothing;
 import com.team2337.robot.commands.auto.*;
 import com.team2337.robot.subsystems.Arm;
+import com.team2337.robot.subsystems.BigBrother;
 import com.team2337.robot.subsystems.Intake;
 import com.team2337.robot.subsystems.LED;
-import com.team2337.robot.subsystems.Lifter;
+import com.team2337.robot.subsystems.Lift;
+import com.team2337.robot.subsystems.Trolley;
 import com.team2337.robot.subsystems.Shifter;
 
 import edu.wpi.first.wpilibj.DriverStation;
@@ -29,16 +29,17 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends TimedRobot {
 	public static Chassis chassis;
-	public static Ejector ejector;
 	public static Arm arm;
 	public static Intake intake;
 	public static LED led;
-	public static Lifter lifter;
+	public static Trolley trolley;
 	public static Shifter shifter;
 	public static Climber climber;
 	public static Claw claw;
+	public static BigBrother bigBrother;
+	public static Lift lift;
 	public static OI oi;
-	public static char ourswitch, scale, oppswitch;
+	//public static char ourswitch, scale, oppswitch;
 
 	Command m_autonomousCommand;
 	SendableChooser<Command> autonchooser = new SendableChooser<>();
@@ -59,16 +60,16 @@ public class Robot extends TimedRobot {
 		// Reference all of the subsystems
 		 
 		chassis = new Chassis();
-		lifter = new Lifter();
+		trolley = new Trolley();
 		intake = new Intake();
-		ejector = new Ejector();
 		arm = new Arm();
 		climber = new Climber();
 		shifter = new Shifter();
 		led = new LED();
 		claw = new Claw();
+		bigBrother = new BigBrother();
+		lift = new Lift();
 
-		// Include the Operator Interface
 		oi = new OI();
 
 		// Also include the Auton Chooser
@@ -97,15 +98,18 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void disabledPeriodic() {
+		SmartDashboard.putNumber("trolleyJoystickValue", Robot.oi.operatorThrottleJoystick.getRawAxis(2));
 		Scheduler.getInstance().run();
 		this.allPeriodic();
 		
 		String gameData;
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
-
-		ourswitch = gameData.charAt(0);
-		scale = gameData.charAt(1);
-		oppswitch = gameData.charAt(2);
+		
+		//TODO
+		//ourswitch = gameData.charAt(0);
+		//scale = gameData.charAt(1);
+		//oppswitch = gameData.charAt(2);
+		
 
 	}
 
@@ -151,6 +155,9 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopInit() {
 		this.allInit();
+		RobotMap.endOfAuto = true;
+		claw.close();
+		
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
@@ -183,7 +190,7 @@ public class Robot extends TimedRobot {
 
 		SmartDashboard.putNumber("centerX", RobotMap.vision.getRevAngle());
 		//
-		System.out.print(RobotMap.vision.getRevAngle());
+		//System.out.print(RobotMap.vision.getRevAngle());
 	}
 
 	/**

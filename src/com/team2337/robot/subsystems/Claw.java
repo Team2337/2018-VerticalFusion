@@ -43,7 +43,6 @@ public class Claw extends Subsystem {
 	}
 
 	public void close() {
-		claw.set(true
-				);
+		claw.set(true);
 	}
 }

@@ -11,10 +11,10 @@ public class auto_centerSwitch extends Command {
 	}
 	
 	protected void initialize() {
-		char switcho = Robot.ourswitch;
-		char scaleo = Robot.scale;
-		char switchopp = Robot.oppswitch;
-		stuff = "Our swtich: " + switcho + " Scale: " + scaleo + " Opp Switch: " + switchopp; 
+		//char switcho = Robot.ourswitch;
+		//char scaleo = Robot.scale;
+		//char switchopp = Robot.oppswitch;
+		//stuff = "Our swtich: " + switcho + " Scale: " + scaleo + " Opp Switch: " + switchopp; 
 		
 	}
 
