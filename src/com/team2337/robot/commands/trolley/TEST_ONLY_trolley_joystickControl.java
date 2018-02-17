@@ -40,10 +40,10 @@ public class TEST_ONLY_trolley_joystickControl extends Command {
 		
 		SmartDashboard.putNumber("TrolleyStringPotValue,selected sensor", RobotMap.trolley_right.getSelectedSensorPosition(0));
 		SmartDashboard.putNumber("trolleyOutputPercent", RobotMap.trolley_right.getMotorOutputPercent());
-		SmartDashboard.putNumber("trolleyJoystickValue", Robot.oi.operatorThrottleJoystick.getRawAxis(2));
+		SmartDashboard.putNumber("trolleyJoystickValue", Robot.oi.operatorJoystick.getRawAxis(2));
 		SmartDashboard.putBoolean("troleySetPointSet", setPointSet);
 		
-    	trolleyJoystickY = Robot.oi.operatorThrottleJoystick.getRawAxis(2);  //uses flight joystick to test
+    	trolleyJoystickY = Robot.oi.operatorJoystick.getRawAxis(2);  //uses flight joystick to test
 
     	if ((trolleyJoystickY > -.2 ) && (trolleyJoystickY < .2)) { 	//Dead band
     		

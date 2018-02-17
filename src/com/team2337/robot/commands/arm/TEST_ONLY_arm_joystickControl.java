@@ -50,7 +50,7 @@ public class TEST_ONLY_arm_joystickControl extends Command {
 		SmartDashboard.putNumber("selectedSensorPosition", armPositionEncoder);
 		SmartDashboard.putNumber("ArmJoystickValue", armJoystickX);
 
-		armJoystickX = -Robot.oi.operatorThrottleJoystick.getRawAxis(1);  //uses flightStick to Test
+		armJoystickX = -Robot.oi.operatorJoystick.getRawAxis(1);  //uses flightStick to Test
 
 		stringPot = (RobotMap.lift_right.getSelectedSensorPosition(0));  /// absolute???? removed
 

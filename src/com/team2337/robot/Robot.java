@@ -98,7 +98,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void disabledPeriodic() {
-		SmartDashboard.putNumber("trolleyJoystickValue", Robot.oi.operatorThrottleJoystick.getRawAxis(2));
+		SmartDashboard.putNumber("trolleyJoystickValue", Robot.oi.operatorJoystick.getRawAxis(2));
 		Scheduler.getInstance().run();
 		this.allPeriodic();
 		

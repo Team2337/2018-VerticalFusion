@@ -73,11 +73,11 @@ public class alt_Control_Import extends Command {
 		// liftPot = RobotMap.lift_right.getSelectedSensorPosition(0);
 
 		// Read Joystick and Throttle Input
-		trolleyStick = OI.operatorThrottleJoystick.getRawAxis(1);
-		throttleStick = -OI.operatorThrottleJoystick.getRawAxis(2);
+		trolleyStick = OI.operatorJoystick.getRawAxis(1);
+		throttleStick = -OI.operatorJoystick.getRawAxis(2);
 		throttleValue = (throttleStick * 10) + 10;
 
-		throttleToggle = OI.operatorThrottleJoystick.getRawAxis(4);
+		throttleToggle = OI.operatorJoystick.getRawAxis(4);
 
 		// Read values from array based on Throttle input
 		trolleySetPoint = (points[(int) throttleValue][trolleySetPoints]);
