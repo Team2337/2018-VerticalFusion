@@ -174,22 +174,10 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 		this.allPeriodic();
-		
-		
-		SmartDashboard.putNumber("pot", RobotMap.lift_potentiometer.get());
-		SmartDashboard.putNumber("SetPoint", Robot.lifter.getSetpoint());
-		SmartDashboard.putBoolean("atSetPoint?", com.team2337.robot.commands.lifter.lifter_joystickControl.isAtTop);
-		SmartDashboard.putNumber("potValue", com.team2337.robot.commands.lifter.lifter_joystickControl.potValue);
-		SmartDashboard.putNumber("armAnglePosition", Arm.armAngle);
-		SmartDashboard.putNumber("armEncoderPosition", RobotMap.arm_right.getSelectedSensorPosition(0));
-		SmartDashboard.putNumber("armValue", com.team2337.robot.commands.arm.arm_increaseAngle.armPosition);
-		SmartDashboard.putNumber("rightFront", RobotMap.lift_rightFront.getMotorOutputPercent());
-		SmartDashboard.putNumber("leftFront", RobotMap.lift_leftFront.getMotorOutputPercent());
-		// SmartDashboard.putNumber("armPositionValue",
-		// com.team2337.robot.commands.arm.arm_joystickControl.armPositionValue);
+
 
 		SmartDashboard.putNumber("centerX", RobotMap.vision.getRevAngle());
-		//
+
 		//System.out.print(RobotMap.vision.getRevAngle());
 	}
 

@@ -141,11 +141,11 @@ public class OI {
 		driver_BlueX			.whenPressed(new DoNothing()); //.whenPressed(new trolley_setPID(0.1)); 
 		driver_YellowY			.whenPressed(new DoNothing()); //.whenPressed(new trolley_stopPID());
 		
-		driver_BumperLeft		.whenPressed(new claw_close());
-		driver_BumperRight		.whenPressed(new claw_open());
+		driver_BumperLeft		.whenPressed(new DoNothing());
+		driver_BumperRight		.whenPressed(new DoNothing());
 		
-		driver_Back				.whileHeld(new claw_giveLessHugs()); 
-		driver_Start			.whileHeld(new claw_giveMoreHugs());
+		driver_Back				.whileHeld(new DoNothing()); 
+		driver_Start			.whileHeld(new DoNothing());
 		
 		driver_LeftStick		.whenPressed(new DoNothing()); 
 		driver_RightStick		.whenPressed(new DoNothing()); 
@@ -172,11 +172,11 @@ public class OI {
 		operator_BlueX			.whenPressed(new DoNothing()); //.whenPressed(new trolley_setPID(1.1));
 		operator_YellowY		.whenPressed(new DoNothing()); //.whenPressed(new trolley_stopPID());
 		
-		operator_BumperLeft		.whileHeld(new DoNothing());
-		operator_BumperRight	.whileHeld(new DoNothing());
+		operator_BumperLeft		.whenPressed(new claw_close());
+		operator_BumperRight	.whenPressed(new claw_open());
 		
-		operator_Back			.whenPressed(new DoNothing());
-		operator_Start			.whenPressed(new DoNothing());
+		operator_Back			.whileHeld(new claw_giveLessHugs()); 
+		operator_Start			.whileHeld(new claw_giveMoreHugs());
 		
 		operator_LeftStick		.whenPressed(new DoNothing());
 		operator_RightStick		.whenPressed(new DoNothing());
