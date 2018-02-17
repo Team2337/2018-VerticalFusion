@@ -18,7 +18,7 @@ public class chassis_moveForward extends AutoCommand {
     	this.time = time;
     }
     
-    protected void initialize() {
+    protected void init() {
     	setTimeout(this.time);
     	RobotMap.drive.arcadeDrive(1, 0, true);
     }
@@ -28,8 +28,7 @@ public class chassis_moveForward extends AutoCommand {
     protected boolean isFinished() { 
     	return isTimedOut();
     }
-    protected void end() {
+    protected void stop() {
     	RobotMap.drive.arcadeDrive(0, 0, true);
     }
-    protected void interrupted() {this.end();}
 }

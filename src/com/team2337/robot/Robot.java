@@ -55,7 +55,7 @@ public class Robot extends TimedRobot {
 		RobotMap.init();
 		// Also start the camera(s)
 		RobotMap.startCamera();
-
+		
 		
 		// Reference all of the subsystems
 		 
@@ -72,6 +72,7 @@ public class Robot extends TimedRobot {
 		// Include the Operator Interface
 		oi = new OI();
 
+		AutoCommandManager.getInstance().init();
 		// Also include the Auton Chooser
 		autonchooser.addDefault("Cross the Line", new DoNothing());
 		autonchooser.addObject("Center Switch", new auto_centerSwitch());
@@ -94,6 +95,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void disabledInit() {
 		this.allInit();
+		AutoCommandManager.getInstance().disable();
 	}
 
 	@Override
@@ -116,6 +118,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+		AutoCommandManager.getInstance().auton();
 		this.allInit();
 		m_autonomousCommand = autonchooser.getSelected();
 
@@ -143,6 +146,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
+		AutoCommandManager.getInstance().teleop();
 		this.allInit();
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to

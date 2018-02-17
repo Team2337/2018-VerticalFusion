@@ -8,20 +8,19 @@ import edu.wpi.first.wpilibj.command.Command;
 public class Wait extends AutoCommand {
 	private double time = 10;
     public Wait(double time) {
-    	requires(Robot.chassis);
+    	requires(Robot.climber);
     	this.time = time;
     }
-    protected void initialize() {
+    protected void init() {
     	setTimeout(this.time);
- 
     }
     protected void execute() {
-    
+    	
     }
     protected boolean isFinished() { 
     	return isTimedOut();
     }
-    protected void end() {
+    protected void stop() {
  
     }
     protected void interrupted() {this.end();}

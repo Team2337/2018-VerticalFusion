@@ -6,10 +6,22 @@ import com.team2337.robot.RobotMap;
 import edu.wpi.first.wpilibj.command.Command;
 
 public abstract class AutoCommand extends Command {
-    public AutoCommand() {}
-    void initilize() {
-    	System.out.println("ijhfuidslhvfdsyuijgdkh7ifydsvkfdsvhydfsyfdsghfds");
-    	AutoCommandManager.getInstance().toggle();
-    	this.initialize();
+    private int _id;
+	public AutoCommand() {}
+    @Override
+    protected void initialize() {
+    	this._id = AutoCommandManager.getInstance().init(this.getName());
+    	this.init();
     }
+    @Override
+    protected void end() {
+    	AutoCommandManager.getInstance().end(this.getName(), _id);
+    	this.stop();
+    }
+    @Override
+    protected void interrupted() {
+    	this.end();
+    }
+    protected void init() {}
+    protected void stop() {}
 }

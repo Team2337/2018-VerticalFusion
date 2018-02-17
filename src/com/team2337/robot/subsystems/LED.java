@@ -16,6 +16,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class LED extends Subsystem {
 	public void initDefaultCommand() {
-		setDefaultCommand(new led_runtime());
+		//setDefaultCommand(new led_runtime());
 	}
 }
