@@ -20,7 +20,7 @@ public class shifter_high extends Command {
 	}
 
 	protected void execute() {}
-	protected boolean isFinished() {return false;}
+	protected boolean isFinished() {return true;}
 	protected void end() {}
 	protected void interrupted() {
 		this.end();

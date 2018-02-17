@@ -9,20 +9,29 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class auto_driveToAngleWithTime extends Command {
 
-	double speed, turn, Pgain, Dgain, MaxCorrectionRatio, targetAngle;
+	double speed, turn, Pgain, Dgain, MaxCorrectionRatio, targetAngle, timeout;
 	
-	public auto_driveToAngleWithTime() {
+	public auto_driveToAngleWithTime(double speed, double timeout, double angle) {
+		requires(Robot.chassis);
 		Pgain = 0.04; /* percent throttle per degree of error */
 		Dgain = 0.0004; /* percent throttle per angular velocity dps */
-		MaxCorrectionRatio = 0.30; /* cap corrective turning throttle to 30 percent of forward throttle */
-		targetAngle = 0;
-	    speed = 0.5;
-
+		MaxCorrectionRatio = 0.20; /* cap corrective turning throttle to 30 percent of forward throttle */
+		this.speed = speed;
+	    this.timeout = timeout;
+	    this.targetAngle = angle;
 		
+	}
+	public auto_driveToAngleWithTime(double timeout) {
+		this.timeout = timeout;
+		speed = .7;
+		turn  = .7;
 	}
 	
     protected void initialize() {
-    	setTimeout(2);
+    	setTimeout(timeout);
+    	//Robot.gyro.resetPidgey();
+    	RobotMap.chassis_leftFront.setSelectedSensorPosition(0, 0, 0);
+    	RobotMap.chassis_rightFront.setSelectedSensorPosition(0, 0, 0);
     }
     
     protected void execute() {
@@ -31,9 +40,9 @@ public class auto_driveToAngleWithTime extends Command {
     	double currentAngularRate = Robot.gyro.getAngularRate();
     	double forward = speed; 	
     	
-    	turn = (targetAngle - currentAngle) * Pgain - (currentAngularRate) * Dgain;
+    	//turn = (targetAngle - currentAngle) * Pgain - (currentAngularRate) * Dgain;
     	
-    	RobotMap.drive.arcadeDrive(forward, turn, false);
+    	RobotMap.drive.arcadeDrive(forward, -turn, false);
     	
     }
 	
@@ -43,49 +52,12 @@ public class auto_driveToAngleWithTime extends Command {
 	}
 	
     protected void end() {
-    	
+    	RobotMap.drive.arcadeDrive(0,0,true);
     }
     
     protected void interrupted() {
-    	
+    	this.end();
     }
     
-    /** @return 10% deadband */
-	double Db(double axisVal) {
-		if (axisVal < -0.10)
-			return axisVal;
-		if (axisVal > +0.10)
-			return axisVal;
-		return 0;
-	}
-    
-	/** @param value to cap.
-	 * @param peak positive double representing the maximum (peak) value.
-	 * @return a capped value.
-	 */
-	double Cap(double value, double peak) {
-		if (value < -peak)
-			return -peak;
-		if (value > +peak)
-			return +peak;
-		return value;
-	}
-	/**
-	 * Given the robot forward throttle and ratio, return the max
-	 * corrective turning throttle to adjust for heading.  This is
-	 * a simple method of avoiding using different gains for
-	 * low speed, high speed, and no-speed (zero turns).
-	 */
-	double MaxCorrection(double forwardThrot, double scalor) {
-		/* make it positive */
-		if(forwardThrot < 0) {forwardThrot = -forwardThrot;}
-		/* max correction is the current forward throttle scaled down */
-		forwardThrot *= scalor;
-		/* ensure caller is allowed at least 10% throttle,
-		 * regardless of forward throttle */
-		if(forwardThrot < 0.10)
-			return 0.10;
-		return forwardThrot;
-	}
 
 }

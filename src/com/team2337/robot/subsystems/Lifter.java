@@ -2,6 +2,7 @@ package com.team2337.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.team2337.robot.RobotMap;
 import com.team2337.robot.commands.lifter.lifter_joystickControl;
 import com.team2337.robot.commands.lifter.lifter_joystickControl2;
@@ -23,8 +24,8 @@ public class Lifter extends PIDSubsystem {
 	public final static AnalogPotentiometer potentiometer = RobotMap.lift_potentiometer;
 	//private final TalonSRX leftBack = RobotMap.lift_leftBack;
 	//private final TalonSRX rightBack = RobotMap.lift_rightBack;
-	private final static TalonSRX leftFront = RobotMap.lift_leftFront;
-	private final static TalonSRX rightFront = RobotMap.lift_rightFront;
+	private final static VictorSPX leftFront = RobotMap.lift_leftFront;
+	private final static VictorSPX rightFront = RobotMap.lift_rightFront;
 
 	private boolean PIDStatus = false;
 
@@ -137,13 +138,13 @@ public class Lifter extends PIDSubsystem {
 		RobotMap.lift_leftFront.configForwardSoftLimitThreshold(forward, 0);
 		RobotMap.lift_rightFront.configForwardSoftLimitThreshold(forward, 0);
 		
-		RobotMap.lift_leftBack.configForwardSoftLimitThreshold(forward, 0);
+
 		RobotMap.lift_rightBack.configForwardSoftLimitThreshold(forward, 0);
 		
 		RobotMap.lift_leftFront.configReverseSoftLimitThreshold(reverse, 0);
 		RobotMap.lift_rightFront.configReverseSoftLimitThreshold(reverse, 0);
 	
-		RobotMap.lift_leftBack.configReverseSoftLimitThreshold(reverse, 0);
+
 		RobotMap.lift_rightBack.configReverseSoftLimitThreshold(reverse, 0);	
 		
 		SmartDashboard.putNumber("forwardLIFTSoftLimit", forward);

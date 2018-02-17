@@ -46,7 +46,8 @@ public class Robot extends TimedRobot {
 	public static Claw claw;
 	public static OI oi;
 	public static Pigeon gyro;
-	public static char ourswitch, scale, oppswitch;
+	public static String ourswitch = "q";
+	public static char scale, oppswitch;
 
 	Command m_autonomousCommand;
 	SendableChooser<Command> autonchooser = new SendableChooser<>();
@@ -75,8 +76,11 @@ public class Robot extends TimedRobot {
 		
 		oi = new OI();
 	
-		
-		 autonchooser.addDefault("Cross the Line", new DoNothing());
+		Robot.gyro.resetPidgey();
+		RobotMap.chassis_leftFront.setSelectedSensorPosition(0, 0, 0);
+    	RobotMap.chassis_rightFront.setSelectedSensorPosition(0, 0, 0);
+    	
+		 autonchooser.addDefault("Cross the Line", new auto_brakeModeOn());
 		 autonchooser.addObject("Center Switch", new auto_centerSwitch());
 		 autonchooser.addObject("Do Nothing", new DoNothing());
 		 autonchooser.addObject("Right Switch", new DoNothing());
@@ -103,13 +107,15 @@ public class Robot extends TimedRobot {
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
-		String gameData;
+		/*String gameData;
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
 		
-		ourswitch = gameData.charAt(0);
+		ourswitch = gameData.substring(0,1);
 		scale = gameData.charAt(1);
 		oppswitch = gameData.charAt(2);
-
+		*/
+		
+		
 		allPeriodic();
 
 
@@ -129,9 +135,18 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-
+		Robot.gyro.resetPidgey();
+		
+		String gameData;
+		gameData = DriverStation.getInstance().getGameSpecificMessage();
+		
+		ourswitch = gameData.substring(0,1);
+		scale = gameData.charAt(1);
+		oppswitch = gameData.charAt(2);
+		
 		m_autonomousCommand = autonchooser.getSelected();
-
+		
+	
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
 		 * switch(autoSelected) { case "My Auto": autonomousCommand = new
@@ -155,7 +170,8 @@ public class Robot extends TimedRobot {
 	}
 	@Override
 	public void teleopInit() {
-
+		Robot.gyro.resetPidgey();
+		
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
@@ -165,7 +181,6 @@ public class Robot extends TimedRobot {
 		}
 		RobotMap.chassis_leftFront.setSelectedSensorPosition(0, 0, 0);
 		RobotMap.chassis_rightFront.setSelectedSensorPosition(0, 0, 0);
-		Pigeon.pidgey.setFusedHeading(0.0, 10);
 	}
 
 	/**

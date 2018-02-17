@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.team2337.robot.Robot;
 import com.team2337.robot.RobotMap;
 import com.team2337.robot.subsystems.Arm;
@@ -33,8 +34,8 @@ public class lifter_joystickControl2 extends Command {
 	double liftJoystickY;
 	public static int stringPotValue;  
 	
-	public static TalonSRX frontRight = RobotMap.lift_rightFront;
-	public static TalonSRX frontLeft = RobotMap.lift_leftFront;
+	public static VictorSPX frontRight = RobotMap.lift_rightFront;
+	public static VictorSPX frontLeft = RobotMap.lift_leftFront;
 	public static TalonSRX backRight = RobotMap.lift_leftBack;
 	
 	

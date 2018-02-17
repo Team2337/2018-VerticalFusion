@@ -48,8 +48,8 @@ public class RobotMap {
 
 	//public static PigeonIMU pidgey;
 	// Lift
-	public static TalonSRX lift_leftFront;
-	public static TalonSRX lift_rightFront;
+	public static VictorSPX lift_leftFront;
+	public static VictorSPX lift_rightFront;
 	public static TalonSRX lift_leftBack;
 	public static TalonSRX lift_rightBack;
 	public static AnalogPotentiometer lift_potentiometer; // Use for string pot
@@ -140,20 +140,17 @@ public class RobotMap {
 		 * Lift
 		 */
 
-		lift_rightFront = new TalonSRX(5); // 5
-		lift_rightFront.configSelectedFeedbackSensor(FeedbackDevice.Analog, 0, 0);
-		lift_rightFront.setSensorPhase(true);
+		lift_rightFront = new VictorSPX(5); // 5
+
 		
 		lift_rightBack = new TalonSRX(6); // 6
 		lift_rightBack.follow(lift_rightFront);
 		
 		
-		lift_leftFront = new TalonSRX(3); // 3
+		lift_leftFront = new VictorSPX(9); // 3
 //		lift_leftFront.setInverted(true);
 
-		lift_leftBack = new TalonSRX(4); // 4
-		lift_leftBack.follow(lift_leftFront);
-//		lift_leftBack.setInverted(true);
+
 
 		
 		lift_potentiometer = new AnalogPotentiometer(2, 10.0, 0.068);
@@ -165,10 +162,10 @@ public class RobotMap {
 		lift_leftFront.configReverseSoftLimitEnable(false, 0);
 
 		lift_rightBack.configForwardSoftLimitEnable(false, 0);
-		lift_leftBack.configForwardSoftLimitEnable(false, 0);
+
 
 		lift_rightBack.configReverseSoftLimitEnable(false, 0);
-		lift_leftBack.configReverseSoftLimitEnable(false, 0);
+
 
 		lift_stringPot = new AnalogInput(0);
 
@@ -211,11 +208,7 @@ public class RobotMap {
 		claw_left = new Solenoid(0, 2);
 		claw_right = new Solenoid(0, 3);
 
-		/*
-		 * Climber
-		 */
-		climber_left = new TalonSRX(9); // 9
-		climber_right = new TalonSRX(10); //
+
 
 		/*
 		 * Shifter

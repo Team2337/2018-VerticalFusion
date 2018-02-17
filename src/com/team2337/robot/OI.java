@@ -143,8 +143,8 @@ public class OI {
 		driver_BumperLeft		.whenPressed(new auto_gyroMMTurn());
 		driver_BumperRight		.whenPressed(new DoNothing());
 		
-		driver_Back				.whileHeld(new DoNothing()); 
-		driver_Start			.whileHeld(new DoNothing());
+		//driver_Back				.whenPressed(new CG_centerSwitch()); //speed, timeout, angle
+		driver_Start			.whenPressed(new auto_UTurnLeft(0.6, 1.5, 16));//speed, timeout, angle,enc left, enc right
 		
 		driver_LeftStick		.whenPressed(new DoNothing()); 
 		driver_RightStick		.whenPressed(new DoNothing()); 

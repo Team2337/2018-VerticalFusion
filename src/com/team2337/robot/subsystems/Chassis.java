@@ -50,6 +50,7 @@ public class Chassis extends Subsystem {
 	}
 	
 	public void periodic() {
-
+		SmartDashboard.putNumber("chassis RightFront encoder value", RobotMap.chassis_rightFront.getSelectedSensorPosition(0));
+		SmartDashboard.putNumber("chassis LeftFront encoder value", RobotMap.chassis_leftFront.getSelectedSensorPosition(0));
 	}
 }
