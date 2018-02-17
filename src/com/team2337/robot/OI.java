@@ -194,10 +194,10 @@ public class OI {
 		//operator_POVUpLeft	.whenPressed(new _DoNothing());
 		
 	    
-	    ////////////////////////////////////
-	    operator_RightTrigger			       .whenPressed(new DoNothing());
+	    //Operator 
+	    operator_RightTrigger			       .whenPressed(new intake_in(1));
 	    operator_StripedButton			       .whenPressed(new DoNothing());
-	    operator_RightKnucleButton		       .whenPressed(new DoNothing());
+	    operator_RightKnucleButton		       .whenPressed(new intake_out(1));
 	    operator_L3						       .whenPressed(new DoNothing());
 	                                           
 	    operator_ThrottleTopThumbButton		   .whenPressed(new liftLevelAdjuster(1));
@@ -211,14 +211,16 @@ public class OI {
 	    //operator_SE						   .whenPressed(new DoNothing());
 	    //operator_ST						   .whenPressed(new DoNothing());
 	                                          
-	    operator_JoystickPOVUp			       .whenPressed(new DoNothing());
-	    operator_JoystickPOVUpRight		       .whenPressed(new DoNothing());
+	    operator_JoystickPOVUp			       .whenPressed(new claw_open());
+	    operator_JoystickPOVUpRight		       .whenPressed(new claw_open());
+	    operator_JoystickPOVUpLeft		       .whenPressed(new claw_open());
+	    
+	    operator_JoystickPOVDownRight	       .whenPressed(new claw_close());
+	    operator_JoystickPOVDown		       .whenPressed(new claw_close());
+	    operator_JoystickPOVDownLeft	       .whenPressed(new claw_close());
+	    
 	    operator_JoystickPOVRight		       .whenPressed(new DoNothing());
-	    operator_JoystickPOVDownRight	       .whenPressed(new DoNothing());
-	    operator_JoystickPOVDown		       .whenPressed(new DoNothing());
-	    operator_JoystickPOVDownLeft	       .whenPressed(new DoNothing());
 	    operator_JoystickPOVLeft		       .whenPressed(new DoNothing());
-	    operator_JoystickPOVUpLeft		       .whenPressed(new DoNothing());
 	    
 	    ////////////////////////////////////
 		
