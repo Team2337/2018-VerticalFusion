@@ -27,6 +27,9 @@ public class auto_driveToAngleWithEncoder extends Command {
 	}
 	
     protected void initialize() {
+    	if (Robot.ourswitch.equals("L") || Robot.ourswitch.equals("l")) {
+    		
+    	}
     	setTimeout(timeout);
     	//Robot.gyro.resetPidgey();
 //    	RobotMap.chassis_leftFront.setSelectedSensorPosition(0, 0, 0);

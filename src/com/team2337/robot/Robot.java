@@ -80,7 +80,7 @@ public class Robot extends TimedRobot {
 		RobotMap.chassis_leftFront.setSelectedSensorPosition(0, 0, 0);
     	RobotMap.chassis_rightFront.setSelectedSensorPosition(0, 0, 0);
     	
-		 autonchooser.addDefault("Cross the Line", new auto_brakeModeOn());
+    	 autonchooser.addDefault("Cross the Line", new CG_centerSwitch(ourswitch));
 		 autonchooser.addObject("Center Switch", new auto_centerSwitch());
 		 autonchooser.addObject("Do Nothing", new DoNothing());
 		 autonchooser.addObject("Right Switch", new DoNothing());
@@ -90,7 +90,8 @@ public class Robot extends TimedRobot {
 		 autonchooser.addObject("Right Switch No cross", new DoNothing());
 		 autonchooser.addObject("Right Scale No cross", new DoNothing());
 		 autonchooser.addObject("Make them cry", new DoNothing());
-		 SmartDashboard.putData("Auto mode", autonchooser);
+
+
 		
 	}
 
@@ -144,6 +145,17 @@ public class Robot extends TimedRobot {
 		scale = gameData.charAt(1);
 		oppswitch = gameData.charAt(2);
 		
+		 autonchooser.addDefault("Cross the Line", new CG_centerSwitch(ourswitch));
+		 autonchooser.addObject("Center Switch", new auto_centerSwitch());
+		 autonchooser.addObject("Do Nothing", new DoNothing());
+		 autonchooser.addObject("Right Switch", new DoNothing());
+		 autonchooser.addObject("Right Scale", new DoNothing());
+		 autonchooser.addObject("Right Switch Scale", new DoNothing());
+		 autonchooser.addObject("Right Scale Switch", new DoNothing());
+		 autonchooser.addObject("Right Switch No cross", new DoNothing());
+		 autonchooser.addObject("Right Scale No cross", new DoNothing());
+		 autonchooser.addObject("Make them cry", new DoNothing());
+
 		m_autonomousCommand = autonchooser.getSelected();
 		
 	
@@ -227,7 +239,7 @@ public class Robot extends TimedRobot {
 	}
 	
 	public void allPeriodic() {
-
+		 SmartDashboard.putData("Auto mode", autonchooser);
 	}
 	
 }

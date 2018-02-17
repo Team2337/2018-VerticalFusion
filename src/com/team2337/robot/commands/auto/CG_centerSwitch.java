@@ -7,7 +7,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class CG_centerSwitch extends CommandGroup {
 
-	public CG_centerSwitch() {
+	String ourSwitch;
+	public CG_centerSwitch(String ourSwitch) {
+		this.ourSwitch = ourSwitch;
 		//addSequential(new auto_driveToAngleWithTime(.5, 1.5, 28));
 		
 		//addSequential(new auto_driveToAngleWithTime(.5, 0.6, 0));
@@ -15,14 +17,15 @@ public class CG_centerSwitch extends CommandGroup {
 		
 		//System.out.println(Robot.ourswitch);
 		
-		if (Robot.ourswitch.equals("L") || Robot.ourswitch.equals("l")) {
-			
+		if (ourSwitch.equals("L") ||ourSwitch.equals("l")) {
+			System.out.println(ourSwitch);
 			/*addSequential(new auto_brakeModeOn());
 			addSequential(new auto_driveToAngleWithEncoder(.5, 3, 35, 40000, 50708, 0.04));
 			addSequential(new shifter_high());
 			addSequential(new auto_driveToAngleWithEncoder(.5, 3, 0, 40000, 80000, 0.02));
 			*/
 		} else {
+			System.out.println("not our switch");
 			addSequential(new shifter_low());
 			addSequential(new shifter_high());
 			addSequential(new shifter_low());

@@ -7,13 +7,15 @@ import com.team2337.robot.RobotMap;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class auto_brakeModeOn extends Command {
-	public auto_brakeModeOn() {
+	String ourSwitch;
+	public auto_brakeModeOn(String ourSwitch) {
+		this.ourSwitch = ourSwitch;
 		requires(Robot.chassis);
 	}
 
 	@Override
 	protected void initialize() {
-		System.out.println(Robot.ourswitch);
+		System.out.println(ourSwitch);
 		RobotMap.chassis_rightFront.setNeutralMode(NeutralMode.Brake);
 		RobotMap.chassis_leftFront.setNeutralMode(NeutralMode.Brake);
 	}
