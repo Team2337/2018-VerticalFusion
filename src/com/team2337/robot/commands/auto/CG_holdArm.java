@@ -14,16 +14,19 @@ public class CG_holdArm extends CommandGroup {
 		//addSequential(new auto_moveUpperPosition(-600,386));
 		//addSequential(new auto_wait(0.25));
  
-		addSequential(new auto_driveToAngleWithEncoder(.5, 5, 35, 40000, 55708, 0.04));
+		addSequential(new auto_driveToAngleWithEncoder(.9, 5, 40, 40000, 44000, 0.04));
 		
 		addSequential(new shifter_high());
-		addSequential(new auto_driveToAngleWithEncoder(.5, 3, 0, 40000, 80000, 0.02));
+		addSequential(new auto_driveToAngleWithEncoder(.9, 3, 0, 40000, 69000, 0.02));
 		
 		
-		addSequential(new auto_moveUpperPosition(-100,60));
-		addSequential(new auto_intakeOut(1,1));
+		addSequential(new auto_moveUpperPosition(-250,60));
+		addParallel(new auto_driveForwardWithTime(.3, 1));
+		addSequential(new claw_open());
+		addParallel(new auto_intakeOut(0.5,1));
 		
-		//addSequential(new claw_open());
+		
+
 		addSequential(new auto_wait(1.5));
 		addSequential(new auto_moveUpperPosition(50,386));
 		

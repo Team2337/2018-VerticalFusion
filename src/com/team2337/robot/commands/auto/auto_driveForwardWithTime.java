@@ -7,11 +7,11 @@ import com.team2337.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class auto_driveForwardWithTimeTEST extends Command {
+public class auto_driveForwardWithTime extends Command {
 
 	double speed, turn, Pgain, Dgain, MaxCorrectionRatio, targetAngle, timeout;
 	
-	public auto_driveForwardWithTimeTEST(double speed, double timeout) {
+	public auto_driveForwardWithTime(double speed, double timeout) {
 		requires(Robot.chassis);
 
 		this.speed = speed;

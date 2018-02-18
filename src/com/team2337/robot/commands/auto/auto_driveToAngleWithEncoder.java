@@ -27,13 +27,10 @@ public class auto_driveToAngleWithEncoder extends Command {
 	}
 	
     protected void initialize() {
-    	if (Robot.ourswitch.equals("L") || Robot.ourswitch.equals("l")) {
-    		
+    	if (Robot.ourswitch.equals("R") || Robot.ourswitch.equals("r")) {
+    		encoderRight = Math.abs(encoderLeft);
     	}
     	setTimeout(timeout);
-    	//Robot.gyro.resetPidgey();
-//    	RobotMap.chassis_leftFront.setSelectedSensorPosition(0, 0, 0);
-//    	RobotMap.chassis_rightFront.setSelectedSensorPosition(0, 0, 0);
     }
     
     protected void execute() {
@@ -43,11 +40,8 @@ public class auto_driveToAngleWithEncoder extends Command {
     	double forward = speed; 	
     	
     	turn = (targetAngle - currentAngle) * Pgain ;//- (currentAngularRate) * Dgain;
-    	//if(turn > .3) turn  = 0.3;
-    	//if(turn < -.3) turn = -0.3;
+
     	RobotMap.drive.arcadeDrive(forward, turn, false);
-    	//SmartDashboard.putNumber("right Chassis Output Percent", RobotMap.chassis_rightFront.getMotorOutputPercent());
-    	//SmartDashboard.putNumber("left Chassis Output Percent", RobotMap.chassis_leftFront.getMotorOutputPercent());
     }
 	
 	@Override
@@ -56,8 +50,6 @@ public class auto_driveToAngleWithEncoder extends Command {
 		}
 	
     protected void end() {
-//    	RobotMap.chassis_leftFront.setSelectedSensorPosition(0, 0, 0);
-//    	RobotMap.chassis_rightFront.setSelectedSensorPosition(0, 0, 0);
     	RobotMap.drive.arcadeDrive(0,0,true);
     }
     

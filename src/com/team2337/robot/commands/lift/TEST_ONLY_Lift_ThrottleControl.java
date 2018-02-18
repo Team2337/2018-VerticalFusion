@@ -39,21 +39,23 @@ public class TEST_ONLY_Lift_ThrottleControl extends Command {
 		
 		SmartDashboard.putNumber("LiftStringPotValue,selected sensor", RobotMap.lift_right.getSelectedSensorPosition(0));
 		
-		liftThrottle = Robot.oi.operatorJoystick.getRawAxis(2);  //uses flight throttle to test
-
+		liftThrottle = Robot.oi.operatorJoystick.getRawAxis(1);  //uses flight throttle to test
+/*
     	if ((liftThrottle > -.2 ) && (liftThrottle < .2)) { 	//Dead band
     		
     		liftThrottle = 0;  
     		
     		if (!setPointSet) {
-    			Robot.trolley.setSetpoint(RobotMap.lift_right.getSelectedSensorPosition(0));
+    			//Robot.trolley.setSetpoint(RobotMap.lift_right.getSelectedSensorPosition(0));
     			setPointSet = true; 
     		}
     		
     	} else {
+    	*/
     		setPointSet = false;
      		Robot.lift.move(liftThrottle);  //run lift by %Vbus
-    		}
+     		SmartDashboard.putNumber("liftThrottle", RobotMap.lift_right.getMotorOutputPercent());
+    		//}
 	}
 
 	protected boolean isFinished() {

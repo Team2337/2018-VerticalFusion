@@ -180,7 +180,7 @@ public class RobotMap {
 		lift_right = new TalonSRX(liftRight); // 5
 		lift_right.configSelectedFeedbackSensor(FeedbackDevice.Analog, 0, 0); //string pot
 		lift_right.setSensorPhase(false);
-		lift_right.setInverted(true);
+		lift_right.setInverted(false);
 		lift_right.setStatusFramePeriod(0, 0, 0);
 		lift_right.setNeutralMode(NeutralMode.Brake);
 		

@@ -43,11 +43,14 @@ public class Robot extends TimedRobot {
 	public static OI oi;
 	public static Pigeon gyro;
 	public static String ourswitch = "q";
-	public static char scale, oppswitch;
+	public static String scale = "q";
+	public static String oppswitch = "q";
+	
 	//public static char ourswitch, scale, oppswitch;
 
 	Command m_autonomousCommand;
-	SendableChooser<Command> autonchooser = new SendableChooser<>();
+	SendableChooser<String> autonchooser = new SendableChooser<>();
+	
 
 	/**
 	 * This function is run when the robot is first started up and should be used
@@ -82,6 +85,7 @@ public class Robot extends TimedRobot {
 		RobotMap.chassis_leftFront.setSelectedSensorPosition(0, 0, 0);
     	RobotMap.chassis_rightFront.setSelectedSensorPosition(0, 0, 0);
     	
+    	/*
     	 autonchooser.addDefault("Cross the Line", new CG_holdArm());
 		 autonchooser.addObject("Center Switch", new auto_centerSwitch());
 		 autonchooser.addObject("Do Nothing", new DoNothing());
@@ -92,6 +96,9 @@ public class Robot extends TimedRobot {
 		 autonchooser.addObject("Right Switch No cross", new DoNothing());
 		 autonchooser.addObject("Right Scale No cross", new DoNothing());
 		 autonchooser.addObject("Make them cry", new DoNothing());
+		 */
+    	autonchooser.addObject("Cross the Line", "CrossLine");
+    	autonchooser.addDefault("Center Switch", "CenterSwitch");
 	}
 
 	/**
@@ -111,13 +118,7 @@ public class Robot extends TimedRobot {
 		Scheduler.getInstance().run();
 		this.allPeriodic();
 		
-		String gameData;
-		gameData = DriverStation.getInstance().getGameSpecificMessage();
-		
-		//TODO
-		//ourswitch = gameData.charAt(0);
-		//scale = gameData.charAt(1);
-		//oppswitch = gameData.charAt(2);
+
 		
 
 	}
@@ -144,21 +145,27 @@ public class Robot extends TimedRobot {
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
 		
 		ourswitch = gameData.substring(0,1);
-		scale = gameData.charAt(1);
-		oppswitch = gameData.charAt(2);
-		
-		 autonchooser.addDefault("Cross the Line", new CG_holdArm());
-		 autonchooser.addObject("Center Switch", new auto_centerSwitch());
-		 autonchooser.addObject("Do Nothing", new DoNothing());
-		 autonchooser.addObject("Right Switch", new DoNothing());
-		 autonchooser.addObject("Right Scale", new DoNothing());
-		 autonchooser.addObject("Right Switch Scale", new DoNothing());
-		 autonchooser.addObject("Right Scale Switch", new DoNothing());
-		 autonchooser.addObject("Right Switch No cross", new DoNothing());
-		 autonchooser.addObject("Right Scale No cross", new DoNothing());
-		 autonchooser.addObject("Make them cry", new DoNothing());
+		scale = gameData.substring(1,2);
+		oppswitch = gameData.substring(2,3);
 
-		m_autonomousCommand = autonchooser.getSelected();
+		String selected = autonchooser.getSelected();
+		
+		switch(selected) {
+		case "CenterSwitch": 
+			m_autonomousCommand = new CG_centerSwitch(ourswitch, scale);
+			//m_autonomousCommand = new CG_holdArm();
+			 break;
+		case "CrossLine":
+			//m_autonomousCommand = new auto_driveToAngleWithEncoder(.5, 10, 0, 40000, 92000, 0.04);
+			m_autonomousCommand = new DoNothing(ourswitch, scale);
+			System.out.println(ourswitch);
+			break;
+		default:
+			m_autonomousCommand = new DoNothing();
+			break; 
+		}
+		 
+
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
@@ -237,7 +244,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putData("autoArmCommand", bigBrother);
 		//SmartDashboard.putData("arugnygfuynfgrt6gfsd", arm.getCurrentCommand());
 		SmartDashboard.putString("getCommandtyg", bigBrother.getCurrentCommandName());
-		SmartDashboard.putNumber("ArmPValue", RobotMap.arm_right.configGetParameter(ParamEnum.eProfileParamSlot_P, 0, 0));
+		//SmartDashboard.putNumber("ArmPValue", RobotMap.arm_right.configGetParameter(ParamEnum.eProfileParamSlot_P, 0, 0));
 		SmartDashboard.putNumber("LeftEncoder", RobotMap.chassis_leftFront.getSelectedSensorPosition(0));
 		SmartDashboard.putNumber("RightEncoder", RobotMap.chassis_rightFront.getSelectedSensorPosition(0));
 		

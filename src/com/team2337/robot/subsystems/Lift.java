@@ -4,6 +4,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import com.team2337.robot.RobotMap;
+import com.team2337.robot.commands.lift.TEST_ONLY_Lift_ThrottleControl;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -22,7 +23,7 @@ public class Lift extends Subsystem {
 	
 	public int levelOfLift = 1;
 
-	private double maxSpeed = 0.2;
+	private double maxSpeed = 1;
 	private double nominalSpeed = 0;
 	private double kF = 0;
 	private double kP = 0.1;
@@ -35,6 +36,7 @@ public class Lift extends Subsystem {
 
 	protected void initDefaultCommand() {
 		//setDefaultCommand(new lift_startPID());
+		//setDefaultCommand(new TEST_ONLY_Lift_ThrottleControl());
 	}
 
 	public Lift() {

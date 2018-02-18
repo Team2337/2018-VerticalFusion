@@ -1,5 +1,6 @@
 package com.team2337.robot.commands.auto;
 import com.team2337.robot.Robot;
+import com.team2337.robot.commands.claw.claw_open;
 import com.team2337.robot.commands.shifter.shifter_high;
 import com.team2337.robot.commands.shifter.shifter_low;
 
@@ -7,50 +8,40 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class CG_centerSwitch extends CommandGroup {
 
-	String ourSwitch;
-	public CG_centerSwitch(String ourSwitch) {
+	String ourSwitch, scale;
+	public CG_centerSwitch(String ourSwitch, String scale) {
 		this.ourSwitch = ourSwitch;
-		//addSequential(new auto_driveToAngleWithTime(.5, 1.5, 28));
-		
-		//addSequential(new auto_driveToAngleWithTime(.5, 0.6, 0));
-		
-		
-		//System.out.println(Robot.ourswitch);
+		this.scale = scale;		
 		
 		if (ourSwitch.equals("L") ||ourSwitch.equals("l")) {
-			System.out.println(ourSwitch);
-			/*addSequential(new auto_brakeModeOn());
-			addSequential(new auto_driveToAngleWithEncoder(.5, 3, 35, 40000, 50708, 0.04));
-			addSequential(new shifter_high());
-			addSequential(new auto_driveToAngleWithEncoder(.5, 3, 0, 40000, 80000, 0.02));
-			*/
+			addParallel(new auto_bigBrother_DoNothing());
+			addSequential(new auto_holdUpperPosition(0.1));
+			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
+			//addSequential(new auto_moveUpperPosition(-600,386));
+			//addSequential(new auto_wait(0.25));
+			addSequential(new auto_driveToAngleWithEncoder(.9, 5, 40, 40000, 44000, 0.04));
+			addSequential(new auto_driveToAngleWithEncoder(.9, 3, 0, 40000, 69000, 0.02));
+			addSequential(new auto_moveUpperPosition(-250,60));
+			addParallel(new auto_driveForwardWithTime(.3, 1));
+			addSequential(new claw_open());
+			addParallel(new auto_intakeOut(0.5,1));
+			addSequential(new auto_wait(1.5));
+			addSequential(new auto_moveUpperPosition(50,386));
 		} else {
-			System.out.println("not our switch");
+			addParallel(new auto_bigBrother_DoNothing());
+			addSequential(new auto_holdUpperPosition(0.1));
+			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
 			addSequential(new shifter_low());
+			addSequential(new auto_driveToAngleWithEncoder(.9, 5, -40, 28000, 44000, 0.04));
+			addSequential(new auto_driveToAngleWithEncoder(.9, 3, 0, 65000, 69000, 0.02));
 			addSequential(new shifter_high());
-			addSequential(new shifter_low());
-			addSequential(new shifter_high());
-			addSequential(new shifter_low());
-			addSequential(new shifter_high());
-			addSequential(new shifter_low());
-			addSequential(new shifter_high());
-			addSequential(new shifter_low());
-			addSequential(new shifter_high());
-			addSequential(new shifter_low());
-			addSequential(new shifter_high());
-			addSequential(new shifter_low());
-			addSequential(new shifter_high());
-			addSequential(new shifter_low());
-			addSequential(new shifter_high());
-			addSequential(new shifter_low());
-			addSequential(new shifter_high());
-			addSequential(new shifter_low());
-			/*
-			 * addSequential(new auto_brakeModeOn());
-			addSequential(new auto_driveToAngleWithEncoder(.5, 3, -32, 40000, 50708, 0.04));
-			addSequential(new shifter_high());
-			addSequential(new auto_driveToAngleWithEncoder(.5, 3, 0, 40000, 80000, 0.02));
-			 */
+			addSequential(new auto_moveUpperPosition(-250,60));
+			addParallel(new auto_driveForwardWithTime(.3, 1));
+			addSequential(new claw_open());
+			addParallel(new auto_intakeOut(0.5,1));
+			addSequential(new auto_wait(1.5));
+			addSequential(new auto_moveUpperPosition(50,386));
+			
 		}
 		
 	
