@@ -21,7 +21,7 @@ public class Chassis extends Subsystem {
 	
 	public void periodic() {
 		if (RobotMap.chassisDebug) {
-		SmartDashboard.putNumber("leftFront", RobotMap.chassis_leftFront.getMotorOutputPercent());
+			SmartDashboard.putNumber("leftFront", RobotMap.chassis_leftFront.getMotorOutputPercent());
 		}
 	}
 	

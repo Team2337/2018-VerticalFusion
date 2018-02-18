@@ -25,7 +25,7 @@ public class arm_setPID extends Command {
 
 		this.pos = pos;
 	}
-
+	
 	protected void initialize() {
 		Robot.arm.setSetpoint(this.pos);
 	}
@@ -33,7 +33,6 @@ public class arm_setPID extends Command {
 	protected void execute() {
 
 	}
-
 	protected boolean isFinished() {
 		return true;   //TODO how to determine if on target ??(Robot.arm.onTarget());
 
