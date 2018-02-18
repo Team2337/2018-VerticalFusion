@@ -26,7 +26,7 @@ public class led_runtime extends Command {
 		if (Robot.intake.hasCrate()) {
 			 RED = Color.RED;
 			 YELLOW = Color.YELLOW;
-			 GREEN = Color.GREEN;
+			 GREEN = Color.AQUA;
 			
 		} else {
 			 RED = Color.STROBE_RED;
@@ -40,7 +40,9 @@ public class led_runtime extends Command {
 			RobotMap.blinkin.setColor(YELLOW);
 		} else if (Robot.lifter.levelOfLift == 3) {
 			RobotMap.blinkin.setColor(RED);
-		}*/
+		}
+		*/
+		RobotMap.blinkin.setColor(Color.PURPLE);
 	}
 
 	protected boolean isFinished() {

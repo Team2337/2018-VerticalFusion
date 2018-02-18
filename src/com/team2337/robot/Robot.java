@@ -5,6 +5,7 @@ import com.team2337.robot.subsystems.Claw;
 import com.team2337.robot.subsystems.Climber;
 import com.team2337.robot.subsystems.Ejector;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.team2337.fusion.led.Color;
 import com.team2337.fusion.wrappers.command.auto.AutoCommandManager;
 import com.team2337.robot.commands.DoNothing;
 import com.team2337.robot.commands.auto.*;
@@ -95,6 +96,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void disabledInit() {
 		this.allInit();
+		RobotMap.blinkin.setColor(Color.OFF);
 		AutoCommandManager.getInstance().disable();
 	}
 

@@ -10,6 +10,6 @@ public class auto_ActionColorExample_ extends ActionColor {
 		setBlinkIn(RobotMap.blinkin);
 		newSequential(new chassis_moveForward(3), 3);
 		newSequential(new chassis_moveForward(3), 3);
-		addWait(10);
+		//addWait(10);
 	}
 }

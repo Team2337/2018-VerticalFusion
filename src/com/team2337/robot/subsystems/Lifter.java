@@ -34,7 +34,7 @@ public class Lifter extends PIDSubsystem {
 	private double maxSpeedDown = -0.5;
 
 	protected void initDefaultCommand() {
-		setDefaultCommand(new lifter_joystickControl3());
+		//setDefaultCommand(new lifter_joystickControl3());
 	}
 
 	public Lifter() {

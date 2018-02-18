@@ -4,11 +4,12 @@ import com.team2337.robot.Robot;
 import com.team2337.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Wait extends AutoCommand {
 	private double time = 10;
-    public Wait(double time) {
-    	requires(Robot.climber);
+    public Wait(double time, Object subsystem) {
+    	requires((Subsystem) subsystem);
     	this.time = time;
     }
     protected void init() {

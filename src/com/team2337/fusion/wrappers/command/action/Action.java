@@ -8,7 +8,7 @@ public class Action extends CommandGroup {
 	
 	public boolean color;
 
-	public void addWait(double time) {
-		super.addSequential(new Wait(time), (time + 1));
+	public void addWait(double time, Object subsystem) {
+		super.addSequential(new Wait(time, subsystem), (time + 1));
 	}	
 }

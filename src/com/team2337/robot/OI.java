@@ -12,6 +12,8 @@ import com.team2337.robot.commands.claw.claw_giveMoreHugs;
 import com.team2337.robot.commands.claw.claw_open;
 import com.team2337.robot.commands.ejector.*;
 import com.team2337.robot.commands.intake.*;
+import com.team2337.robot.commands.led.led_decrease;
+import com.team2337.robot.commands.led.led_increase;
 import com.team2337.robot.commands.shifter.*;
 import com.team2337.robot.commands.lifter.lifter_setPID;
 import com.team2337.robot.commands.lifter.lifter_stopPID;
@@ -58,29 +60,7 @@ public class OI {
 	 */
 	
 	public static Joystick				operatorJoystick		= new Joystick(1);
-	JoystickButton			operator_GreenA			= new JoystickButton(operatorJoystick, 1);
-	JoystickButton			operator_RedB			= new JoystickButton(operatorJoystick, 2);
-	JoystickButton			operator_BlueX			= new JoystickButton(operatorJoystick, 3);
-	JoystickButton			operator_YellowY		= new JoystickButton(operatorJoystick, 4);
-	JoystickButton			operator_BumperLeft		= new JoystickButton(operatorJoystick, 5);
-	JoystickButton			operator_BumperRight 	= new JoystickButton(operatorJoystick, 6);
-	JoystickButton			operator_Back			= new JoystickButton(operatorJoystick, 7);
-	JoystickButton			operator_Start			= new JoystickButton(operatorJoystick, 8);
-	JoystickButton			operator_LeftStick		= new JoystickButton(operatorJoystick, 9);
-	JoystickButton			operator_RightStick		= new JoystickButton(operatorJoystick, 10);
-	JoystickAnalogButton	operator_TriggerLeft	= new JoystickAnalogButton(operatorJoystick, 2);
-	JoystickAnalogButton	operator_TriggerRight	= new JoystickAnalogButton(operatorJoystick, 3);
-	JoystickPOVButton		operator_POVUp			= new JoystickPOVButton(operatorJoystick, 0);
-	JoystickPOVButton		operator_POVUpRight		= new JoystickPOVButton(operatorJoystick, 45);
-	JoystickPOVButton		operator_POVRight		= new JoystickPOVButton(operatorJoystick, 90);
-	JoystickPOVButton		operator_POVDownRight	= new JoystickPOVButton(operatorJoystick, 135);
-	JoystickPOVButton		operator_POVDown		= new JoystickPOVButton(operatorJoystick, 180);
-	JoystickPOVButton		operator_POVDownLeft	= new JoystickPOVButton(operatorJoystick, 225);
-	JoystickPOVButton		operator_POVLeft		= new JoystickPOVButton(operatorJoystick, 270);
-	JoystickPOVButton		operator_POVUpLeft		= new JoystickPOVButton(operatorJoystick, 315);
-	
-	
-	public static Joystick				operatorThrottleJoystick		= new Joystick(4);
+
 	JoystickButton			operator_RightTrigger				= new JoystickButton(operatorJoystick, 1);	//Digital trigger on the back of the joystick
 	JoystickButton			operator_StripedButton				= new JoystickButton(operatorJoystick, 2);	//The orange and black striped button on joystick
 	JoystickButton			operator_RightKnucleButton			= new JoystickButton(operatorJoystick, 3);	//The button on the top-right of the joytstick
@@ -163,37 +143,7 @@ public class OI {
 	    driver_POVLeft			.whenPressed(new DoNothing()); 
 	   	//driver_POVUpLeft		.whenPressed(new _DoNothing()); 
 	    
-	    //////////////////////////////////
-	    
-	    
-		/* ====== OPERATOR JOYSTICK ===== */
-	    
-		operator_GreenA			.whenPressed(new lifter_setPID(0.7));
-		operator_RedB			.whenPressed(new lifter_setPID(0.9));
-		operator_BlueX			.whenPressed(new lifter_setPID(1.1));
-		operator_YellowY		.whenPressed(new lifter_stopPID());
-		
-		operator_BumperLeft		.whileHeld(new arm_increaseAngle());
-		operator_BumperRight	.whileHeld(new arm_decreaseAngle());
-		
-		operator_Back			.whenPressed(new DoNothing());
-		operator_Start			.whenPressed(new DoNothing());
-		
-		operator_LeftStick		.whenPressed(new DoNothing());
-		operator_RightStick		.whenPressed(new DoNothing());
-		
-		operator_TriggerLeft	.whileHeld(new DoNothing());
-		operator_TriggerRight	.whileHeld(new DoNothing());
-		
-		operator_POVUp			.whenPressed(new DoNothing());
-		//operator_POVUpRight	.whenPressed(new _DoNothing());
-		operator_POVRight		.whenPressed(new DoNothing());
-		//operator_POVDownRight	.whenPressed(new _DoNothing());
-	    operator_POVDown	    .whenPressed(new DoNothing());
-		//operator_POVDownLeft  .whenPressed(new _DoNothing());
-		operator_POVLeft	    .whenPressed(new DoNothing());
-		//operator_POVUpLeft	.whenPressed(new _DoNothing());
-		
+
 	    
 	    ////////////////////////////////////
 	    operator_RightTrigger			       .whenPressed(new DoNothing());
@@ -212,11 +162,11 @@ public class OI {
 	    //operator_SE						   .whenPressed(new DoNothing());
 	    //operator_ST						   .whenPressed(new DoNothing());
 	                                          
-	    operator_JoystickPOVUp			       .whenPressed(new DoNothing());
+	    operator_JoystickPOVUp			       .whenPressed(new led_increase());
 	    operator_JoystickPOVUpRight		       .whenPressed(new DoNothing());
 	    operator_JoystickPOVRight		       .whenPressed(new DoNothing());
 	    operator_JoystickPOVDownRight	       .whenPressed(new DoNothing());
-	    operator_JoystickPOVDown		       .whenPressed(new DoNothing());
+	    operator_JoystickPOVDown		       .whenPressed(new led_decrease());
 	    operator_JoystickPOVDownLeft	       .whenPressed(new DoNothing());
 	    operator_JoystickPOVLeft		       .whenPressed(new DoNothing());
 	    operator_JoystickPOVUpLeft		       .whenPressed(new DoNothing());

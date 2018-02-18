@@ -28,8 +28,8 @@ public class ActionColor extends CommandGroup {
 		super.addSequential(command, timeout);
 	}
 
-	public void addWait(double time) {
-		super.addSequential(new Wait(time), (time + 1));
+	public void addWait(double time, Object subsystem) {
+		super.addSequential(new Wait(time, subsystem), (time + 1));
 	}
 	
 	
