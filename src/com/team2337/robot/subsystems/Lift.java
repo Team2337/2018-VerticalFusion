@@ -54,7 +54,7 @@ public class Lift extends Subsystem {
 		 * neutral within this range. See Table in Section 17.2.1 for native
 		 * units per rotation.
 		 */
-		rightFront.configAllowableClosedloopError(allowableError, 0, 0); 
+		rightFront.configAllowableClosedloopError(0, allowableError, 0); 
 		
 		/* set closed loop gains in slot0, typically kF stays zero. */
 		rightFront.config_kF(0, kF, 0);

@@ -3,6 +3,8 @@ package com.team2337.robot;
 import com.team2337.robot.subsystems.Chassis;
 import com.team2337.robot.subsystems.Claw;
 import com.team2337.robot.subsystems.Climber;
+import com.ctre.phoenix.ParamEnum;
+import com.team2337.fusion.gyro.Pigeon;
 import com.team2337.robot.commands.DoNothing;
 import com.team2337.robot.commands.auto.*;
 import com.team2337.robot.subsystems.Arm;
@@ -39,6 +41,9 @@ public class Robot extends TimedRobot {
 	public static BigBrother bigBrother;
 	public static Lift lift;
 	public static OI oi;
+	public static Pigeon gyro;
+	public static String ourswitch = "q";
+	public static char scale, oppswitch;
 	//public static char ourswitch, scale, oppswitch;
 
 	Command m_autonomousCommand;
@@ -69,21 +74,24 @@ public class Robot extends TimedRobot {
 		claw = new Claw();
 		bigBrother = new BigBrother();
 		lift = new Lift();
-
+		gyro = new Pigeon();
 		oi = new OI();
 
 		// Also include the Auton Chooser
-		autonchooser.addDefault("Cross the Line", new DoNothing());
-		autonchooser.addObject("Center Switch", new auto_centerSwitch());
-		autonchooser.addObject("Do Nothing", new DoNothing());
-		autonchooser.addObject("Right Switch", new DoNothing());
-		autonchooser.addObject("Right Scale", new DoNothing());
-		autonchooser.addObject("Right Switch Scale", new DoNothing());
-		autonchooser.addObject("Right Scale Switch", new DoNothing());
-		autonchooser.addObject("Right Switch No cross", new DoNothing());
-		autonchooser.addObject("Right Scale No cross", new DoNothing());
-		autonchooser.addObject("Make them cry", new DoNothing());
-		SmartDashboard.putData("Auto mode", autonchooser);
+		Robot.gyro.resetPidgey();
+		RobotMap.chassis_leftFront.setSelectedSensorPosition(0, 0, 0);
+    	RobotMap.chassis_rightFront.setSelectedSensorPosition(0, 0, 0);
+    	
+    	 autonchooser.addDefault("Cross the Line", new CG_holdArm());
+		 autonchooser.addObject("Center Switch", new auto_centerSwitch());
+		 autonchooser.addObject("Do Nothing", new DoNothing());
+		 autonchooser.addObject("Right Switch", new DoNothing());
+		 autonchooser.addObject("Right Scale", new DoNothing());
+		 autonchooser.addObject("Right Switch Scale", new DoNothing());
+		 autonchooser.addObject("Right Scale Switch", new DoNothing());
+		 autonchooser.addObject("Right Switch No cross", new DoNothing());
+		 autonchooser.addObject("Right Scale No cross", new DoNothing());
+		 autonchooser.addObject("Make them cry", new DoNothing());
 	}
 
 	/**
@@ -93,6 +101,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void disabledInit() {
+		Pigeon.pidgey.setFusedHeading(0.0, 10);
 		this.allInit();
 	}
 
@@ -127,7 +136,28 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		this.allInit();
+		Robot.gyro.resetPidgey();
+		RobotMap.chassis_leftFront.setSelectedSensorPosition(0, 0, 0);
+		RobotMap.chassis_rightFront.setSelectedSensorPosition(0, 0, 0);
+		
+		String gameData;
+		gameData = DriverStation.getInstance().getGameSpecificMessage();
+		
+		ourswitch = gameData.substring(0,1);
+		scale = gameData.charAt(1);
+		oppswitch = gameData.charAt(2);
+		
+		 autonchooser.addDefault("Cross the Line", new CG_holdArm());
+		 autonchooser.addObject("Center Switch", new auto_centerSwitch());
+		 autonchooser.addObject("Do Nothing", new DoNothing());
+		 autonchooser.addObject("Right Switch", new DoNothing());
+		 autonchooser.addObject("Right Scale", new DoNothing());
+		 autonchooser.addObject("Right Switch Scale", new DoNothing());
+		 autonchooser.addObject("Right Scale Switch", new DoNothing());
+		 autonchooser.addObject("Right Switch No cross", new DoNothing());
+		 autonchooser.addObject("Right Scale No cross", new DoNothing());
+		 autonchooser.addObject("Make them cry", new DoNothing());
+
 		m_autonomousCommand = autonchooser.getSelected();
 
 		/*
@@ -141,6 +171,8 @@ public class Robot extends TimedRobot {
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.start();
 		}
+		
+		this.allInit();
 	}
 
 	/**
@@ -201,6 +233,13 @@ public class Robot extends TimedRobot {
 	 * This method is called periodically during all modes (disabled, auton, teleop and test)
 	 */
 	public void allPeriodic() {
+		SmartDashboard.putData("Auto mode", autonchooser);
+		SmartDashboard.putData("autoArmCommand", bigBrother);
+		//SmartDashboard.putData("arugnygfuynfgrt6gfsd", arm.getCurrentCommand());
+		SmartDashboard.putString("getCommandtyg", bigBrother.getCurrentCommandName());
+		SmartDashboard.putNumber("ArmPValue", RobotMap.arm_right.configGetParameter(ParamEnum.eProfileParamSlot_P, 0, 0));
+		SmartDashboard.putNumber("LeftEncoder", RobotMap.chassis_leftFront.getSelectedSensorPosition(0));
+		SmartDashboard.putNumber("RightEncoder", RobotMap.chassis_rightFront.getSelectedSensorPosition(0));
 		
 	}	
 	

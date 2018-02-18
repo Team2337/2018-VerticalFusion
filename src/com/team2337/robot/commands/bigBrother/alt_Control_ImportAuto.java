@@ -43,7 +43,8 @@ public class alt_Control_ImportAuto extends Command {
 	}
 
 	protected void initialize() {
-		
+		Robot.arm.setSetpoint(21);
+		Robot.trolley.setSetpoint(72);
 		Robot.lift.liftLeveler(autolevelOfLift);
 		
 		

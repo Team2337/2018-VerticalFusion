@@ -96,7 +96,7 @@ public class RobotMap {
 	//*********************************************************************************************************
 	//Debug
 	public static Boolean alt_ControlDebug = true;
-	public static Boolean chassisDebug = false;
+	public static Boolean chassisDebug = true;
 	public static Boolean intakeDebug = false;
 	
 	//Public Variables

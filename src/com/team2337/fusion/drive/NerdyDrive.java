@@ -8,6 +8,10 @@ package com.team2337.fusion.drive;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import edu.wpi.first.wpilibj.hal.HAL;
+import edu.wpi.first.wpilibj.hal.FRCNetComm.tInstances;
+import edu.wpi.first.wpilibj.hal.FRCNetComm.tResourceType;
+
 public class NerdyDrive {
 	private TalonSRX left;
 	private TalonSRX right;
@@ -130,6 +134,30 @@ public class NerdyDrive {
 		this.right.set(ControlMode.PercentOutput, rightMotorOutput);
 	}
 
+	public void tankDrive(double leftSpeed, double rightSpeed) {
+	    tankDrive(leftSpeed, rightSpeed, true);
+	  }
+	
+	public void tankDrive(double leftSpeed, double rightSpeed, boolean squaredInputs) {
+
+	    leftSpeed = limit(leftSpeed);
+	    leftSpeed = applyDeadband(leftSpeed, m_deadband);
+
+	    rightSpeed = limit(rightSpeed);
+	    rightSpeed = applyDeadband(rightSpeed, m_deadband);
+
+	    // Square the inputs (while preserving the sign) to increase fine control
+	    // while permitting full power.
+	    if (squaredInputs) {
+	      leftSpeed = Math.copySign(leftSpeed * leftSpeed, leftSpeed);
+	      rightSpeed = Math.copySign(rightSpeed * rightSpeed, rightSpeed);
+	    }
+	    
+	    this.left.set(ControlMode.PercentOutput, leftSpeed);
+		this.right.set(ControlMode.PercentOutput, rightSpeed);
+	  }
+
+	
 	protected double limit(double value) {
 		if (value > 1.0) {
 			return 1.0;

@@ -39,10 +39,10 @@ public class Claw extends Subsystem {
 	}
 	
 	public void open() {
-		claw.set(false);
+		claw.set(true);
 	}
 
 	public void close() {
-		claw.set(true);
+		claw.set(false);
 	}
 }

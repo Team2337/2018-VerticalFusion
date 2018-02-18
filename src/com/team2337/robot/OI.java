@@ -197,8 +197,8 @@ public class OI {
 	    
 	    //Operator 
 	    operator_RightTrigger			       .whileHeld(new intake_in(1));
-	    operator_StripedButton			       .whileHeld(new DoNothing());
-	    operator_RightKnucleButton		       .whenPressed(new intake_out(1));
+	    operator_StripedButton			       .whenPressed(new DoNothing());
+	    operator_RightKnucleButton		       .whileHeld(new intake_out(1));
 	    operator_L3						       .whenPressed(new DoNothing());
 	                                           
 	    operator_ThrottleTopThumbButton		   .whenPressed(new liftLevelAdjuster(1));

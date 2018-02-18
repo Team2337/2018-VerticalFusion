@@ -107,7 +107,7 @@ public class alt_Control_Import extends Command {
 					armSetPoint = points[11][armSetPoints];
 				}
 				sameSide = false;
-				System.out.println("**OVERRIDING ARM SET POINTS**");
+				//System.out.println("**OVERRIDING ARM SET POINTS**");
 
 			}
 		} else

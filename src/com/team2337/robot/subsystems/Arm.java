@@ -21,7 +21,7 @@ public class Arm extends Subsystem {
 	//private boolean PIDStatus = false;
 	
 	private double kF = 0;
-	private double kP = 1.1;
+	private double kP = 2;  //1.1
 	private double kI = 0;
 	private double kD = 0;
 	private int allowableError = 1;                ///need to set *****************//TODO
@@ -100,12 +100,16 @@ public class Arm extends Subsystem {
 		armRight.set(ControlMode.Position, pos);
 	}	
 	
+	public void holdPosition() {
+		armRight.set(ControlMode.Position, getPosition());
+	}
+	
 	/**
 	 * Gets the set point of the arm
 	 */
-	public double getSetpoint(){
-		return armRight.getClosedLoopTarget(0);
-	}
+	/*public double getSetpoint(){
+		//return armRight.getClosedLoopTarget(0);
+	}*/
 	
 	/**
 	 * Gets the set point error of the arm
@@ -150,6 +154,7 @@ public class Arm extends Subsystem {
 	public boolean armIsForward() {
 		return (getPosition() > forwardSoftLimit);
 	}
+	
 
 
 	public void setSoftLimits(int forward, int reverse) {
@@ -203,7 +208,7 @@ public class Arm extends Subsystem {
 	public void periodic() {
 		if(RobotMap.alt_ControlDebug) {
 			
-		SmartDashboard.putNumber("armGetSetpoint", getSetpoint());
+		//SmartDashboard.putNumber("armGetSetpoint", getSetpoint());
 		SmartDashboard.putNumber("armEncoderPositionPWM", RobotMap.arm_right.getSensorCollection().getPulseWidthPosition());
 		SmartDashboard.putNumber("armGetSelectedSensorPos", RobotMap.arm_right.getSelectedSensorPosition(0));
 		SmartDashboard.putString("controlMode", RobotMap.arm_right.getControlMode().toString());
