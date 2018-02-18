@@ -23,10 +23,10 @@ public class Trolley extends Subsystem {
 
 	//private int absolutePosition;  //used to set relative position encoder
 	private double maxSpeedUp = 1.0;
-	private double maxSpeedDown = 0.5; //0.01
+	private double maxSpeedDown = 1.0; //0.01
 	private double nominalSpeed = 0;
 	private double kF = 0;
-	private double kP = 7;
+	private double kP = 14;
 	private double kI = 0;
 	private double kD = 0;
 	private int allowableError = 0;
