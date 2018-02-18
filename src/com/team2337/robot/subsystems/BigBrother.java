@@ -1,11 +1,8 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package com.team2337.robot.subsystems;
+
+import com.team2337.robot.commands.bigBrother.*;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.team2337.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -16,18 +13,33 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * @author Team2337 - EngiNERDs
  */
 public class BigBrother extends Subsystem {
-	int liftPoints[][] = new int[3][5];
-	/*
-	 * 
-	 */
-	public void initDefaultCommand() {
-		// Set the default command for a subsystem here.
-		// setDefaultCommand(new MySpecialCommand());
+
+	int totalRows = 20;
+	int totalColumns = 8;
+
+	public double points[][] = new double[totalRows][totalColumns];
+
+	public BigBrother() {
+		startFilling();
 	}
 
-	public void points() {
-		liftPoints[0][0] = 0;
-		liftPoints[1][0] = 10;
-		liftPoints[2][0] = 13; 
+	public void initDefaultCommand() {
+		setDefaultCommand(new alt_Control_Import());
 	}
+
+	void startFilling() {
+		points = setPointsTestPickUpOnly.points;
+		//points = setPoints.points;
+		//points = setPointsPracticeBot.points;
+		//points = setPointsCompBot.points;
+	}
+	public void stopAltControl() {
+		RobotMap.trolley_right.set(ControlMode.PercentOutput, 0);
+		RobotMap.lift_right.set(ControlMode.PercentOutput, 0);
+		RobotMap.arm_right.set(ControlMode.PercentOutput, 0);
+	}
+	public void startAltControl(double pos) {
+
+	}
+
 }

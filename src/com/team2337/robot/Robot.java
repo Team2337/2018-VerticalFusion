@@ -3,16 +3,21 @@ package com.team2337.robot;
 import com.team2337.robot.subsystems.Chassis;
 import com.team2337.robot.subsystems.Claw;
 import com.team2337.robot.subsystems.Climber;
+<<<<<<< HEAD
 import com.team2337.robot.subsystems.Ejector;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.team2337.fusion.led.Color;
 import com.team2337.fusion.wrappers.command.auto.AutoCommandManager;
+=======
+>>>>>>> master
 import com.team2337.robot.commands.DoNothing;
 import com.team2337.robot.commands.auto.*;
 import com.team2337.robot.subsystems.Arm;
+import com.team2337.robot.subsystems.BigBrother;
 import com.team2337.robot.subsystems.Intake;
 import com.team2337.robot.subsystems.LED;
-import com.team2337.robot.subsystems.Lifter;
+import com.team2337.robot.subsystems.Lift;
+import com.team2337.robot.subsystems.Trolley;
 import com.team2337.robot.subsystems.Shifter;
 
 import edu.wpi.first.wpilibj.DriverStation;
@@ -31,16 +36,17 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends TimedRobot {
 	public static Chassis chassis;
-	public static Ejector ejector;
 	public static Arm arm;
 	public static Intake intake;
 	public static LED led;
-	public static Lifter lifter;
+	public static Trolley trolley;
 	public static Shifter shifter;
 	public static Climber climber;
 	public static Claw claw;
+	public static BigBrother bigBrother;
+	public static Lift lift;
 	public static OI oi;
-	public static char ourswitch, scale, oppswitch;
+	//public static char ourswitch, scale, oppswitch;
 
 	Command m_autonomousCommand;
 	SendableChooser<Command> autonchooser = new SendableChooser<>();
@@ -61,16 +67,16 @@ public class Robot extends TimedRobot {
 		// Reference all of the subsystems
 		 
 		chassis = new Chassis();
-		lifter = new Lifter();
+		trolley = new Trolley();
 		intake = new Intake();
-		ejector = new Ejector();
 		arm = new Arm();
 		climber = new Climber();
 		shifter = new Shifter();
 		led = new LED();
 		claw = new Claw();
+		bigBrother = new BigBrother();
+		lift = new Lift();
 
-		// Include the Operator Interface
 		oi = new OI();
 
 		AutoCommandManager.getInstance().init();
@@ -102,8 +108,19 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void disabledPeriodic() {
+		SmartDashboard.putNumber("trolleyJoystickValue", Robot.oi.operatorJoystick.getRawAxis(2));
 		Scheduler.getInstance().run();
 		this.allPeriodic();
+		
+		String gameData;
+		gameData = DriverStation.getInstance().getGameSpecificMessage();
+		
+		//TODO
+		//ourswitch = gameData.charAt(0);
+		//scale = gameData.charAt(1);
+		//oppswitch = gameData.charAt(2);
+		
+
 	}
 
 	/**
@@ -150,6 +167,9 @@ public class Robot extends TimedRobot {
 	public void teleopInit() {
 		AutoCommandManager.getInstance().teleop();
 		this.allInit();
+		RobotMap.endOfAuto = true;
+		claw.close();
+		
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
@@ -166,23 +186,11 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 		this.allPeriodic();
-		
-		
-		SmartDashboard.putNumber("pot", RobotMap.lift_potentiometer.get());
-		SmartDashboard.putNumber("SetPoint", Robot.lifter.getSetpoint());
-		SmartDashboard.putBoolean("atSetPoint?", com.team2337.robot.commands.lifter.lifter_joystickControl.isAtTop);
-		SmartDashboard.putNumber("potValue", com.team2337.robot.commands.lifter.lifter_joystickControl.potValue);
-		SmartDashboard.putNumber("armAnglePosition", Arm.armAngle);
-		SmartDashboard.putNumber("armEncoderPosition", RobotMap.arm_right.getSelectedSensorPosition(0));
-		SmartDashboard.putNumber("armValue", com.team2337.robot.commands.arm.arm_increaseAngle.armPosition);
-		SmartDashboard.putNumber("rightFront", RobotMap.lift_rightFront.getMotorOutputPercent());
-		SmartDashboard.putNumber("leftFront", RobotMap.lift_leftFront.getMotorOutputPercent());
-		// SmartDashboard.putNumber("armPositionValue",
-		// com.team2337.robot.commands.arm.arm_joystickControl.armPositionValue);
+
 
 		SmartDashboard.putNumber("centerX", RobotMap.vision.getRevAngle());
-		//
-		System.out.print(RobotMap.vision.getRevAngle());
+
+		//System.out.print(RobotMap.vision.getRevAngle());
 	}
 
 	/**

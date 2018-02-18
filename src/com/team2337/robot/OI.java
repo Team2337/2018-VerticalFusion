@@ -4,19 +4,21 @@ import com.team2337.fusion.controller.JoystickAnalogButton;
 import com.team2337.fusion.controller.JoystickPOVButton;
 
 import com.team2337.robot.commands.*;
-import com.team2337.robot.commands.arm.arm_decreaseAngle;
-import com.team2337.robot.commands.arm.arm_increaseAngle;
-import com.team2337.robot.commands.claw.claw_close;
-import com.team2337.robot.commands.claw.claw_giveLessHugs;
-import com.team2337.robot.commands.claw.claw_giveMoreHugs;
-import com.team2337.robot.commands.claw.claw_open;
-import com.team2337.robot.commands.ejector.*;
+import com.team2337.robot.commands.arm.*;
+import com.team2337.robot.commands.bigBrother.*;
+import com.team2337.robot.commands.chassis.*;
+import com.team2337.robot.commands.claw.*;
+import com.team2337.robot.commands.climber.*;
 import com.team2337.robot.commands.intake.*;
+<<<<<<< HEAD
 import com.team2337.robot.commands.led.led_decrease;
 import com.team2337.robot.commands.led.led_increase;
+=======
+import com.team2337.robot.commands.led.*;
+import com.team2337.robot.commands.lift.*;
+>>>>>>> master
 import com.team2337.robot.commands.shifter.*;
-import com.team2337.robot.commands.lifter.lifter_setPID;
-import com.team2337.robot.commands.lifter.lifter_stopPID;
+import com.team2337.robot.commands.trolley.*;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -59,8 +61,36 @@ public class OI {
 	 * OperatorJoystick
 	 */
 	
+<<<<<<< HEAD
 	public static Joystick				operatorJoystick		= new Joystick(1);
 
+=======
+	/*public static Joystick				operatorJoystick		= new Joystick(1);
+	JoystickButton			operator_GreenA			= new JoystickButton(operatorJoystick, 1);
+	JoystickButton			operator_RedB			= new JoystickButton(operatorJoystick, 2);
+	JoystickButton			operator_BlueX			= new JoystickButton(operatorJoystick, 3);
+	JoystickButton			operator_YellowY		= new JoystickButton(operatorJoystick, 4);
+	JoystickButton			operator_BumperLeft		= new JoystickButton(operatorJoystick, 5);
+	JoystickButton			operator_BumperRight 	= new JoystickButton(operatorJoystick, 6);
+	JoystickButton			operator_Back			= new JoystickButton(operatorJoystick, 7);
+	JoystickButton			operator_Start			= new JoystickButton(operatorJoystick, 8);
+	JoystickButton			operator_LeftStick		= new JoystickButton(operatorJoystick, 9);
+	JoystickButton			operator_RightStick		= new JoystickButton(operatorJoystick, 10);
+	JoystickAnalogButton	operator_TriggerLeft	= new JoystickAnalogButton(operatorJoystick, 2);
+	JoystickAnalogButton	operator_TriggerRight	= new JoystickAnalogButton(operatorJoystick, 3);
+	JoystickPOVButton		operator_POVUp			= new JoystickPOVButton(operatorJoystick, 0);
+	JoystickPOVButton		operator_POVUpRight		= new JoystickPOVButton(operatorJoystick, 45);
+	JoystickPOVButton		operator_POVRight		= new JoystickPOVButton(operatorJoystick, 90);
+	JoystickPOVButton		operator_POVDownRight	= new JoystickPOVButton(operatorJoystick, 135);
+	JoystickPOVButton		operator_POVDown		= new JoystickPOVButton(operatorJoystick, 180);
+	JoystickPOVButton		operator_POVDownLeft	= new JoystickPOVButton(operatorJoystick, 225);
+	JoystickPOVButton		operator_POVLeft		= new JoystickPOVButton(operatorJoystick, 270);
+	JoystickPOVButton		operator_POVUpLeft		= new JoystickPOVButton(operatorJoystick, 315);
+	*/
+	
+	
+	public static Joystick				operatorJoystick		= new Joystick(1);
+>>>>>>> master
 	JoystickButton			operator_RightTrigger				= new JoystickButton(operatorJoystick, 1);	//Digital trigger on the back of the joystick
 	JoystickButton			operator_StripedButton				= new JoystickButton(operatorJoystick, 2);	//The orange and black striped button on joystick
 	JoystickButton			operator_RightKnucleButton			= new JoystickButton(operatorJoystick, 3);	//The button on the top-right of the joytstick
@@ -98,7 +128,7 @@ public class OI {
 	 */
 	
 	
-	public static Joystick				operatorControls		= new Joystick(2);
+	public static Joystick				operatorControls		= new Joystick(4);
 	/*
 	JoystickButton			operatorInt_GreenButton				= new JoystickButton(operatorJoystick, 19);
 	JoystickButton			operatorInt_RedButton				= new JoystickButton(operatorJoystick, 20);
@@ -117,22 +147,22 @@ public class OI {
 		
 		/* ====== DRIVER JOYSTICK ===== */
 		
-		driver_GreenA			.whenPressed(new lifter_setPID(0.7));
-		driver_RedB				.whenPressed(new lifter_setPID(0.6));
-		driver_BlueX			.whenPressed(new lifter_setPID(0.1)); 
-		driver_YellowY			.whenPressed(new lifter_stopPID());
+		driver_GreenA			.whenPressed(new DoNothing()); //.whenPressed(new trolley_setPID(0.7));
+		driver_RedB				.whenPressed(new DoNothing()); //.whenPressed(new trolley_setPID(0.6));
+		driver_BlueX			.whenPressed(new DoNothing()); //.whenPressed(new trolley_setPID(0.1)); 
+		driver_YellowY			.whenPressed(new DoNothing()); //.whenPressed(new trolley_stopPID());
 		
-		driver_BumperLeft		.whenPressed(new claw_close());
-		driver_BumperRight		.whenPressed(new claw_open());
+		driver_BumperLeft		.whenPressed(new DoNothing());
+		driver_BumperRight		.whenPressed(new DoNothing());
 		
-		driver_Back				.whileHeld(new claw_giveLessHugs()); 
-		driver_Start			.whileHeld(new claw_giveMoreHugs());
+		driver_Back				.whileHeld(new DoNothing()); 
+		driver_Start			.whileHeld(new DoNothing());
 		
 		driver_LeftStick		.whenPressed(new DoNothing()); 
 		driver_RightStick		.whenPressed(new DoNothing()); 
 		
-		driver_TriggerLeft		.whileHeld(new intake_out(0.75));
-		driver_TriggerRight		.whileHeld(new intake_in(0.75));
+		//driver_TriggerLeft		.whileHeld(new intake_out(1));
+		//driver_TriggerRight		.whileHeld(new intake_in(1));
 		
 		driver_POVUp			.whenPressed(new DoNothing());  
 		//driver_POVUpRight		.whenPressed(new _DoNothing()); 
@@ -143,17 +173,47 @@ public class OI {
 	    driver_POVLeft			.whenPressed(new DoNothing()); 
 	   	//driver_POVUpLeft		.whenPressed(new _DoNothing()); 
 	    
-
+	    //////////////////////////////////
 	    
-	    ////////////////////////////////////
-	    operator_RightTrigger			       .whenPressed(new DoNothing());
-	    operator_StripedButton			       .whenPressed(new DoNothing());
-	    operator_RightKnucleButton		       .whenPressed(new DoNothing());
+	    
+		/* ====== OPERATOR JOYSTICK ===== */
+	    /*
+		operator_GreenA			.whenPressed(new DoNothing()); //.whenPressed(new trolley_setPID(0.7));
+		operator_RedB			.whenPressed(new DoNothing()); //.whenPressed(new trolley_setPID(0.9));
+		operator_BlueX			.whenPressed(new DoNothing()); //.whenPressed(new trolley_setPID(1.1));
+		operator_YellowY		.whenPressed(new DoNothing()); //.whenPressed(new trolley_stopPID());
+		
+		operator_BumperLeft		.whenPressed(new claw_close());
+		operator_BumperRight	.whenPressed(new claw_open());
+		
+		operator_Back			.whileHeld(new claw_giveLessHugs()); 
+		operator_Start			.whileHeld(new claw_giveMoreHugs());
+		
+		operator_LeftStick		.whenPressed(new DoNothing());
+		operator_RightStick		.whenPressed(new DoNothing());
+		
+		operator_TriggerLeft	.whileHeld(new DoNothing());
+		operator_TriggerRight	.whileHeld(new DoNothing());
+		
+		operator_POVUp			.whenPressed(new DoNothing());
+		//operator_POVUpRight	.whenPressed(new _DoNothing());
+		operator_POVRight		.whenPressed(new DoNothing());
+		//operator_POVDownRight	.whenPressed(new _DoNothing());
+	    operator_POVDown	    .whenPressed(new DoNothing());
+		//operator_POVDownLeft  .whenPressed(new _DoNothing());
+		operator_POVLeft	    .whenPressed(new DoNothing());
+		//operator_POVUpLeft	.whenPressed(new _DoNothing());
+		*/
+	    
+	    //Operator 
+	    operator_RightTrigger			       .whileHeld(new intake_in(1));
+	    operator_StripedButton			       .whileHeld(new DoNothing());
+	    operator_RightKnucleButton		       .whenPressed(new intake_out(1));
 	    operator_L3						       .whenPressed(new DoNothing());
 	                                           
-	    operator_ThrottleTopThumbButton		   .whenPressed(new DoNothing());
-	    operator_ThrottleMidThumbButton		   .whenPressed(new DoNothing());
-	    operator_ThrottleBottomThumbButton	   .whenPressed(new DoNothing());
+	    operator_ThrottleTopThumbButton		   .whenPressed(new liftLevelAdjuster(1));
+	    operator_ThrottleMidThumbButton		   .whenPressed(new liftLevelAdjuster(2));
+	    operator_ThrottleBottomThumbButton	   .whenPressed(new liftLevelAdjuster(3));
 	                                           
 	    operator_PalmButton				       .whenPressed(new DoNothing());
 	    operator_TopIndexButton 		       .whenPressed(new DoNothing());
@@ -162,14 +222,25 @@ public class OI {
 	    //operator_SE						   .whenPressed(new DoNothing());
 	    //operator_ST						   .whenPressed(new DoNothing());
 	                                          
+<<<<<<< HEAD
 	    operator_JoystickPOVUp			       .whenPressed(new led_increase());
 	    operator_JoystickPOVUpRight		       .whenPressed(new DoNothing());
 	    operator_JoystickPOVRight		       .whenPressed(new DoNothing());
 	    operator_JoystickPOVDownRight	       .whenPressed(new DoNothing());
 	    operator_JoystickPOVDown		       .whenPressed(new led_decrease());
 	    operator_JoystickPOVDownLeft	       .whenPressed(new DoNothing());
+=======
+	    operator_JoystickPOVUp			       .whenPressed(new claw_open());
+	    operator_JoystickPOVUpRight		       .whenPressed(new claw_open());
+	    operator_JoystickPOVUpLeft		       .whenPressed(new claw_open());
+	    
+	    operator_JoystickPOVDownRight	       .whenPressed(new claw_close());
+	    operator_JoystickPOVDown		       .whenPressed(new claw_close());
+	    operator_JoystickPOVDownLeft	       .whenPressed(new claw_close());
+	    
+	    operator_JoystickPOVRight		       .whenPressed(new DoNothing());
+>>>>>>> master
 	    operator_JoystickPOVLeft		       .whenPressed(new DoNothing());
-	    operator_JoystickPOVUpLeft		       .whenPressed(new DoNothing());
 	    
 	    ////////////////////////////////////
 		

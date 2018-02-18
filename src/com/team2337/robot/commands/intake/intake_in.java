@@ -7,6 +7,7 @@ import com.team2337.robot.RobotMap;
 
 /**
  * Intake: IN - Move the intake in
+ * 
  * @category INTAKE
  * @author Brendan
  */
@@ -19,6 +20,7 @@ public class intake_in extends Command {
 		requires(Robot.intake);
 		this.power = power;
 	}
+
 	protected void initialize() {
 		
 	}
@@ -43,7 +45,7 @@ public class intake_in extends Command {
 	protected void end() {
 		Robot.intake.stop();
 	}
-	
+
 	protected void interrupted() {
 		this.end();
 	}

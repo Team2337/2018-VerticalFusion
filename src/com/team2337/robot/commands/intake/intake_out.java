@@ -21,7 +21,7 @@ public class intake_out extends Command {
 	}
 	
 	protected void execute() {}
-	protected boolean isFinished() {return false;}
+	protected boolean isFinished() {return true;}
 	
 	protected void end() {
 		Robot.claw.give30Hugs();

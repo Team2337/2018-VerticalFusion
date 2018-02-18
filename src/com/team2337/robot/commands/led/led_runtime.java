@@ -16,12 +16,12 @@ public class led_runtime extends Command {
 	}
 
 	protected void initialize() {
-		//RobotMap.blinkin.setColor(Color.AQUA);
+		
 	}
 
 	protected void execute() {
-		/*
-		//TODO: If not auton, do this, else go do command colors//
+		
+		//TODO: If not auton, do this, else go do command colors
 		double RED, YELLOW, GREEN = 1;
 		if (Robot.intake.hasCrate()) {
 			 RED = Color.RED;
@@ -33,16 +33,14 @@ public class led_runtime extends Command {
 			 YELLOW = Color.STROBE_YELLOW;
 			 GREEN = Color.STROBE_GREEN;
 		}
-		//if climber is up and done, do RAINBOW
+
 		if (Robot.lifter.levelOfLift == 1) {
 			RobotMap.blinkin.setColor(GREEN);
 		} else if (Robot.lifter.levelOfLift == 2) {
 			RobotMap.blinkin.setColor(YELLOW);
 		} else if (Robot.lifter.levelOfLift == 3) {
 			RobotMap.blinkin.setColor(RED);
-		}
-		*/
-		RobotMap.blinkin.setColor(Color.PURPLE);
+		}	
 	}
 
 	protected boolean isFinished() {

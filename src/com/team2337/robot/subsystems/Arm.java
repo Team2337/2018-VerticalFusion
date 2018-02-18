@@ -2,154 +2,214 @@ package com.team2337.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.team2337.robot.Robot;
 import com.team2337.robot.RobotMap;
-import com.team2337.robot.commands.arm.arm_joystickControl;
-import com.team2337.robot.commands.arm.arm_joystickControl2;
-import com.team2337.robot.commands.lifter.lifter_joystickControl;
 
-import edu.wpi.first.wpilibj.AnalogPotentiometer;
-import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 
 /**
  * The subsystem to control the arm via a PID
  * 
- * @category LIFTER
- * @author Brendan, Jennah, Bryce
+ * @category ARM
+ * @author 2337
  */
-public class Arm extends PIDSubsystem {
+public class Arm extends Subsystem {
 
-	private final static TalonSRX armLeft = RobotMap.arm_left;
-	public final static TalonSRX armRight = RobotMap.arm_right;
+	private final static TalonSRX armRight = RobotMap.arm_right;
 
-	private boolean PIDStatus = false;
+	//private boolean PIDStatus = false;
+	
+	private double kF = 0;
+	private double kP = 1.1;
+	private double kI = 0;
+	private double kD = 0;
+	private int allowableError = 1;                ///need to set *****************//TODO
 
-	public static double armAngle = 0;
-	private double maxSpeedUp = 0.5;
-	private double maxSpeedDown = -0.5;
+	private static final double maxSpeedUp 		= 1;
+	private static final double maxSpeedDown 	= -1;
+	private double nominalSpeed = 0;
+	
+	public static final int forwardSoftLimit 	= 1238;
+	public static final int forwardLevel 		= 900;    ///??
+	public static final int forwardTopSL 		= 548;
+
+	public static final int centerPosition 		= 333;
+	
+	public static final int reverseTopSL 		= 55;
+	public static final int reverseLevel 		= -550;		///??
+	public static final int reverseSoftLimit 	= -1100;
+	
+	//public static final double stringpotTopPos 		= 1.0;
+	//public static final double stringpotMidPos 		= 0.7;
+	//public static final double stringpotBottomPos 	= 0.1;
+	
+	//private int absolutePosition;  //used to set relative position of the encoder based on absolute encoder
 
 	protected void initDefaultCommand() {
-		setDefaultCommand(new arm_joystickControl2());
+		//setDefaultCommand(new TEST_ONLY_arm_joystickControl());
 	}
 
 	public Arm() {
 
-		super("Arm", 4.0, 0.0, 0.0);
-		setAbsoluteTolerance(70);
-		getPIDController().setContinuous(false);
-		getPIDController().setInputRange(0, 4096);
+		//getPIDController().setContinuous(false);
+		//getPIDController().setInputRange(0, 8000);
+		
+		setSoftLimits(forwardSoftLimit, reverseSoftLimit);
+				
+		/* set the peak and nominal outputs, 12V? means full */
+		armRight.configNominalOutputForward(nominalSpeed, 0);
+		armRight.configNominalOutputReverse(-nominalSpeed, 0);
+		armRight.configPeakOutputForward(maxSpeedUp, 0);
+		armRight.configPeakOutputReverse(maxSpeedDown, 0);
+		/*
+		armLeft.configNominalOutputForward(nominalSpeed, 0);
+		armLeft.configNominalOutputReverse(-nominalSpeed, 0);
+		armLeft.configPeakOutputForward(maxSpeedUp, 0);
+		armLeft.configPeakOutputReverse(maxSpeedDown, 0);
+		/*
+		 * set the allowable closed-loop error, Closed-Loop output will be
+		 * neutral within this range. See Table in Section 17.2.1 for native
+		 * units per rotation.
+		 */
+		armRight.configAllowableClosedloopError(0, allowableError, 0);  
+		
+		/* set closed loop gains in slot0, typically kF stays zero. */
+		armRight.config_kF(0, kF, 0);
+		armRight.config_kP(0, kP, 0);
+		armRight.config_kI(0, kI, 0);
+		armRight.config_kD(0, kD, 0);
+		/*
+		 * lets grab the 360 degree position of the MagEncoder's absolute
+		 * position, and intitally set the relative sensor to match. may need to make negative if sensors phase inverted
+		 * may also need to adjust to make it within the range we want to use.....//TODO
+		 */
+		//absolutePosition = armRight.getSensorCollection().getPulseWidthPosition();
+		/* mask out overflows, keep bottom 12 bits */
+		//absolutePosition &= 0xFFF;
+		// if sensor out of phase:  			absolutePosition *= -1;  //TODO
+		// motor inverted:           			absolutePosition *= -1;  //TODO    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!           
+		/* set the quadrature (relative) sensor to match absolute */
+		//armRight.setSelectedSensorPosition(absolutePosition, 0, 0);
+	}
+
+	/**
+	 * Sets the setpoint of the arm
+	 */
+	public void setSetpoint(double pos) {
+		armRight.set(ControlMode.Position, pos);
+	}	
+	
+	/**
+	 * Gets the set point of the arm
+	 */
+	public double getSetpoint(){
+		return armRight.getClosedLoopTarget(0);
 	}
 	
 	/**
-	 * Returns the input of the PID 
+	 * Gets the set point error of the arm
 	 */
-	public double returnPIDInput() {
-
-		SmartDashboard.putNumber("armPIDInput", armRight.getSensorCollection().getQuadraturePosition());
-		return RobotMap.arm_right.getSelectedSensorPosition(0);
-//		return SmartDashboard.getNumber("ArmPosition", 0.5);
+	public double getError(){
+		return armRight.getClosedLoopError(0);
 	}
 	
 	/**
-	 * Returns the Output of the PID
+	 * Returns the PID input/position of the Arm PID
 	 */
-	protected void usePIDOutput(double output) {
-
-		/*armLeft.set(ControlMode.PercentOutput, -output);
-		armRight.set(ControlMode.PercentOutput, output);*/
-		SmartDashboard.putNumber("numberOutput", output);
-		Arm.moveForward(output);
-
+	public double getPosition() {
+		return armRight.getSelectedSensorPosition(0);
 	}
 
-	// StopPID, toggle option for stopping it.
-	/**
-	 * Disables the PID subsystem on the lift.
-	 */
-	public void stopPID() {
-		this.PIDStatus = true;
-		this.disable();
-
-	}
-
-	/**
-	 * Enables the PID subsystem on the lift.
-	 */
-	public void startPID() {
-		this.PIDStatus = false;
-		this.enable();
-
-	}
-
-	// Return the PID when needed to another command.
-	/**
-	 * Returns the status of the PID subsystem to determine whether it is enabled.
-	 * 
-	 * @return true or false
-	 */
-	public boolean getPIDStatus() {
-		return this.PIDStatus;
-	}
-	//
+	//TODO ??
 	/*
 	 * public boolean LiftAutoTote() { return liftAutoTote.get(); }
 	 */
 
 	/**
-	 * Returns the status of the operator station button to determine whether the
-	 * joystick Y axis controls the lift or the back arm.
-	 * 
-	 * @return true or false
+	 * Set the Ramp Rate for the Arm for the PID.
 	 */
-
-	public boolean joystickModeStatus() {
-		// return this.joystickStatus;
-		return false;
+	public void setArmPIDRampRate(double arg0, int arg1) {
+		armRight.configClosedloopRamp(arg0, arg1);
 	}
 
-	/**
-	 * Set the Output range for the Lift during Teleop.
-	 */
-	public void setTeleopArmSpeed() {
-		getPIDController().setOutputRange(maxSpeedDown, maxSpeedUp); // For the lift PID
-	}
-	/**
-	 * Sets the position of the lifter
-	 */
-	public void setPosition(double pos){
-	    	setSetpoint(pos);
-	}
-	
-	public static void moveForward(double power) {
-		armLeft.set(ControlMode.PercentOutput, power);
+	public void move(double power) {
 		armRight.set(ControlMode.PercentOutput, power);
 	}
-	public static void moveBackward(double power) {
-		armLeft.set(ControlMode.PercentOutput, power);
-		armRight.set(ControlMode.PercentOutput, power);
-	}
+
 	public void stop() {
-		armLeft.set(ControlMode.PercentOutput, 0);
 		armRight.set(ControlMode.PercentOutput, 0);
 	}
 	
-	public static void setSoftLimits(int forward, int reverse) {
+	public boolean armIsLevel() {
+		return (getPosition() > 0.95 * forwardLevel);
+	}
+	public boolean armIsReverse() {
+		return (getPosition() < reverseSoftLimit);
+	}
+	public boolean armIsForward() {
+		return (getPosition() > forwardSoftLimit);
+	}
+
+
+	public void setSoftLimits(int forward, int reverse) {
 		RobotMap.arm_left.configForwardSoftLimitThreshold(forward, 0);
 		RobotMap.arm_right.configForwardSoftLimitThreshold(forward, 0);
-		
+
 		RobotMap.arm_left.configReverseSoftLimitThreshold(reverse, 0);
 		RobotMap.arm_right.configReverseSoftLimitThreshold(reverse, 0);
-		
-		SmartDashboard.putNumber("forwardSoftLimit", forward);
-		SmartDashboard.putNumber("reverseSoftLimit", reverse);
-		
-		SmartDashboard.putBoolean("forwardBoolean", RobotMap.arm_right.getSensorCollection().isFwdLimitSwitchClosed());
-		SmartDashboard.putBoolean("reverseBoolean", RobotMap.arm_right.getSensorCollection().isRevLimitSwitchClosed());
-		
+
+		if(RobotMap.alt_ControlDebug) {
+		SmartDashboard.putNumber("forwardArmSoftLimit", forward);
+		SmartDashboard.putNumber("reverseArmSoftLimit", reverse);
+
+		SmartDashboard.putBoolean("forwardArmLimitSwitch", RobotMap.arm_right.getSensorCollection().isFwdLimitSwitchClosed());
+		SmartDashboard.putBoolean("reverseArmLimitSwitch", RobotMap.arm_right.getSensorCollection().isRevLimitSwitchClosed());
+
+		}
 	}
-	public static void armAngle(double angle) {
-		
+
+	public boolean sameSide(double currentPosition, double desiredPosition) {
+		if(RobotMap.alt_ControlDebug) {
+		SmartDashboard.putNumber("currentArmPositionSS", currentPosition);
+		SmartDashboard.putNumber("desiredArmPositionSS", desiredPosition);
+		}
+		if (desiredPosition >= Robot.bigBrother.points[10][4] && currentPosition >= Robot.bigBrother.points[10][4]) {
+			return true;
+		} else if (currentPosition <= Robot.bigBrother.points[11][4] && desiredPosition <= Robot.bigBrother.points[11][4]) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
+	public boolean isScore() {
+		if(getPosition() < centerPosition) {
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean isPickUp() {
+		if(getPosition() >= centerPosition) {
+			return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * Debug, turn on/off in RobotMap
+	 */
+	public void periodic() {
+		if(RobotMap.alt_ControlDebug) {
+			
+		SmartDashboard.putNumber("armGetSetpoint", getSetpoint());
+		SmartDashboard.putNumber("armEncoderPositionPWM", RobotMap.arm_right.getSensorCollection().getPulseWidthPosition());
+		SmartDashboard.putNumber("armGetSelectedSensorPos", RobotMap.arm_right.getSelectedSensorPosition(0));
+		SmartDashboard.putString("controlMode", RobotMap.arm_right.getControlMode().toString());
+		SmartDashboard.putNumber("armRight MotorOutput %", RobotMap.arm_right.getMotorOutputPercent());
+		
+		SmartDashboard.putNumber("trolleyStringPotValue(in arm)", RobotMap.trolley_right.getSelectedSensorPosition(0));
+		}
+	}
 }
