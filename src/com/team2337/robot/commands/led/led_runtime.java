@@ -15,10 +15,7 @@ public class led_runtime extends Command {
 		requires(Robot.led);
 	}
 
-	protected void initialize() {
-		
-	}
-
+	protected void initialize() {}
 	protected void execute() {
 		
 		//TODO: If not auton, do this, else go do command colors
@@ -26,7 +23,7 @@ public class led_runtime extends Command {
 		if (Robot.intake.hasCrate()) {
 			 RED = Color.RED;
 			 YELLOW = Color.YELLOW;
-			 GREEN = Color.AQUA;
+			 GREEN = Color.GREEN;
 			
 		} else {
 			 RED = Color.STROBE_RED;
@@ -34,11 +31,11 @@ public class led_runtime extends Command {
 			 GREEN = Color.STROBE_GREEN;
 		}
 
-		if (Robot.lifter.levelOfLift == 1) {
+		if (Robot.lift.levelOfLift == 1) {
 			RobotMap.blinkin.setColor(GREEN);
-		} else if (Robot.lifter.levelOfLift == 2) {
+		} else if (Robot.lift.levelOfLift == 2) {
 			RobotMap.blinkin.setColor(YELLOW);
-		} else if (Robot.lifter.levelOfLift == 3) {
+		} else if (Robot.lift.levelOfLift == 3) {
 			RobotMap.blinkin.setColor(RED);
 		}	
 	}
@@ -46,10 +43,7 @@ public class led_runtime extends Command {
 	protected boolean isFinished() {
 		return false;
 	}
-
-	protected void end() {
-	}
-
+	protected void end() {}
 	protected void interrupted() {
 		this.end();
 	}

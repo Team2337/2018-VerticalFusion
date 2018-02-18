@@ -17,6 +17,6 @@ public class BlinkIn {
 		return setColor;
 	}
 	public void flow() {
-		blinkin.set(-1.02);
+		blinkin.set(-.99);
 	}
 }

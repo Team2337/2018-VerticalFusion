@@ -18,7 +18,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class LED extends Subsystem {
 	public double color = 0;
 	public void initDefaultCommand() {
-		//setDefaultCommand(new led_runtime());
+		setDefaultCommand(new led_runtime());
 	}
 	public void increase() {
 		color = color + 0.01;

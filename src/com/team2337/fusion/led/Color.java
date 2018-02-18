@@ -15,7 +15,7 @@ public class Color {
 	public static double RED = 0.61;
 	
 	public static double STROBE_YELLOW = .29;
-	public static double STROBE_GREEN = .11;
+	public static double STROBE_GREEN = .15;
 	public static double STROBE_RED = -.17;
 	
 	public static double RAINBOW_RAINBOW_PALETTE = -0.99;

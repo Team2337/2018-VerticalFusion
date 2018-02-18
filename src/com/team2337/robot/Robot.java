@@ -3,13 +3,11 @@ package com.team2337.robot;
 import com.team2337.robot.subsystems.Chassis;
 import com.team2337.robot.subsystems.Claw;
 import com.team2337.robot.subsystems.Climber;
-<<<<<<< HEAD
-import com.team2337.robot.subsystems.Ejector;
+
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.team2337.fusion.led.Color;
 import com.team2337.fusion.wrappers.command.auto.AutoCommandManager;
-=======
->>>>>>> master
+
 import com.team2337.robot.commands.DoNothing;
 import com.team2337.robot.commands.auto.*;
 import com.team2337.robot.subsystems.Arm;
@@ -80,6 +78,7 @@ public class Robot extends TimedRobot {
 		oi = new OI();
 
 		AutoCommandManager.getInstance().init();
+		
 		// Also include the Auton Chooser
 		autonchooser.addDefault("Cross the Line", new DoNothing());
 		autonchooser.addObject("Center Switch", new auto_centerSwitch());

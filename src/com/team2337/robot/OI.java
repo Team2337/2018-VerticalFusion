@@ -10,13 +10,8 @@ import com.team2337.robot.commands.chassis.*;
 import com.team2337.robot.commands.claw.*;
 import com.team2337.robot.commands.climber.*;
 import com.team2337.robot.commands.intake.*;
-<<<<<<< HEAD
-import com.team2337.robot.commands.led.led_decrease;
-import com.team2337.robot.commands.led.led_increase;
-=======
 import com.team2337.robot.commands.led.*;
 import com.team2337.robot.commands.lift.*;
->>>>>>> master
 import com.team2337.robot.commands.shifter.*;
 import com.team2337.robot.commands.trolley.*;
 
@@ -61,10 +56,6 @@ public class OI {
 	 * OperatorJoystick
 	 */
 	
-<<<<<<< HEAD
-	public static Joystick				operatorJoystick		= new Joystick(1);
-
-=======
 	/*public static Joystick				operatorJoystick		= new Joystick(1);
 	JoystickButton			operator_GreenA			= new JoystickButton(operatorJoystick, 1);
 	JoystickButton			operator_RedB			= new JoystickButton(operatorJoystick, 2);
@@ -90,7 +81,6 @@ public class OI {
 	
 	
 	public static Joystick				operatorJoystick		= new Joystick(1);
->>>>>>> master
 	JoystickButton			operator_RightTrigger				= new JoystickButton(operatorJoystick, 1);	//Digital trigger on the back of the joystick
 	JoystickButton			operator_StripedButton				= new JoystickButton(operatorJoystick, 2);	//The orange and black striped button on joystick
 	JoystickButton			operator_RightKnucleButton			= new JoystickButton(operatorJoystick, 3);	//The button on the top-right of the joytstick
@@ -222,14 +212,7 @@ public class OI {
 	    //operator_SE						   .whenPressed(new DoNothing());
 	    //operator_ST						   .whenPressed(new DoNothing());
 	                                          
-<<<<<<< HEAD
-	    operator_JoystickPOVUp			       .whenPressed(new led_increase());
-	    operator_JoystickPOVUpRight		       .whenPressed(new DoNothing());
-	    operator_JoystickPOVRight		       .whenPressed(new DoNothing());
-	    operator_JoystickPOVDownRight	       .whenPressed(new DoNothing());
-	    operator_JoystickPOVDown		       .whenPressed(new led_decrease());
-	    operator_JoystickPOVDownLeft	       .whenPressed(new DoNothing());
-=======
+
 	    operator_JoystickPOVUp			       .whenPressed(new claw_open());
 	    operator_JoystickPOVUpRight		       .whenPressed(new claw_open());
 	    operator_JoystickPOVUpLeft		       .whenPressed(new claw_open());
@@ -239,7 +222,7 @@ public class OI {
 	    operator_JoystickPOVDownLeft	       .whenPressed(new claw_close());
 	    
 	    operator_JoystickPOVRight		       .whenPressed(new DoNothing());
->>>>>>> master
+
 	    operator_JoystickPOVLeft		       .whenPressed(new DoNothing());
 	    
 	    ////////////////////////////////////
