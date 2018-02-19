@@ -26,13 +26,13 @@ public class Lift extends Subsystem {
 	private double maxSpeed = 1;
 	private double nominalSpeed = 0;
 	private double kF = 0;
-	private double kP = 0.1;
+	private double kP = 14;
 	private double kI = 0;
 	private double kD = 0;
-	private int allowableError = 50;     						 ///need to set *****************//TODO
+	private int allowableError = 0;     						 ///need to set *****************//TODO
 	
-	public static int forwardLIFTSoftLimit = 0;					 ///need to set *****************//TODO
-	public static  int reverseLIFTSoftLimit = 100;				 ///need to set *****************//TODO
+	public static int forwardLIFTSoftLimit = 590;					 ///need to set *****************//TODO
+	public static  int reverseLIFTSoftLimit = 40;				 ///need to set *****************//TODO
 
 	protected void initDefaultCommand() {
 		//setDefaultCommand(new lift_startPID());
@@ -77,7 +77,7 @@ public class Lift extends Subsystem {
 	 * Gets the set point of the lift
 	 */
 	public double getSetpoint(){
-		return rightFront.getClosedLoopError(0);
+		return rightFront.getClosedLoopTarget(0);
 	}
 	
 	/**

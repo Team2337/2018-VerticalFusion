@@ -231,6 +231,8 @@ public class Robot extends TimedRobot {
 	 * This method is called periodically during all modes (disabled, auton, teleop and test)
 	 */
 	public void allPeriodic() {
+		Robot.led.initDefaultCommand();
+		
 		SmartDashboard.putData("Auto mode", autonchooser);
 		SmartDashboard.putData("autoArmCommand", bigBrother);
 		//SmartDashboard.putData("arugnygfuynfgrt6gfsd", arm.getCurrentCommand());
@@ -239,6 +241,12 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("LeftEncoder", RobotMap.chassis_leftFront.getSelectedSensorPosition(0));
 		SmartDashboard.putNumber("RightEncoder", RobotMap.chassis_rightFront.getSelectedSensorPosition(0));
 		SmartDashboard.putNumber("LIFTStringPot", RobotMap.lift_right.getSelectedSensorPosition(0));
+		SmartDashboard.putNumber("lift output %%", RobotMap.lift_right.getMotorOutputPercent());
+		SmartDashboard.putNumber("lift Error", RobotMap.lift_right.getClosedLoopError(0));
+		SmartDashboard.putNumber("lift output calc", RobotMap.lift_right.getClosedLoopError(0)*7);
+		SmartDashboard.putNumber("lift Level", Robot.lift.levelOfLift);
+		//SmartDashboard.putNumber("lift P Value", RobotMap.lift_right.configGetParameter(ParamEnum.eProfileParamSlot_P, 0, 0));
+
 		
 	}	
 	

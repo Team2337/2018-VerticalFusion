@@ -40,9 +40,9 @@ public class auto_driveToAngleWithTime extends Command {
     	double currentAngularRate = Robot.gyro.getAngularRate();
     	double forward = speed; 	
     	
-    	//turn = (targetAngle - currentAngle) * Pgain - (currentAngularRate) * Dgain;
+    	turn = (targetAngle - currentAngle) * Pgain ;//- (currentAngularRate) * Dgain;
     	
-    	RobotMap.drive.arcadeDrive(forward, -turn, false);
+    	RobotMap.drive.arcadeDrive(forward, turn, false);
     	
     }
 	

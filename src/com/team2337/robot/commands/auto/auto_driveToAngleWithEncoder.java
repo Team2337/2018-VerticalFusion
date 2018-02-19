@@ -1,5 +1,6 @@
 package com.team2337.robot.commands.auto;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.team2337.fusion.gyro.Pigeon;
 import com.team2337.robot.OI;
 import com.team2337.robot.Robot;
@@ -39,9 +40,10 @@ public class auto_driveToAngleWithEncoder extends Command {
     	double currentAngularRate = Robot.gyro.getAngularRate();
     	double forward = speed; 	
     	
-    	turn = (targetAngle - currentAngle) * Pgain ;//- (currentAngularRate) * Dgain;
+    	turn = -((targetAngle - currentAngle) * Pgain );//- (currentAngularRate) * Dgain;
 
     	RobotMap.drive.arcadeDrive(forward, turn, false);
+
     }
 	
 	@Override

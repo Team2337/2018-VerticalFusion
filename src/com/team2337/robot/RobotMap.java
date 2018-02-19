@@ -143,9 +143,9 @@ public class RobotMap {
 		chassis_leftMid = new VictorSPX(chassisLeftMid);
 		chassis_leftRear = new VictorSPX(chassisLeftRear);
 
-		chassis_leftFront.setInverted(true);
-		chassis_leftMid.setInverted(true);
-		chassis_leftRear.setInverted(true);
+		chassis_leftFront.setInverted(false);
+		chassis_leftMid.setInverted(false);
+		chassis_leftRear.setInverted(false);
 
 		chassis_leftRear.follow(chassis_leftFront);
 		chassis_leftMid.follow(chassis_leftFront);
@@ -179,14 +179,14 @@ public class RobotMap {
 
 		lift_right = new TalonSRX(liftRight); // 5
 		lift_right.configSelectedFeedbackSensor(FeedbackDevice.Analog, 0, 0); //string pot
-		lift_right.setSensorPhase(false);
-		lift_right.setInverted(false);
+		lift_right.setSensorPhase(true);
+		lift_right.setInverted(true);
 		lift_right.setStatusFramePeriod(0, 0, 0);
 		lift_right.setNeutralMode(NeutralMode.Brake);
 		
 		lift_left = new VictorSPX(liftLeft); // 6
 		lift_left.follow(lift_right);
-		lift_left.setInverted(false);
+		lift_left.setInverted(true);
 		
 		lift_right.configForwardSoftLimitEnable(false, 0);
 		lift_left.configForwardSoftLimitEnable(false, 0);

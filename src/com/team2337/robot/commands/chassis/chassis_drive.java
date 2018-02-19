@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import com.team2337.robot.Robot;
 import com.team2337.robot.RobotMap;
 import com.team2337.robot.RobotMap.*;
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.team2337.fusion.drive.*;
 /**
  * Chassis: DRIVE - The drive for the chassis thats runs arcadeD
@@ -24,8 +25,10 @@ public class chassis_drive extends Command {
 	protected void execute() {
 		double moveSpeed = -driverJoystick.getRawAxis(1); //Left Y
 		double turnSpeed = driverJoystick.getRawAxis(4); //Right X
-
-		RobotMap.drive.arcadeDrive(moveSpeed, -turnSpeed, true);
+		
+		/*RobotMap.chassis_rightFront.set(ControlMode.PercentOutput, moveSpeed);
+		RobotMap.chassis_leftFront.set(ControlMode.PercentOutput, moveSpeed);*/
+		RobotMap.drive.arcadeDrive(moveSpeed, turnSpeed, true);
 		
 	}
 

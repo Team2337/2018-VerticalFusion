@@ -83,7 +83,7 @@ public class NerdyDrive {
 		}
 
 		this.left.set(ControlMode.PercentOutput, limit(leftMotorOutput) * m_maxOutput);
-		this.right.set(ControlMode.PercentOutput, -limit(rightMotorOutput) * m_maxOutput);
+		this.right.set(ControlMode.PercentOutput, limit(rightMotorOutput) * m_maxOutput);
 
 	}
 	public void curvatureDrive(double speed, double zRotation, boolean isQuickTurn) {

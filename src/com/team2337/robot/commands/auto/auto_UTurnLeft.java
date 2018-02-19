@@ -25,7 +25,7 @@ public class auto_UTurnLeft extends Command {
 	}
 
 	protected void execute() {
-		RobotMap.drive.tankDrive(speedRight, -0.1);
+		RobotMap.drive.tankDrive(-0.1, speedRight);
 
 		SmartDashboard.putNumber("right output CHASSIS", RobotMap.chassis_rightFront.getMotorOutputPercent());
 		SmartDashboard.putNumber("left output CHASSIS", RobotMap.chassis_leftFront.getMotorOutputPercent());

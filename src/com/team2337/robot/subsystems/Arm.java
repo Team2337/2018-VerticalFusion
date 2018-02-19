@@ -34,7 +34,7 @@ public class Arm extends Subsystem {
 	public static final int forwardLevel 		= 900;    ///??
 	public static final int forwardTopSL 		= 548;
 
-	public static final int centerPosition 		= 333;
+	public static final int centerPosition 		= 345;
 	
 	public static final int reverseTopSL 		= 55;
 	public static final int reverseLevel 		= -550;		///??

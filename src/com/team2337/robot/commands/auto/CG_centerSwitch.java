@@ -19,14 +19,15 @@ public class CG_centerSwitch extends CommandGroup {
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
 			//addSequential(new auto_moveUpperPosition(-600,386));
 			//addSequential(new auto_wait(0.25));
-			addSequential(new auto_driveToAngleWithEncoder(.9, 5, 40, 40000, 44000, 0.04));
-			addSequential(new auto_driveToAngleWithEncoder(.9, 3, 0, 40000, 69000, 0.02));
+			addSequential(new auto_driveToAngleWithEncoder(.9, 5, 40, 28000, 44000, 0.04));// speed was .9 
+			addSequential(new auto_driveToAngleWithEncoder(.9, 3, 0, 65000, 69000, 0.02));
 			addSequential(new auto_moveUpperPosition(-250,60));
 			addParallel(new auto_driveForwardWithTime(.3, 1));
 			addSequential(new claw_open());
 			addParallel(new auto_intakeOut(0.5,1));
 			addSequential(new auto_wait(1.5));
 			addSequential(new auto_moveUpperPosition(50,386));
+			
 		} else {
 			addParallel(new auto_bigBrother_DoNothing());
 			addSequential(new auto_holdUpperPosition(0.1));

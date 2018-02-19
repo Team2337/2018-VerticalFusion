@@ -201,9 +201,9 @@ public class OI {
 	    operator_RightKnucleButton		       .whileHeld(new intake_out(1));
 	    operator_L3						       .whenPressed(new DoNothing());
 	                                           
-	    operator_ThrottleTopThumbButton		   .whenPressed(new liftLevelAdjuster(1));
+	    operator_ThrottleTopThumbButton		   .whenPressed(new liftLevelAdjuster(3));
 	    operator_ThrottleMidThumbButton		   .whenPressed(new liftLevelAdjuster(2));
-	    operator_ThrottleBottomThumbButton	   .whenPressed(new liftLevelAdjuster(3));
+	    operator_ThrottleBottomThumbButton	   .whenPressed(new liftLevelAdjuster(1));
 	                                           
 	    operator_PalmButton				       .whenPressed(new DoNothing());
 	    operator_TopIndexButton 		       .whenPressed(new DoNothing());

@@ -22,6 +22,7 @@ public class Intake extends Subsystem {
 	//public static TalonSRX right = RobotMap.intake_right; //Right motor of intake 
 	public static VictorSPX right = RobotMap.intake_right;
 	public static TalonSRX left = RobotMap.intake_left; //Left motor of intake
+	public static boolean intakeOn = false;
 	
 	public void initDefaultCommand() {
 		setDefaultCommand(new intake_doNothing());
@@ -34,6 +35,7 @@ public class Intake extends Subsystem {
 	 * @param power Power of motors (-1.0 to 1.0)
 	 */
 	public void moveIn(double power) {
+		intakeOn = true;
 		right.set(ControlMode.PercentOutput, power);
 		left.set(ControlMode.PercentOutput, power);
 		
@@ -43,6 +45,7 @@ public class Intake extends Subsystem {
 	 * @param power Power of motors (-1.0 to 1.0) 
 	 */
 	public void moveOut(double power) {
+		intakeOn = true;
 		right.set(ControlMode.PercentOutput, -power);
 		left.set(ControlMode.PercentOutput, -power);
 	}
@@ -50,7 +53,7 @@ public class Intake extends Subsystem {
 	 * Stop the intake
 	 */
 	public void stop() {
-
+		intakeOn = false;
 		right.neutralOutput();
 		left.neutralOutput();
 	}

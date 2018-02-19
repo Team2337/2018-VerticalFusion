@@ -23,7 +23,7 @@ public class alt_Control_Import extends Command {
 	double armAdjNeg;
 	double trolleyAdj = 2; // TODO determne rightamount
 	double armEncoder;
-	// double liftPot;
+	//double liftPot;
 	double trolleyPot;
 	int reverse, forward;
 
@@ -95,19 +95,24 @@ public class alt_Control_Import extends Command {
 		// Override trolley setpoint to the top position if arm needs to change sides
 		armEncoder = RobotMap.arm_right.getSelectedSensorPosition(0);
 
+		if ((throttleToggle) > 0.1) {
+			armSetPoint = armSetPoint + (throttleToggle * armAdjPos);
+		} else if (throttleToggle < -0.1) {
+			armSetPoint = armSetPoint + (throttleToggle * armAdjNeg);
+		}
+		
 		if ((!Robot.arm.sameSide(armEncoder, armSetPoint))) {
 			trolleySetPoint = points[10][trolleySetPoints];
 
 			if (Robot.trolley.getPosition() < Robot.trolley.trolleyPassover) {
 
-				if (armEncoder >= points[10][armSetPoints]) {// Assuming position 10 is at the top
+				if (armEncoder >= Robot.arm.centerPosition) {// Assuming position 10 is at the top
 					armSetPoint = points[10][armSetPoints];
 				} // Setting arm set point to array 10 till trolley is at top
-				else if (armEncoder <= points[11][armSetPoints]) {
+				else if (armEncoder <= Robot.arm.centerPosition) {
 					armSetPoint = points[11][armSetPoints];
 				}
 				sameSide = false;
-				//System.out.println("**OVERRIDING ARM SET POINTS**");
 
 			}
 		} else
@@ -117,11 +122,7 @@ public class alt_Control_Import extends Command {
 
 		// Adjust arm set point based on throttle toggle input. Different adjustments
 		// for positive and negative toggle positions.
-		if ((throttleToggle) > 0.1) {
-			armSetPoint = armSetPoint + (throttleToggle * armAdjPos);
-		} else if (throttleToggle < -0.1) {
-			armSetPoint = armSetPoint + (throttleToggle * armAdjNeg);
-		}
+
 
 		// Soft Limits for ARM , set py position, not array....???
 		/*
@@ -154,7 +155,7 @@ public class alt_Control_Import extends Command {
 		} else {
 			// Robot.trolley.setSetpoint(trolleySetPoint);
 			Robot.arm.setSetpoint(armSetPoint);
-			Robot.lift.setSetpoint((double) points[(int) throttleValue][Robot.lift.levelOfLift]);
+			Robot.lift.setSetpoint(points[(int) throttleValue][Robot.lift.levelOfLift]);
 		}
 		if (RobotMap.trolley_right.getSelectedSensorPosition(0) < 61 && trolleySetPoint < 61) {
 			Robot.trolley.stop();
@@ -173,7 +174,9 @@ public class alt_Control_Import extends Command {
 			// RobotMap.trolley_right.getMotorOutputPercent());
 			SmartDashboard.putNumber("trolleyOutputXXXXXXXX", RobotMap.trolley_right.getMotorOutputPercent());
 			SmartDashboard.putBoolean("XXXsameSideXXX", sameSide);
-
+			SmartDashboard.putNumber("LIFTSetPointXXXXXX", Robot.lift.getSetpoint());
+			SmartDashboard.putNumber("liftArray SetPoint", points[(int) throttleValue][Robot.lift.levelOfLift]);
+			
 			// SmartDashboard.putNumber("TrolleyArrayValue", points[(int)
 			// throttleValue][trolleySetPoints]);
 			// this may be setting the array to the throttle, then getting to the logic
