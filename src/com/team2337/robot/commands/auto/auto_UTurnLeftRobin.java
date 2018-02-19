@@ -11,13 +11,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class auto_UTurnLeftRobin extends Command {
 
 	double speed, turn, radius, timeout, currentAngle;
-	double targetAngle = 180;
+	double targetAngle = -180;
 	double kPt = 0.1;
 	double track = 21.5; //inches
 
 	public auto_UTurnLeftRobin(double speed, double timeout, double radius) {
 		requires(Robot.chassis);
-		this.speed = speed;
+		this.speed = -speed;
 		this.timeout = timeout;
 		this.radius = radius;
 	}
