@@ -10,10 +10,11 @@ import edu.wpi.first.wpilibj.command.Command;
 public class auto_UTurnRight extends Command {
 
 	double speedLeft, speedRight, turn, timeout;
+	double track = 21.5;
 	
-	public auto_UTurnRight(double speedLeft, double speedRight, double timeout) {
+	public auto_UTurnRight(double speed, double timeout, double radius) {
 		requires(Robot.chassis);
-		this.speedLeft = speedLeft;
+		this.speedLeft = -(speed / (radius / (radius + track)));
 		this.speedRight = speedRight;
 	    this.timeout = timeout;
 
@@ -26,7 +27,7 @@ public class auto_UTurnRight extends Command {
     
     protected void execute() {
     	
-    	RobotMap.drive.tankDrive(speedLeft, speedRight);
+    	RobotMap.drive.tankDrive(speedRight, speedLeft);
     	
     }
 	

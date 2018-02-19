@@ -135,16 +135,16 @@ public class NerdyDrive {
 	}
 
 	public void tankDrive(double leftSpeed, double rightSpeed) {
-	    tankDrive(leftSpeed, rightSpeed, true);
+	    tankDrive(leftSpeed, rightSpeed, false);
 	  }
 	
 	public void tankDrive(double leftSpeed, double rightSpeed, boolean squaredInputs) {
 
 	    leftSpeed = limit(leftSpeed);
-	    leftSpeed = applyDeadband(leftSpeed, m_deadband);
+	  //  leftSpeed = applyDeadband(leftSpeed, m_deadband);
 
 	    rightSpeed = limit(rightSpeed);
-	    rightSpeed = applyDeadband(rightSpeed, m_deadband);
+	  //  rightSpeed = applyDeadband(rightSpeed, m_deadband);
 
 	    // Square the inputs (while preserving the sign) to increase fine control
 	    // while permitting full power.

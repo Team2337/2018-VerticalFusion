@@ -30,8 +30,8 @@ public class auto_driveToAngleWithTime extends Command {
     protected void initialize() {
     	setTimeout(timeout);
     	//Robot.gyro.resetPidgey();
-    	RobotMap.chassis_leftFront.setSelectedSensorPosition(0, 0, 0);
-    	RobotMap.chassis_rightFront.setSelectedSensorPosition(0, 0, 0);
+    	//RobotMap.chassis_leftFront.setSelectedSensorPosition(0, 0, 0);
+    	//RobotMap.chassis_rightFront.setSelectedSensorPosition(0, 0, 0);
     }
     
     protected void execute() {

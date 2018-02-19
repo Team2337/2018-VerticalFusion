@@ -103,9 +103,9 @@ public class RobotMap {
 	public static Boolean endOfAuto = true;  		//Also set to true in Robot.TeleOpInit
 	
 	//CAN Ports
-	private final static int chassisRightFront  = 0;
-	private final static int chassisRightMid    = 1;
-	private final static int chassisRightRear   = 2;
+	private final static int chassisRightFront  = 0; //15
+	private final static int chassisRightMid    = 1; //14
+	private final static int chassisRightRear   = 2; //13
 	private final static int climberRight       = 3; //9??  PTO off of lift
 	private final static int trolleyRight       = 4;
 	private final static int intakeRight        = 5;
@@ -116,9 +116,9 @@ public class RobotMap {
 	private final static int armLeft            = 10; //8
 	private final static int trolleyLeft        = 11; //3
 	private final static int climberLeft        = 12; //10;??  PTO off of lift
-	private final static int chassisLeftRear    = 13;
-	private final static int chassisLeftMid     = 14;
-	private final static int chassisLeftFront   = 15;
+	private final static int chassisLeftRear    = 13; //2
+	private final static int chassisLeftMid     = 14; //1
+	private final static int chassisLeftFront   = 15; //0
 	
 	//Pnuematics
 	//PCMs

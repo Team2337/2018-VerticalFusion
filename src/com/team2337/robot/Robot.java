@@ -85,20 +85,9 @@ public class Robot extends TimedRobot {
 		RobotMap.chassis_leftFront.setSelectedSensorPosition(0, 0, 0);
     	RobotMap.chassis_rightFront.setSelectedSensorPosition(0, 0, 0);
     	
-    	/*
-    	 autonchooser.addDefault("Cross the Line", new CG_holdArm());
-		 autonchooser.addObject("Center Switch", new auto_centerSwitch());
-		 autonchooser.addObject("Do Nothing", new DoNothing());
-		 autonchooser.addObject("Right Switch", new DoNothing());
-		 autonchooser.addObject("Right Scale", new DoNothing());
-		 autonchooser.addObject("Right Switch Scale", new DoNothing());
-		 autonchooser.addObject("Right Scale Switch", new DoNothing());
-		 autonchooser.addObject("Right Switch No cross", new DoNothing());
-		 autonchooser.addObject("Right Scale No cross", new DoNothing());
-		 autonchooser.addObject("Make them cry", new DoNothing());
-		 */
     	autonchooser.addObject("Cross the Line", "CrossLine");
     	autonchooser.addDefault("Center Switch", "CenterSwitch");
+    	autonchooser.addObject("TESTUTurn", "UTurn");
 	}
 
 	/**
@@ -158,7 +147,9 @@ public class Robot extends TimedRobot {
 		case "CrossLine":
 			//m_autonomousCommand = new auto_driveToAngleWithEncoder(.5, 10, 0, 40000, 92000, 0.04);
 			m_autonomousCommand = new DoNothing(ourswitch, scale);
-			System.out.println(ourswitch);
+			break;
+		case "UTurn":
+			m_autonomousCommand = new CG_uTurnStart(ourswitch, scale);
 			break;
 		default:
 			m_autonomousCommand = new DoNothing();
@@ -247,6 +238,7 @@ public class Robot extends TimedRobot {
 		//SmartDashboard.putNumber("ArmPValue", RobotMap.arm_right.configGetParameter(ParamEnum.eProfileParamSlot_P, 0, 0));
 		SmartDashboard.putNumber("LeftEncoder", RobotMap.chassis_leftFront.getSelectedSensorPosition(0));
 		SmartDashboard.putNumber("RightEncoder", RobotMap.chassis_rightFront.getSelectedSensorPosition(0));
+		SmartDashboard.putNumber("LIFTStringPot", RobotMap.lift_right.getSelectedSensorPosition(0));
 		
 	}	
 	
