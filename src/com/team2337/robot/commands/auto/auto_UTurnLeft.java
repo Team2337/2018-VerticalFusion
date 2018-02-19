@@ -33,7 +33,7 @@ public class auto_UTurnLeft extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		return isTimedOut() || Robot.gyro.getYaw() < -175;
+		return isTimedOut() || Robot.gyro.getYaw() < -150;
 	}
 
 	protected void end() {

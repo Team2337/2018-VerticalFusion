@@ -17,8 +17,8 @@ public class CG_uTurnStart extends CommandGroup {
 			addParallel(new auto_bigBrother_DoNothing());
 			addSequential(new auto_holdUpperPosition(0.1));
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
-			addSequential(new auto_UTurnLeft(.4, 1.5, 12)); //speed, timeout, radius: inches
-			addSequential(new auto_driveToAngleWithTime(-.5, 2, -180));
+			addSequential(new auto_UTurnLeft(.4, 1.2, 12)); //speed, timeout, radius: inches
+			//addSequential(new auto_driveToAngleWithEncoder(-.5, 2, -180, -42068, -86331, 0.04));
 			
 			
 		} else {
