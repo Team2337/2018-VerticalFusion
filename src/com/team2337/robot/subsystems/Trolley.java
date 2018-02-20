@@ -31,7 +31,7 @@ public class Trolley extends Subsystem {
 	private double kD = 0;
 	private int allowableError = 0;
 	
-	public double trolleyPassover = 540;
+	public double trolleyPassover = 510;  //practice 540, comp 510
 
 	public static int forwardTrolleySoftLimit = 585;
 	public static int reverseTrolleySoftLimit = 50;

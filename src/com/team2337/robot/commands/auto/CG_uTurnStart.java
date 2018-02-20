@@ -17,14 +17,19 @@ public class CG_uTurnStart extends CommandGroup {
 			addParallel(new auto_bigBrother_DoNothing());
 			addSequential(new auto_holdUpperPosition(0.1));
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
-			addSequential(new auto_UTurnLeft(.4, 1.5, 12)); //speed, timeout, radius: inches
-			addSequential(new auto_driveToAngleWithTime(-.5, 2, -180));
+			//addSequential(new auto_UTurnLeftRobin(.8, 5, 10)); //speed, timeout, radius: inches
+			addSequential(new auto_UTurn(.1, -.8, 5, -175));
+			//addSequential(new auto_wait(1));
+			addSequential(new auto_driveToAngleWithTime(-.6, 1.2, -180));
+			addSequential(new auto_driveToAngleWithTime(-1, .5, -180));
 			
 			
 		} else {
 			addParallel(new auto_bigBrother_DoNothing());
 			addSequential(new auto_holdUpperPosition(0.1));
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
+			addSequential(new auto_UTurn(-0.8, .1, 5, 175));
+			addSequential(new auto_driveToAngleWithTime(-.6, 1.2, 180));
 			
 		}
 		

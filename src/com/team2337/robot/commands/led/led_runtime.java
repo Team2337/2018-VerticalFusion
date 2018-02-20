@@ -1,6 +1,7 @@
 package com.team2337.robot.commands.led;
 
 import com.team2337.fusion.led.Color;
+import com.team2337.fusion.wrappers.auto.AutoCommandManager;
 import com.team2337.robot.Robot;
 import com.team2337.robot.RobotMap;
 
@@ -16,47 +17,39 @@ public class led_runtime extends Command {
 	}
 
 	protected void initialize() {
-		if(Robot.lift.levelOfLift == 1) RobotMap.blinkin.setColor(0.09);
-		else if(Robot.lift.levelOfLift == 2) RobotMap.blinkin.setColor(0.29);
-		else if(Robot.lift.levelOfLift == 3) RobotMap.blinkin.setColor(-0.17);
+
 	}
 
 	protected void execute() {
-		if(Robot.lift.levelOfLift == 1) {
-			if(!RobotMap.crateSensor.get()) {
-				RobotMap.blinkin.setColor(0.76); //Solid Green
+		if (AutoCommandManager.getInstance().state.equals("teleop")) {
+			if (Robot.lift.levelOfLift == 1) {
+				if (!RobotMap.crateSensor.get()) {
+					RobotMap.blinkin.setColor(0.76); // Solid Green
+				} else if (Robot.intake.intakeOn) {
+					RobotMap.blinkin.setColor(0.05); // HeartBeat Green
+				} else {
+					RobotMap.blinkin.setColor(0.09); // Breath Green
+				}
+			} else if (Robot.lift.levelOfLift == 2) {
+				if (!RobotMap.crateSensor.get()) {
+					RobotMap.blinkin.setColor(0.63); // Solid Yellow
+				} else if (Robot.intake.intakeOn) {
+					RobotMap.blinkin.setColor(0.25); // HeartBeat Yellow
+				} else {
+					RobotMap.blinkin.setColor(0.29); // Breath Yellow
+				}
+			} else if (Robot.lift.levelOfLift == 3) {
+				if (!RobotMap.crateSensor.get()) {
+					RobotMap.blinkin.setColor(0.62); // Solid Red
+				} else if (Robot.intake.intakeOn) {
+					RobotMap.blinkin.setColor(-0.25); // HeartBeat Red
+				} else {
+					RobotMap.blinkin.setColor(-0.17); // Breath Red
+				}
 			}
-			else if(Robot.intake.intakeOn) {
-				RobotMap.blinkin.setColor(0.05); //HeartBeat Green
-			}
-			else {
-			RobotMap.blinkin.setColor(0.09); //Breath Green
-			}
+			// -0.59 = rainbow party
+			// RobotMap.blinkin.flow();
 		}
-		else if(Robot.lift.levelOfLift == 2) {
-			if(!RobotMap.crateSensor.get()) {
-				RobotMap.blinkin.setColor(0.63); //Solid Yellow
-			}
-			else if(Robot.intake.intakeOn) {
-				RobotMap.blinkin.setColor(0.25); //HeartBeat Yellow
-			}
-			else {
-			RobotMap.blinkin.setColor(0.29); //Breath Yellow
-			}
-		}
-		else if(Robot.lift.levelOfLift == 3) {
-			if(!RobotMap.crateSensor.get()) {
-				RobotMap.blinkin.setColor(0.62); //Solid Red
-			}
-			else if(Robot.intake.intakeOn) {
-				RobotMap.blinkin.setColor(-0.25); //HeartBeat Red
-			}
-			else {
-			RobotMap.blinkin.setColor(-0.17); //Breath Red
-			}
-		}
-		//-0.59 = rainbow party
-		// RobotMap.blinkin.flow();
 	}
 
 	protected boolean isFinished() {

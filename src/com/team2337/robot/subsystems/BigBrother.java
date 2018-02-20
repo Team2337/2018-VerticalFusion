@@ -29,10 +29,10 @@ public class BigBrother extends Subsystem {
 	}
 
 	void startFilling() {
-		points = setPointsTestPickUpOnly.points;
+		//points = setPointsTestPickUpOnly.points;
 		//points = setPoints.points;
 		//points = setPointsPracticeBot.points;
-		//points = setPointsCompBot.points;
+		points = setPointsCompBot.points;
 	}
 	public void stopAltControl() {
 		RobotMap.trolley_right.set(ControlMode.PercentOutput, 0);

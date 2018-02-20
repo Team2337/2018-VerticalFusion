@@ -5,6 +5,7 @@ import com.team2337.fusion.controller.JoystickPOVButton;
 
 import com.team2337.robot.commands.*;
 import com.team2337.robot.commands.arm.*;
+import com.team2337.robot.commands.auto.*;
 import com.team2337.robot.commands.bigBrother.*;
 import com.team2337.robot.commands.chassis.*;
 import com.team2337.robot.commands.claw.*;
@@ -146,7 +147,7 @@ public class OI {
 		driver_BumperRight		.whenPressed(new DoNothing());
 		
 		driver_Back				.whileHeld(new DoNothing()); 
-		driver_Start			.whileHeld(new DoNothing());
+		driver_Start			.whenPressed(new auto_gyroMMTurn());
 		
 		driver_LeftStick		.whenPressed(new DoNothing()); 
 		driver_RightStick		.whenPressed(new DoNothing()); 

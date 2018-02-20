@@ -6,25 +6,21 @@ import com.team2337.robot.Robot;
 import com.team2337.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class auto_driveToAngleWithTime extends Command {
 
 	double speed, turn, Pgain, Dgain, MaxCorrectionRatio, targetAngle, timeout;
-	
+	double num = 0;
 	public auto_driveToAngleWithTime(double speed, double timeout, double angle) {
 		requires(Robot.chassis);
-		Pgain = 0.04; /* percent throttle per degree of error */
+		Pgain = 0.08; /* percent throttle per degree of error */
 		Dgain = 0.0004; /* percent throttle per angular velocity dps */
 		MaxCorrectionRatio = 0.20; /* cap corrective turning throttle to 30 percent of forward throttle */
 		this.speed = speed;
 	    this.timeout = timeout;
 	    this.targetAngle = angle;
 		
-	}
-	public auto_driveToAngleWithTime(double timeout) {
-		this.timeout = timeout;
-		speed = .7;
-		turn  = .7;
 	}
 	
     protected void initialize() {
@@ -35,12 +31,13 @@ public class auto_driveToAngleWithTime extends Command {
     }
     
     protected void execute() {
-    	
+    	System.out.println(Robot.gyro.getYaw() + " exec "  +  num);
+    	num++;
     	double currentAngle = Pigeon.pidgey.getFusedHeading();
     	double currentAngularRate = Robot.gyro.getAngularRate();
     	double forward = speed; 	
     	
-    	turn = (targetAngle - currentAngle) * Pgain ;//- (currentAngularRate) * Dgain;
+    	turn = (-targetAngle + currentAngle) * Pgain; // - (currentAngularRate) * Dgain;
     	
     	RobotMap.drive.arcadeDrive(forward, turn, false);
     	
@@ -52,6 +49,7 @@ public class auto_driveToAngleWithTime extends Command {
 	}
 	
     protected void end() {
+    	System.out.println(Robot.gyro.getYaw());
     	RobotMap.drive.arcadeDrive(0,0,true);
     }
     

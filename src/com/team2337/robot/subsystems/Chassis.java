@@ -2,6 +2,7 @@ package com.team2337.robot.subsystems;
 
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.team2337.robot.Robot;
 import com.team2337.robot.RobotMap;
 import com.team2337.robot.commands.chassis.chassis_drive;
@@ -19,6 +20,15 @@ public class Chassis extends Subsystem {
 
 	public void initDefaultCommand() {
 		setDefaultCommand(new chassis_drive());
+	}
+	
+	public void setBrakeMode(NeutralMode mode) {
+		 RobotMap.chassis_leftFront.setNeutralMode(mode);
+		 RobotMap.chassis_rightFront.setNeutralMode(mode);
+		 RobotMap.chassis_leftMid.setNeutralMode(mode);
+		 RobotMap.chassis_rightMid.setNeutralMode(mode);
+		 RobotMap.chassis_leftRear.setNeutralMode(mode);
+		 RobotMap.chassis_rightRear.setNeutralMode(mode);
 	}
 	
 	public void periodic() {

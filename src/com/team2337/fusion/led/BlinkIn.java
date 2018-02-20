@@ -7,6 +7,7 @@ public class BlinkIn {
 	private double setColor = 0;
 	public BlinkIn(int pwm) {
 		blinkin = new Spark(pwm);
+		blinkin.setSafetyEnabled(false);
 	}
 	public void setColor(double color) {
 		if (color != setColor) {

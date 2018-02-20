@@ -16,11 +16,12 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class auto_gyroMMTurn extends Command {
 
-    public static double driveFL, drivePL, driveIL, driveDL, driveFR, drivePR, driveIR, driveDR, rev;
+    public static double driveFL, drivePL, driveIL, driveDL, driveFR, drivePR, driveIR, driveDR, rev, secondsFromNeutralToFull;
 	public static int timeoutMs = 0;
 	public static int slotIdx = 0;
 	public static int sensorUnitsPer100ms, sensorUnitsPer100msPerSec;
     public VisionProcessing boilerVision = RobotMap.vision;
+    
    
     public auto_gyroMMTurn() {
         requires(Robot.chassis);
@@ -28,22 +29,22 @@ public class auto_gyroMMTurn extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	
+    	secondsFromNeutralToFull = .2;
     	RobotMap.chassis_rightFront.setSelectedSensorPosition(0, 0, timeoutMs);
     	RobotMap.chassis_leftFront.setSelectedSensorPosition(0, 0, timeoutMs);
-    	driveFR = 0.1370574769317461;
-        drivePR = 0.00836; 
+    	driveFR = .14; //0.00425; //.01370574769317461;
+        drivePR = 0;//.03; 
         driveIR = 0;
-        driveDR = 0.08;
+        driveDR = 0;
     	RobotMap.chassis_rightFront.config_kF(slotIdx, driveFR, timeoutMs); 
     	RobotMap.chassis_rightFront.config_kP(slotIdx, drivePR, timeoutMs); 
     	RobotMap.chassis_rightFront.config_kI(slotIdx, driveIR, timeoutMs);
     	RobotMap.chassis_rightFront.config_kD(slotIdx, driveDR, timeoutMs);
     	
-    	driveFL = 0.1370574769317461;
-        drivePL = 0.00886; 
+    	driveFL = 0.01; //.005;
+        drivePL = 0;//.09; 
         driveIL = 0;
-        driveDL = 0.08;
+        driveDL = 0;
     	RobotMap.chassis_leftFront.config_kF(slotIdx, driveFL, timeoutMs);
     	RobotMap.chassis_leftFront.config_kF(slotIdx, drivePL, timeoutMs);
     	RobotMap.chassis_leftFront.config_kF(slotIdx, driveIL, timeoutMs);
@@ -58,19 +59,20 @@ public class auto_gyroMMTurn extends Command {
 		RobotMap.chassis_leftFront.configMotionAcceleration(sensorUnitsPer100msPerSec, timeoutMs);
 		RobotMap.chassis_rightFront.configMotionAcceleration(sensorUnitsPer100msPerSec, timeoutMs);
 		
-		//RobotMap.chassis_leftFront.configClosedloopRamp(secondsFromNeutralToFull, timeoutMs)
+		RobotMap.chassis_leftFront.configClosedloopRamp(secondsFromNeutralToFull, timeoutMs);
+		RobotMap.chassis_rightFront.configClosedloopRamp(secondsFromNeutralToFull, timeoutMs);
 		RobotMap.chassis_leftFront.configNominalOutputForward(.1, timeoutMs);
 		RobotMap.chassis_rightFront.configNominalOutputForward(.1, timeoutMs);
 		
 		RobotMap.chassis_leftFront.configNominalOutputReverse(-.1, timeoutMs);
 		RobotMap.chassis_rightFront.configNominalOutputReverse(-.1, timeoutMs);
 		
-		//Robot.chassis.setBrakeMode(NeutralMode.Coast);
+		Robot.chassis.setBrakeMode(NeutralMode.Coast);
     	//rev = Constants.kTargetingCamera_RevDegree * Constants.kAuton_TurnDegreeRed;
-    	rev = 50000;
+    	rev = 26000;
     	//System.out.println(rev);
-    	RobotMap.chassis_leftFront.set(ControlMode.MotionMagic, 50000);
-    	RobotMap.chassis_rightFront.set(ControlMode.MotionMagic, 50000);
+    	RobotMap.chassis_leftFront.set(ControlMode.MotionMagic, rev);
+    	RobotMap.chassis_rightFront.set(ControlMode.MotionMagic, rev);
     
     	//Robot.chassis.setMotionMagicTurn(rev);
 		setTimeout(6);

@@ -90,6 +90,7 @@ public class RobotMap {
 
 	public static VisionProcessing vision;
 	
+	public static DigitalInput lineReader;
 	
 	public static UsbCamera camera;
 	
@@ -130,6 +131,7 @@ public class RobotMap {
 	private final static int shifterLeft   = 4;
 	private final static int shifterRight  = 5;
 	private final static int ledInfo       = 6;
+	private final static int climb 		   = 7; //TBD
 	
 	public static void init() {
 		
@@ -226,7 +228,7 @@ public class RobotMap {
 		intake_right.setInverted(true);
 		
 		crateSensor = new DigitalInput(0);
-		
+		lineReader = new DigitalInput(2);
 		/*
 		 * Arm
 		 */

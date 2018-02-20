@@ -4,7 +4,9 @@ import com.team2337.robot.subsystems.Chassis;
 import com.team2337.robot.subsystems.Claw;
 import com.team2337.robot.subsystems.Climber;
 import com.ctre.phoenix.ParamEnum;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.team2337.fusion.gyro.Pigeon;
+import com.team2337.fusion.wrappers.auto.AutoCommandManager;
 import com.team2337.robot.commands.DoNothing;
 import com.team2337.robot.commands.auto.*;
 import com.team2337.robot.subsystems.Arm;
@@ -45,12 +47,11 @@ public class Robot extends TimedRobot {
 	public static String ourswitch = "q";
 	public static String scale = "q";
 	public static String oppswitch = "q";
-	
-	//public static char ourswitch, scale, oppswitch;
+
+	// public static char ourswitch, scale, oppswitch;
 
 	Command m_autonomousCommand;
 	SendableChooser<String> autonchooser = new SendableChooser<>();
-	
 
 	/**
 	 * This function is run when the robot is first started up and should be used
@@ -64,9 +65,8 @@ public class Robot extends TimedRobot {
 		// Also start the camera(s)
 		RobotMap.startCamera();
 
-		
 		// Reference all of the subsystems
-		 
+
 		chassis = new Chassis();
 		trolley = new Trolley();
 		intake = new Intake();
@@ -79,15 +79,20 @@ public class Robot extends TimedRobot {
 		lift = new Lift();
 		gyro = new Pigeon();
 		oi = new OI();
+		
+		AutoCommandManager.getInstance().init();
+		AutoCommandManager.getInstance().setBlinkin(RobotMap.blinkin);
 
 		// Also include the Auton Chooser
 		Robot.gyro.resetPidgey();
 		RobotMap.chassis_leftFront.setSelectedSensorPosition(0, 0, 0);
-    	RobotMap.chassis_rightFront.setSelectedSensorPosition(0, 0, 0);
-    	
-    	autonchooser.addObject("Cross the Line", "CrossLine");
-    	autonchooser.addDefault("Center Switch", "CenterSwitch");
-    	autonchooser.addObject("TESTUTurn", "UTurn");
+		RobotMap.chassis_rightFront.setSelectedSensorPosition(0, 0, 0);
+
+		autonchooser.addObject("Cross the Line", "CrossLine");
+		autonchooser.addDefault("Center Switch", "CenterSwitch");
+		autonchooser.addObject("TESTUTurn", "UTurn");
+		autonchooser.addObject("TESTLineRead", "line");
+
 	}
 
 	/**
@@ -97,6 +102,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void disabledInit() {
+		AutoCommandManager.getInstance().disable();
 		Pigeon.pidgey.setFusedHeading(0.0, 10);
 		this.allInit();
 	}
@@ -106,9 +112,6 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("trolleyJoystickValue", Robot.oi.operatorJoystick.getRawAxis(2));
 		Scheduler.getInstance().run();
 		this.allPeriodic();
-		
-
-		
 
 	}
 
@@ -126,37 +129,40 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+		AutoCommandManager.getInstance().auton();
 		Robot.gyro.resetPidgey();
 		RobotMap.chassis_leftFront.setSelectedSensorPosition(0, 0, 0);
 		RobotMap.chassis_rightFront.setSelectedSensorPosition(0, 0, 0);
-		
+
 		String gameData;
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
-		
-		ourswitch = gameData.substring(0,1);
-		scale = gameData.substring(1,2);
-		oppswitch = gameData.substring(2,3);
+
+		ourswitch = gameData.substring(0, 1);
+		scale = gameData.substring(1, 2);
+		oppswitch = gameData.substring(2, 3);
 
 		String selected = autonchooser.getSelected();
-		
-		switch(selected) {
-		case "CenterSwitch": 
+
+		switch (selected) {
+		case "CenterSwitch":
 			m_autonomousCommand = new CG_centerSwitch(ourswitch, scale);
-			//m_autonomousCommand = new CG_holdArm();
-			 break;
+			// m_autonomousCommand = new CG_holdArm();
+			break;
 		case "CrossLine":
-			//m_autonomousCommand = new auto_driveToAngleWithEncoder(.5, 10, 0, 40000, 92000, 0.04);
+			// m_autonomousCommand = new auto_driveToAngleWithEncoder(.5, 10, 0, 40000,
+			// 92000, 0.04);
 			m_autonomousCommand = new DoNothing(ourswitch, scale);
 			break;
 		case "UTurn":
 			m_autonomousCommand = new CG_uTurnStart(ourswitch, scale);
 			break;
+		case "line":
+			m_autonomousCommand = new auto_driveToLine(-.5,0,5);
+			break;
 		default:
 			m_autonomousCommand = new DoNothing();
-			break; 
+			break;
 		}
-		 
-
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
@@ -169,7 +175,7 @@ public class Robot extends TimedRobot {
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.start();
 		}
-		
+
 		this.allInit();
 	}
 
@@ -184,10 +190,14 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
+		AutoCommandManager.getInstance().teleop();
+		
 		this.allInit();
 		RobotMap.endOfAuto = true;
 		claw.close();
 		
+		Robot.chassis.setBrakeMode(NeutralMode.Coast);
+
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
@@ -205,10 +215,9 @@ public class Robot extends TimedRobot {
 		Scheduler.getInstance().run();
 		this.allPeriodic();
 
-
 		SmartDashboard.putNumber("centerX", RobotMap.vision.getRevAngle());
 
-		//System.out.print(RobotMap.vision.getRevAngle());
+		// System.out.print(RobotMap.vision.getRevAngle());
 	}
 
 	/**
@@ -218,37 +227,43 @@ public class Robot extends TimedRobot {
 	public void testPeriodic() {
 		this.allPeriodic();
 	}
-	
+
 	//////////////////////////////////////////////
 
 	/**
-	 * This method is called once during all modes when selected (disabled, auton, teleop and test)
+	 * This method is called once during all modes when selected (disabled, auton,
+	 * teleop and test)
 	 */
 	public void allInit() {
-		
+
 	}
+
 	/**
-	 * This method is called periodically during all modes (disabled, auton, teleop and test)
+	 * This method is called periodically during all modes (disabled, auton, teleop
+	 * and test)
 	 */
 	public void allPeriodic() {
 		Robot.led.initDefaultCommand();
-		
+
 		SmartDashboard.putData("Auto mode", autonchooser);
 		SmartDashboard.putData("autoArmCommand", bigBrother);
-		//SmartDashboard.putData("arugnygfuynfgrt6gfsd", arm.getCurrentCommand());
+		// SmartDashboard.putData("arugnygfuynfgrt6gfsd", arm.getCurrentCommand());
 		SmartDashboard.putString("getCommandtyg", bigBrother.getCurrentCommandName());
-		//SmartDashboard.putNumber("ArmPValue", RobotMap.arm_right.configGetParameter(ParamEnum.eProfileParamSlot_P, 0, 0));
+		// SmartDashboard.putNumber("ArmPValue",
+		// RobotMap.arm_right.configGetParameter(ParamEnum.eProfileParamSlot_P, 0, 0));
 		SmartDashboard.putNumber("LeftEncoder", RobotMap.chassis_leftFront.getSelectedSensorPosition(0));
 		SmartDashboard.putNumber("RightEncoder", RobotMap.chassis_rightFront.getSelectedSensorPosition(0));
 		SmartDashboard.putNumber("LIFTStringPot", RobotMap.lift_right.getSelectedSensorPosition(0));
 		SmartDashboard.putNumber("lift output %%", RobotMap.lift_right.getMotorOutputPercent());
 		SmartDashboard.putNumber("lift Error", RobotMap.lift_right.getClosedLoopError(0));
-		SmartDashboard.putNumber("lift output calc", RobotMap.lift_right.getClosedLoopError(0)*7);
+		SmartDashboard.putNumber("lift output calc", RobotMap.lift_right.getClosedLoopError(0) * 7);
 		SmartDashboard.putNumber("lift Level", Robot.lift.levelOfLift);
-		//SmartDashboard.putNumber("lift P Value", RobotMap.lift_right.configGetParameter(ParamEnum.eProfileParamSlot_P, 0, 0));
+		//SmartDashboard.putNumber("left P Value",
+		//RobotMap.chassis_leftFront.configGetParameter(ParamEnum.eProfileParamSlot_F, 0, 0));
+		//SmartDashboard.putNumber("Right P Value",
+		//RobotMap.chassis_rightFront.configGetParameter(ParamEnum.eProfileParamSlot_F, 0, 0));
+		SmartDashboard.putBoolean("Line Reader", RobotMap.lineReader.get());
 
-		
-	}	
-	
-	
+	}
+
 }
