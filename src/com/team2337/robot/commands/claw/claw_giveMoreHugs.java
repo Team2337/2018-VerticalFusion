@@ -27,7 +27,7 @@ public class claw_giveMoreHugs extends Command {
 	}
 	@Override
 	protected boolean isFinished() {
-		return false;
+		return true;
 	}
 	@Override
 	protected void end() {

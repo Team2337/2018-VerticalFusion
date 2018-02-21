@@ -31,10 +31,10 @@ public class auto_driveToAngleWithTime extends Command {
     }
     
     protected void execute() {
-    	System.out.println(Robot.gyro.getYaw() + " exec "  +  num);
+    	//System.out.println(Robot.gyro.getYaw() + " exec "  +  num);
     	num++;
     	double currentAngle = Pigeon.pidgey.getFusedHeading();
-    	double currentAngularRate = Robot.gyro.getAngularRate();
+    	//double currentAngularRate = Robot.gyro.getAngularRate();
     	double forward = speed; 	
     	
     	turn = (-targetAngle + currentAngle) * Pgain; // - (currentAngularRate) * Dgain;
@@ -49,7 +49,7 @@ public class auto_driveToAngleWithTime extends Command {
 	}
 	
     protected void end() {
-    	System.out.println(Robot.gyro.getYaw());
+    	//System.out.println(Robot.gyro.getYaw());
     	RobotMap.drive.arcadeDrive(0,0,true);
     }
     

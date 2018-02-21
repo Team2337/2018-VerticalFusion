@@ -35,7 +35,7 @@ public class intake_in extends Command {
 			Robot.claw.give60Hugs();
 		} else {
 			Robot.intake.moveIn(this.power);
-			Robot.claw.give30Hugs();
+			//Robot.claw.give30Hugs();
 		}
 	}
 	protected boolean isFinished() {

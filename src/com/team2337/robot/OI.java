@@ -143,11 +143,12 @@ public class OI {
 		driver_BlueX			.whenPressed(new DoNothing()); //.whenPressed(new trolley_setPID(0.1)); 
 		driver_YellowY			.whenPressed(new DoNothing()); //.whenPressed(new trolley_stopPID());
 		
-		driver_BumperLeft		.whenPressed(new DoNothing());
-		driver_BumperRight		.whenPressed(new DoNothing());
+		driver_BumperLeft		.whenPressed(new claw_close());
+		driver_BumperRight	.whenPressed(new claw_CGOpen());
+		driver_BumperRight  .whenReleased(new claw_CGClose());
 		
-		driver_Back				.whileHeld(new DoNothing()); 
-		driver_Start			.whenPressed(new auto_gyroMMTurn());
+		driver_Back				.whenPressed(new claw_giveLessHugs()); //30
+		driver_Start			.whenPressed(new claw_giveMoreHugs()); //60
 		
 		driver_LeftStick		.whenPressed(new DoNothing()); 
 		driver_RightStick		.whenPressed(new DoNothing()); 
@@ -199,8 +200,8 @@ public class OI {
 	    //Operator 
 	    operator_RightTrigger			       .whileHeld(new intake_in(1));
 	    operator_StripedButton			       .whenPressed(new DoNothing());
-	    operator_RightKnucleButton		       .whileHeld(new intake_out(1));
-	    operator_L3						       .whenPressed(new DoNothing());
+	    operator_RightKnucleButton		       .whileHeld(new intake_out(0.6));
+	    operator_L3						       .whileHeld(new intake_out(1));
 	                                           
 	    operator_ThrottleTopThumbButton		   .whenPressed(new liftLevelAdjuster(3));
 	    operator_ThrottleMidThumbButton		   .whenPressed(new liftLevelAdjuster(2));
@@ -213,13 +214,13 @@ public class OI {
 	    //operator_SE						   .whenPressed(new DoNothing());
 	    //operator_ST						   .whenPressed(new DoNothing());
 	                                          
-	    operator_JoystickPOVUp			       .whenPressed(new claw_open());
-	    operator_JoystickPOVUpRight		       .whenPressed(new claw_open());
-	    operator_JoystickPOVUpLeft		       .whenPressed(new claw_open());
+	    operator_JoystickPOVUp			       .whileHeld(new claw_openClose());
+	    operator_JoystickPOVUpRight		       .whileHeld(new claw_openClose());
+	    operator_JoystickPOVUpLeft		       .whileHeld(new claw_openClose());
 	    
-	    operator_JoystickPOVDownRight	       .whenPressed(new claw_close());
-	    operator_JoystickPOVDown		       .whenPressed(new claw_close());
-	    operator_JoystickPOVDownLeft	       .whenPressed(new claw_close());
+	    operator_JoystickPOVDownRight	       .whenPressed(new DoNothing());
+	    operator_JoystickPOVDown		       .whenPressed(new DoNothing());
+	    operator_JoystickPOVDownLeft	       .whenPressed(new DoNothing());
 	    
 	    operator_JoystickPOVRight		       .whenPressed(new DoNothing());
 	    operator_JoystickPOVLeft		       .whenPressed(new DoNothing());

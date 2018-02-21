@@ -9,6 +9,7 @@ import com.team2337.fusion.gyro.Pigeon;
 import com.team2337.fusion.wrappers.auto.AutoCommandManager;
 import com.team2337.robot.commands.DoNothing;
 import com.team2337.robot.commands.auto.*;
+import com.team2337.robot.commands.lift.liftLevelAdjuster;
 import com.team2337.robot.subsystems.Arm;
 import com.team2337.robot.subsystems.BigBrother;
 import com.team2337.robot.subsystems.Intake;
@@ -193,6 +194,7 @@ public class Robot extends TimedRobot {
 		AutoCommandManager.getInstance().teleop();
 		
 		this.allInit();
+		lift.levelOfLift = 1;;
 		RobotMap.endOfAuto = true;
 		claw.close();
 		

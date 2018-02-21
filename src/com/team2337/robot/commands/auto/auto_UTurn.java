@@ -30,11 +30,11 @@ public class auto_UTurn extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		return isTimedOut() || Math.abs(Robot.gyro.getYaw()) > Math.abs(target);
+		return isTimedOut() ;//|| Math.abs(Robot.gyro.getYaw()) > Math.abs(target);
 	}
 
 	protected void end() {
-		System.out.println(Robot.gyro.getYaw());
+		//System.out.println(Robot.gyro.getYaw());
 		//RobotMap.drive.arcadeDrive(.5, 0, true);
 		
 	}

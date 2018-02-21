@@ -9,26 +9,26 @@ import com.team2337.robot.Robot;
  * @category CLAW
  * @author Brendan
  */
-public class claw_open extends Command {
-	public claw_open() {
+public class claw_openClose extends Command {
+	public claw_openClose() {
 		requires(Robot.claw);
 	}
 	@Override
 	protected void initialize() {
-		Robot.claw.open();
 		
+		Robot.claw.open();
+		Robot.claw.give60Hugs();
 	}
 	@Override
 	protected void execute() {
-
 	}
 	@Override
 	protected boolean isFinished() {
-		return true;
+		return false;
 	}
 	@Override
 	protected void end() {
-		
+		Robot.claw.close();
 	}
 	@Override
 	protected void interrupted() {

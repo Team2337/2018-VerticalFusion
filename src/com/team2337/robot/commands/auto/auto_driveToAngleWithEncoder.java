@@ -37,7 +37,7 @@ public class auto_driveToAngleWithEncoder extends Command {
     protected void execute() {
     	
     	double currentAngle = Pigeon.pidgey.getFusedHeading();
-    	double currentAngularRate = Robot.gyro.getAngularRate();
+    	//double currentAngularRate = Robot.gyro.getAngularRate();
     	double forward = speed; 	
     	
     	turn = -((targetAngle - currentAngle) * Pgain );//- (currentAngularRate) * Dgain;

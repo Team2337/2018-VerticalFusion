@@ -94,6 +94,8 @@ public class RobotMap {
 	
 	public static UsbCamera camera;
 	
+	
+	
 	//*********************************************************************************************************
 	//Debug
 	public static Boolean alt_ControlDebug = true;
@@ -202,14 +204,14 @@ public class RobotMap {
 		
 		trolley_right = new TalonSRX(trolleyRight); // 4
 		trolley_right.configSelectedFeedbackSensor(FeedbackDevice.Analog, 0, 0);  //string pot
-		trolley_right.setSensorPhase(true);
-		trolley_right.setInverted(true);
+		trolley_right.setSensorPhase(false);
+		trolley_right.setInverted(false);
 		trolley_right.setStatusFramePeriod(0, 0, 0);
 		trolley_right.setNeutralMode(NeutralMode.Brake);
 
 		trolley_left = new VictorSPX(trolleyLeft); // 11
 		trolley_left.follow(trolley_right);
-		trolley_left.setInverted(false);
+		trolley_left.setInverted(true);
 
 		trolley_right.configForwardSoftLimitEnable(false, 0);
 		trolley_left.configForwardSoftLimitEnable(false, 0);
@@ -222,10 +224,10 @@ public class RobotMap {
 		 * Intake
 		 */
 		intake_left = new TalonSRX(intakeLeft);
-		intake_left.setInverted(false);
+		intake_left.setInverted(true);
 		
 		intake_right = new VictorSPX(intakeRight);
-		intake_right.setInverted(true);
+		intake_right.setInverted(false);
 		
 		crateSensor = new DigitalInput(0);
 		lineReader = new DigitalInput(2);
@@ -237,7 +239,7 @@ public class RobotMap {
 		arm_right.setNeutralMode(NeutralMode.Brake);
 		
 		arm_left = new VictorSPX(armLeft);
-		arm_left.setInverted(true);
+		arm_left.setInverted(true);		
 		arm_left.follow(arm_right);
 		arm_left.setNeutralMode(NeutralMode.Brake);
 
