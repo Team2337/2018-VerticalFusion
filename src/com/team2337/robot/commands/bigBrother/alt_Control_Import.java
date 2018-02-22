@@ -14,20 +14,12 @@ public class alt_Control_Import extends Command {
 
 	double points[][] = Robot.bigBrother.points;
 
-	boolean setPointSet = false;
-
 	double trolleySetPoint;
 	double armSetPoint;
-	// double fineArm;
 	double armAdjPos;
 	double armAdjNeg;
 	double trolleyAdj = 2; // TODO determne rightamount
 	double armEncoder;
-	//double liftPot;
-	double trolleyPot;
-	int reverse, forward;
-
-	// int liftSetPointColumn;
 
 	double throttleToggle;
 	double trolleyStick;
@@ -35,9 +27,9 @@ public class alt_Control_Import extends Command {
 	double throttleValue;
 
 	/*
-	 * Columns 0: trolley set points 1: lift set points A 2: lift set points B 3:
-	 * lift set points C 4: arm set points 5: arm forward soft limits 6: arm reverse
-	 * soft limits 7: arm positive adjustment 8: arm negative adjustment
+	 * Columns 0: trolley set points 1: lift set points A 2: lift set points B
+	 * 3: lift set points C 4: arm set points 5: arm forward soft limits 6: arm
+	 * reverse soft limits 7: arm positive adjustment 8: arm negative adjustment
 	 */
 
 	int trolleySetPoints = 0;
@@ -61,14 +53,6 @@ public class alt_Control_Import extends Command {
 	}
 
 	protected void execute() {
-		SmartDashboard.putBoolean("endOfAuto - before", RobotMap.endOfAuto);
-		// Disable after Autonomous util......//TODO
-		/*
-		 * if(RobotMap.endOfAuto) { Robot.bigBrother.stopAltControl();
-		 * SmartDashboard.putBoolean("endOfAuto - middle", RobotMap.endOfAuto);
-		 * if(OI.operatorThrottleJoystick.getRawButton(8)) { RobotMap.endOfAuto = false;
-		 * SmartDashboard.putBoolean("endOfAuto - after", RobotMap.endOfAuto); } }
-		 */
 
 		// liftPot = RobotMap.lift_right.getSelectedSensorPosition(0);
 
@@ -85,85 +69,79 @@ public class alt_Control_Import extends Command {
 		armAdjPos = (points[(int) throttleValue][armPositiveAdj]);
 		armAdjNeg = (points[(int) throttleValue][armNegativeAdj]);
 
-		// Trolley set point logic
+		// Trolley adjustment by joystick
 
 		// Adjust trolley setpoint based on joystick input
 		if (Math.abs(trolleyStick) > 0.1) {
 			trolleySetPoint = trolleySetPoint + (trolleyStick * trolleyAdj);
 		}
 
-		// Override trolley setpoint to the top position if arm needs to change sides
-		armEncoder = RobotMap.arm_right.getSelectedSensorPosition(0);
+		// Arm adjustment by toggle
 
+		// Adjust arm set point based on throttle toggle input. Different
+		// adjustments
+		// for positive and negative toggle positions.
 		if ((throttleToggle) > 0.1) {
 			armSetPoint = armSetPoint + (throttleToggle * armAdjPos);
 		} else if (throttleToggle < -0.1) {
 			armSetPoint = armSetPoint + (throttleToggle * armAdjNeg);
 		}
-		
+
+		// Arm and Trolley set point override:
+
+		// If arm needs to change sides:
+		// Override trolley set point to the top position, and
+		// override arm position to stay on same side until trolley gets to top.
+		armEncoder = RobotMap.arm_right.getSelectedSensorPosition(0);
+
 		if ((!Robot.arm.sameSide(armEncoder, armSetPoint))) {
 			trolleySetPoint = points[10][trolleySetPoints];
 
 			if (Robot.trolley.getPosition() < Robot.trolley.trolleyPassover) {
-
-				if (armEncoder >= Robot.arm.centerPosition) {// Assuming position 10 is at the top
+				if (armEncoder >= Robot.arm.centerPosition) {
 					armSetPoint = points[10][armSetPoints];
-				} // Setting arm set point to array 10 till trolley is at top
+				} 
 				else if (armEncoder <= Robot.arm.centerPosition) {
 					armSetPoint = points[11][armSetPoints];
 				}
 				sameSide = false;
-
 			}
 		} else
 			sameSide = true;
 
-		// Arm set point logic
+		// SET ALL SETPOINTS
 
-		// Adjust arm set point based on throttle toggle input. Different adjustments
-		// for positive and negative toggle positions.
-
-
-		// Soft Limits for ARM , set py position, not array....???
-		/*
-		 * if (Robot.trolley.isAtTop()) { forward = Robot.arm.forwardSoftLimit; reverse
-		 * = Robot.arm.reverseSoftLimit;
-		 * 
-		 * } else if (Robot.trolley.isAboveMid()) { if (Robot.arm.armIsReverse()) {
-		 * forward = Robot.arm.reverseTopSL; reverse = Robot.arm.reverseSoftLimit; }
-		 * else if (Robot.arm.armIsForward()) { forward = Robot.arm.forwardSoftLimit;
-		 * reverse = Robot.arm.forwardTopSL; } }else { if (Robot.arm.armIsReverse()) {
-		 * forward = Robot.arm.reverseTopSL; reverse = Robot.arm.reverseLevel; } else if
-		 * (Robot.arm.armIsForward()) { forward = Robot.arm.forwardLevel; reverse =
-		 * Robot.arm.forwardTopSL; } }
-		 * 
-		 * //Robot.arm.setSoftLimits((int)(points[(int)
-		 * throttleValue][armForwardSoftLimits]), (int)(points[(int)
-		 * throttleValue][armReverseSoftLimits]));
-		 * 
-		 * Robot.arm.setSoftLimits(forward, reverse);
-		 */
-
-		// Set Set points, suspend PID if at pickup position
-		// TODO add check if endOfAuto??? to disable/skip sets????
-
-		if ((throttleToggle > 0.9) && (throttleStick > 0.9) && (Robot.arm.armIsLevel())) {
-			// TODO add .... if (lift is down) & (trolley is down)[i.e. pick up position]
-			Robot.arm.stop();
-			Robot.lift.stop();
-			// Robot.trolley.stop();
-		} else {
-			// Robot.trolley.setSetpoint(trolleySetPoint);
-			Robot.arm.setSetpoint(armSetPoint);
-			Robot.lift.setSetpoint(points[(int) throttleValue][Robot.lift.levelOfLift]);
-		}
-		if (RobotMap.trolley_right.getSelectedSensorPosition(0) < 61 && trolleySetPoint < 61) {
-			Robot.trolley.stop();
-		} else {
-			Robot.trolley.setSetpoint(trolleySetPoint);
+		// Disabled after Autonomous until throttleToggle activated.
+		if (RobotMap.disabledAtEndOfAuto) {
+			SmartDashboard.putBoolean("Disabled: endOfAuto - checking throttle toggle", RobotMap.disabledAtEndOfAuto);
+			if (Math.abs(throttleToggle) > 0.9) {
+				RobotMap.disabledAtEndOfAuto = false;
+				SmartDashboard.putBoolean("Disabled: endOfAuto - checking throttle toggle", RobotMap.disabledAtEndOfAuto);
+			}
 		}
 
+		if (!RobotMap.disabledAtEndOfAuto) { // Disable until throttleToggle activated (see above)									
+
+			// Set Set points, suspend PID if at pickup position
+			if ((throttleToggle > 0.9) && (throttleStick > 0.9) && (Robot.arm.armIsLevel())) {
+				Robot.arm.stop();
+				Robot.lift.stop();		//keeping lift in here for pickup position protection, unless it hops to much....
+			} else {
+				Robot.arm.setSetpoint(armSetPoint);
+				Robot.lift.setSetpoint(points[(int) throttleValue][Robot.lift.levelOfLift]);
+			}
+			// Set trolley set point, suspend PID if at bottom position.
+			if (RobotMap.trolley_right.getSelectedSensorPosition(0) < 61 && trolleySetPoint < 61) {
+				Robot.trolley.stop();
+			} else {
+				Robot.trolley.setSetpoint(trolleySetPoint);
+			}
+
+		}
+
+		// Print Debug info to SmartDashboard if turned on in RobotMap.
 		if (RobotMap.alt_ControlDebug) {
+			SmartDashboard.putBoolean("endOFAuto - debug", RobotMap.disabledAtEndOfAuto);
 			SmartDashboard.putBoolean("sameSide", Robot.arm.sameSide(armEncoder, armSetPoint));
 			SmartDashboard.putNumber("trolleyStick", trolleyStick);
 			SmartDashboard.putNumber("TrolleySetPoint", Robot.trolley.getSetpoint());
@@ -176,10 +154,11 @@ public class alt_Control_Import extends Command {
 			SmartDashboard.putBoolean("XXXsameSideXXX", sameSide);
 			SmartDashboard.putNumber("LIFTSetPointXXXXXX", Robot.lift.getSetpoint());
 			SmartDashboard.putNumber("liftArray SetPoint", points[(int) throttleValue][Robot.lift.levelOfLift]);
-			
+
 			// SmartDashboard.putNumber("TrolleyArrayValue", points[(int)
 			// throttleValue][trolleySetPoints]);
-			// this may be setting the array to the throttle, then getting to the logic
+			// this may be setting the array to the throttle, then getting to
+			// the logic
 			// above
 		}
 	}

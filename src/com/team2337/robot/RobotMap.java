@@ -101,9 +101,10 @@ public class RobotMap {
 	public static Boolean alt_ControlDebug = true;
 	public static Boolean chassisDebug = true;
 	public static Boolean intakeDebug = false;
+	public static Boolean robot_AllPeriodicDebug = true;
 	
 	//Public Variables
-	public static Boolean endOfAuto = true;  		//Also set to true in Robot.TeleOpInit
+	public static Boolean disabledAtEndOfAuto = true;  		//Also set to true in Robot.TeleOpInit & Robot.disabledInint
 	
 	//CAN Ports
 	private final static int chassisRightFront  = 0; //15

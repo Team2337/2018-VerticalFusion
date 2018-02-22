@@ -55,8 +55,8 @@ public class Robot extends TimedRobot {
 	SendableChooser<String> autonchooser = new SendableChooser<>();
 
 	/**
-	 * This function is run when the robot is first started up and should be used
-	 * for any initialization code.
+	 * This function is run when the robot is first started up and should be
+	 * used for any initialization code.
 	 */
 	@Override
 	public void robotInit() {
@@ -80,14 +80,15 @@ public class Robot extends TimedRobot {
 		lift = new Lift();
 		gyro = new Pigeon();
 		oi = new OI();
-		
+
 		AutoCommandManager.getInstance().init();
 		AutoCommandManager.getInstance().setBlinkin(RobotMap.blinkin);
 
 		// Also include the Auton Chooser
 		Robot.gyro.resetPidgey();
-		RobotMap.chassis_leftFront.setSelectedSensorPosition(0, 0, 0);
-		RobotMap.chassis_rightFront.setSelectedSensorPosition(0, 0, 0);
+		Robot.chassis.resetEncoders();
+		// RobotMap.chassis_leftFront.setSelectedSensorPosition(0, 0, 0);  //replaced by above method
+		// RobotMap.chassis_rightFront.setSelectedSensorPosition(0, 0, 0);
 
 		autonchooser.addObject("Cross the Line", "CrossLine");
 		autonchooser.addDefault("Center Switch", "CenterSwitch");
@@ -97,20 +98,20 @@ public class Robot extends TimedRobot {
 	}
 
 	/**
-	 * This function is called once each time the robot enters Disabled mode. You
-	 * can use it to reset any subsystem information you want to clear when the
-	 * robot is disabled.
+	 * This function is called once each time the robot enters Disabled mode.
+	 * You can use it to reset any subsystem information you want to clear when
+	 * the robot is disabled.
 	 */
 	@Override
 	public void disabledInit() {
 		AutoCommandManager.getInstance().disable();
 		Pigeon.pidgey.setFusedHeading(0.0, 10);
+		RobotMap.disabledAtEndOfAuto = true;
 		this.allInit();
 	}
 
 	@Override
 	public void disabledPeriodic() {
-		SmartDashboard.putNumber("trolleyJoystickValue", Robot.oi.operatorJoystick.getRawAxis(2));
 		Scheduler.getInstance().run();
 		this.allPeriodic();
 
@@ -118,15 +119,15 @@ public class Robot extends TimedRobot {
 
 	/**
 	 * This autonomous (along with the chooser code above) shows how to select
-	 * between different autonomous modes using the dashboard. The sendable chooser
-	 * code works with the Java SmartDashboard. If you prefer the LabVIEW Dashboard,
-	 * remove all of the chooser code and uncomment the getString code to get the
-	 * auto name from the text box below the Gyro
+	 * between different autonomous modes using the dashboard. The sendable
+	 * chooser code works with the Java SmartDashboard. If you prefer the
+	 * LabVIEW Dashboard, remove all of the chooser code and uncomment the
+	 * getString code to get the auto name from the text box below the Gyro
 	 *
 	 * <p>
 	 * You can add additional auto modes by adding additional commands to the
-	 * chooser code above (like the commented example) or additional comparisons to
-	 * the switch structure below with additional strings & commands.
+	 * chooser code above (like the commented example) or additional comparisons
+	 * to the switch structure below with additional strings & commands.
 	 */
 	@Override
 	public void autonomousInit() {
@@ -150,7 +151,8 @@ public class Robot extends TimedRobot {
 			// m_autonomousCommand = new CG_holdArm();
 			break;
 		case "CrossLine":
-			// m_autonomousCommand = new auto_driveToAngleWithEncoder(.5, 10, 0, 40000,
+			// m_autonomousCommand = new auto_driveToAngleWithEncoder(.5, 10, 0,
+			// 40000,
 			// 92000, 0.04);
 			m_autonomousCommand = new DoNothing(ourswitch, scale);
 			break;
@@ -158,7 +160,7 @@ public class Robot extends TimedRobot {
 			m_autonomousCommand = new CG_uTurnStart(ourswitch, scale);
 			break;
 		case "line":
-			m_autonomousCommand = new auto_driveToLine(-.5,0,5);
+			m_autonomousCommand = new auto_driveToLine(-.5, 0, 5);
 			break;
 		default:
 			m_autonomousCommand = new DoNothing();
@@ -166,10 +168,10 @@ public class Robot extends TimedRobot {
 		}
 
 		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
-		 * switch(autoSelected) { case "My Auto": autonomousCommand = new
-		 * MyAutoCommand(); break; case "Default Auto": default: autonomousCommand = new
-		 * ExampleCommand(); break; }
+		 * String autoSelected = SmartDashboard.getString("Auto Selector",
+		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
+		 * = new MyAutoCommand(); break; case "Default Auto": default:
+		 * autonomousCommand = new ExampleCommand(); break; }
 		 */
 
 		// schedule the autonomous command (example)
@@ -192,12 +194,14 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopInit() {
 		AutoCommandManager.getInstance().teleop();
-		
-		this.allInit();
-		lift.levelOfLift = 1;;
-		RobotMap.endOfAuto = true;
+
+		this.allInit();                                  // not used right now?
+		lift.levelOfLift = 1;
+		;
+		RobotMap.disabledAtEndOfAuto = true;
+		Robot.bigBrother.holdAltControl();
 		claw.close();
-		
+
 		Robot.chassis.setBrakeMode(NeutralMode.Coast);
 
 		// This makes sure that the autonomous stops running when
@@ -216,10 +220,6 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 		this.allPeriodic();
-
-		SmartDashboard.putNumber("centerX", RobotMap.vision.getRevAngle());
-
-		// System.out.print(RobotMap.vision.getRevAngle());
 	}
 
 	/**
@@ -233,39 +233,48 @@ public class Robot extends TimedRobot {
 	//////////////////////////////////////////////
 
 	/**
-	 * This method is called once during all modes when selected (disabled, auton,
-	 * teleop and test)
+	 * This method is called once during all modes when selected (disabled,
+	 * auton, teleop and test)
 	 */
 	public void allInit() {
 
 	}
 
 	/**
-	 * This method is called periodically during all modes (disabled, auton, teleop
-	 * and test)
+	 * This method is called periodically during all modes (disabled, auton,
+	 * teleop and test)
 	 */
 	public void allPeriodic() {
+
 		Robot.led.initDefaultCommand();
 
-		SmartDashboard.putData("Auto mode", autonchooser);
-		SmartDashboard.putData("autoArmCommand", bigBrother);
-		// SmartDashboard.putData("arugnygfuynfgrt6gfsd", arm.getCurrentCommand());
-		SmartDashboard.putString("getCommandtyg", bigBrother.getCurrentCommandName());
-		// SmartDashboard.putNumber("ArmPValue",
-		// RobotMap.arm_right.configGetParameter(ParamEnum.eProfileParamSlot_P, 0, 0));
-		SmartDashboard.putNumber("LeftEncoder", RobotMap.chassis_leftFront.getSelectedSensorPosition(0));
-		SmartDashboard.putNumber("RightEncoder", RobotMap.chassis_rightFront.getSelectedSensorPosition(0));
-		SmartDashboard.putNumber("LIFTStringPot", RobotMap.lift_right.getSelectedSensorPosition(0));
-		SmartDashboard.putNumber("lift output %%", RobotMap.lift_right.getMotorOutputPercent());
-		SmartDashboard.putNumber("lift Error", RobotMap.lift_right.getClosedLoopError(0));
-		SmartDashboard.putNumber("lift output calc", RobotMap.lift_right.getClosedLoopError(0) * 7);
-		SmartDashboard.putNumber("lift Level", Robot.lift.levelOfLift);
-		//SmartDashboard.putNumber("left P Value",
-		//RobotMap.chassis_leftFront.configGetParameter(ParamEnum.eProfileParamSlot_F, 0, 0));
-		//SmartDashboard.putNumber("Right P Value",
-		//RobotMap.chassis_rightFront.configGetParameter(ParamEnum.eProfileParamSlot_F, 0, 0));
-		SmartDashboard.putBoolean("Line Reader", RobotMap.lineReader.get());
-
+		if (RobotMap.robot_AllPeriodicDebug) {
+			SmartDashboard.putData("Auto mode", autonchooser);
+			SmartDashboard.putData("autoArmCommand", bigBrother);
+			SmartDashboard.putNumber("trolleyJoystickValue", Robot.oi.operatorJoystick.getRawAxis(2));
+			// SmartDashboard.putData("arugnygfuynfgrt6gfsd",
+			// arm.getCurrentCommand());
+			SmartDashboard.putString("getCommandtyg", bigBrother.getCurrentCommandName());
+			// SmartDashboard.putNumber("ArmPValue",
+			// RobotMap.arm_right.configGetParameter(ParamEnum.eProfileParamSlot_P,
+			// 0, 0));
+			SmartDashboard.putNumber("LeftEncoder", RobotMap.chassis_leftFront.getSelectedSensorPosition(0));
+			SmartDashboard.putNumber("RightEncoder", RobotMap.chassis_rightFront.getSelectedSensorPosition(0));
+			SmartDashboard.putNumber("LIFTStringPot", RobotMap.lift_right.getSelectedSensorPosition(0));
+			SmartDashboard.putNumber("lift output %%", RobotMap.lift_right.getMotorOutputPercent());
+			SmartDashboard.putNumber("lift Error", RobotMap.lift_right.getClosedLoopError(0));
+			SmartDashboard.putNumber("lift output calc", RobotMap.lift_right.getClosedLoopError(0) * 7);
+			SmartDashboard.putNumber("lift Level", Robot.lift.levelOfLift);
+			// SmartDashboard.putNumber("left P Value",
+			// RobotMap.chassis_leftFront.configGetParameter(ParamEnum.eProfileParamSlot_F,
+			// 0, 0));
+			// SmartDashboard.putNumber("Right P Value",
+			// RobotMap.chassis_rightFront.configGetParameter(ParamEnum.eProfileParamSlot_F,
+			// 0, 0));
+			SmartDashboard.putBoolean("Line Reader", RobotMap.lineReader.get());
+			
+			SmartDashboard.putNumber("centerX", RobotMap.vision.getRevAngle());
+		}
 	}
 
 }

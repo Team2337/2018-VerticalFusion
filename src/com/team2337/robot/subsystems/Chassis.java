@@ -22,6 +22,16 @@ public class Chassis extends Subsystem {
 		setDefaultCommand(new chassis_drive());
 	}
 	
+	public void setEncoders(int pos){  //test first!!
+		RobotMap.chassis_rightFront.setSelectedSensorPosition(pos, 0, 0);
+		RobotMap.chassis_leftFront.setSelectedSensorPosition(-pos, 0, 0);
+	}
+	
+	public void resetEncoders(){
+		RobotMap.chassis_rightFront.setSelectedSensorPosition(0, 0, 0);
+		RobotMap.chassis_leftFront.setSelectedSensorPosition(0, 0, 0);
+	}
+	
 	public void setBrakeMode(NeutralMode mode) {
 		 RobotMap.chassis_leftFront.setNeutralMode(mode);
 		 RobotMap.chassis_rightFront.setNeutralMode(mode);
