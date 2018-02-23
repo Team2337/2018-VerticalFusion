@@ -5,6 +5,7 @@ import com.team2337.robot.subsystems.Claw;
 import com.team2337.robot.subsystems.Climber;
 import com.ctre.phoenix.ParamEnum;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.team2337.fusion.address.Address;
 import com.team2337.fusion.gyro.Pigeon;
 import com.team2337.fusion.wrappers.auto.AutoCommandManager;
 import com.team2337.robot.commands.DoNothing;
@@ -60,7 +61,13 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {
-
+		String mac = Address.getInstance().getMAC();
+		System.out.print(mac);
+		if (mac.equals("00-80-2F-17-89-85") || mac.equals("00-80-2F-17-E5-D2")) {
+			System.out.print("TEST BOT");
+		} else {
+			System.out.print("COMP");
+		}
 		// Initialize all of the Robots Mappings
 		RobotMap.init();
 		// Also start the camera(s)
@@ -190,11 +197,9 @@ public class Robot extends TimedRobot {
 		Scheduler.getInstance().run();
 		this.allPeriodic();
 	}
-
 	@Override
 	public void teleopInit() {
 		AutoCommandManager.getInstance().teleop();
-
 		this.allInit();                                  // not used right now?
 		lift.levelOfLift = 1;
 		;
