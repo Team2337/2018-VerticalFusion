@@ -192,6 +192,7 @@ public class RobotMap {
 		lift_left = new VictorSPX(liftLeft); // 6
 		lift_left.follow(lift_right);
 		lift_left.setInverted(true);
+		lift_left.setNeutralMode(NeutralMode.Brake);
 		
 		lift_right.configForwardSoftLimitEnable(false, 0);
 		lift_left.configForwardSoftLimitEnable(false, 0);

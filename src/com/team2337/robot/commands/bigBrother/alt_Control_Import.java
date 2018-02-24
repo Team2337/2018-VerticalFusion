@@ -41,6 +41,9 @@ public class alt_Control_Import extends Command {
 	int armReverseSoftLimits = 6;
 	int armPositiveAdj = 7;
 	int armNegativeAdj = 8;
+	
+	int compTrolleyRestPoint = 61;
+	int practiceTrolleyRestPoint = 61;
 
 	boolean sameSide = true;
 
@@ -131,7 +134,7 @@ public class alt_Control_Import extends Command {
 				Robot.lift.setSetpoint(points[(int) throttleValue][Robot.lift.levelOfLift]);
 			}
 			// Set trolley set point, suspend PID if at bottom position.
-			if (RobotMap.trolley_right.getSelectedSensorPosition(0) < 61 && trolleySetPoint < 61) {
+			if (RobotMap.trolley_right.getSelectedSensorPosition(0) < practiceTrolleyRestPoint && trolleySetPoint < practiceTrolleyRestPoint) {
 				Robot.trolley.stop();
 			} else {
 				Robot.trolley.setSetpoint(trolleySetPoint);

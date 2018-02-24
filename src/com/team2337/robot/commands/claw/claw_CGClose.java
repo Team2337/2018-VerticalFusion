@@ -6,10 +6,10 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class claw_CGClose extends Action {
 	public claw_CGClose() {
-		addSequential(new claw_giveMoreHugs());
-		addWait(0.2);
-		addSequential(new claw_giveLessHugs());
-		addWait(0.2);
+		addSequential(new claw_give60psi());
+		addWait(0.5);
+		addSequential(new claw_give30psi());
+		addWait(0.5);
 		addSequential(new claw_close());
 	}
 }

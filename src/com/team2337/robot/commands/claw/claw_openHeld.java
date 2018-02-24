@@ -18,18 +18,23 @@ public class claw_openHeld extends Command {
 	}
 	@Override
 	protected void initialize() {
+
 		done = false;
 	}
 	@Override
 	protected void execute() {
+		
+
 		if(Robot.intake.hasCrate()) {
 			time++;
+			
 		} else {
 			time = 0;
 		}
 		if (time > 30) {
 			Robot.claw.close();
 			done = true;
+
 		}
 	}
 	@Override

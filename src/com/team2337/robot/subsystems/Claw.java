@@ -7,11 +7,13 @@
 
 package com.team2337.robot.subsystems;
 
+import com.team2337.robot.Robot;
 import com.team2337.robot.RobotMap;
 import com.team2337.robot.commands.claw.claw_DoNothing;
 
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The CLAW! 
@@ -44,5 +46,9 @@ public class Claw extends Subsystem {
 
 	public void close() {
 		claw.set(false);
+	}
+	
+	public void periodic() {
+		SmartDashboard.putString("Claw Command", Robot.claw.getCurrentCommandName());
 	}
 }

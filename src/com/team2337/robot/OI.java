@@ -143,12 +143,12 @@ public class OI {
 		driver_BlueX			.whenPressed(new DoNothing()); //.whenPressed(new trolley_setPID(0.1)); 
 		driver_YellowY			.whenPressed(new DoNothing()); //.whenPressed(new trolley_stopPID());
 		
-		driver_BumperLeft		.whenPressed(new claw_close());
-		driver_BumperRight	.whenPressed(new claw_CGOpen());
-		driver_BumperRight  .whenReleased(new claw_CGClose());
+		driver_BumperLeft		.whenPressed(new DoNothing()); //.whenPressed(new claw_close());
+		driver_BumperRight	    .whenPressed(new DoNothing()); //.whenPressed(new claw_CGOpen());
+		driver_BumperRight      .whenPressed(new DoNothing()); //.whenReleased(new claw_CGClose());
 		
-		driver_Back				.whenPressed(new claw_giveLessHugs()); //30
-		driver_Start			.whenPressed(new claw_giveMoreHugs()); //60
+		driver_Back				.whenPressed(new DoNothing()); //.whenPressed(new claw_give30psi()); //30
+		driver_Start			.whenPressed(new DoNothing()); //.whenPressed(new claw_give60psi()); //60
 		
 		driver_LeftStick		.whenPressed(new DoNothing()); 
 		driver_RightStick		.whenPressed(new DoNothing()); 
@@ -214,9 +214,12 @@ public class OI {
 	    //operator_SE						   .whenPressed(new DoNothing());
 	    //operator_ST						   .whenPressed(new DoNothing());
 	                                          
-	    operator_JoystickPOVUp			       .whileHeld(new claw_openClose());
-	    operator_JoystickPOVUpRight		       .whileHeld(new claw_openClose());
-	    operator_JoystickPOVUpLeft		       .whileHeld(new claw_openClose());
+	    operator_JoystickPOVUp			       .whenPressed(new claw_CGOpen());
+	    operator_JoystickPOVUp				   .whenReleased(new claw_CGClose());
+	    operator_JoystickPOVUpRight		       .whenPressed(new claw_CGOpen());
+	    operator_JoystickPOVUpRight			   .whenReleased(new claw_CGClose());
+	    operator_JoystickPOVUpLeft		       .whenPressed(new claw_CGOpen());
+	    operator_JoystickPOVUpLeft			   .whenReleased(new claw_CGClose());
 	    
 	    operator_JoystickPOVDownRight	       .whenPressed(new DoNothing());
 	    operator_JoystickPOVDown		       .whenPressed(new DoNothing());

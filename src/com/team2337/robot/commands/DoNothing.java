@@ -1,6 +1,5 @@
 package com.team2337.robot.commands;
 
-import com.team2337.fusion.address.Address;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -21,7 +20,7 @@ public class DoNothing extends Command {
 	}
 
 	protected void initialize() {
-		System.out.println(Address.getInstance().getStoredMAC());
+
 	}
 
 	protected void execute() {

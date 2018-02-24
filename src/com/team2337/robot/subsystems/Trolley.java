@@ -22,8 +22,8 @@ public class Trolley extends Subsystem {
 	//private final static TalonSRX leftFront = RobotMap.trolley_left;  //4
 
 	//private int absolutePosition;  //used to set relative position encoder
-	private double maxSpeedUp = 1.0;
-	private double maxSpeedDown = 0.7; //0.01
+	private double maxSpeedUp = 1.0;  //1.0
+	private double maxSpeedDown = 0.7; //.7
 	private double nominalSpeed = 0;
 	private double kF = 0;
 	private double kP = 7;
@@ -31,10 +31,16 @@ public class Trolley extends Subsystem {
 	private double kD = 0;
 	private int allowableError = 0;
 	
+	
+	//comp  
+	
 	public double trolleyPassover = 510;  //practice 540, comp 510
 
 	public static int forwardTrolleySoftLimit = 585;
 	public static int reverseTrolleySoftLimit = 50;
+	
+
+	
 	
 	protected void initDefaultCommand() {
 		//setDefaultCommand(new TEST_ONLY_trolley_joystickControl());

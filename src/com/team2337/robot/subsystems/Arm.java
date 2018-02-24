@@ -30,15 +30,16 @@ public class Arm extends Subsystem {
 	private static final double maxSpeedDown 	= -1;
 	private double nominalSpeed = 0;
 	
-	public static final int forwardSoftLimit 	= 350;   //1238 practice
-	public static final int forwardLevel 		= -160;    // 900
-	public static final int forwardTopSL 		= 548;   //548   /// not used
+	public static final int centerPosition 		= 280;  //345    startup position    // comp  -630
+		
+	public static final int forwardSoftLimit 	= centerPosition + 940;   //1238 practice    /// comp  350
+	public static final int forwardLevel 		= centerPosition + 420;    // 900           ///  comp -160
+	public static final int forwardTopSL 		= 548;   //548   /// not used /// comp  548??
 
-	public static final int centerPosition 		= -630;  //345
 	
-	public static final int reverseTopSL 		= -375;  //55   /// not used
+	public static final int reverseTopSL 		= -375;  //55   /// not used   /// comp comp -375
 	//public static final int reverseLevel 		= -550;	  //-550	
-	public static final int reverseSoftLimit 	= -1680;   //-1100
+	public static final int reverseSoftLimit 	= centerPosition - 1008;   //-1100
 	
 	//public static final double stringpotTopPos 		= 1.0;
 	//public static final double stringpotMidPos 		= 0.7;

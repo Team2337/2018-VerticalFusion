@@ -50,6 +50,7 @@ public class Robot extends TimedRobot {
 	public static String scale = "q";
 	public static String oppswitch = "q";
 
+	public static boolean isComp = false;
 	// public static char ourswitch, scale, oppswitch;
 
 	Command m_autonomousCommand;
@@ -62,12 +63,12 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		String mac = Address.getInstance().getMAC();
-		System.out.print(mac);
 		if (mac.equals("00-80-2F-17-89-85") || mac.equals("00-80-2F-17-E5-D2")) {
-			System.out.print("TEST BOT");
+			isComp = false;
 		} else {
-			System.out.print("COMP");
+			isComp = true;
 		}
+		
 		// Initialize all of the Robots Mappings
 		RobotMap.init();
 		// Also start the camera(s)

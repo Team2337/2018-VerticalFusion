@@ -14,8 +14,8 @@ import com.team2337.robot.Robot;
 /**
  * An example command.  You can replace me with your own command.
  */
-public class claw_giveMoreHugs extends Command {
-	public claw_giveMoreHugs() {
+public class claw_give60psi extends Command {
+	public claw_give60psi() {
 		requires(Robot.claw);
 	}
 	@Override
