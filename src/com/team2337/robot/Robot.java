@@ -63,9 +63,11 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		String mac = Address.getInstance().getMAC();
-		if (mac.equals("00-80-2F-17-89-85") || mac.equals("00-80-2F-17-E5-D2")) {
+		if (mac.equals("00-80-2F-17-89-85")) {
+			System.out.println("PracticBot");
 			isComp = false;
-		} else {
+		} else if(mac.equals("00-80-2F-17-E5-D2")) {
+			System.out.println("CompBot");
 			isComp = true;
 		}
 		
@@ -278,6 +280,9 @@ public class Robot extends TimedRobot {
 			SmartDashboard.putNumber("lift Level", Robot.lift.levelOfLift);
 			SmartDashboard.putNumber("TrolleyPosition - 454", RobotMap.trolley_right.getSelectedSensorPosition(0));
 			SmartDashboard.putNumber("armEncoderPositionPWM - 400ish", RobotMap.arm_right.getSensorCollection().getPulseWidthPosition());
+			SmartDashboard.putNumber("arm7", RobotMap.pdp.getCurrent(7));
+			SmartDashboard.putNumber("trolley4", RobotMap.pdp.getCurrent(4));
+			SmartDashboard.putNumber("totalamps", RobotMap.pdp.getTotalCurrent());
 			// SmartDashboard.putNumber("left P Value",
 			// RobotMap.chassis_leftFront.configGetParameter(ParamEnum.eProfileParamSlot_F,
 			// 0, 0));

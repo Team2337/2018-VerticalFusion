@@ -23,11 +23,11 @@ public class Arm extends Subsystem {
 	private double kF = 0;
 	private double kP = 2;  //1.1
 	private double kI = 0;
-	private double kD = 0;
+	private double kD = 200;
 	private int allowableError = 1;                ///need to set *****************//TODO
 
-	private static final double maxSpeedUp 		= 1;
-	private static final double maxSpeedDown 	= -1;
+	private static final double maxSpeedUp 		= 0.7;
+	private static final double maxSpeedDown 	= -0.7;
 	private double nominalSpeed = 0;
 	
 	public static final int centerPosition 		= 280;  //345    startup position    // comp  -630
@@ -36,7 +36,7 @@ public class Arm extends Subsystem {
 	public static final int forwardLevel 		= centerPosition + 420;    // 900           ///  comp -160
 	public static final int forwardTopSL 		= 548;   //548   /// not used /// comp  548??
 
-	
+
 	public static final int reverseTopSL 		= -375;  //55   /// not used   /// comp comp -375
 	//public static final int reverseLevel 		= -550;	  //-550	
 	public static final int reverseSoftLimit 	= centerPosition - 1008;   //-1100

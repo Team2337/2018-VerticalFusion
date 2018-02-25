@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.hal.EncoderJNI;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -94,6 +95,8 @@ public class RobotMap {
 	
 	public static UsbCamera camera;
 	
+	public static PowerDistributionPanel pdp;
+	
 	
 	
 	//*********************************************************************************************************
@@ -127,6 +130,7 @@ public class RobotMap {
 	//Pnuematics
 	//PCMs
 	private final static int PCM_0 		   = 0;
+	private final static int PDP_0		   = 0;
 	
 	//Ports
 	private final static int clawHugger    = 2;
@@ -239,11 +243,13 @@ public class RobotMap {
 		arm_right = new TalonSRX(armRight);
 		arm_right.setInverted(false);
 		arm_right.setNeutralMode(NeutralMode.Brake);
+		arm_right.configClosedloopRamp(0.25, 0);
 		
 		arm_left = new VictorSPX(armLeft);
 		arm_left.setInverted(true);		
 		arm_left.follow(arm_right);
 		arm_left.setNeutralMode(NeutralMode.Brake);
+		arm_left.configClosedloopRamp(0.25, 0);
 
 		arm_right.setStatusFramePeriod(0, 0, 0);
 		//arm_right.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
@@ -285,6 +291,8 @@ public class RobotMap {
 		 * VisionProcessing for ?
 		 */
 		blinkin = new BlinkIn(0);
+		
+		pdp = new PowerDistributionPanel(PDP_0);
 		
 		vision = new VisionProcessing("GRIP/vision");
 		vision.setCameraVerticalOffset(Constants.TargetingCamera_VerticalOffset); // Offset from front of robot
