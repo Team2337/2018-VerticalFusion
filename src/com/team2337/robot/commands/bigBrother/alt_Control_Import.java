@@ -16,6 +16,7 @@ public class alt_Control_Import extends Command {
 
 	double trolleySetPoint;
 	double armSetPoint;
+	double liftSetPoint;
 	double armAdjPos;
 	double armAdjNeg;
 	double trolleyAdj = 2; // TODO determne rightamount
@@ -44,6 +45,9 @@ public class alt_Control_Import extends Command {
 	
 	int compTrolleyRestPoint = 61;
 	int practiceTrolleyRestPoint = 61;
+	
+	int compLiftRestPoint = 100;
+	int practiceLiftRestPoint = 100;
 
 	boolean sameSide = true;
 
@@ -71,6 +75,7 @@ public class alt_Control_Import extends Command {
 		armSetPoint = ((double) points[(int) throttleValue][armSetPoints]);
 		armAdjPos = (points[(int) throttleValue][armPositiveAdj]);
 		armAdjNeg = (points[(int) throttleValue][armNegativeAdj]);
+		liftSetPoint = points[(int) throttleValue][Robot.lift.levelOfLift];
 
 		// Trolley adjustment by joystick
 
@@ -112,6 +117,20 @@ public class alt_Control_Import extends Command {
 		} else
 			sameSide = true;
 
+		
+		//Lift & Trolley Override
+		
+		/* put lift down before trolley
+		 * trolley goes up before lift
+		 * So we don't crush the snakes
+		 */
+		
+		if(liftSetPoint > practiceLiftRestPoint && Robot.trolley.getPosition() < Robot.trolley.trolleyPassover) {
+			liftSetPoint = practiceLiftRestPoint;
+		}
+		if(Robot.lift.getPosition() > practiceLiftRestPoint) {
+			trolleySetPoint = points[10][trolleySetPoints];
+		}
 		// SET ALL SETPOINTS
 
 		// Disabled after Autonomous until throttleToggle activated.
@@ -131,7 +150,7 @@ public class alt_Control_Import extends Command {
 				Robot.lift.stop();		//keeping lift in here for pickup position protection, unless it hops to much....
 			} else {
 				Robot.arm.setSetpoint(armSetPoint);
-				Robot.lift.setSetpoint(points[(int) throttleValue][Robot.lift.levelOfLift]);
+				Robot.lift.setSetpoint(liftSetPoint);
 			}
 			// Set trolley set point, suspend PID if at bottom position.
 			if (RobotMap.trolley_right.getSelectedSensorPosition(0) < practiceTrolleyRestPoint && trolleySetPoint < practiceTrolleyRestPoint) {
@@ -145,12 +164,12 @@ public class alt_Control_Import extends Command {
 		// Print Debug info to SmartDashboard if turned on in RobotMap.
 		if (RobotMap.alt_ControlDebug) {
 			SmartDashboard.putBoolean("endOFAuto - debug", RobotMap.disabledAtEndOfAuto);
-			SmartDashboard.putBoolean("sameSide", Robot.arm.sameSide(armEncoder, armSetPoint));
+			//SmartDashboard.putBoolean("sameSide", Robot.arm.sameSide(armEncoder, armSetPoint));
 			SmartDashboard.putNumber("trolleyStick", trolleyStick);
 			SmartDashboard.putNumber("TrolleySetPoint", Robot.trolley.getSetpoint());
-			SmartDashboard.putNumber("TrolleyPosition", RobotMap.trolley_right.getSelectedSensorPosition(0));
+	
 			SmartDashboard.putNumber("throttleValue", throttleValue);
-			SmartDashboard.putNumber("ArmSetPosition", armSetPoint);
+			SmartDashboard.putNumber("ArmSetPoint", armSetPoint);
 			// SmartDashboard.putNumber("trolleyOutputPercent",
 			// RobotMap.trolley_right.getMotorOutputPercent());
 			SmartDashboard.putNumber("trolleyOutputXXXXXXXX", RobotMap.trolley_right.getMotorOutputPercent());

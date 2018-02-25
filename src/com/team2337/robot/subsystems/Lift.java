@@ -23,7 +23,7 @@ public class Lift extends Subsystem {
 	
 	public int levelOfLift = 1;
 
-	private double maxSpeed = 1.0;
+	private double maxSpeed = 0.7;
 	private double nominalSpeed = 0;
 	private double kF = 0;
 	private double kP = 14;

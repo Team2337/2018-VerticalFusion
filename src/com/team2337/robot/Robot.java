@@ -98,10 +98,12 @@ public class Robot extends TimedRobot {
 		// RobotMap.chassis_leftFront.setSelectedSensorPosition(0, 0, 0);  //replaced by above method
 		// RobotMap.chassis_rightFront.setSelectedSensorPosition(0, 0, 0);
 
-		autonchooser.addObject("Cross the Line", "CrossLine");
+		//autonchooser.addObject("Cross the Line", "CrossLine");
 		autonchooser.addDefault("Center Switch", "CenterSwitch");
-		autonchooser.addObject("TESTUTurn", "UTurn");
-		autonchooser.addObject("TESTLineRead", "line");
+		autonchooser.addObject("Do Nothing", "DoNothing");
+		//autonchooser.addObject("TESTUTurn", "UTurn");
+		//autonchooser.addObject("TESTLineRead", "line");
+		
 
 	}
 
@@ -170,8 +172,11 @@ public class Robot extends TimedRobot {
 		case "line":
 			m_autonomousCommand = new auto_driveToLine(-.5, 0, 5);
 			break;
+		case "DoNothing":
+			m_autonomousCommand = new CG_autoDoNothing(ourswitch, scale);
+			break;
 		default:
-			m_autonomousCommand = new DoNothing();
+			m_autonomousCommand = new CG_autoDoNothing(ourswitch, scale);
 			break;
 		}
 
@@ -266,11 +271,13 @@ public class Robot extends TimedRobot {
 			// 0, 0));
 			SmartDashboard.putNumber("LeftEncoder", RobotMap.chassis_leftFront.getSelectedSensorPosition(0));
 			SmartDashboard.putNumber("RightEncoder", RobotMap.chassis_rightFront.getSelectedSensorPosition(0));
-			SmartDashboard.putNumber("LIFTStringPot", RobotMap.lift_right.getSelectedSensorPosition(0));
+			SmartDashboard.putNumber("LIFTStringPot - 43", RobotMap.lift_right.getSelectedSensorPosition(0));
 			SmartDashboard.putNumber("lift output %%", RobotMap.lift_right.getMotorOutputPercent());
 			SmartDashboard.putNumber("lift Error", RobotMap.lift_right.getClosedLoopError(0));
 			SmartDashboard.putNumber("lift output calc", RobotMap.lift_right.getClosedLoopError(0) * 7);
 			SmartDashboard.putNumber("lift Level", Robot.lift.levelOfLift);
+			SmartDashboard.putNumber("TrolleyPosition - 454", RobotMap.trolley_right.getSelectedSensorPosition(0));
+			SmartDashboard.putNumber("armEncoderPositionPWM - 400ish", RobotMap.arm_right.getSensorCollection().getPulseWidthPosition());
 			// SmartDashboard.putNumber("left P Value",
 			// RobotMap.chassis_leftFront.configGetParameter(ParamEnum.eProfileParamSlot_F,
 			// 0, 0));

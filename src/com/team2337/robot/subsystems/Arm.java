@@ -208,14 +208,7 @@ public class Arm extends Subsystem {
 	 */
 	public void periodic() {
 		if(RobotMap.alt_ControlDebug) {
-			
-		//SmartDashboard.putNumber("armGetSetpoint", getSetpoint());
-		SmartDashboard.putNumber("armEncoderPositionPWM", RobotMap.arm_right.getSensorCollection().getPulseWidthPosition());
-		SmartDashboard.putNumber("armGetSelectedSensorPos", RobotMap.arm_right.getSelectedSensorPosition(0));
-		SmartDashboard.putString("controlMode", RobotMap.arm_right.getControlMode().toString());
 		SmartDashboard.putNumber("armRight MotorOutput %", RobotMap.arm_right.getMotorOutputPercent());
-		
-		SmartDashboard.putNumber("trolleyStringPotValue(in arm)", RobotMap.trolley_right.getSelectedSensorPosition(0));
 		}
 	}
 }
