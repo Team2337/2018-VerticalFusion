@@ -108,6 +108,7 @@ public class RobotMap {
 	
 	//Public Variables
 	public static Boolean disabledAtEndOfAuto = true;  		//Also set to true in Robot.TeleOpInit & Robot.disabledInint
+	public static Boolean firstIntake = true;
 	
 	//CAN Ports
 	private final static int chassisRightFront  = 0; //15

@@ -30,10 +30,10 @@ public class Arm extends Subsystem {
 	private static final double maxSpeedDown 	= -0.7;
 	private double nominalSpeed = 0;
 	
-	public static final int centerPosition 		= 280;  //345    startup position    // comp  -630
+	public static final int centerPosition 		= 2300;  //345    startup position    // comp  -630
 		
 	public static final int forwardSoftLimit 	= centerPosition + 940;   //1238 practice    /// comp  350
-	public static final int forwardLevel 		= centerPosition + 420;    // 900           ///  comp -160
+	public static final int forwardCarry 		= centerPosition + 420;    // 900           ///  comp -160
 	public static final int forwardTopSL 		= 548;   //548   /// not used /// comp  548??
 
 
@@ -52,6 +52,7 @@ public class Arm extends Subsystem {
 	}
 
 	public Arm() {
+		System.out.println(forwardSoftLimit + "    " + forwardCarry + "    " + centerPosition + "    " + reverseSoftLimit);
 
 		//getPIDController().setContinuous(false);
 		//getPIDController().setInputRange(0, 8000);
@@ -147,7 +148,7 @@ public class Arm extends Subsystem {
 	}
 	
 	public boolean armIsLevel() {
-		return (getPosition() > 0.95 * forwardLevel);
+		return (getPosition() > 0.95 * forwardCarry);
 	}
 	public boolean armIsReverse() {
 		return (getPosition() < reverseSoftLimit);

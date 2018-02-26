@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class claw_CGClose extends Action {
 	public claw_CGClose() {
 		addSequential(new claw_give60psi());
-		addWait(0.5);
+		addWait(0.3);
 		addSequential(new claw_give30psi());
-		addWait(0.5);
+		addWait(0.3);
 		addSequential(new claw_close());
 	}
 }

@@ -10,6 +10,7 @@ import com.team2337.fusion.gyro.Pigeon;
 import com.team2337.fusion.wrappers.auto.AutoCommandManager;
 import com.team2337.robot.commands.DoNothing;
 import com.team2337.robot.commands.auto.*;
+import com.team2337.robot.commands.claw.claw_CGClose;
 import com.team2337.robot.commands.lift.liftLevelAdjuster;
 import com.team2337.robot.subsystems.Arm;
 import com.team2337.robot.subsystems.BigBrother;
@@ -210,10 +211,15 @@ public class Robot extends TimedRobot {
 		AutoCommandManager.getInstance().teleop();
 		this.allInit();                                  // not used right now?
 		lift.levelOfLift = 1;
-		;
 		RobotMap.disabledAtEndOfAuto = true;
 		Robot.bigBrother.holdAltControl();
+	//	new claw_CGClose();
+		/*
+		claw.give60Hugs();
+		new auto_wait(0.5);
+		claw.give30Hugs();
 		claw.close();
+		*/
 
 		Robot.chassis.setBrakeMode(NeutralMode.Coast);
 
@@ -263,35 +269,17 @@ public class Robot extends TimedRobot {
 
 		if (RobotMap.robot_AllPeriodicDebug) {
 			SmartDashboard.putData("Auto mode", autonchooser);
-			SmartDashboard.putData("autoArmCommand", bigBrother);
-			SmartDashboard.putNumber("trolleyJoystickValue", Robot.oi.operatorJoystick.getRawAxis(2));
-			// SmartDashboard.putData("arugnygfuynfgrt6gfsd",
-			// arm.getCurrentCommand());
-			SmartDashboard.putString("getCommandtyg", bigBrother.getCurrentCommandName());
-			// SmartDashboard.putNumber("ArmPValue",
-			// RobotMap.arm_right.configGetParameter(ParamEnum.eProfileParamSlot_P,
-			// 0, 0));
 			SmartDashboard.putNumber("LeftEncoder", RobotMap.chassis_leftFront.getSelectedSensorPosition(0));
 			SmartDashboard.putNumber("RightEncoder", RobotMap.chassis_rightFront.getSelectedSensorPosition(0));
 			SmartDashboard.putNumber("LIFTStringPot - 43", RobotMap.lift_right.getSelectedSensorPosition(0));
-			SmartDashboard.putNumber("lift output %%", RobotMap.lift_right.getMotorOutputPercent());
-			SmartDashboard.putNumber("lift Error", RobotMap.lift_right.getClosedLoopError(0));
-			SmartDashboard.putNumber("lift output calc", RobotMap.lift_right.getClosedLoopError(0) * 7);
 			SmartDashboard.putNumber("lift Level", Robot.lift.levelOfLift);
 			SmartDashboard.putNumber("TrolleyPosition - 454", RobotMap.trolley_right.getSelectedSensorPosition(0));
-			SmartDashboard.putNumber("armEncoderPositionPWM - 400ish", RobotMap.arm_right.getSensorCollection().getPulseWidthPosition());
-			SmartDashboard.putNumber("arm7", RobotMap.pdp.getCurrent(7));
-			SmartDashboard.putNumber("trolley4", RobotMap.pdp.getCurrent(4));
-			SmartDashboard.putNumber("totalamps", RobotMap.pdp.getTotalCurrent());
-			// SmartDashboard.putNumber("left P Value",
-			// RobotMap.chassis_leftFront.configGetParameter(ParamEnum.eProfileParamSlot_F,
-			// 0, 0));
-			// SmartDashboard.putNumber("Right P Value",
-			// RobotMap.chassis_rightFront.configGetParameter(ParamEnum.eProfileParamSlot_F,
-			// 0, 0));
+			SmartDashboard.putNumber("armEncoderPositionPWM - 2300ish", RobotMap.arm_right.getSensorCollection().getPulseWidthPosition());
 			SmartDashboard.putBoolean("Line Reader", RobotMap.lineReader.get());
-			
 			SmartDashboard.putNumber("centerX", RobotMap.vision.getRevAngle());
+			SmartDashboard.putBoolean("intake?", RobotMap.firstIntake);
+			SmartDashboard.putString("IntakeCommand", Robot.intake.getCurrentCommandName());
+			SmartDashboard.putString("Claw Command", Robot.claw.getCurrentCommandName());
 		}
 	}
 

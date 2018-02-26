@@ -3,6 +3,15 @@ package com.team2337.robot.commands.bigBrother;
 import com.team2337.robot.Robot;
 
 public class setPointsTestPickUpOnly {
+	static int armForwardSoftLimit = Robot.arm.forwardSoftLimit;
+	static int armReverseSoftLimit = Robot.arm.reverseSoftLimit;
+	static int armForwardCarry = Robot.arm.forwardCarry;
+	
+	static int liftLowPoint = Robot.lift.practiceLiftRestPoint;
+	
+	static int arm95Carry = (armForwardCarry-718);
+	static int arm95Minus100 = arm95Carry - 100;
+	static int arm95Minus200 = arm95Carry - 200;
 	
 	public static double points[][] = new double[][] {
 		
@@ -20,57 +29,28 @@ public class setPointsTestPickUpOnly {
 		 * 8: arm negative adjustment
 		 */
 		
-		{110,45,45,45,720,1220,-728,475,0,},
-		{128,45,45,45,720,1220,-728,475,0,},
-		{198,45,45,45,720,1220,-728,475,0,},
-		{268,45,45,45,720,1220,-728,475,0,},
-		{338,45,45,45,720,1220,-728,475,0,},
-		{408,45,45,45,720,1220,-728,475,0,},
-		{478,45,45,45,720,1220,-728,475,0,},
-		{545,45,45,45,720,1220,-728,475,0,},
-		{545,45,126,225,720,1220,-728,475,0,},
-		{545,45,207,405,720,1220,-728,475,0,},
-		{545,45,290,585,720,1220,-728,50,50,}, 
+		{110,liftLowPoint,liftLowPoint,liftLowPoint,armForwardCarry,armForwardSoftLimit,armReverseSoftLimit,475,0,},
+		{128,liftLowPoint,liftLowPoint,liftLowPoint,armForwardCarry,armForwardSoftLimit,armReverseSoftLimit,475,0,},
+		{198,liftLowPoint,liftLowPoint,liftLowPoint,armForwardCarry,armForwardSoftLimit,armReverseSoftLimit,475,0,},
+		{268,liftLowPoint,liftLowPoint,liftLowPoint,armForwardCarry,armForwardSoftLimit,armReverseSoftLimit,475,0,},
+		{338,liftLowPoint,liftLowPoint,liftLowPoint,armForwardCarry,armForwardSoftLimit,armReverseSoftLimit,475,0,},
+		{408,liftLowPoint,liftLowPoint,liftLowPoint,armForwardCarry,armForwardSoftLimit,armReverseSoftLimit,475,0,},
+		{478,liftLowPoint,liftLowPoint,liftLowPoint,armForwardCarry,armForwardSoftLimit,armReverseSoftLimit,475,0,},
+		{545,liftLowPoint,liftLowPoint,liftLowPoint,armForwardCarry,armForwardSoftLimit,armReverseSoftLimit,475,0,},
+		{545,liftLowPoint,126,225,armForwardCarry,armForwardSoftLimit,armReverseSoftLimit,475,0,},
+		{545,liftLowPoint,207,405,armForwardCarry,armForwardSoftLimit,armReverseSoftLimit,475,0,},
+		{545,liftLowPoint,290,585,armForwardCarry,armForwardSoftLimit,armReverseSoftLimit,50,50,}, 
 		
-		{545,45,290,585,-18,1220,-728,0,0,},
-		{545,45,290,585,-18,1220,-728,0,0,},
-		{545,45,290,585,-18,1220,-728,0,0,},
-		{545,45,290,585,-120,1220,-728,0,0,},
-		{545,45,290,585,-120,1220,-728,0,0,},
-		{545,45,290,585,-120,1220,-728,0,0,},
-		{545,45,290,585,-120,1220,-728,0,0,},
-		{545,45,290,585,-230,1220,-728,0,0,},
-		{545,45,290,585,-230,1220,-728,0,0,},
-		{545,45,290,585,-230,1220,-728,0,0,},
-
-
-		/*	
-		{58,45,45,45,720,1220,-728,475,0,},
-		{100,45,45,45,720,1220,-728,475,0,},
-		{155,45,70,105,720,1220,-728,475,0,},
-		{205,45,95,165,720,1220,-728,475,0,},
-		{260,45,120,225,720,1220,-728,475,0,},
-		{317,45,145,285,720,1220,-728,475,0,},
-		{366,45,170,345,720,1220,-728,475,0,},
-		{415,45,195,405,720,1220,-728,475,0,},
-		{464,45,220,465,720,1220,-728,475,0,},
-		{513,45,255,525,720,1220,-728,475,0,},
-		{545,45,290,585,720,1220,-728,50,50,}, 
-		
-		
-
-		{545,45,290,585,-18,1220,-728,0,0,},
-		{545,45,290,585,-18,1220,-728,0,0,},
-		{545,45,290,585,-18,1220,-728,0,0,},
-		{545,45,290,585,-120,1220,-728,0,0,},
-		{545,45,290,585,-120,1220,-728,0,0,},
-		{545,45,290,585,-120,1220,-728,0,0,},
-		{545,45,290,585,-120,1220,-728,0,0,},
-		{545,45,290,585,-230,1220,-728,0,0,},
-		{545,45,290,585,-230,1220,-728,0,0,},
-		{545,45,290,585,-230,1220,-728,0,0,},
-*/
-
+		{545,liftLowPoint,290,585,arm95Carry,armForwardSoftLimit,armReverseSoftLimit,0,0,},
+		{545,liftLowPoint,290,585,arm95Carry,armForwardSoftLimit,armReverseSoftLimit,0,0,},
+		{545,liftLowPoint,290,585,arm95Carry,armForwardSoftLimit,armReverseSoftLimit,0,0,},
+		{545,liftLowPoint,290,585,arm95Minus100,armForwardSoftLimit,armReverseSoftLimit,0,0,},
+		{545,liftLowPoint,290,585,arm95Minus100,armForwardSoftLimit,armReverseSoftLimit,0,0,},
+		{545,liftLowPoint,290,585,arm95Minus100,armForwardSoftLimit,armReverseSoftLimit,0,0,},
+		{545,liftLowPoint,290,585,arm95Minus100,armForwardSoftLimit,armReverseSoftLimit,0,0,},
+		{545,liftLowPoint,290,585,arm95Minus200,armForwardSoftLimit,armReverseSoftLimit,0,0,},
+		{545,liftLowPoint,290,585,arm95Minus200,armForwardSoftLimit,armReverseSoftLimit,0,0,},
+		{545,liftLowPoint,290,585,arm95Minus200,armForwardSoftLimit,armReverseSoftLimit,0,0,},
 	};
 }
 

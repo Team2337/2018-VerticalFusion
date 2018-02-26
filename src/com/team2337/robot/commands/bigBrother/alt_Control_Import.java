@@ -46,8 +46,8 @@ public class alt_Control_Import extends Command {
 	int compTrolleyRestPoint = 61;
 	int practiceTrolleyRestPoint = 111;
 	
-	int compLiftRestPoint = 100;
-	int practiceLiftRestPoint = 100;
+	int compLiftRestPoint = Robot.lift.compLiftRestPoint;
+	int practiceLiftRestPoint = Robot.lift.practiceLiftRestPoint;
 
 	boolean sameSide = true;
 
@@ -157,6 +157,12 @@ public class alt_Control_Import extends Command {
 				Robot.trolley.stop();
 			} else {
 				Robot.trolley.setSetpoint(trolleySetPoint);
+			}
+			
+			if (RobotMap.lift_right.getSelectedSensorPosition(0) < (Robot.lift.practiceLiftRestPoint-10) && liftSetPoint < Robot.lift.practiceLiftRestPoint) {
+				Robot.lift.stop();
+			} else {
+				Robot.lift.setSetpoint(liftSetPoint);
 			}
 
 		}

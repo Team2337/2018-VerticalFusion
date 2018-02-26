@@ -33,6 +33,8 @@ public class Lift extends Subsystem {
 	
 	public static int forwardLIFTSoftLimit = 590;					 ///need to set *****************//TODO
 	public static  int reverseLIFTSoftLimit = 40;				 ///need to set *****************//TODO
+	public static int practiceLiftRestPoint = 100;
+	public static int compLiftRestPoint = 100;
 
 	protected void initDefaultCommand() {
 		//setDefaultCommand(new lift_startPID());

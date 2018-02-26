@@ -31,7 +31,7 @@ public class claw_openHeld extends Command {
 		} else {
 			time = 0;
 		}
-		if (time > 15) {
+		if (time > 7) {
 			Robot.claw.close();
 			done = true;
 
