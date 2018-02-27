@@ -177,6 +177,12 @@ public class RobotMap {
 		chassis_rightMid.follow(chassis_rightFront);
 		chassis_rightRear.follow(chassis_rightFront);
 		
+		
+		chassis_rightFront.configVoltageCompSaturation(12, 0);
+		chassis_rightFront.enableVoltageCompensation(true);
+		
+		chassis_leftFront.configVoltageCompSaturation(12, 0);
+		chassis_leftFront.enableVoltageCompensation(true);
 	
 			/*
 			 * NerdyDrive Instance
