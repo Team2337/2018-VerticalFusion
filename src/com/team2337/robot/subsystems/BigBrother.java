@@ -34,15 +34,18 @@ public class BigBrother extends Subsystem {
 		//points = setPoints.points;
 		//points = setPointsPracticeBot.points;
 		
-	//	if (Robot.isComp) {
-	//		points = setPointsCompBot.points;
-	//	} else {
+		if (Robot.isComp) {
+			points = setPointsCompBot.points;
+			System.out.println("Loaded Comp Bot Array");
+		} else {
 			points = setPointsTestPickUpOnly.points;
-	//	}
 			System.out.println(Robot.arm.forwardSoftLimit + "    " + Robot.arm.reverseSoftLimit + "   " + Robot.arm.forwardCarry);
 			System.out.println(points[11][1]);
 			System.out.println(points[16][1]);
 			System.out.println(points[20][1]);
+			System.out.println("Loaded Practice Bot Array");
+		}
+
 	}
 	public void stopAltControl() {
 		RobotMap.trolley_right.set(ControlMode.PercentOutput, 0);

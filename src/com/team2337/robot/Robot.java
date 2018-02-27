@@ -65,9 +65,12 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 		String mac = Address.getInstance().getMAC();
 		if (mac.equals("00-80-2F-17-89-85")) {
-			System.out.println("PracticBot");
+			System.out.println("TestBoard");
 			isComp = false;
 		} else if(mac.equals("00-80-2F-17-E5-D2")) {
+			System.out.println("PracticeBot");
+			isComp = false;
+		} else {
 			System.out.println("CompBot");
 			isComp = true;
 		}
@@ -87,8 +90,8 @@ public class Robot extends TimedRobot {
 		shifter = new Shifter();
 		led = new LED();
 		claw = new Claw();
-		bigBrother = new BigBrother();
 		lift = new Lift();
+		bigBrother = new BigBrother();		
 		gyro = new Pigeon();
 		oi = new OI();
 

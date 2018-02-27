@@ -176,7 +176,7 @@ public class RobotMap {
 
 		chassis_rightMid.follow(chassis_rightFront);
 		chassis_rightRear.follow(chassis_rightFront);
-
+		
 	
 			/*
 			 * NerdyDrive Instance
@@ -293,7 +293,7 @@ public class RobotMap {
 		 */
 		blinkin = new BlinkIn(0);
 		
-		pdp = new PowerDistributionPanel(PDP_0);
+		pdp = new PowerDistributionPanel(0);
 		
 		vision = new VisionProcessing("GRIP/vision");
 		vision.setCameraVerticalOffset(Constants.TargetingCamera_VerticalOffset); // Offset from front of robot

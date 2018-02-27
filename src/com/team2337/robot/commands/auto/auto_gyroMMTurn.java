@@ -32,8 +32,9 @@ public class auto_gyroMMTurn extends Command {
     	secondsFromNeutralToFull = .2;
     	RobotMap.chassis_rightFront.setSelectedSensorPosition(0, 0, timeoutMs);
     	RobotMap.chassis_leftFront.setSelectedSensorPosition(0, 0, timeoutMs);
-    	driveFR = .14; //0.00425; //.01370574769317461;
-        drivePR = 0;//.03; 
+    	Robot.gyro.resetPidgey();
+    	driveFR = 0.13; //0.00425; //.01370574769317461;
+        drivePR = 0.047;//.03; 
         driveIR = 0;
         driveDR = 0;
     	RobotMap.chassis_rightFront.config_kF(slotIdx, driveFR, timeoutMs); 
@@ -41,17 +42,17 @@ public class auto_gyroMMTurn extends Command {
     	RobotMap.chassis_rightFront.config_kI(slotIdx, driveIR, timeoutMs);
     	RobotMap.chassis_rightFront.config_kD(slotIdx, driveDR, timeoutMs);
     	
-    	driveFL = 0.01; //.005;
-        drivePL = 0;//.09; 
+    	driveFL = 0.13; //.005;
+        drivePL = 0.047;//.09; 
         driveIL = 0;
         driveDL = 0;
     	RobotMap.chassis_leftFront.config_kF(slotIdx, driveFL, timeoutMs);
-    	RobotMap.chassis_leftFront.config_kF(slotIdx, drivePL, timeoutMs);
-    	RobotMap.chassis_leftFront.config_kF(slotIdx, driveIL, timeoutMs);
-    	RobotMap.chassis_leftFront.config_kF(slotIdx, driveDL, timeoutMs);
+    	RobotMap.chassis_leftFront.config_kP(slotIdx, drivePL, timeoutMs);
+    	RobotMap.chassis_leftFront.config_kI(slotIdx, driveIL, timeoutMs);
+    	RobotMap.chassis_leftFront.config_kD(slotIdx, driveDL, timeoutMs);
     	
-    	sensorUnitsPer100ms = 3500; //Velocity // 2000
-    	sensorUnitsPer100msPerSec = 3500; //Acceleration
+    	sensorUnitsPer100ms = 13000; //Velocity // 2000
+    	sensorUnitsPer100msPerSec = 13000; //Acceleration
     	
 		RobotMap.chassis_leftFront.configMotionCruiseVelocity(sensorUnitsPer100ms, timeoutMs);  //75% of 937
 		RobotMap.chassis_rightFront.configMotionCruiseVelocity(sensorUnitsPer100ms, timeoutMs);
@@ -69,13 +70,13 @@ public class auto_gyroMMTurn extends Command {
 		
 		Robot.chassis.setBrakeMode(NeutralMode.Coast);
     	//rev = Constants.kTargetingCamera_RevDegree * Constants.kAuton_TurnDegreeRed;
-    	rev = 26000;
+    	rev = 4950;
     	//System.out.println(rev);
-    	RobotMap.chassis_leftFront.set(ControlMode.MotionMagic, rev);
+    	RobotMap.chassis_leftFront.set(ControlMode.MotionMagic, -rev);
     	RobotMap.chassis_rightFront.set(ControlMode.MotionMagic, rev);
     
     	//Robot.chassis.setMotionMagicTurn(rev);
-		setTimeout(6);
+		setTimeout(20);
     }
 
     // Called repeatedly when this Command is scheduled to run

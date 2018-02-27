@@ -34,28 +34,22 @@ public class Arm extends Subsystem {
 		
 	public static final int forwardSoftLimit 	= centerPosition + 940;   //1238 practice    /// comp  350
 	public static final int forwardCarry 		= centerPosition + 420;    // 900           ///  comp -160
-	public static final int forwardTopSL 		= 548;   //548   /// not used /// comp  548??
 
-
-	public static final int reverseTopSL 		= -375;  //55   /// not used   /// comp comp -375
-	//public static final int reverseLevel 		= -550;	  //-550	
 	public static final int reverseSoftLimit 	= centerPosition - 1008;   //-1100
 	
-	//public static final double stringpotTopPos 		= 1.0;
-	//public static final double stringpotMidPos 		= 0.7;
-	//public static final double stringpotBottomPos 	= 0.1;
 	
-	//private int absolutePosition;  //used to set relative position of the encoder based on absolute encoder
+	//ONLY USED IN JOYSTICK CONTROL
+	public static final int forwardTopSL 		= 548;   //548   /// not used /// comp  548??
+	public static final int reverseTopSL 		= -375;  //55   /// not used   /// comp comp -375
+	
 
 	protected void initDefaultCommand() {
 		//setDefaultCommand(new TEST_ONLY_arm_joystickControl());
 	}
 
 	public Arm() {
-		System.out.println(forwardSoftLimit + "    " + forwardCarry + "    " + centerPosition + "    " + reverseSoftLimit);
+		
 
-		//getPIDController().setContinuous(false);
-		//getPIDController().setInputRange(0, 8000);
 		
 		setSoftLimits(forwardSoftLimit, reverseSoftLimit);
 				

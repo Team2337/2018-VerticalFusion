@@ -147,7 +147,7 @@ public class OI {
 		driver_BumperRight	    .whenPressed(new DoNothing()); //.whenPressed(new claw_CGOpen());
 		driver_BumperRight      .whenPressed(new DoNothing()); //.whenReleased(new claw_CGClose());
 		
-		driver_Back				.whenPressed(new DoNothing()); //.whenPressed(new claw_give30psi()); //30
+		driver_Back				.whenPressed(new auto_gyroMMTurn()); //.whenPressed(new claw_give30psi()); //30
 		driver_Start			.whenPressed(new DoNothing()); //.whenPressed(new claw_give60psi()); //60
 		
 		driver_LeftStick		.whenPressed(new DoNothing()); 
