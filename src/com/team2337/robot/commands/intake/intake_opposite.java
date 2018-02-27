@@ -6,52 +6,34 @@ import com.team2337.robot.Robot;
 import com.team2337.robot.RobotMap;
 
 /**
- * Intake: OUT - Move the intake out
+ * Intake: IN - Move the intake in
  * 
  * @category INTAKE
  * @author Brendan
  */
-public class intake_out extends Command {
-	int num = 0;
-
-	private double power = 1;
-
-	public intake_out(double power) {
+public class intake_opposite extends Command {
+	private double power = .75;
+	
+	
+	private int time = 0;
+	public intake_opposite(double power) {
 		requires(Robot.intake);
 		this.power = power;
 	}
 
 	protected void initialize() {
-
+		
 	}
-
 	protected void execute() {
-		Robot.intake.moveOut(this.power);
-
-
-			if (num == 52) {
-				Robot.claw.give60Hugs();
-			}
-			if (num == 60) {
-				Robot.claw.open();
-			}
-			if (num == 700) {
-				Robot.claw.give30Hugs();
-			}
-			if (num == 80) {
-				Robot.claw.close();
-			}
-
-		num++;
+		Robot.intake.rotate(this.power);
+		
 	}
-
 	protected boolean isFinished() {
 		return false;
 	}
-
+	
 	protected void end() {
 		Robot.intake.stop();
-		num = 0;
 	}
 
 	protected void interrupted() {

@@ -209,7 +209,6 @@ public class OI {
 	    operator_ThrottleBottomThumbButton	   .whenPressed(new liftLevelAdjuster(1));
 	                                           
 	    operator_PalmButton				       .whenPressed(new DoNothing());
-	    operator_TopIndexButton 		       .whenPressed(new DoNothing());
 	    operator_BottomIndexButton		       .whenPressed(new DoNothing());
 
 	    //operator_SE						   .whenPressed(new DoNothing());

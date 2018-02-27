@@ -39,6 +39,16 @@ public class Intake extends Subsystem {
 		
 	}
 	/**
+	 * Move the intake inwards (intake)
+	 * @param power Power of motors (-1.0 to 1.0)
+	 */
+	public void rotate(double power) {
+		intakeOn = true;
+		right.set(ControlMode.PercentOutput, power);
+		left.set(ControlMode.PercentOutput, -power);
+		
+	}
+	/**
 	 * Move the intake outwards (release/bloop it)
 	 * @param power Power of motors (-1.0 to 1.0) 
 	 */
