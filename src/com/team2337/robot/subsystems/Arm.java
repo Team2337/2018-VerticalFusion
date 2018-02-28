@@ -32,7 +32,8 @@ public class Arm extends Subsystem {
 	
 	public static final int centerPosition 		= 2300;  //345    startup position    // comp  -630
 		
-	public static final int forwardSoftLimit 	= centerPosition + 940;   //1238 practice    /// comp  350
+	public static final int forwardLevel 		= centerPosition + 975;
+	public static final int forwardSoftLimit 	= centerPosition + 1000;   //1238 practice    /// comp  350
 	public static final int forwardCarry 		= centerPosition + 420;    // 900           ///  comp -160
 
 	public static final int reverseSoftLimit 	= centerPosition - 1008;   //-1100
@@ -142,13 +143,13 @@ public class Arm extends Subsystem {
 	}
 	
 	public boolean armIsLevel() {
-		return (getPosition() > 0.95 * forwardCarry);
+		return (getPosition() > 0.95 * forwardLevel);
 	}
 	public boolean armIsReverse() {
-		return (getPosition() < reverseSoftLimit);
+		return (getPosition() < centerPosition);
 	}
 	public boolean armIsForward() {
-		return (getPosition() > forwardSoftLimit);
+		return (getPosition() > centerPosition);
 	}
 	
 

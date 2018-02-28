@@ -23,7 +23,8 @@ public class Lift extends Subsystem {
 	
 	public int levelOfLift = 1;
 
-	private double maxSpeed = 0.7;
+	private double maxSpeedUp = 0.7;
+	private double maxSpeedDown = 0.5;
 	private double nominalSpeed = 0;
 	private double kF = 0;
 	private double kP = 14;
@@ -33,8 +34,11 @@ public class Lift extends Subsystem {
 	
 	public static int forwardLIFTSoftLimit = 590;					 ///need to set *****************//TODO
 	public static  int reverseLIFTSoftLimit = 40;				 ///need to set *****************//TODO
-	public static int practiceLiftRestPoint = 45;
+	public static int practiceLiftRestPoint = 100;
 	public static int compLiftRestPoint = 100;
+	
+	public static int liftYellowHigh = 290;
+	public static int liftRedHigh = 600;
 
 	protected void initDefaultCommand() {
 		//setDefaultCommand(new lift_startPID());
@@ -46,8 +50,8 @@ public class Lift extends Subsystem {
 		/* set the peak and nominal outputs, 12V? means full */
 		rightFront.configNominalOutputForward(nominalSpeed, 0);
 		rightFront.configNominalOutputReverse(nominalSpeed, 0);
-		rightFront.configPeakOutputForward(maxSpeed, 0);
-		rightFront.configPeakOutputReverse(-maxSpeed, 0);
+		rightFront.configPeakOutputForward(maxSpeedUp, 0);
+		rightFront.configPeakOutputReverse(-maxSpeedDown, 0);
 		
 		//leftFront.configNominalOutputForward(nominalSpeed, 0);
 		//leftFront.configNominalOutputReverse(nominalSpeed, 0);

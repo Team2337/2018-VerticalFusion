@@ -27,22 +27,6 @@ public class intake_out extends Command {
 
 	protected void execute() {
 		Robot.intake.moveOut(this.power);
-
-
-			if (num == 52) {
-				Robot.claw.give60Hugs();
-			}
-			if (num == 60) {
-				Robot.claw.open();
-			}
-			if (num == 700) {
-				Robot.claw.give30Hugs();
-			}
-			if (num == 80) {
-				Robot.claw.close();
-			}
-
-		num++;
 	}
 
 	protected boolean isFinished() {

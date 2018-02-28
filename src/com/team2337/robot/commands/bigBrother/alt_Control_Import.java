@@ -145,12 +145,10 @@ public class alt_Control_Import extends Command {
 		if (!RobotMap.disabledAtEndOfAuto) { // Disable until throttleToggle activated (see above)									
 
 			// Set Set points, suspend PID if at pickup position
-			if ((throttleToggle > 0.9) && (throttleStick > 0.9) && (Robot.arm.armIsLevel())) {
+			if ((throttleToggle > 0.9) && (throttleStick < -0.9) && (Robot.arm.armIsLevel())) {
 				Robot.arm.stop();
-				Robot.lift.stop();		//keeping lift in here for pickup position protection, unless it hops to much....
 			} else {
 				Robot.arm.setSetpoint(armSetPoint);
-				Robot.lift.setSetpoint(liftSetPoint);
 			}
 			// Set trolley set point, suspend PID if at bottom position.
 			if (RobotMap.trolley_right.getSelectedSensorPosition(0) < (practiceTrolleyRestPoint-10) && trolleySetPoint < practiceTrolleyRestPoint) {
@@ -159,7 +157,7 @@ public class alt_Control_Import extends Command {
 				Robot.trolley.setSetpoint(trolleySetPoint);
 			}
 			
-			if (RobotMap.lift_right.getSelectedSensorPosition(0) < (Robot.lift.practiceLiftRestPoint-10) && liftSetPoint < Robot.lift.practiceLiftRestPoint) {
+			if (RobotMap.lift_right.getSelectedSensorPosition(0) < (Robot.lift.practiceLiftRestPoint-10) && liftSetPoint <= Robot.lift.practiceLiftRestPoint) {
 				Robot.lift.stop();
 			} else {
 				Robot.lift.setSetpoint(liftSetPoint);
@@ -182,6 +180,7 @@ public class alt_Control_Import extends Command {
 			SmartDashboard.putBoolean("XXXsameSideXXX", sameSide);
 			SmartDashboard.putNumber("LIFTSetPointXXXXXX", Robot.lift.getSetpoint());
 			SmartDashboard.putNumber("liftArray SetPoint", points[(int) throttleValue][Robot.lift.levelOfLift]);
+			SmartDashboard.putNumber("throttleStick", throttleStick);
 
 			// SmartDashboard.putNumber("TrolleyArrayValue", points[(int)
 			// throttleValue][trolleySetPoints]);

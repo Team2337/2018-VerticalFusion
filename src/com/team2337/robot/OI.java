@@ -202,7 +202,9 @@ public class OI {
 	    operator_StripedButton			       .whenPressed(new claw_CGOpen());
 	    operator_StripedButton				   .whenReleased(new claw_CGClose());
 	    operator_RightKnucleButton		       .whileHeld(new intake_out(0.6));
+	    operator_RightKnucleButton		       .whenReleased(new claw_CGOpenClose());
 	    operator_L3						       .whileHeld(new intake_out(1));
+	    operator_L3						       .whenReleased(new claw_CGOpenClose());
 	                                           
 	    operator_ThrottleTopThumbButton		   .whenPressed(new liftLevelAdjuster(3));
 	    operator_ThrottleMidThumbButton		   .whenPressed(new liftLevelAdjuster(2));
