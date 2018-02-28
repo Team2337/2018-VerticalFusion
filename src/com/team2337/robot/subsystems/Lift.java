@@ -83,7 +83,7 @@ public class Lift extends Subsystem {
 	 * Gets the set point of the lift
 	 */
 	public double getSetpoint(){
-		return rightFront.getClosedLoopTarget(0);
+		return rightFront.getClosedLoopError(0);
 	}
 	
 	/**

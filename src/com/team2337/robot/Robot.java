@@ -3,6 +3,9 @@ package com.team2337.robot;
 import com.team2337.robot.subsystems.Chassis;
 import com.team2337.robot.subsystems.Claw;
 import com.team2337.robot.subsystems.Climber;
+
+import com.team2337.fusion.pixy.*;
+
 import com.ctre.phoenix.ParamEnum;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.team2337.fusion.address.Address;
@@ -12,6 +15,7 @@ import com.team2337.robot.commands.DoNothing;
 import com.team2337.robot.commands.auto.*;
 import com.team2337.robot.commands.claw.claw_CGClose;
 import com.team2337.robot.commands.lift.liftLevelAdjuster;
+import com.team2337.robot.subsystems.PixyVision;
 import com.team2337.robot.subsystems.Arm;
 import com.team2337.robot.subsystems.BigBrother;
 import com.team2337.robot.subsystems.Intake;
@@ -47,6 +51,7 @@ public class Robot extends TimedRobot {
 	public static Lift lift;
 	public static OI oi;
 	public static Pigeon gyro;
+	public static PixyVision pixy;
 	public static String ourswitch = "q";
 	public static String scale = "q";
 	public static String oppswitch = "q";
@@ -93,6 +98,7 @@ public class Robot extends TimedRobot {
 		lift = new Lift();
 		bigBrother = new BigBrother();		
 		gyro = new Pigeon();
+		pixy = new PixyVision();
 		oi = new OI();
 
 		AutoCommandManager.getInstance().init();
@@ -207,6 +213,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+		pixy.testPixy1(); 
 		this.allPeriodic();
 	}
 	@Override
@@ -283,6 +290,10 @@ public class Robot extends TimedRobot {
 			SmartDashboard.putBoolean("intake?", RobotMap.firstIntake);
 			SmartDashboard.putString("IntakeCommand", Robot.intake.getCurrentCommandName());
 			SmartDashboard.putString("Claw Command", Robot.claw.getCurrentCommandName());
+		}
+		if (RobotMap.pixyDebug) {
+			SmartDashboard.putNumber("Pixy readPackets: ", PixyPacket.X);//+ Integer.toString(signature) + ": X: ", Integer.toString(packet.X));
+			SmartDashboard.putNumber("Pixy readPackets: ", PixyPacket.Y);// + Integer.toString(signature) + ": Y: ", Integer.toString(packet.Y));
 		}
 	}
 

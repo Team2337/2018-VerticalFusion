@@ -104,7 +104,7 @@ public class Trolley extends Subsystem {
 	 * Gets the set point of the trolley
 	 */
 	public double getSetpoint(){
-		return rightFront.getClosedLoopTarget(0);
+		return rightFront.getClosedLoopError(0);
 	}
 	
 	/**

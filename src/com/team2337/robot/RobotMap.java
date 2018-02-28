@@ -101,10 +101,11 @@ public class RobotMap {
 	
 	//*********************************************************************************************************
 	//Debug
-	public static Boolean alt_ControlDebug = true;
-	public static Boolean chassisDebug = true;
+	public static Boolean alt_ControlDebug = false;
+	public static Boolean chassisDebug = false;
 	public static Boolean intakeDebug = false;
 	public static Boolean robot_AllPeriodicDebug = true;
+	public static Boolean pixyDebug = true;
 	
 	//Public Variables
 	public static Boolean disabledAtEndOfAuto = true;  		//Also set to true in Robot.TeleOpInit & Robot.disabledInint
