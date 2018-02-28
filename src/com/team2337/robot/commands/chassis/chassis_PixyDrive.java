@@ -5,35 +5,35 @@ import edu.wpi.first.wpilibj.command.Command;
 
 import com.team2337.robot.Robot;
 import com.team2337.robot.RobotMap;
-import com.team2337.robot.RobotMap.*;
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.team2337.fusion.drive.*;
 
 /**
- * Chassis: DRIVE - The drive for the chassis thats runs arcadeD
+ * Chassis: Drive using the Pixycam to target a power cube and steer.
+ * Left Y joystick is use to move forward/backward.
  * 
  * @category CHASSIS
  * @author Team2337 - EngiNERDs
  */
 public class chassis_PixyDrive extends Command {
-	
+
 	private Joystick driverJoystick = Robot.oi.driverJoystick;
 	private static final double turnP = 0.01;
+	private double moveSpeed, turnSpeed;
 
 	public chassis_PixyDrive() {
 		requires(Robot.chassis);
 	}
 
 	protected void initialize() {
-
 	}
 
 	protected void execute() {
-		double moveSpeed = -driverJoystick.getRawAxis(1); // Left Y
-		double turnSpeed = (Robot.pixy.xx - Robot.pixy.centerXX) * turnP;
-
+		moveSpeed = -driverJoystick.getRawAxis(1); // Left Y
+		if (Robot.pixy.xx > 0) {
+			turnSpeed = (Robot.pixy.xx - Robot.pixy.centerXX) * turnP;
+		} else {
+			turnSpeed = 0;
+		}
 		RobotMap.drive.arcadeDrive(moveSpeed, turnSpeed, true);
-
 	}
 
 	protected boolean isFinished() {
@@ -46,5 +46,4 @@ public class chassis_PixyDrive extends Command {
 	protected void interrupted() {
 		this.end();
 	}
-
 }
