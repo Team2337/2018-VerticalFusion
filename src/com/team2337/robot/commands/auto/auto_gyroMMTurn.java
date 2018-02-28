@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class auto_gyroMMTurn extends Command {
+public class auto_gyroMMTurn extends Command { 
 
 	public static double driveFL, drivePL, driveIL, driveDL, driveFR, drivePR, driveIR, driveDR, rev,
 			secondsFromNeutralToFull, angleDifference;
@@ -38,12 +38,14 @@ public class auto_gyroMMTurn extends Command {
 		secondsFromNeutralToFull = .2;
 		RobotMap.chassis_rightFront.setSelectedSensorPosition(0, 0, timeoutMs);
 		RobotMap.chassis_leftFront.setSelectedSensorPosition(0, 0, timeoutMs);
+		
+		
 
-		driveFR = 0.05; // 0.00425; //.01370574769317461; forward .17
+		driveFR = 0.05; 
 		if (degree > 50) {
 			drivePR = .12;
 		} else {
-			drivePR = 0.16;// .03; // forward .013
+			drivePR = 0.16;
 		}
 		driveIR = 0;
 		driveDR = 2;
@@ -52,11 +54,11 @@ public class auto_gyroMMTurn extends Command {
 		RobotMap.chassis_rightFront.config_kI(slotIdx, driveIR, timeoutMs);
 		RobotMap.chassis_rightFront.config_kD(slotIdx, driveDR, timeoutMs);
 
-		driveFL = 0.05; // .005;
+		driveFL = 0.05; 
 		if (degree > 50) {
 			drivePL = .12;
 		} else {
-			drivePL = 0.16;// .03; // forward .013
+			drivePL = 0.16;
 		}
 		driveIL = 0;
 		driveDL = 2;
@@ -65,10 +67,10 @@ public class auto_gyroMMTurn extends Command {
 		RobotMap.chassis_leftFront.config_kI(slotIdx, driveIL, timeoutMs);
 		RobotMap.chassis_leftFront.config_kD(slotIdx, driveDL, timeoutMs);
 
-		sensorUnitsPer100ms = 13000; // Velocity // 2000
+		sensorUnitsPer100ms = 13000; // Velocity
 		sensorUnitsPer100msPerSec = 13000; // Acceleration
 
-		RobotMap.chassis_leftFront.configMotionCruiseVelocity(sensorUnitsPer100ms, timeoutMs); // 75% of 937
+		RobotMap.chassis_leftFront.configMotionCruiseVelocity(sensorUnitsPer100ms, timeoutMs); 
 		RobotMap.chassis_rightFront.configMotionCruiseVelocity(sensorUnitsPer100ms, timeoutMs);
 
 		RobotMap.chassis_leftFront.configMotionAcceleration(sensorUnitsPer100msPerSec, timeoutMs);
@@ -83,20 +85,24 @@ public class auto_gyroMMTurn extends Command {
 		RobotMap.chassis_rightFront.configNominalOutputReverse(-.2, timeoutMs);
 
 		Robot.chassis.setBrakeMode(NeutralMode.Coast);
-		// rev = Constants.kTargetingCamera_RevDegree * Constants.kAuton_TurnDegreeRed;
+		rev = Math.abs(degree) * 145;
 
-		rev = degree * 145;
+		if (degree > 0) {
+			// turn left
+			RobotMap.chassis_leftFront.set(ControlMode.MotionMagic, -rev);
+			RobotMap.chassis_rightFront.set(ControlMode.MotionMagic, rev);
 
-		// rev = 4350;
-		// System.out.println(rev);
-		RobotMap.chassis_leftFront.set(ControlMode.MotionMagic, -rev);
-		RobotMap.chassis_rightFront.set(ControlMode.MotionMagic, rev);
+			System.out.println("Left -" + rev + " " + rev);
+		} else {
+			// turn right
+			RobotMap.chassis_leftFront.set(ControlMode.MotionMagic, rev);
+			RobotMap.chassis_rightFront.set(ControlMode.MotionMagic, -rev);
+			System.out.println("Right " + rev + " -" + rev);
+		}
 
-		// Robot.chassis.setMotionMagicTurn(rev);
 		setTimeout(2);
 	}
 
-	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		angleDifference = Robot.gyro.getYaw() - degree;
 		boolean var = (Math.abs(angleDifference) < acceptableAngleError);
@@ -112,21 +118,16 @@ public class auto_gyroMMTurn extends Command {
 
 	}
 
-	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
 		return isTimedOut() || angleDone; // || getBetween(rev, RobotMap.chassis_leftFront.getPosition(), 0.002) ||
-											// Robot.oi.getOperatorControls().getRawButton(3);
 	}
 
-	// Called once after isFinished returns true
 	protected void end() {
 		angleDone = false;
 		// Robot.chassis.changeVbusToFollower(0);
 		// Robot.chassis.setBrakeMode(NeutralMode.Brake);
 	}
 
-	// Called when another command which requires one or more of the same
-	// subsystems is scheduled to run
 	protected void interrupted() {
 		this.end();
 	}

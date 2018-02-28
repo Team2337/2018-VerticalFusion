@@ -107,6 +107,8 @@ public class Robot extends TimedRobot {
 		//autonchooser.addObject("Cross the Line", "CrossLine");
 		autonchooser.addDefault("Center Switch", "CenterSwitch");
 		autonchooser.addObject("Do Nothing", "DoNothing");
+		autonchooser.addObject("Scale From Left", "ScaleLeft");
+		autonchooser.addObject("Scale From Right", "ScaleRight");
 		//autonchooser.addObject("TESTUTurn", "UTurn");
 		//autonchooser.addObject("TESTLineRead", "line");
 		
@@ -164,26 +166,24 @@ public class Robot extends TimedRobot {
 		switch (selected) {
 		case "CenterSwitch":
 			m_autonomousCommand = new CG_centerSwitch(ourswitch, scale);
-			// m_autonomousCommand = new CG_holdArm();
 			break;
 		case "CrossLine":
-			// m_autonomousCommand = new auto_driveToAngleWithEncoder(.5, 10, 0,
-			// 40000,
-			// 92000, 0.04);
 			m_autonomousCommand = new DoNothing(ourswitch, scale);
-			break;
-		case "UTurn":
-			m_autonomousCommand = new CG_uTurnStart(ourswitch, scale);
-			break;
-		case "line":
-			m_autonomousCommand = new auto_driveToLine(-.5, 0, 5);
 			break;
 		case "DoNothing":
 			m_autonomousCommand = new CG_autoDoNothing(ourswitch, scale);
 			break;
+		case "ScaleLeft":
+			m_autonomousCommand = new CG_scaleFromLeft(ourswitch, scale);
+			break;
+		case "ScaleRight":
+			m_autonomousCommand = new CG_scaleFromRight(ourswitch, scale);
+			break;
 		default:
 			m_autonomousCommand = new CG_autoDoNothing(ourswitch, scale);
 			break;
+			
+			
 		}
 
 		/*
@@ -271,6 +271,8 @@ public class Robot extends TimedRobot {
 		Robot.led.initDefaultCommand();
 
 		if (RobotMap.robot_AllPeriodicDebug) {
+			SmartDashboard.putNumber("claw pressure", (RobotMap.clawPressure.getValue() / 21.37));
+	
 			SmartDashboard.putData("Auto mode", autonchooser);
 			SmartDashboard.putNumber("LeftEncoder", RobotMap.chassis_leftFront.getSelectedSensorPosition(0));
 			SmartDashboard.putNumber("RightEncoder", RobotMap.chassis_rightFront.getSelectedSensorPosition(0));

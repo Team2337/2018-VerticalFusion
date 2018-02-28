@@ -8,14 +8,12 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class auto_brakeModeOn extends Command {
 	String ourSwitch;
-	public auto_brakeModeOn(String ourSwitch) {
-		this.ourSwitch = ourSwitch;
+	public auto_brakeModeOn() {
 		requires(Robot.chassis);
 	}
 
 	@Override
 	protected void initialize() {
-		System.out.println(ourSwitch);
 		RobotMap.chassis_rightFront.setNeutralMode(NeutralMode.Brake);
 		RobotMap.chassis_leftFront.setNeutralMode(NeutralMode.Brake);
 	}

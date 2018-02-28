@@ -34,4 +34,7 @@ public class Constants {
 
 	public final static double TargetingCamera_PixelDegree = 0.375; // 0.375 degree(s) per 1 pixel //0.2875
 	public final static double TargetingCamera_RevDegree = 0.0169; // 0.017845 rev(s) per 1 degree
+	
+	public final static double EncoderTicksPerInch = 698.57;
+	
 }

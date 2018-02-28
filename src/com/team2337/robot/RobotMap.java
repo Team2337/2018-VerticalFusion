@@ -72,6 +72,7 @@ public class RobotMap {
 	// public static double encoderValue = enc.get();
 
 	// Claw
+	public static AnalogInput clawPressure;
 	public static Solenoid claw_hugger;
 	public static Solenoid claw_claw;
 
@@ -95,13 +96,13 @@ public class RobotMap {
 	
 	public static UsbCamera camera;
 	
-	public static PowerDistributionPanel pdp;
+	//public static PowerDistributionPanel pdp;
 	
 	
 	
 	//*********************************************************************************************************
 	//Debug
-	public static Boolean alt_ControlDebug = true;
+	public static Boolean alt_ControlDebug = false;
 	public static Boolean chassisDebug = true;
 	public static Boolean intakeDebug = false;
 	public static Boolean robot_AllPeriodicDebug = true;
@@ -272,6 +273,7 @@ public class RobotMap {
 		/*
 		 * Claw
 		 */
+		clawPressure = new AnalogInput(0);
 		claw_hugger = new Solenoid(PCM_0, clawHugger);
 		claw_claw = new Solenoid(PCM_0, clawClaw);
 
@@ -299,7 +301,7 @@ public class RobotMap {
 		 */
 		blinkin = new BlinkIn(0);
 		
-		pdp = new PowerDistributionPanel(0);
+		//pdp = new PowerDistributionPanel(0);
 		
 		vision = new VisionProcessing("GRIP/vision");
 		vision.setCameraVerticalOffset(Constants.TargetingCamera_VerticalOffset); // Offset from front of robot
