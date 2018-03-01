@@ -18,7 +18,7 @@ public class CG_scaleFromRight extends CommandGroup {
 			addParallel(new auto_bigBrother_DoNothing());
 			addSequential(new auto_holdUpperPosition(0.1));
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
-			//addSequential (new auto_driveToAngleWithEncoder(.5,10,0,201188,201188,.13));
+			addSequential (new auto_driveToAngleWithEncoder(.5,10,0,201188,201188,.13));
 			addSequential (new auto_brakeModeOn());
 			addSequential (new auto_gyroMMTurn(-90));
 			
@@ -26,7 +26,7 @@ public class CG_scaleFromRight extends CommandGroup {
 			addParallel(new auto_bigBrother_DoNothing());
 			addSequential(new auto_holdUpperPosition(0.1));
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
-			//addSequential (new auto_driveToAngleWithEncoder(.5,10,0,201188,201188,.13));
+			addSequential (new auto_driveToAngleWithEncoder(.5,10,0,201188,201188,.13));
 			addSequential (new auto_brakeModeOn());
 			addSequential (new auto_gyroMMTurn(90));
 			

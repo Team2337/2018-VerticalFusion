@@ -244,7 +244,7 @@ public class RobotMap {
 		intake_right.setInverted(false);
 		
 		crateSensor = new DigitalInput(0);
-		lineReader = new DigitalInput(2);
+		lineReader = new DigitalInput(1);
 		/*
 		 * Arm
 		 */
