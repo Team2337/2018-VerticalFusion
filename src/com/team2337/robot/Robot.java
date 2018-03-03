@@ -3,15 +3,12 @@ package com.team2337.robot;
 import com.team2337.robot.subsystems.Chassis;
 import com.team2337.robot.subsystems.Claw;
 import com.team2337.robot.subsystems.Climber;
-import com.ctre.phoenix.ParamEnum;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.team2337.fusion.address.Address;
 import com.team2337.fusion.gyro.Pigeon;
 import com.team2337.fusion.wrappers.auto.AutoCommandManager;
 import com.team2337.robot.commands.DoNothing;
 import com.team2337.robot.commands.auto.*;
-import com.team2337.robot.commands.claw.claw_CGClose;
-import com.team2337.robot.commands.lift.liftLevelAdjuster;
 import com.team2337.robot.subsystems.Arm;
 import com.team2337.robot.subsystems.BigBrother;
 import com.team2337.robot.subsystems.Intake;
@@ -106,6 +103,7 @@ public class Robot extends TimedRobot {
 
 		//autonchooser.addObject("Cross the Line", "CrossLine");
 		autonchooser.addDefault("Center Switch", "CenterSwitch");
+		autonchooser.addObject("Center Switch then Scale", "CenterSwitchScale");
 		autonchooser.addObject("Do Nothing", "DoNothing");
 		autonchooser.addObject("Scale From Left", "ScaleLeft");
 		autonchooser.addObject("Scale From Right", "ScaleRight");
@@ -167,8 +165,11 @@ public class Robot extends TimedRobot {
 		case "CenterSwitch":
 			m_autonomousCommand = new CG_centerSwitch(ourswitch, scale);
 			break;
+		case "CenterSwitchScale":
+			m_autonomousCommand = new CG_centerSwitchThenScale(ourswitch, scale);
+			break;			
 		case "CrossLine":
-			m_autonomousCommand = new DoNothing(ourswitch, scale);
+			m_autonomousCommand = new CG_crossTheLine(ourswitch, scale);
 			break;
 		case "DoNothing":
 			m_autonomousCommand = new CG_autoDoNothing(ourswitch, scale);

@@ -7,10 +7,10 @@ import com.team2337.robot.commands.shifter.shifter_low;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class CG_centerSwitch extends CommandGroup {
+public class CG_centerSwitchThenScale extends CommandGroup {
 
 	String ourSwitch, scale;
-	public CG_centerSwitch(String ourSwitch, String scale) {
+	public CG_centerSwitchThenScale(String ourSwitch, String scale) {
 		this.ourSwitch = ourSwitch;
 		this.scale = scale;		
 		
@@ -20,8 +20,6 @@ public class CG_centerSwitch extends CommandGroup {
 			addParallel(new auto_bigBrother_DoNothing());
 			addSequential(new auto_holdUpperPosition(0.1));
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
-			///////////////addSequential(new auto_moveUpperPosition(-600,386));
-			////////////addSequential(new auto_wait(0.25));
 			addSequential(new auto_driveToAngleWithEncoder(.9, 4, 40, 28000, 44000, 0.04));// speed was .9 
 			addSequential(new auto_driveToAngleWithEncoder(.9, 3, 0, 65000, 69000, 0.02));
 			addSequential(new auto_moveUpperPosition(1900,60));  //-250,60  ///Score into Switch position
@@ -31,9 +29,9 @@ public class CG_centerSwitch extends CommandGroup {
 			addSequential(new auto_wait(1.5));
 			addSequential(new auto_moveUpperPosition(2127,550));  //50,386  ///Touch down
 			addSequential(new auto_wait(4));
-			addSequential(new auto_moveUpperPosition(2700,550));
+			addSequential(new auto_moveUpperPosition(2700,550)); // Move to 10
 			addSequential(new auto_wait(1.5));
-			addSequential(new auto_moveUpperPosition(2700,100));
+			addSequential(new auto_moveUpperPosition(2700,100)); // Move to 0
 			
 			
 			
