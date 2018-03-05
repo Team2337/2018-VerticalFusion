@@ -144,7 +144,7 @@ public class auto_MMDriveRemote extends Command {
 
 		RobotMap.chassis_rightFront.set(ControlMode.MotionMagic, distance, DemandType.AuxPID, degree);
 		RobotMap.chassis_leftFront.follow(RobotMap.chassis_rightFront, FollowerType.AuxOutput1);
-		setTimeout(1);
+		setTimeout(10);
 	}
 
 	// Called repeatedly when this Command is scheduled to run

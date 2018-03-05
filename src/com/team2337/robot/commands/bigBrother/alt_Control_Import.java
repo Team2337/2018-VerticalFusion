@@ -148,19 +148,34 @@ public class alt_Control_Import extends Command {
 			if ((throttleToggle > 0.9) && (throttleStick < -0.9) && (Robot.arm.armIsLevel())) {
 				Robot.arm.stop();
 			} else {
-				Robot.arm.setSetpoint(armSetPoint);
+				if(OI.operatorControls.getRawButton(Robot.oi.yellowSwitch)) {
+					Robot.arm.stop();
+					Robot.trolley.stop();
+					Robot.lift.stop();
+				} else {
+					Robot.arm.setSetpoint(armSetPoint);
+				}
 			}
 			// Set trolley set point, suspend PID if at bottom position.
 			if (RobotMap.trolley_right.getSelectedSensorPosition(0) < (practiceTrolleyRestPoint-10) && trolleySetPoint < practiceTrolleyRestPoint) {
 				Robot.trolley.stop();
 			} else {
-				Robot.trolley.setSetpoint(trolleySetPoint);
+				if(OI.operatorControls.getRawButton(Robot.oi.blackSwitch)) {
+					Robot.trolley.stop();
+					Robot.lift.stop();
+				} else {
+					Robot.trolley.setSetpoint(trolleySetPoint);
+				}
 			}
 			
 			if (RobotMap.lift_right.getSelectedSensorPosition(0) < (Robot.lift.practiceLiftRestPoint-10) && liftSetPoint <= Robot.lift.practiceLiftRestPoint) {
 				Robot.lift.stop();
 			} else {
+				if(OI.operatorControls.getRawButton(Robot.oi.blueSwitch)) {
+					Robot.lift.stop();
+				} else {
 				Robot.lift.setSetpoint(liftSetPoint);
+				}
 			}
 
 		}

@@ -27,6 +27,11 @@ import edu.wpi.first.wpilibj.GenericHID.RumbleType;
  */
 public class OI {
 
+	public final int yellowSwitch = 18;
+	public final int blackSwitch  = 17;
+	public final int blueSwitch	  = 16;
+	public final int blueButton   = 12;
+	
 	/*
 	 * DriverJoystick
 	 */
@@ -120,19 +125,17 @@ public class OI {
 	
 	
 	public static Joystick				operatorControls		= new Joystick(4);
-	/*
-	JoystickButton			operatorInt_GreenButton				= new JoystickButton(operatorJoystick, 19);
-	JoystickButton			operatorInt_RedButton				= new JoystickButton(operatorJoystick, 20);
-    JoystickButton 			operatorInt_ClearSwitch				= new JoystickButton(operatorJoystick, 15);
-	JoystickButton 			operatorInt_YellowSwitch			= new JoystickButton(operatorJoystick, 18);
-	JoystickButton 			operatorInt_BlackSwitch				= new JoystickButton(operatorJoystick, 17);
-	JoystickButton 			operatorInt_BlueSwitch				= new JoystickButton(operatorJoystick, 16);
-	JoystickButton 			operatorInt_WhiteButton				= new JoystickButton(operatorJoystick, 14);
-	JoystickButton 			operatorInt_YellowButton			= new JoystickButton(operatorJoystick, 13);
-	JoystickButton 			operatorInt_BlackButton 			= new JoystickButton(operatorJoystick, 11);
-	JoystickButton 			operatorInt_BlueButton				= new JoystickButton(operatorJoystick, 12);
-     * OperatorControl
-	 */
+	JoystickButton			operatorInt_GreenButton				= new JoystickButton(operatorControls, 19);
+	JoystickButton			operatorInt_RedButton				= new JoystickButton(operatorControls, 20);
+    JoystickButton 			operatorInt_ClearSwitch				= new JoystickButton(operatorControls, 15);
+	JoystickButton 			operatorInt_YellowSwitch			= new JoystickButton(operatorControls, yellowSwitch);
+	JoystickButton 			operatorInt_BlackSwitch				= new JoystickButton(operatorControls, blackSwitch);
+	JoystickButton 			operatorInt_BlueSwitch				= new JoystickButton(operatorControls, blueSwitch);
+	JoystickButton 			operatorInt_WhiteButton				= new JoystickButton(operatorControls, 14);
+	JoystickButton 			operatorInt_YellowButton			= new JoystickButton(operatorControls, 13);
+	JoystickButton 			operatorInt_BlueButton				= new JoystickButton(operatorControls, blueButton);
+	JoystickButton 			operatorInt_BlackButton 			= new JoystickButton(operatorControls, 11);
+     /* OperatorControl*/
 	
 	public OI() {
 		
@@ -147,8 +150,8 @@ public class OI {
 		driver_BumperRight	    .whenPressed(new DoNothing()); //.whenPressed(new claw_CGOpen());
 		driver_BumperRight      .whenPressed(new DoNothing()); //.whenReleased(new claw_CGClose());
 		
-		driver_Back				.whenPressed(new auto_driveToAngleWithEncoder(.5,10,0,201188,201188,.13)); //.whenPressed(new claw_give30psi()); //30
-		driver_Start			.whenPressed(new DoNothing()); //.whenPressed(new claw_give60psi()); //60
+		driver_Back				.whenPressed(new auto_driveToAngleWithEncoder(.5, 4, 0, 18000, 44000, 0.04)); //.whenPressed(new claw_give30psi()); //30
+		driver_Start			.whenPressed(new auto_MMDriveRemote(13670, 0)); //.whenPressed(new claw_give60psi()); //60
 		
 		driver_LeftStick		.whenPressed(new DoNothing()); 
 		driver_RightStick		.whenPressed(new DoNothing()); 
@@ -233,21 +236,20 @@ public class OI {
 	    ////////////////////////////////////
 		
 		
-		/* ===== DRIVER STATION CONTROLS ===== 
+		/* ===== DRIVER STATION CONTROLS ===== */
 		
-		//operatorInt_GreenButton	.whenPressed(new _DoNothing());
-		//operatorInt_RedButton	.whenPressed(new _DoNothing());
+//		operatorInt_GreenButton	.whenPressed(new _DoNothing());
+//		operatorInt_RedButton	.whenPressed(new _DoNothing());
 		
-		operatorInt_ClearSwitch	.whenPressed(new DoNothing());
-		operatorInt_BlueSwitch	.whenPressed(new DoNothing());
-		operatorInt_BlackSwitch	.whenPressed(new DoNothing());
-		operatorInt_YellowSwitch.whenPressed(new DoNothing());
+//		operatorInt_ClearSwitch	.whenPressed(new DoNothing());
+	    operatorInt_YellowSwitch.whenPressed(new DoNothing());		//this is being used in ALTControl to disable arm
+	    operatorInt_BlackSwitch	.whenPressed(new DoNothing());		//this is being used in ALTControl to disable trolley
+		operatorInt_BlueSwitch	.whenPressed(new DoNothing());		//this is being used in ALTControl to disable lift
 		
-		operatorInt_BlackButton	.whenPressed(new DoNothing());
-		operatorInt_BlueButton	.whenPressed(new DoNothing());
-		operatorInt_YellowButton.whenPressed(new DoNothing());
-		operatorInt_WhiteButton	.whenPressed(new DoNothing());
-		*/
+//		operatorInt_BlackButton	.whenPressed(new DoNothing());
+//		operatorInt_BlueButton	.whenPressed(new DoNothing());
+//		operatorInt_YellowButton.whenPressed(new DoNothing());
+//		operatorInt_WhiteButton	.whenPressed(new DoNothing());
 		///////////////////////////////////////// 
 	}
 

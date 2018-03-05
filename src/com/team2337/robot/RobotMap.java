@@ -106,6 +106,7 @@ public class RobotMap {
 	public static Boolean chassisDebug = true;
 	public static Boolean intakeDebug = false;
 	public static Boolean robot_AllPeriodicDebug = true;
+	public static Boolean clawPressureDash = true;
 	
 	//Public Variables
 	public static Boolean disabledAtEndOfAuto = true;  		//Also set to true in Robot.TeleOpInit & Robot.disabledInint

@@ -11,8 +11,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class auto_driveToAngleWithEncoder extends Command {
 
-	double speed, turn, Pgain, Dgain, MaxCorrectionRatio, targetAngle, timeout;
+	double speed, turn, Pgain, Dgain, MaxCorrectionRatio, targetAngle, timeout, isFinishedPos;
 	int encoderLeft, encoderRight;
+	boolean isFinishedSide = false;
 	
 	public auto_driveToAngleWithEncoder(double speed, double timeout, double angle, int encoderTargetLeft, int encoderTargetRight, double Pgain) {
 		requires(Robot.chassis);
@@ -30,12 +31,13 @@ public class auto_driveToAngleWithEncoder extends Command {
     protected void initialize() {
     	if (Robot.ourswitch.equals("R") || Robot.ourswitch.equals("r")) {
     		encoderRight = Math.abs(encoderLeft);
+    		isFinishedSide = true;
     	}
     	setTimeout(timeout);
     }
     
     protected void execute() {
-    	
+    	System.out.println(isFinishedPos + "  " + encoderRight + "  " + encoderLeft);
     	double currentAngle = Pigeon.pidgey.getFusedHeading();
     	//double currentAngularRate = Robot.gyro.getAngularRate();
     	double forward = speed; 	
@@ -43,12 +45,17 @@ public class auto_driveToAngleWithEncoder extends Command {
     	turn = -((targetAngle - currentAngle) * Pgain );//- (currentAngularRate) * Dgain;
 
     	RobotMap.drive.arcadeDrive(forward, turn, false);
+    	if(isFinishedSide) {
+    		isFinishedPos = Math.abs(RobotMap.chassis_leftFront.getSelectedSensorPosition(0));
+    	} else {
+    		isFinishedPos = Math.abs(RobotMap.chassis_rightFront.getSelectedSensorPosition(0));
+    	}
 
     }
 	
 	@Override
 	protected boolean isFinished() {
-		return (isTimedOut() || Math.abs(RobotMap.chassis_rightFront.getSelectedSensorPosition(0)) > Math.abs(encoderRight));
+		return (isTimedOut() || isFinishedPos > Math.abs(encoderRight));
 		}
 	
     protected void end() {

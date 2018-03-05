@@ -29,15 +29,7 @@ public class Arm extends Subsystem {
 	private static final double maxSpeedUp 		= 0.7;
 	private static final double maxSpeedDown 	= -0.7;
 	private double nominalSpeed = 0;
-	
-	public static final int centerPosition 		= 2300;  //345    startup position    // comp  -630
-		
-	public static final int forwardLevel 		= centerPosition + 975;
-	public static final int forwardSoftLimit 	= centerPosition + 1000;   //1238 practice    /// comp  350
-	public static final int forwardCarry 		= centerPosition + 420;    // 900           ///  comp -160
-
-	public static final int reverseSoftLimit 	= centerPosition - 1008;   //-1100
-	
+	public static int centerPosition, forwardLevel, forwardSoftLimit, forwardCarry, reverseSoftLimit;
 	
 	//ONLY USED IN JOYSTICK CONTROL
 	public static final int forwardTopSL 		= 548;   //548   /// not used /// comp  548??
@@ -49,8 +41,18 @@ public class Arm extends Subsystem {
 	}
 
 	public Arm() {
+		if(Robot.isComp) {
+			centerPosition 		= 2300;
+			
+		} else {
+			centerPosition 		= 2300;
+		}
 		
+		forwardLevel 		= centerPosition + 975;
+		forwardSoftLimit 	= centerPosition + 1000;   //1238 practice    /// comp  350
+		forwardCarry 		= centerPosition + 420;    // 900           ///  comp -160
 
+		reverseSoftLimit 	= centerPosition - 1008;   //-1100
 		
 		setSoftLimits(forwardSoftLimit, reverseSoftLimit);
 				

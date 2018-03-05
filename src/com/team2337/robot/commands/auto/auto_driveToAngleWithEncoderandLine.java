@@ -48,7 +48,7 @@ public class auto_driveToAngleWithEncoderandLine extends Command {
 	
 	@Override
 	protected boolean isFinished() {
-		return (isTimedOut() || ((Math.abs(RobotMap.chassis_rightFront.getSelectedSensorPosition(0)) > 163000) &&   RobotMap.lineReader.get()));
+		return (isTimedOut() || ((Math.abs(RobotMap.chassis_rightFront.getSelectedSensorPosition(0)) > encoderRight) &&   RobotMap.lineReader.get()));
 		}
 	
     protected void end() {

@@ -50,6 +50,11 @@ public class led_runtime extends Command {
 			// -0.59 = rainbow party
 			// RobotMap.blinkin.flow();
 		}
+		if(RobotMap.clawPressure.getVoltage() > 40) {
+			RobotMap.clawPressureDash = false;
+		} else {
+			RobotMap.clawPressureDash = true;
+		}
 	}
 
 	protected boolean isFinished() {

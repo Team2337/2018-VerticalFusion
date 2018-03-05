@@ -64,10 +64,10 @@ public class Robot extends TimedRobot {
 		if (mac.equals("00-80-2F-17-89-85")) {
 			System.out.println("TestBoard");
 			isComp = false;
-		} else if(mac.equals("00-80-2F-17-E5-D2")) {
+		} else if(mac.equals("00:80:2F:19:21:E1")) {
 			System.out.println("PracticeBot");
 			isComp = false;
-		} else {
+		} else {  //00-80-2F-17-E5-D2
 			System.out.println("CompBot");
 			isComp = true;
 		}
@@ -101,12 +101,13 @@ public class Robot extends TimedRobot {
 		// RobotMap.chassis_leftFront.setSelectedSensorPosition(0, 0, 0);  //replaced by above method
 		// RobotMap.chassis_rightFront.setSelectedSensorPosition(0, 0, 0);
 
-		//autonchooser.addObject("Cross the Line", "CrossLine");
+		autonchooser.addObject("Cross the Line", "CrossLine");
 		autonchooser.addDefault("Center Switch", "CenterSwitch");
 		autonchooser.addObject("Center Switch then Scale", "CenterSwitchScale");
 		autonchooser.addObject("Do Nothing", "DoNothing");
 		autonchooser.addObject("Scale From Left", "ScaleLeft");
 		autonchooser.addObject("Scale From Right", "ScaleRight");
+		autonchooser.addObject("LiftUpperPosition", "LiftUpperPosition");
 		//autonchooser.addObject("TESTUTurn", "UTurn");
 		//autonchooser.addObject("TESTLineRead", "line");
 		
@@ -175,10 +176,13 @@ public class Robot extends TimedRobot {
 			m_autonomousCommand = new CG_autoDoNothing(ourswitch, scale);
 			break;
 		case "ScaleLeft":
-			m_autonomousCommand = new CG_scaleFromLeft(ourswitch, scale);
+			m_autonomousCommand = new CG_scaleFromLeft2(ourswitch, scale);
 			break;
 		case "ScaleRight":
 			m_autonomousCommand = new CG_scaleFromRight(ourswitch, scale);
+			break;
+		case "LiftUpperPosition":
+			m_autonomousCommand = new CG_scorePosition();
 			break;
 		default:
 			m_autonomousCommand = new CG_autoDoNothing(ourswitch, scale);
@@ -217,14 +221,6 @@ public class Robot extends TimedRobot {
 		lift.levelOfLift = 1;
 		RobotMap.disabledAtEndOfAuto = true;
 		Robot.bigBrother.holdAltControl();
-	//	new claw_CGClose();
-		/*
-		claw.give60Hugs();
-		new auto_wait(0.5);
-		claw.give30Hugs();
-		claw.close();
-		*/
-
 		Robot.chassis.setBrakeMode(NeutralMode.Coast);
 
 		// This makes sure that the autonomous stops running when
@@ -283,9 +279,8 @@ public class Robot extends TimedRobot {
 			SmartDashboard.putNumber("armEncoderPositionPWM - 2300ish", RobotMap.arm_right.getSensorCollection().getPulseWidthPosition());
 			SmartDashboard.putBoolean("Line Reader", RobotMap.lineReader.get());
 			SmartDashboard.putNumber("centerX", RobotMap.vision.getRevAngle());
-			SmartDashboard.putBoolean("intake?", RobotMap.firstIntake);
-			SmartDashboard.putString("IntakeCommand", Robot.intake.getCurrentCommandName());
-			SmartDashboard.putString("Claw Command", Robot.claw.getCurrentCommandName());
+			SmartDashboard.putBoolean("claw Pressure", RobotMap.clawPressureDash);
+			SmartDashboard.putBoolean("Crate Sensor", RobotMap.crateSensor.get());
 		}
 	}
 

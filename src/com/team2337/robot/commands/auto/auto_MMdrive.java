@@ -40,7 +40,7 @@ public class auto_MMdrive extends Command {
 		RobotMap.chassis_leftFront.setSelectedSensorPosition(0, 0, timeoutMs);
 
 		driveFR = 0; // 0.00425; //.01370574769317461; forward .17
-		drivePR = 0.13;// .03; // forward .013
+		drivePR = 0.025;// .03; // forward .013
 		driveIR = 0;
 		driveDR = 2;
 		RobotMap.chassis_rightFront.config_kF(slotIdx, driveFR, timeoutMs);
@@ -49,7 +49,7 @@ public class auto_MMdrive extends Command {
 		RobotMap.chassis_rightFront.config_kD(slotIdx, driveDR, timeoutMs);
 
 		driveFL = 0; // .005;
-		drivePL = 0.13;// .03; // forward .013
+		drivePL = 0.025;// .03; // forward .013
 		driveIL = 0;
 		driveDL = 2;
 		RobotMap.chassis_leftFront.config_kF(slotIdx, driveFL, timeoutMs);
