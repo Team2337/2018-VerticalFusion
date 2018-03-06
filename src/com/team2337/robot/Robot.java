@@ -268,7 +268,7 @@ public class Robot extends TimedRobot {
 		Robot.led.initDefaultCommand();
 
 		if (RobotMap.robot_AllPeriodicDebug) {
-			SmartDashboard.putNumber("claw pressure", (RobotMap.clawPressure.getValue() / 21.37));
+			
 	
 			SmartDashboard.putData("Auto mode", autonchooser);
 			SmartDashboard.putNumber("LeftEncoder", RobotMap.chassis_leftFront.getSelectedSensorPosition(0));
@@ -280,7 +280,12 @@ public class Robot extends TimedRobot {
 			SmartDashboard.putBoolean("Line Reader", RobotMap.lineReader.get());
 			SmartDashboard.putNumber("centerX", RobotMap.vision.getRevAngle());
 			SmartDashboard.putBoolean("claw Pressure", RobotMap.clawPressureDash);
+			SmartDashboard.putNumber("claw pressure", (RobotMap.clawPressure.getValue() / 21.37));
 			SmartDashboard.putBoolean("Crate Sensor", RobotMap.crateSensor.get());
+		//	SmartDashboard.putNumber("accel X", RobotMap.accel.getX());
+		//	SmartDashboard.putNumber("accel Y", RobotMap.accel.getY());
+		//	SmartDashboard.putNumber("accel Z", RobotMap.accel.getZ());
+			
 		}
 	}
 

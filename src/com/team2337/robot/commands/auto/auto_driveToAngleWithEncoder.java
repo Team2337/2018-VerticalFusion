@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class auto_driveToAngleWithEncoder extends Command {
 
 	double speed, turn, Pgain, Dgain, MaxCorrectionRatio, targetAngle, timeout, isFinishedPos;
-	int encoderLeft, encoderRight;
+	int encoderLeft, encoderRight,encoderEnd;
 	boolean isFinishedSide = false;
 	
 	public auto_driveToAngleWithEncoder(double speed, double timeout, double angle, int encoderTargetLeft, int encoderTargetRight, double Pgain) {
@@ -30,7 +30,6 @@ public class auto_driveToAngleWithEncoder extends Command {
 	
     protected void initialize() {
     	if (Robot.ourswitch.equals("R") || Robot.ourswitch.equals("r")) {
-    		encoderRight = Math.abs(encoderLeft);
     		isFinishedSide = true;
     	}
     	setTimeout(timeout);
@@ -46,16 +45,20 @@ public class auto_driveToAngleWithEncoder extends Command {
 
     	RobotMap.drive.arcadeDrive(forward, turn, false);
     	if(isFinishedSide) {
+    		//Read left side encoder
     		isFinishedPos = Math.abs(RobotMap.chassis_leftFront.getSelectedSensorPosition(0));
+    		encoderEnd = Math.abs(encoderLeft);
     	} else {
+    		//Read right side encoder
     		isFinishedPos = Math.abs(RobotMap.chassis_rightFront.getSelectedSensorPosition(0));
+    		encoderEnd = Math.abs(encoderRight);
     	}
 
     }
 	
 	@Override
 	protected boolean isFinished() {
-		return (isTimedOut() || isFinishedPos > Math.abs(encoderRight));
+		return (isTimedOut() || isFinishedPos > Math.abs(encoderEnd));
 		}
 	
     protected void end() {

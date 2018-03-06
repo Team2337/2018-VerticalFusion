@@ -1,6 +1,5 @@
 package com.team2337.robot.commands.led;
 
-import com.team2337.fusion.led.Color;
 import com.team2337.fusion.wrappers.auto.AutoCommandManager;
 import com.team2337.robot.Robot;
 import com.team2337.robot.RobotMap;
@@ -50,7 +49,7 @@ public class led_runtime extends Command {
 			// -0.59 = rainbow party
 			// RobotMap.blinkin.flow();
 		}
-		if(RobotMap.clawPressure.getVoltage() > 40) {
+		if((RobotMap.clawPressure.getValue() / 21.37) > 40) {
 			RobotMap.clawPressureDash = false;
 		} else {
 			RobotMap.clawPressureDash = true;

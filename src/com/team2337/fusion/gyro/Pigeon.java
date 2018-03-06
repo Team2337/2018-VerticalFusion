@@ -52,11 +52,11 @@ public class Pigeon extends Subsystem {
 		pidgey.getYawPitchRoll(ypr_deg);
 		pidgey.getRawGyro(xyz_dps);
 		
-		SmartDashboard.putNumber("FusedHeading2", pidgey.getFusedHeading());
-		SmartDashboard.putNumber("AbsoluteCompass", getThing());
+		//SmartDashboard.putNumber("FusedHeading2", pidgey.getFusedHeading());
+		//SmartDashboard.putNumber("AbsoluteCompass", getThing());
 		SmartDashboard.putNumber("Yaw", getYaw());
-		SmartDashboard.putNumber("Pitch", getPitch());
-		SmartDashboard.putNumber("Roll", getRoll());
+		//SmartDashboard.putNumber("Pitch", getPitch());
+		//SmartDashboard.putNumber("Roll", getRoll());
 
 		
 	}
