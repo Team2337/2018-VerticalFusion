@@ -34,9 +34,8 @@ public class Intake extends Subsystem {
 	 */
 	public void moveIn(double power) {
 		intakeOn = true;
-		right.set(ControlMode.PercentOutput, power);
+		right.set(ControlMode.PercentOutput, power-0.2);
 		left.set(ControlMode.PercentOutput, power);
-		
 	}
 	/**
 	 * Move the intake inwards (intake)

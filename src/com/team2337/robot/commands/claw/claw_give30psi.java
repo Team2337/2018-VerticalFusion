@@ -10,6 +10,7 @@ package com.team2337.robot.commands.claw;
 import edu.wpi.first.wpilibj.command.Command;
 
 import com.team2337.robot.Robot;
+import com.team2337.robot.RobotMap;
 
 /**
  * An example command.  You can replace me with your own command.
@@ -20,7 +21,9 @@ public class claw_give30psi extends Command {
 	}
 	@Override
 	protected void initialize() {
+		if(RobotMap.crateSensor.get()) {
 		Robot.claw.give30Hugs();
+		}
 	}
 	@Override
 	protected void execute() {

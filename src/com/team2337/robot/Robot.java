@@ -282,6 +282,7 @@ public class Robot extends TimedRobot {
 			SmartDashboard.putBoolean("claw Pressure", RobotMap.clawPressureDash);
 			SmartDashboard.putNumber("claw pressure", (RobotMap.clawPressure.getValue() / 21.37));
 			SmartDashboard.putBoolean("Crate Sensor", RobotMap.crateSensor.get());
+			SmartDashboard.putString("clawCommand", Robot.claw.getCurrentCommandName());
 		//	SmartDashboard.putNumber("accel X", RobotMap.accel.getX());
 		//	SmartDashboard.putNumber("accel Y", RobotMap.accel.getY());
 		//	SmartDashboard.putNumber("accel Z", RobotMap.accel.getZ());
