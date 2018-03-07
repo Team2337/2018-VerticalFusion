@@ -5,10 +5,12 @@ import edu.wpi.first.wpilibj.command.Command;
 import com.team2337.robot.Robot;
 
 /**
- * called by throttle side buttons to set motion array of lift based on scale position.
+ * called by throttle side buttons to set motion array of lift based on scale
+ * position.
  */
 public class liftLevelAdjuster extends Command {
 	int liftLevel;
+	boolean climb = Robot.lift.climb;
 
 	public liftLevelAdjuster(int liftLevel) {
 		this.liftLevel = liftLevel;
@@ -18,6 +20,8 @@ public class liftLevelAdjuster extends Command {
 	@Override
 	protected void initialize() {
 		Robot.lift.liftLeveler(liftLevel);
+		if (liftLevel == 9)
+			climb = true;
 	}
 
 	@Override

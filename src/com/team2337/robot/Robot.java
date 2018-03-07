@@ -281,6 +281,7 @@ public class Robot extends TimedRobot {
 			SmartDashboard.putNumber("centerX", RobotMap.vision.getRevAngle());
 			SmartDashboard.putBoolean("claw Pressure", RobotMap.clawPressureDash);
 			SmartDashboard.putBoolean("Crate Sensor", RobotMap.crateSensor.get());
+			SmartDashboard.putBoolean("jhbkjihgiyu", OI.operatorJoystick.getRawButton(Robot.oi.kOperator_PalmButton));
 		}
 	}
 

@@ -19,6 +19,7 @@ public class alt_Control_Import extends Command {
 	double liftSetPoint;
 	double armAdjPos;
 	double armAdjNeg;
+	double armClimbAdj;
 	double trolleyAdj = 2; // TODO determne rightamount
 	double armEncoder;
 
@@ -42,12 +43,17 @@ public class alt_Control_Import extends Command {
 	int armReverseSoftLimits = 6;
 	int armPositiveAdj = 7;
 	int armNegativeAdj = 8;
-	
+	int liftSetPointClimb = 9;
+	int armClimbAdjustment = 10;
+		
 	int compTrolleyRestPoint = 61;
 	int practiceTrolleyRestPoint = 111;
 	
 	int compLiftRestPoint = Robot.lift.compLiftRestPoint;
 	int practiceLiftRestPoint = Robot.lift.practiceLiftRestPoint;
+	
+	double armCenterPosition = Robot.arm.centerPosition;
+	double climberAdjLimit = Robot.arm.climberAdjLimit;
 
 	boolean sameSide = true;
 
@@ -75,6 +81,7 @@ public class alt_Control_Import extends Command {
 		armSetPoint = ((double) points[(int) throttleValue][armSetPoints]);
 		armAdjPos = (points[(int) throttleValue][armPositiveAdj]);
 		armAdjNeg = (points[(int) throttleValue][armNegativeAdj]);
+		armClimbAdj = (points[(int) throttleValue][armClimbAdjustment]);
 		liftSetPoint = points[(int) throttleValue][Robot.lift.levelOfLift];
 
 		// Trolley adjustment by joystick
@@ -141,6 +148,31 @@ public class alt_Control_Import extends Command {
 				SmartDashboard.putBoolean("Disabled: endOfAuto - checking throttle toggle", RobotMap.disabledAtEndOfAuto);
 			}
 		}
+		
+		//SETPOINTS For Climbing 
+				if(Robot.lift.levelOfLift == liftSetPointClimb) {
+					if((int) throttleValue <= 10 && OI.operatorJoystick.getRawButton(Robot.oi.kOperator_PalmButton)) {
+						//if(Robot.trolley.getPosition() > points[4][trolleySetPoints]) {
+						trolleySetPoint = (points[(int) throttleValue][trolleySetPoints]);
+					//	} else {
+					//		trolleySetPoint = points[4][trolleySetPoints];
+					//	}
+						armSetPoint = 2100;
+						if (throttleToggle < -0.1) {								
+							armSetPoint = armSetPoint + (throttleToggle * Robot.arm.climberAdjLimit); 
+						}
+					} else if((int) throttleValue >= 11) {								//else if the throttleValue is greater than 10
+						armSetPoint = armCenterPosition;
+						if ((throttleToggle) > 0.1) {									//if the adjustment analog is greater than 0.1
+							armSetPoint = armSetPoint + (throttleToggle * armAdjPos);	//set the arm setpoint 
+						} else if (throttleToggle < -0.1) {								
+							armSetPoint = armSetPoint + (throttleToggle * armClimbAdj); 
+							//set the negative adjustment (the arm adj on score side) to the soft limit of the climber
+						} 
+						
+					}
+				}
+
 
 		if (!RobotMap.disabledAtEndOfAuto) { // Disable until throttleToggle activated (see above)									
 
@@ -148,7 +180,7 @@ public class alt_Control_Import extends Command {
 			if ((throttleToggle > 0.9) && (throttleStick < -0.9) && (Robot.arm.armIsLevel())) {
 				Robot.arm.stop();
 			} else {
-				if(OI.operatorControls.getRawButton(Robot.oi.yellowSwitch)) {
+				if(OI.operatorControls.getRawButton(Robot.oi.kOperatorInt_YellowSwitch)) {
 					Robot.arm.stop();
 					Robot.trolley.stop();
 					Robot.lift.stop();
@@ -160,7 +192,7 @@ public class alt_Control_Import extends Command {
 			if (RobotMap.trolley_right.getSelectedSensorPosition(0) < (practiceTrolleyRestPoint-10) && trolleySetPoint < practiceTrolleyRestPoint) {
 				Robot.trolley.stop();
 			} else {
-				if(OI.operatorControls.getRawButton(Robot.oi.blackSwitch)) {
+				if(OI.operatorControls.getRawButton(Robot.oi.kOperatorInt_BlackSwitch)) {
 					Robot.trolley.stop();
 					Robot.lift.stop();
 				} else {
@@ -171,14 +203,14 @@ public class alt_Control_Import extends Command {
 			if (RobotMap.lift_right.getSelectedSensorPosition(0) < (Robot.lift.practiceLiftRestPoint-10) && liftSetPoint <= Robot.lift.practiceLiftRestPoint) {
 				Robot.lift.stop();
 			} else {
-				if(OI.operatorControls.getRawButton(Robot.oi.blueSwitch)) {
+				if(OI.operatorControls.getRawButton(Robot.oi.kOperatorInt_BlueSwitch)) {
 					Robot.lift.stop();
 				} else {
 				Robot.lift.setSetpoint(liftSetPoint);
 				}
 			}
-
 		}
+
 
 		// Print Debug info to SmartDashboard if turned on in RobotMap.
 		if (RobotMap.alt_ControlDebug) {

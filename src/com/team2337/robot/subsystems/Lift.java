@@ -22,7 +22,8 @@ public class Lift extends Subsystem {
 	//private final static TalonSRX leftFront = RobotMap.lift_left;  //4
 	
 	public int levelOfLift = 1;
-
+	public boolean climb = false;
+	
 	private double maxSpeedUp = 0.7;
 	private double maxSpeedDown = 0.5;
 	private double nominalSpeed = 0;
@@ -33,7 +34,7 @@ public class Lift extends Subsystem {
 	private int allowableError = 0;     						 ///need to set *****************//TODO
 	
 	public static int forwardLIFTSoftLimit = 590;					 ///need to set *****************//TODO
-	public static  int reverseLIFTSoftLimit = 40;				 ///need to set *****************//TODO
+	public static int reverseLIFTSoftLimit = 40;				 ///need to set *****************//TODO
 	public static int practiceLiftRestPoint = 100;
 	public static int compLiftRestPoint = 100;
 	

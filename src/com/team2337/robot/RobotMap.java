@@ -102,7 +102,7 @@ public class RobotMap {
 	
 	//*********************************************************************************************************
 	//Debug
-	public static Boolean alt_ControlDebug = false;
+	public static Boolean alt_ControlDebug = true;
 	public static Boolean chassisDebug = true;
 	public static Boolean intakeDebug = false;
 	public static Boolean robot_AllPeriodicDebug = true;
