@@ -10,7 +10,7 @@ import com.team2337.robot.Robot;
  */
 public class liftLevelAdjuster extends Command {
 	int liftLevel;
-	boolean climb = Robot.lift.climb;
+	//boolean climb = Robot.lift.climb;
 
 	public liftLevelAdjuster(int liftLevel) {
 		this.liftLevel = liftLevel;
@@ -20,8 +20,8 @@ public class liftLevelAdjuster extends Command {
 	@Override
 	protected void initialize() {
 		Robot.lift.liftLeveler(liftLevel);
-		if (liftLevel == 9)
-			climb = true;
+		//if (liftLevel == 9)
+		//	climb = true;
 	}
 
 	@Override

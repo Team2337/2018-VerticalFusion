@@ -62,13 +62,13 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 		String mac = Address.getInstance().getMAC();
 		if (mac.equals("00-80-2F-17-89-85")) {
-			System.out.println("TestBoard");
+			System.out.println("TestBoard " + mac);
 			isComp = false;
-		} else if(mac.equals("00:80:2F:19:21:E1")) {
-			System.out.println("PracticeBot");
+		} else if(mac.equals("00-80-2F-19-21-E1")) {
+			System.out.println("PracticeBot " + mac);
 			isComp = false;
 		} else {  //00-80-2F-17-E5-D2
-			System.out.println("CompBot");
+			System.out.println("CompBot " + mac);
 			isComp = true;
 		}
 		
@@ -269,7 +269,6 @@ public class Robot extends TimedRobot {
 
 		if (RobotMap.robot_AllPeriodicDebug) {
 			SmartDashboard.putNumber("claw pressure", (RobotMap.clawPressure.getValue() / 21.37));
-	
 			SmartDashboard.putData("Auto mode", autonchooser);
 			SmartDashboard.putNumber("LeftEncoder", RobotMap.chassis_leftFront.getSelectedSensorPosition(0));
 			SmartDashboard.putNumber("RightEncoder", RobotMap.chassis_rightFront.getSelectedSensorPosition(0));
@@ -281,7 +280,7 @@ public class Robot extends TimedRobot {
 			SmartDashboard.putNumber("centerX", RobotMap.vision.getRevAngle());
 			SmartDashboard.putBoolean("claw Pressure", RobotMap.clawPressureDash);
 			SmartDashboard.putBoolean("Crate Sensor", RobotMap.crateSensor.get());
-			SmartDashboard.putBoolean("jhbkjihgiyu", OI.operatorJoystick.getRawButton(Robot.oi.kOperator_PalmButton));
+			SmartDashboard.putBoolean("gfd", OI.operatorJoystick.getRawButton(11));
 		}
 	}
 

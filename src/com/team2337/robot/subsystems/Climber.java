@@ -13,28 +13,38 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * @author Brendan
  */
 public class Climber extends Subsystem {
-	
+
 	private final TalonSRX left = RobotMap.climber_left;
 	private final TalonSRX right = RobotMap.climber_right;
-	
-	public Climber() {}
-	public void initDefaultCommand() {}
+
+	public Climber() {
+	}
+
+	public void initDefaultCommand() {
+	}
+
 	/**
 	 * Moves the climber up
-	 * @param power Power of the climber
+	 * 
+	 * @param power
+	 *            Power of the climber
 	 */
 	public void up(double power) {
 		left.set(ControlMode.PercentOutput, power);
 		right.set(ControlMode.PercentOutput, power);
 	}
+
 	/**
 	 * Moves the climber down
-	 * @param power Power of the climber
+	 * 
+	 * @param power
+	 *            Power of the climber
 	 */
 	public void down(double power) {
 		left.set(ControlMode.PercentOutput, -power);
 		right.set(ControlMode.PercentOutput, -power);
 	}
+
 	/**
 	 * Stops the climber
 	 */

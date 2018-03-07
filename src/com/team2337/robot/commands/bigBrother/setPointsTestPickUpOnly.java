@@ -56,5 +56,3 @@ public class setPointsTestPickUpOnly {
 		{545,liftLowPoint,liftYellowHigh,liftRedHigh,arm95Minus200,armForwardSoftLimit,armReverseSoftLimit,0,0,600,300},
 	};
 }
-
-

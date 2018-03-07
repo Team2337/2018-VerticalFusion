@@ -151,12 +151,8 @@ public class alt_Control_Import extends Command {
 		
 		//SETPOINTS For Climbing 
 				if(Robot.lift.levelOfLift == liftSetPointClimb) {
-					if((int) throttleValue <= 10 && OI.operatorJoystick.getRawButton(Robot.oi.kOperator_PalmButton)) {
-						//if(Robot.trolley.getPosition() > points[4][trolleySetPoints]) {
+					if((int) throttleValue <= 10 && OI.operatorJoystick.getRawButton(11)) {
 						trolleySetPoint = (points[(int) throttleValue][trolleySetPoints]);
-					//	} else {
-					//		trolleySetPoint = points[4][trolleySetPoints];
-					//	}
 						armSetPoint = 2100;
 						if (throttleToggle < -0.1) {								
 							armSetPoint = armSetPoint + (throttleToggle * Robot.arm.climberAdjLimit); 
@@ -180,7 +176,7 @@ public class alt_Control_Import extends Command {
 			if ((throttleToggle > 0.9) && (throttleStick < -0.9) && (Robot.arm.armIsLevel())) {
 				Robot.arm.stop();
 			} else {
-				if(OI.operatorControls.getRawButton(Robot.oi.kOperatorInt_YellowSwitch)) {
+				if(OI.operatorControls.getRawButton(Robot.oi.yellowSwitch)) {
 					Robot.arm.stop();
 					Robot.trolley.stop();
 					Robot.lift.stop();
@@ -192,7 +188,7 @@ public class alt_Control_Import extends Command {
 			if (RobotMap.trolley_right.getSelectedSensorPosition(0) < (practiceTrolleyRestPoint-10) && trolleySetPoint < practiceTrolleyRestPoint) {
 				Robot.trolley.stop();
 			} else {
-				if(OI.operatorControls.getRawButton(Robot.oi.kOperatorInt_BlackSwitch)) {
+				if(OI.operatorControls.getRawButton(Robot.oi.blackSwitch)) {
 					Robot.trolley.stop();
 					Robot.lift.stop();
 				} else {
@@ -203,7 +199,7 @@ public class alt_Control_Import extends Command {
 			if (RobotMap.lift_right.getSelectedSensorPosition(0) < (Robot.lift.practiceLiftRestPoint-10) && liftSetPoint <= Robot.lift.practiceLiftRestPoint) {
 				Robot.lift.stop();
 			} else {
-				if(OI.operatorControls.getRawButton(Robot.oi.kOperatorInt_BlueSwitch)) {
+				if(OI.operatorControls.getRawButton(Robot.oi.blueSwitch)) {
 					Robot.lift.stop();
 				} else {
 				Robot.lift.setSetpoint(liftSetPoint);
@@ -211,20 +207,20 @@ public class alt_Control_Import extends Command {
 			}
 		}
 
-
+		
 		// Print Debug info to SmartDashboard if turned on in RobotMap.
 		if (RobotMap.alt_ControlDebug) {
 			SmartDashboard.putBoolean("endOFAuto - debug", RobotMap.disabledAtEndOfAuto);
 			//SmartDashboard.putBoolean("sameSide", Robot.arm.sameSide(armEncoder, armSetPoint));
 			SmartDashboard.putNumber("trolleyStick", trolleyStick);
 			SmartDashboard.putNumber("TrolleySetPoint", Robot.trolley.getSetpoint());
-	
+			SmartDashboard.putBoolean("XXXsameSideXXX", sameSide);
 			SmartDashboard.putNumber("throttleValue", throttleValue);
 			SmartDashboard.putNumber("ArmSetPoint", armSetPoint);
 			// SmartDashboard.putNumber("trolleyOutputPercent",
 			// RobotMap.trolley_right.getMotorOutputPercent());
 			SmartDashboard.putNumber("trolleyOutputXXXXXXXX", RobotMap.trolley_right.getMotorOutputPercent());
-			SmartDashboard.putBoolean("XXXsameSideXXX", sameSide);
+			
 			SmartDashboard.putNumber("LIFTSetPointXXXXXX", Robot.lift.getSetpoint());
 			SmartDashboard.putNumber("liftArray SetPoint", points[(int) throttleValue][Robot.lift.levelOfLift]);
 			SmartDashboard.putNumber("throttleStick", throttleStick);

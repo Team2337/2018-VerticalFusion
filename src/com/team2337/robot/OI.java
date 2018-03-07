@@ -100,8 +100,8 @@ public class OI {
 	JoystickButton			operator_TopIndexButton 			= new JoystickButton(operatorJoystick, 9);	//The higher button on the back right of the throttle
 	JoystickButton			operator_BottomIndexButton			= new JoystickButton(operatorJoystick, 10);	//The lower button on the back right of the throttle
 	
-	//JoystickButton		operator_SE							= new JoystickButton(operatorJoystick, 11); //The "SE" button on the throttle
-	//JoystickButton		operator_ST							= new JoystickButton(operatorJoystick, 12); //The "ST" button on the throttle
+	JoystickButton			operator_SE							= new JoystickButton(operatorJoystick, 11); //The "SE" button on the throttle
+	JoystickButton			operator_ST							= new JoystickButton(operatorJoystick, 12); //The "ST" button on the throttle
 	
 	JoystickPOVButton		operator_JoystickPOVUp				= new JoystickPOVButton(operatorJoystick, 0);
 	JoystickPOVButton		operator_JoystickPOVUpRight			= new JoystickPOVButton(operatorJoystick, 45);
@@ -141,23 +141,23 @@ public class OI {
 		
 		/* ====== DRIVER JOYSTICK ===== */
 		
-		driver_GreenA			.whenPressed(new DoNothing()); //.whenPressed(new trolley_setPID(0.7));
-		driver_RedB				.whenPressed(new DoNothing()); //.whenPressed(new trolley_setPID(0.6));
-		driver_BlueX			.whenPressed(new DoNothing()); //.whenPressed(new trolley_setPID(0.1)); 
-		driver_YellowY			.whenPressed(new DoNothing()); //.whenPressed(new trolley_stopPID());
+		driver_GreenA			.whenPressed(new DoNothing());
+		driver_RedB				.whenPressed(new DoNothing()); 
+		driver_BlueX			.whenPressed(new DoNothing());  
+		driver_YellowY			.whenPressed(new DoNothing()); 
 		
-		driver_BumperLeft		.whenPressed(new DoNothing()); //.whenPressed(new claw_close());
-		driver_BumperRight	    .whenPressed(new DoNothing()); //.whenPressed(new claw_CGOpen());
-		driver_BumperRight      .whenPressed(new DoNothing()); //.whenReleased(new claw_CGClose());
+		driver_BumperLeft		.whenPressed(new shifter_high());
+		driver_BumperRight	    .whenPressed(new shifter_low());
+
 		
-		driver_Back				.whenPressed(new DoNothing()); //.whenPressed(new claw_give30psi()); //30
-		driver_Start			.whenPressed(new auto_MMDriveRemote(13670, 0)); //.whenPressed(new claw_give60psi()); //60
+		driver_Back				.whenPressed(new DoNothing()); 
+		driver_Start			.whenPressed(new DoNothing()); 
 		
 		driver_LeftStick		.whenPressed(new DoNothing()); 
 		driver_RightStick		.whenPressed(new DoNothing()); 
 		
-		//driver_TriggerLeft		.whileHeld(new intake_out(1));
-		//driver_TriggerRight		.whileHeld(new intake_in(1));
+		driver_TriggerLeft		.whileHeld(new DoNothing());
+		driver_TriggerRight		.whileHeld(new DoNothing());
 		
 		driver_POVUp			.whenPressed(new DoNothing());  
 		//driver_POVUpRight		.whenPressed(new _DoNothing()); 
@@ -170,37 +170,7 @@ public class OI {
 	    
 	    //////////////////////////////////
 	    
-	    
-		/* ====== OPERATOR JOYSTICK ===== */
-	    /*
-		operator_GreenA			.whenPressed(new DoNothing()); //.whenPressed(new trolley_setPID(0.7));
-		operator_RedB			.whenPressed(new DoNothing()); //.whenPressed(new trolley_setPID(0.9));
-		operator_BlueX			.whenPressed(new DoNothing()); //.whenPressed(new trolley_setPID(1.1));
-		operator_YellowY		.whenPressed(new DoNothing()); //.whenPressed(new trolley_stopPID());
-		
-		operator_BumperLeft		.whenPressed(new claw_close());
-		operator_BumperRight	.whenPressed(new claw_open());
-		
-		operator_Back			.whileHeld(new claw_giveLessHugs()); 
-		operator_Start			.whileHeld(new claw_giveMoreHugs());
-		
-		operator_LeftStick		.whenPressed(new DoNothing());
-		operator_RightStick		.whenPressed(new DoNothing());
-		
-		operator_TriggerLeft	.whileHeld(new DoNothing());
-		operator_TriggerRight	.whileHeld(new DoNothing());
-		
-		operator_POVUp			.whenPressed(new DoNothing());
-		//operator_POVUpRight	.whenPressed(new _DoNothing());
-		operator_POVRight		.whenPressed(new DoNothing());
-		//operator_POVDownRight	.whenPressed(new _DoNothing());
-	    operator_POVDown	    .whenPressed(new DoNothing());
-		//operator_POVDownLeft  .whenPressed(new _DoNothing());
-		operator_POVLeft	    .whenPressed(new DoNothing());
-		//operator_POVUpLeft	.whenPressed(new _DoNothing());
-		*/
-	    
-	    //Operator 
+   
 	    operator_RightTrigger			       .whileHeld(new intake_in(1));
 	    operator_StripedButton			       .whenPressed(new claw_CGOpen());
 	    operator_StripedButton				   .whenReleased(new claw_CGClose());
@@ -216,7 +186,7 @@ public class OI {
 	    operator_PalmButton				       .whenPressed(new DoNothing());
 	    operator_BottomIndexButton		       .whenPressed(new DoNothing());
 
-	    //operator_SE						   .whenPressed(new DoNothing());
+	    operator_SE						 	   .whenPressed(new liftLevelAdjuster(9));     
 	    //operator_ST						   .whenPressed(new DoNothing());
 	                                          
 	    operator_JoystickPOVUp			       .whenPressed(new claw_CGOpen());
