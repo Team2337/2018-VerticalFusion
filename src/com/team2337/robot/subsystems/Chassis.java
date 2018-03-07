@@ -1,7 +1,6 @@
 package com.team2337.robot.subsystems;
 
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.team2337.robot.Robot;
 import com.team2337.robot.RobotMap;

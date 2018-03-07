@@ -150,7 +150,7 @@ public class OI {
 		driver_BumperRight	    .whenPressed(new DoNothing()); //.whenPressed(new claw_CGOpen());
 		driver_BumperRight      .whenPressed(new DoNothing()); //.whenReleased(new claw_CGClose());
 		
-		driver_Back				.whenPressed(new auto_driveToAngleWithEncoder(.5, 4, 0, 18000, 44000, 0.04)); //.whenPressed(new claw_give30psi()); //30
+		driver_Back				.whenPressed(new DoNothing()); //.whenPressed(new claw_give30psi()); //30
 		driver_Start			.whenPressed(new auto_MMDriveRemote(13670, 0)); //.whenPressed(new claw_give60psi()); //60
 		
 		driver_LeftStick		.whenPressed(new DoNothing()); 
@@ -204,9 +204,9 @@ public class OI {
 	    operator_RightTrigger			       .whileHeld(new intake_in(1));
 	    operator_StripedButton			       .whenPressed(new claw_CGOpen());
 	    operator_StripedButton				   .whenReleased(new claw_CGClose());
-	    operator_RightKnucleButton		       .whileHeld(new intake_out(0.6));
+	    operator_RightKnucleButton		       .whileHeld(new intake_out(1));
 	    operator_RightKnucleButton		       .whenReleased(new claw_CGOpenClose());
-	    operator_L3						       .whileHeld(new intake_out(1));
+	    operator_L3						       .whileHeld(new intake_out(0.6));
 	    operator_L3						       .whenReleased(new claw_CGOpenClose());
 	                                           
 	    operator_ThrottleTopThumbButton		   .whenPressed(new liftLevelAdjuster(3));

@@ -15,6 +15,7 @@ import edu.wpi.cscore.UsbCamera;
 import edu.wpi.cscore.VideoMode.PixelFormat;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
+import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -22,6 +23,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.hal.EncoderJNI;
+import edu.wpi.first.wpilibj.interfaces.Accelerometer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -95,6 +97,8 @@ public class RobotMap {
 	public static DigitalInput lineReader;
 	
 	public static UsbCamera camera;
+	
+	public static Accelerometer accel;
 	
 	//public static PowerDistributionPanel pdp;
 	
@@ -303,6 +307,8 @@ public class RobotMap {
 		blinkin = new BlinkIn(0);
 		
 		//pdp = new PowerDistributionPanel(0);
+		
+		accel = new BuiltInAccelerometer(Accelerometer.Range.k4G);
 		
 		vision = new VisionProcessing("GRIP/vision");
 		vision.setCameraVerticalOffset(Constants.TargetingCamera_VerticalOffset); // Offset from front of robot
