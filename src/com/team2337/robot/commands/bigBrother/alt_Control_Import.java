@@ -47,7 +47,7 @@ public class alt_Control_Import extends Command {
 	int armClimbAdjustment = 10;
 		
 	int compTrolleyRestPoint = 61;
-	int practiceTrolleyRestPoint = 111;
+	int practiceTrolleyRestPoint = 61; //111 practice
 	
 	int compLiftRestPoint = Robot.lift.compLiftRestPoint;
 	int practiceLiftRestPoint = Robot.lift.practiceLiftRestPoint;

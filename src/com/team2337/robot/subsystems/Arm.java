@@ -47,11 +47,11 @@ public class Arm extends Subsystem {
 			centerPosition 		= 2300;
 		}
 		
-		forwardLevel 		= centerPosition + 975;
-		forwardSoftLimit 	= centerPosition + 1000;   //1238 practice    /// comp  350
-		forwardCarry 		= centerPosition + 420;    // 900           ///  comp -160
+		forwardLevel 		= centerPosition + 1100;	//975 prac
+		forwardSoftLimit 	= centerPosition + 1150;   //1000 practice    /// comp  350
+		forwardCarry 		= centerPosition + 600;    //420 practice // 900           ///  comp -160
 		
-		reverseSoftLimit	= centerPosition - 1008; //Flat Position //-1100
+		reverseSoftLimit	= centerPosition - 1200;//- 1008;practice //Flat Position //-1100
 		
 		climberAdjLimit		= 1180; //Climber flat position
 		
@@ -146,7 +146,7 @@ public class Arm extends Subsystem {
 	}
 	
 	public boolean armIsLevel() {
-		return (getPosition() > 0.95 * forwardLevel);
+		return (getPosition() > 0.99 * forwardLevel);
 	}
 	public boolean armIsReverse() {
 		return (getPosition() < centerPosition);

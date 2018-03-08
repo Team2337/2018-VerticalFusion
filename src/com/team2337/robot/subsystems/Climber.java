@@ -3,7 +3,9 @@ package com.team2337.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.team2337.robot.RobotMap;
+import com.team2337.robot.commands.climber.climber_doNothing;
 
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -13,43 +15,22 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * @author Brendan
  */
 public class Climber extends Subsystem {
-
-	private final TalonSRX left = RobotMap.climber_left;
-	private final TalonSRX right = RobotMap.climber_right;
+	
+	private final Solenoid PTO = RobotMap.PTO;
 
 	public Climber() {
 	}
 
 	public void initDefaultCommand() {
+		setDefaultCommand(new climber_doNothing());
 	}
 
-	/**
-	 * Moves the climber up
-	 * 
-	 * @param power
-	 *            Power of the climber
-	 */
-	public void up(double power) {
-		left.set(ControlMode.PercentOutput, power);
-		right.set(ControlMode.PercentOutput, power);
+	
+	public void PTOClimb() {
+		PTO.set(true);
 	}
-
-	/**
-	 * Moves the climber down
-	 * 
-	 * @param power
-	 *            Power of the climber
-	 */
-	public void down(double power) {
-		left.set(ControlMode.PercentOutput, -power);
-		right.set(ControlMode.PercentOutput, -power);
-	}
-
-	/**
-	 * Stops the climber
-	 */
-	public void stop() {
-		left.set(ControlMode.PercentOutput, 0);
-		right.set(ControlMode.PercentOutput, 0);
+	
+	public void PTOLift() {
+		PTO.set(false);
 	}
 }

@@ -5,22 +5,18 @@ import edu.wpi.first.wpilibj.command.Command;
 import com.team2337.robot.Robot;
 
 /**
- * Climber: UP - Moves the climber up
+ * Shifter: HIGH - Shifts drive train into low gear
  * 
  * @category CLIMBER
- * @author Brendan
+ * @author Bryce
  */
-public class climber_up extends Command {
-	private double power = 0.5;
-
-	public climber_up(double power) {
-		this.power = power;
-
+public class climber_PTOLift extends Command {
+	public climber_PTOLift() {
 		requires(Robot.climber);
 	}
 
 	protected void initialize() {
-		Robot.climber.up(this.power);
+		Robot.climber.PTOLift();
 	}
 
 	protected void execute() {
@@ -31,7 +27,6 @@ public class climber_up extends Command {
 	}
 
 	protected void end() {
-		Robot.climber.stop();
 	}
 
 	protected void interrupted() {

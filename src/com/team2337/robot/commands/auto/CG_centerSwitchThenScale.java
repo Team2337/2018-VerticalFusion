@@ -16,17 +16,24 @@ public class CG_centerSwitchThenScale extends CommandGroup {
 			addParallel(new auto_bigBrother_DoNothing());
 			addSequential(new auto_holdUpperPosition(0.1));
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
-			addSequential(new auto_driveToAngleWithEncoder(.9, 4, 40, 28000, 19000, 0.04));// speed was .9 
-			addSequential(new auto_driveToAngleWithEncoder(.9, 3, 0, 65000, 30000, 0.02));
+//			addSequential(new auto_driveToAngleWithEncoder(.9, 4, 40, 28000, 19000, 0.04));
+//			addSequential(new auto_driveToAngleWithEncoder(.9, 3, 0, 65000, 30000, 0.02));
 			addSequential(new auto_moveUpperPosition(1900,60));  //-250,60  ///Score into Switch position
-			addParallel(new auto_driveForwardWithTime(.3, 1));
-			addSequential(new auto_clawOpenWithCollision(4));
-			addSequential(new auto_wait(1.5));
-			addSequential(new auto_moveUpperPosition(2127,550));  //50,386  ///Touch down
-			addSequential(new auto_wait(4));
-			addSequential(new auto_moveUpperPosition(2700,550)); // Move to 10
-			addSequential(new auto_wait(1.5));
-			addSequential(new auto_moveUpperPosition(2700,100)); // Move to 0
+//			addParallel(new auto_driveForwardWithTime(.3, 1));
+//			addSequential(new auto_clawOpenWithCollision(4));
+			addSequential(new auto_wait(0.5));
+			addSequential(new auto_resetEncoder());
+			addParallel(new auto_driveToAngleWithEncoder(-.5, 3, 0, 27000, 12000, 0.02));
+			//addSequential(new auto_driveToAngleWithEncoder(-.5, 3, 60, 38000, 12000, 0.02));
+			addSequential(new auto_moveUpperPosition(2127,500));  //50,386  ///Touch down
+			addSequential(new auto_wait(0.15));
+			addSequential(new auto_moveUpperPosition(2700,500));
+			addSequential(new auto_wait(0.4));
+			addSequential(new auto_moveUpperPosition(2700,100));
+			addSequential(new auto_wait(0.5));
+			addSequential(new auto_resetEncoder());
+			addSequential(new auto_driveToAngleWithEncoder(.7, 4, 50, 28000, 16000, 0.015));
+			addSequential(new auto_driveToAngleWithEncoder(.7, 4, 0, 65000, 30000, 0.0175));
 			
 			
 			
@@ -36,17 +43,24 @@ public class CG_centerSwitchThenScale extends CommandGroup {
 			addParallel(new auto_bigBrother_DoNothing());
 			addSequential(new auto_holdUpperPosition(0.1));
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
-			addSequential(new auto_driveToAngleWithEncoder(.9, 4, 40, 28000, 19000, 0.04));// speed was .9 
-			addSequential(new auto_driveToAngleWithEncoder(.9, 3, 0, 65000, 30000, 0.02));
+//			addSequential(new auto_driveToAngleWithEncoder(.9, 4, 40, 28000, 19000, 0.04));
+//			addSequential(new auto_driveToAngleWithEncoder(.9, 3, 0, 65000, 30000, 0.02));
 			addSequential(new auto_moveUpperPosition(1900,60));  //-250,60  ///Score into Switch position
-			addParallel(new auto_driveForwardWithTime(.3, 1));
-			addSequential(new auto_clawOpenWithCollision(4));
-			addSequential(new auto_wait(1.5));
-			addSequential(new auto_moveUpperPosition(2127,550));  //50,386  ///Touch down
-			addSequential(new auto_wait(4));
-			addSequential(new auto_moveUpperPosition(2700,550));
-			addSequential(new auto_wait(1.5));
+//			addParallel(new auto_driveForwardWithTime(.3, 1));
+//			addSequential(new auto_clawOpenWithCollision(4));
+			addSequential(new auto_wait(0.5));
+			addSequential(new auto_resetEncoder());
+			addParallel(new auto_driveToAngleWithEncoder(-.5, 3, 0, 27000, 12000, 0.02));
+			//addSequential(new auto_driveToAngleWithEncoder(-.5, 3, 60, 38000, 12000, 0.02));
+			addSequential(new auto_moveUpperPosition(2127,500));  //50,386  ///Touch down
+			addSequential(new auto_wait(0.15));
+			addSequential(new auto_moveUpperPosition(2700,500));
+			addSequential(new auto_wait(0.4));
 			addSequential(new auto_moveUpperPosition(2700,100));
+			addSequential(new auto_wait(0.5));
+			addSequential(new auto_resetEncoder());
+			addSequential(new auto_driveToAngleWithEncoder(.7, 4, 50, 28000, 16000, 0.015));
+			addSequential(new auto_driveToAngleWithEncoder(.7, 4, 0, 65000, 30000, 0.0175));
 			
 			
 			
@@ -56,17 +70,24 @@ public class CG_centerSwitchThenScale extends CommandGroup {
 			addParallel(new auto_bigBrother_DoNothing());
 			addSequential(new auto_holdUpperPosition(0.1));
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!		
-			addSequential(new auto_driveToAngleWithEncoder(.9, 4, -40, 38000, 44000, 0.04)); // right was 44000 left was 28000 left was 22000 
-			addSequential(new auto_driveToAngleWithEncoder(.9, 3, 0, 65000, 69000, 0.02));
+//			addSequential(new auto_driveToAngleWithEncoder(.9, 4, -40, 38000, 44000, 0.04)); // right was 44000 left was 28000 left was 22000 
+//			addSequential(new auto_driveToAngleWithEncoder(.9, 3, 0, 65000, 69000, 0.02));
 			addSequential(new auto_moveUpperPosition(1900,60));  //-250,60
-			addParallel(new auto_driveForwardWithTime(.3, 1));
-			addSequential(new auto_clawOpenWithCollision(4));
-			addSequential(new auto_wait(1.5));
-			addSequential(new auto_moveUpperPosition(2127,550));   //50,386
-			addSequential(new auto_wait(4));
-			addSequential(new auto_moveUpperPosition(2700,550));
-			addSequential(new auto_wait(1.5));
+//			addParallel(new auto_driveForwardWithTime(.3, 1));
+//			addSequential(new auto_clawOpenWithCollision(4));
+			addSequential(new auto_wait(0.5));
+			addSequential(new auto_resetEncoder());
+			addParallel(new auto_driveToAngleWithEncoder(-.5, 3, 0, 27000, 12000, 0.02));
+			//addSequential(new auto_driveToAngleWithEncoder(-.5, 3, 60, 38000, 12000, 0.02));
+			addSequential(new auto_moveUpperPosition(2127,500));  //50,386  ///Touch down
+			addSequential(new auto_wait(0.15));
+			addSequential(new auto_moveUpperPosition(2700,500));
+			addSequential(new auto_wait(0.4));
 			addSequential(new auto_moveUpperPosition(2700,100));
+			addSequential(new auto_wait(0.5));
+			addSequential(new auto_resetEncoder());
+			addSequential(new auto_driveToAngleWithEncoder(.7, 4, -50, 32000, 20000, 0.015));
+			addSequential(new auto_driveToAngleWithEncoder(.7, 4, 0, 65000, 30000, 0.0175));
 			
 			
 		// **************************  RRR  **************************
@@ -74,18 +95,25 @@ public class CG_centerSwitchThenScale extends CommandGroup {
 		} else {
 			addParallel(new auto_bigBrother_DoNothing());
 			addSequential(new auto_holdUpperPosition(0.1));
-			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
-			addSequential(new auto_driveToAngleWithEncoder(.9, 4, -40, 38000, 44000, 0.04)); // right was 44000 left was 28000 left was 22000 
-			addSequential(new auto_driveToAngleWithEncoder(.9, 3, 0, 65000, 69000, 0.02));
+			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!		
+//			addSequential(new auto_driveToAngleWithEncoder(.9, 4, -40, 38000, 44000, 0.04)); // right was 44000 left was 28000 left was 22000 
+//			addSequential(new auto_driveToAngleWithEncoder(.9, 3, 0, 65000, 69000, 0.02));
 			addSequential(new auto_moveUpperPosition(1900,60));  //-250,60
-			addParallel(new auto_driveForwardWithTime(.3, 1));
-			addSequential(new auto_clawOpenWithCollision(4));
-			addSequential(new auto_wait(1.5));
-			addSequential(new auto_moveUpperPosition(2127,550));   //50,386
-			addSequential(new auto_wait(4));
-			addSequential(new auto_moveUpperPosition(2700,550));
-			addSequential(new auto_wait(1.5));
+//			addParallel(new auto_driveForwardWithTime(.3, 1));
+//			addSequential(new auto_clawOpenWithCollision(4));
+			addSequential(new auto_wait(0.5));
+			addSequential(new auto_resetEncoder());
+			addParallel(new auto_driveToAngleWithEncoder(-.5, 3, 0, 27000, 12000, 0.02));
+			//addSequential(new auto_driveToAngleWithEncoder(-.5, 3, 60, 38000, 12000, 0.02));
+			addSequential(new auto_moveUpperPosition(2127,500));  //50,386  ///Touch down
+			addSequential(new auto_wait(0.15));
+			addSequential(new auto_moveUpperPosition(2700,500));
+			addSequential(new auto_wait(0.4));
 			addSequential(new auto_moveUpperPosition(2700,100));
+			addSequential(new auto_wait(0.5));
+			addSequential(new auto_resetEncoder());
+			addSequential(new auto_driveToAngleWithEncoder(.7, 4, -50, 32000, 20000, 0.015));
+			addSequential(new auto_driveToAngleWithEncoder(.7, 4, 0, 65000, 30000, 0.0175));
 			
 		}
 		

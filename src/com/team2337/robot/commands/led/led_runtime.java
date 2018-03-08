@@ -23,28 +23,30 @@ public class led_runtime extends Command {
 		if (AutoCommandManager.getInstance().state.equals("teleop")) {
 			if (Robot.lift.levelOfLift == 1) {
 				if (!RobotMap.crateSensor.get()) {
-					RobotMap.blinkin.setColor(0.76); // Solid Green
+					RobotMap.blinkin.setColor(0.76);  // Solid Green
 				} else if (Robot.intake.intakeOn) {
-					RobotMap.blinkin.setColor(0.05); // HeartBeat Green
+					RobotMap.blinkin.setColor(0.05);  // HeartBeat Green
 				} else {
-					RobotMap.blinkin.setColor(0.09); // Breath Green
+					RobotMap.blinkin.setColor(0.09);  // Breath Green
 				}
 			} else if (Robot.lift.levelOfLift == 2) {
 				if (!RobotMap.crateSensor.get()) {
-					RobotMap.blinkin.setColor(0.63); // Solid Yellow
+					RobotMap.blinkin.setColor(0.63);  // Solid Yellow
 				} else if (Robot.intake.intakeOn) {
-					RobotMap.blinkin.setColor(0.25); // HeartBeat Yellow
+					RobotMap.blinkin.setColor(0.25);  // HeartBeat Yellow
 				} else {
-					RobotMap.blinkin.setColor(0.29); // Breath Yellow
+					RobotMap.blinkin.setColor(0.29);  // Breath Yellow
 				}
 			} else if (Robot.lift.levelOfLift == 3) {
 				if (!RobotMap.crateSensor.get()) {
-					RobotMap.blinkin.setColor(0.62); // Solid Red
+					RobotMap.blinkin.setColor(0.62);  // Solid Red
 				} else if (Robot.intake.intakeOn) {
 					RobotMap.blinkin.setColor(-0.25); // HeartBeat Red
 				} else {
 					RobotMap.blinkin.setColor(-0.17); // Breath Red
 				}
+			} else if (Robot.lift.levelOfLift == 9) {
+					RobotMap.blinkin.setColor(0.87);  //Solid blue
 			}
 			// -0.59 = rainbow party
 			// RobotMap.blinkin.flow();

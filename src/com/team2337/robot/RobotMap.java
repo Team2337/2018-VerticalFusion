@@ -81,6 +81,8 @@ public class RobotMap {
 	// Climber
 	public static TalonSRX climber_left;
 	public static TalonSRX climber_right;
+	
+	public static Solenoid PTO;
 
 	// Shifter
 	public static Solenoid shifter_left;
@@ -287,6 +289,8 @@ public class RobotMap {
 		 */
 		climber_left = new TalonSRX(climberLeft); // 10
 		climber_right = new TalonSRX(climberRight); // 9
+		
+		PTO = new Solenoid(PCM_0, climb);
 
 		/*
 		 * Shifter

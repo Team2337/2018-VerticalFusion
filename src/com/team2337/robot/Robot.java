@@ -98,6 +98,8 @@ public class Robot extends TimedRobot {
 		// Also include the Auton Chooser
 		Robot.gyro.resetPidgey();
 		Robot.chassis.resetEncoders();
+		Robot.climber.PTOLift();
+
 		// RobotMap.chassis_leftFront.setSelectedSensorPosition(0, 0, 0);  //replaced by above method
 		// RobotMap.chassis_rightFront.setSelectedSensorPosition(0, 0, 0);
 

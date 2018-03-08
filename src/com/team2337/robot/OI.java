@@ -27,10 +27,10 @@ import edu.wpi.first.wpilibj.GenericHID.RumbleType;
  */
 public class OI {
 
-	public final int yellowSwitch = 18;
-	public final int blackSwitch  = 17;
-	public final int blueSwitch	  = 16;
-	public final int blueButton   = 12;
+	public final int yellowSwitch = 2;
+	public final int blackSwitch  = 3;
+	public final int blueSwitch	  = 4;
+	public final int blueButton   = 8;
 	
 	/*
 	 * DriverJoystick
@@ -146,8 +146,8 @@ public class OI {
 		driver_BlueX			.whenPressed(new DoNothing());  
 		driver_YellowY			.whenPressed(new DoNothing()); 
 		
-		driver_BumperLeft		.whenPressed(new shifter_high());
-		driver_BumperRight	    .whenPressed(new shifter_low());
+		driver_BumperLeft		.whenPressed(new climber_PTOClimb());
+		driver_BumperRight	    .whenPressed(new climber_PTOLift());
 
 		
 		driver_Back				.whenPressed(new DoNothing()); 
