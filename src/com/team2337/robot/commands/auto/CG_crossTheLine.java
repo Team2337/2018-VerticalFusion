@@ -18,7 +18,7 @@ public class CG_crossTheLine extends CommandGroup {
 			addSequential(new auto_holdUpperPosition(0.1));
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
 
-			addSequential(new auto_driveToAngleWithEncoder(.5, 4, 0, 92400, 92400, 0.04));// speed was .9 
+			addSequential(new auto_driveToAngleWithEncoder(.5, 4, 0, 102400, 102400, 0.04));// speed was .9 
 			addSequential(new auto_wait(1.5));
 			addSequential(new auto_moveUpperPosition(2127,550)); ///Touch down
 			addSequential(new auto_wait(4));

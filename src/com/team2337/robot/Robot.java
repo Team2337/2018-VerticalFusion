@@ -109,7 +109,9 @@ public class Robot extends TimedRobot {
 		autonchooser.addObject("Do Nothing", "DoNothing");
 		autonchooser.addObject("Scale From Left", "ScaleLeft");
 		autonchooser.addObject("Scale From Right", "ScaleRight");
-		autonchooser.addObject("LiftUpperPosition", "LiftUpperPosition");
+//		autonchooser.addObject("LiftUpperPosition", "LiftUpperPosition");
+		autonchooser.addObject("PRACTICE CenterSwitchRight", "CenterSwitchRight");
+		autonchooser.addObject("PRACTICE CenterSwitchLeft", "CenterSwitchLeft");
 		//autonchooser.addObject("TESTUTurn", "UTurn");
 		//autonchooser.addObject("TESTLineRead", "line");
 		
@@ -185,6 +187,12 @@ public class Robot extends TimedRobot {
 			break;
 		case "LiftUpperPosition":
 			m_autonomousCommand = new CG_scorePosition();
+			break;
+		case "CenterSwitchLeft":
+			m_autonomousCommand = new CG_centerSwitchLeft(ourswitch, scale);
+			break;
+		case "CenterSwitchRight":
+			m_autonomousCommand = new CG_centerSwitchRight(ourswitch, scale);
 			break;
 		default:
 			m_autonomousCommand = new CG_autoDoNothing(ourswitch, scale);

@@ -35,7 +35,7 @@ public class Lift extends Subsystem {
 	public static int practiceLiftRestPoint = 100;
 	public static int compLiftRestPoint = 100;
 	
-	public static int liftYellowHigh = 290;
+	public static int liftYellowHigh = 375;
 	public static int liftRedHigh = 600;
 
 	protected void initDefaultCommand() {

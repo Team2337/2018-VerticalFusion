@@ -124,7 +124,7 @@ public class OI {
 	 */
 	
 	
-	public static Joystick				operatorControls		= new Joystick(4);
+	public static Joystick				operatorControls		= new Joystick(2);
 	JoystickButton			operatorInt_GreenButton				= new JoystickButton(operatorControls, 19);
 	JoystickButton			operatorInt_RedButton				= new JoystickButton(operatorControls, 20);
     JoystickButton 			operatorInt_ClearSwitch				= new JoystickButton(operatorControls, 15);
