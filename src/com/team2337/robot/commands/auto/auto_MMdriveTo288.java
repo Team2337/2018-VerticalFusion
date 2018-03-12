@@ -1,6 +1,6 @@
 package com.team2337.robot.commands.auto;
 
-import com.team2337.fusion.vision.VisionProcessing;
+
 import com.team2337.robot.RobotMap;
 import com.team2337.robot.Robot;
 import com.team2337.robot.Constants;
@@ -8,7 +8,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 
 /**
  *
@@ -20,9 +20,8 @@ public class auto_MMdriveTo288 extends Command {
 	public static int timeoutMs = 0;
 	public static int slotIdx = 0;
 	public static int sensorUnitsPer100ms, sensorUnitsPer100msPerSec;
-	private static int time = 0;
+
 	static double acceptableAngleError = 1;
-	public VisionProcessing boilerVision = RobotMap.vision;
 	static boolean angleDone;
 
 	public auto_MMdriveTo288() {

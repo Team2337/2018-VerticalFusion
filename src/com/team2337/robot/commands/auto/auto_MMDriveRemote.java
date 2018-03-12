@@ -28,7 +28,7 @@ public class auto_MMDriveRemote extends Command {
 	public static int sensorUnitsPer100ms, sensorUnitsPer100msPerSec;
 	private static int time = 0;
 	static double acceptableAngleError = 1;
-	public VisionProcessing boilerVision = RobotMap.vision;
+
 	static boolean angleDone;
 	private static int distance;
 	public final static int REMOTE_0 = 0;

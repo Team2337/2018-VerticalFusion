@@ -28,9 +28,9 @@ public class auto_driveToAngleWithEncoderandLine extends Command {
 	}
 	
     protected void initialize() {
-    	if (Robot.ourswitch.equals("R") || Robot.ourswitch.equals("r")) {
+    	//if (Robot.ourswitch.equals("R") || Robot.ourswitch.equals("r")) {
     		encoderRight = Math.abs(encoderLeft);
-    	}
+    	//}
     	setTimeout(timeout);
     }
     

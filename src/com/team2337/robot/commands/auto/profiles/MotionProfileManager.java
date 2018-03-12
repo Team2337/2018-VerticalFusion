@@ -35,7 +35,7 @@ import com.ctre.phoenix.ErrorCode;
 import com.ctre.phoenix.motion.*;
 import com.ctre.phoenix.motion.TrajectoryPoint.TrajectoryDuration;
 
-public class MotionProfileExample {
+public class MotionProfileManager {
 
 	/**
 	 * The status of the motion profile executer and buffer inside the Talon.
@@ -46,7 +46,7 @@ public class MotionProfileExample {
 
 	/** additional cache for holding the active trajectory point */
 	double _pos=0,_vel=0,_heading=0;
-
+	double endheading;
 	double _endHeading = 0;
 	
 	int timeoutMs = 10;
@@ -117,6 +117,9 @@ public class MotionProfileExample {
 	 * of your trajectory points.  So if they are firing every 20ms, you should call 
 	 * every 10ms.
 	 */
+	double[][] inprofile;
+	int inTotalCount;
+	
 	class PeriodicRunnable implements java.lang.Runnable {
 	    public void run() {  _motorController.processMotionProfileBuffer();    }
 	}
@@ -129,7 +132,7 @@ public class MotionProfileExample {
 	 * @param talon
 	 *            reference to Talon object to fetch motion profile status from.
 	 */
-	public MotionProfileExample(IMotorController motorController) {
+	public MotionProfileManager(IMotorController motorController, double endheading, double[][] inprofile, int inTotalCount) {
 		_motorController = motorController;
 		/*
 		 * since our MP is 10ms per point, set the control frame rate and the
@@ -137,6 +140,9 @@ public class MotionProfileExample {
 		 */
 		_motorController.changeMotionControlFramePeriod(5);
 		_notifer.startPeriodic(0.005);
+		this.endheading = endheading;
+		this.inprofile = inprofile;
+		this.inTotalCount = inTotalCount;
 	}
 
 	/**
@@ -353,7 +359,7 @@ public class MotionProfileExample {
 	 * Called by application to signal Talon to start the buffered MP (when it's
 	 * able to).
 	 */
-	void start(double endHeading, boolean bForward) {
+	public void start(double endHeading, boolean bForward) {
 		_bStart = true;
 		_bForward = bForward;
 		_endHeading = endHeading;

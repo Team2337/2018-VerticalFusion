@@ -29,9 +29,9 @@ public class auto_driveToAngleWithEncoder extends Command {
 	}
 	
     protected void initialize() {
-    	if (Robot.ourswitch.equals("R") || Robot.ourswitch.equals("r")) {
+//    	if (Robot.ourswitch.equals("R") || Robot.ourswitch.equals("r")) {
     		isFinishedSide = true;
-    	}
+   // 	}
     	setTimeout(timeout);
     }
     

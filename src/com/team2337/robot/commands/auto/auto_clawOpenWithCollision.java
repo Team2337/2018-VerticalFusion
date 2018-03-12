@@ -17,7 +17,7 @@ public class auto_clawOpenWithCollision extends Command {
 	
 	public auto_clawOpenWithCollision(double timeout) {
 		this.timeout = timeout;
-		requires(Robot.claw);
+	//	requires(Robot.claw);
 		
 	}
 	@Override
@@ -40,7 +40,7 @@ public class auto_clawOpenWithCollision extends Command {
         
         if ( ( Math.abs(currentJerkX) > kCollisionThreshold_DeltaG ) ||
              ( Math.abs(currentJerkY) > kCollisionThreshold_DeltaG) ) {
-        	Robot.claw.open();
+     //   	Robot.claw.open();
         	 collisionDetected = true;
         }
         //SmartDashboard.putBoolean("CollisionDetected", collisionDetected);
@@ -55,7 +55,7 @@ public class auto_clawOpenWithCollision extends Command {
 	@Override
 	protected void end() {
 		collisionDetected = false;
-		Robot.claw.open();
+	//	Robot.claw.open();
 	}
 	@Override
 	protected void interrupted() {
