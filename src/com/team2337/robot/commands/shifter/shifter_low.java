@@ -19,7 +19,7 @@ public class shifter_low extends Command {
 	}
 
 	protected void execute() {}
-	protected boolean isFinished() {return true;}
+	protected boolean isFinished() {return false;}
 	protected void end() {}
 	protected void interrupted() {
 		this.end();

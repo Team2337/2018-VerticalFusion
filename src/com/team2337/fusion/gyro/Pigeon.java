@@ -101,6 +101,7 @@ public class Pigeon extends Subsystem {
 	public void resetPidgey() {
 		pidgey.setFusedHeading(0, timeoutMs);
 		pidgey.setYaw(0, timeoutMs);
+		//RobotMap.navx_gyro.reset();
 	}
 
 	public double getAngularRate() {

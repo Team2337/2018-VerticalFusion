@@ -145,7 +145,7 @@ public class alt_Control_Import extends Command {
 			SmartDashboard.putBoolean("Disabled: endOfAuto - checking throttle toggle", RobotMap.disabledAtEndOfAuto);
 			if (Math.abs(throttleToggle) > 0.9) {
 				RobotMap.disabledAtEndOfAuto = false;
-				SmartDashboard.putBoolean("Disabled: endOfAuto - checking throttle toggle", RobotMap.disabledAtEndOfAuto);
+				//SmartDashboard.putBoolean("Disabled: endOfAuto - checking throttle toggle", RobotMap.disabledAtEndOfAuto);
 			}
 		}
 		
@@ -186,7 +186,7 @@ public class alt_Control_Import extends Command {
 			}
 			// Set trolley set point, suspend PID if at bottom position.
 			if (RobotMap.trolley_right.getSelectedSensorPosition(0) < (practiceTrolleyRestPoint-10) && trolleySetPoint < practiceTrolleyRestPoint) {
-				Robot.trolley.stop();
+				//Robot.trolley.stop();
 			} else {
 				if(OI.operatorControls.getRawButton(Robot.oi.blackSwitch)) {
 					Robot.trolley.stop();
@@ -199,11 +199,11 @@ public class alt_Control_Import extends Command {
 			if (RobotMap.lift_right.getSelectedSensorPosition(0) < (Robot.lift.practiceLiftRestPoint-10) && liftSetPoint <= Robot.lift.practiceLiftRestPoint) {
 				Robot.lift.stop();
 			} else {
-				if(OI.operatorControls.getRawButton(Robot.oi.blueSwitch)) {
-					Robot.lift.stop();
-				} else {
+//				if(OI.operatorControls.getRawButton(Robot.oi.blueSwitch)) {
+//					Robot.lift.stop();
+//				} else {
 				Robot.lift.setSetpoint(liftSetPoint);
-				}
+//				}
 			}
 		}
 

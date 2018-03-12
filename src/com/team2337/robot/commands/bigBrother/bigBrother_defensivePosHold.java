@@ -1,36 +1,29 @@
-package com.team2337.robot.commands.auto;
+package com.team2337.robot.commands.bigBrother;
 
 import com.team2337.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class auto_wait extends Command {
-	double timeout;
-	
-	public auto_wait(double timeout) {
-		this.timeout = timeout;
+public class bigBrother_defensivePosHold extends Command {
+
+	public bigBrother_defensivePosHold() {
+		requires(Robot.bigBrother);
 	}
 
 	protected void initialize() {
-		setTimeout(timeout);
 	}
-
 
 	protected void execute() {
-
 	}
 
-
 	protected boolean isFinished() {
-		return isTimedOut();
+		return false;
 	}
 
 	protected void end() {
 	}
 
-
 	protected void interrupted() {
 		this.end();
 	}
-	
 }

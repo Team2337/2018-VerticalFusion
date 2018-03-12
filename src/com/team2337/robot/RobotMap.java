@@ -1,9 +1,11 @@
 package com.team2337.robot;
 
+import com.ctre.phoenix.ParamEnum;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.kauailabs.navx.frc.AHRS;
 import com.team2337.fusion.drive.*;
 import com.team2337.fusion.led.BlinkIn;
 import com.team2337.fusion.vision.VisionProcessing;
@@ -21,6 +23,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.hal.EncoderJNI;
 import edu.wpi.first.wpilibj.interfaces.Accelerometer;
@@ -81,12 +84,12 @@ public class RobotMap {
 	// Climber
 	public static TalonSRX climber_left;
 	public static TalonSRX climber_right;
+	public static Solenoid climb_ejector;
 	
 	public static Solenoid PTO;
-
+	public static Solenoid PTO0;
 	// Shifter
 	public static Solenoid shifter_left;
-	public static Solenoid shifter_right;
 
 	// LEDs
 	public static BlinkIn blinkin;
@@ -103,6 +106,7 @@ public class RobotMap {
 	public static Accelerometer accel;
 	
 	//public static PowerDistributionPanel pdp;
+//	public static AHRS navx_gyro;
 	
 	
 	
@@ -113,6 +117,7 @@ public class RobotMap {
 	public static Boolean intakeDebug = false;
 	public static Boolean robot_AllPeriodicDebug = true;
 	public static Boolean clawPressureDash = true;
+	public static Boolean crateBypass = false;
 	
 	//Public Variables
 	public static Boolean disabledAtEndOfAuto = true;  		//Also set to true in Robot.TeleOpInit & Robot.disabledInint
@@ -144,9 +149,9 @@ public class RobotMap {
 	//Ports
 	private final static int clawHugger    = 2;
 	private final static int clawClaw      = 3;
-	private final static int shifterLeft   = 4;
-	private final static int shifterRight  = 5;
-	private final static int ledInfo       = 6;
+	private final static int shifterLeft   = 6;
+	private final static int climbEjector  = 5;
+	//private final static int ledInfo       = 6;
 	private final static int climb 		   = 7; //TBD
 	
 	public static void init() {
@@ -277,6 +282,8 @@ public class RobotMap {
 		arm_right.configReverseSoftLimitEnable(true, 0);
 		arm_left.configReverseSoftLimitEnable(false, 0);
 		
+		arm_right.configSetParameter(ParamEnum.eFeedbackNotContinuous, 1, 0x00, 0x00, 10);
+		
 		/*
 		 * Claw
 		 */
@@ -291,17 +298,18 @@ public class RobotMap {
 		climber_right = new TalonSRX(climberRight); // 9
 		
 		PTO = new Solenoid(PCM_0, climb);
+		PTO0 = new Solenoid(PCM_0, 0);
 
 		/*
 		 * Shifter
 		 */
 		shifter_left = new Solenoid(PCM_0, shifterLeft); // 1,0
-		shifter_right = new Solenoid(PCM_0, shifterRight); // 1,0
+		climb_ejector = new Solenoid(PCM_0, climbEjector); // 1,0
 
 		/*
 		 * VisionProcessing for PixyCam
 		 */
-		led_info = new Solenoid(PCM_0, ledInfo);
+		//led_info = new Solenoid(PCM_0, ledInfo);
 
 		
 		/*
@@ -313,6 +321,21 @@ public class RobotMap {
 		//pdp = new PowerDistributionPanel(0);
 		
 		accel = new BuiltInAccelerometer(Accelerometer.Range.k4G);
+		
+		/*
+	    //NAV-X MXP
+        try {
+            /* Communicate w/navX MXP via the MXP SPI Bus.                                     
+            /* Alternatively:  I2C.Port.kMXP, SerialPort.Port.kMXP or SerialPort.Port.kUSB     
+            /* See http://navx-mxp.kauailabs.com/guidance/selecting-an-interface/ for details. */
+		/*
+        	navx_gyro = new AHRS(SerialPort.Port.kMXP);
+        	//chassisPID_gyro = new AHRS(SerialPort.Port.kUSB);
+        } catch (RuntimeException ex ) {
+        
+            DriverStation.reportError("Instantiating navX-MXP failed:  " + ex.getMessage(), true);
+        }
+        */
 		
 		vision = new VisionProcessing("GRIP/vision");
 		vision.setCameraVerticalOffset(Constants.TargetingCamera_VerticalOffset); // Offset from front of robot
@@ -333,9 +356,9 @@ public class RobotMap {
 	public static void startCamera() {
 		try {
 			camera = CameraServer.getInstance().startAutomaticCapture("cam0", "/dev/video0");
-			camera.setFPS(30);
-			camera.setResolution(544, 288);
 			camera.setPixelFormat(PixelFormat.kYUYV);
+			camera.setResolution(544, 288);
+			camera.setFPS(30);
 		} catch (Exception e) {
 			DriverStation.reportWarning("[Camera] Could not start the camera!", true);
 		}

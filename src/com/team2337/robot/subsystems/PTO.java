@@ -3,6 +3,7 @@ package com.team2337.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.team2337.robot.RobotMap;
+import com.team2337.robot.commands.PTO.PTO_DoNothing;
 import com.team2337.robot.commands.climber.climber_doNothing;
 
 import edu.wpi.first.wpilibj.Solenoid;
@@ -14,22 +15,25 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * @category CLIMBER
  * @author Brendan
  */
-public class Climber extends Subsystem {
+public class PTO extends Subsystem {
 	
-	private final Solenoid climbEjector = RobotMap.climb_ejector;
-
-	public Climber() {
+	private final Solenoid PTO = RobotMap.PTO;
+	private final Solenoid PTO0 = RobotMap.PTO0;
+	public PTO() {
 	}
 
 	public void initDefaultCommand() {
-		setDefaultCommand(new climber_doNothing());
+		setDefaultCommand(new PTO_DoNothing());
 	}
 
-
-	public void hookerEject() {
-		climbEjector.set(true);
+	
+	public void PTOClimb() {
+		PTO.set(false);
+		PTO0.set(true);
 	}
-	public void hookerRetract() {
-		climbEjector.set(false);
+	
+	public void PTOLift() {
+		PTO.set(true);
+		PTO0.set(false);
 	}
 }

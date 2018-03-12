@@ -2,6 +2,7 @@ package com.team2337.robot.commands.intake;
 
 import edu.wpi.first.wpilibj.command.Command;
 
+import com.team2337.robot.OI;
 import com.team2337.robot.Robot;
 import com.team2337.robot.RobotMap;
 
@@ -25,7 +26,7 @@ public class intake_in extends Command {
 		
 	}
 	protected void execute() {
-		if(Robot.intake.hasCrate()) {
+		if(Robot.intake.hasCrate() && !OI.operatorControls.getRawButton(Robot.oi.blueSwitch)) {
 			time++;
 		} else {
 			time = 0;

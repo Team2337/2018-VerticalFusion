@@ -1,22 +1,17 @@
 package com.team2337.robot.commands.climber;
 
-import edu.wpi.first.wpilibj.command.Command;
-
 import com.team2337.robot.Robot;
 
-/**
- * Shifter: HIGH - Shifts drive train into low gear
- * 
- * @category CLIMBER
- * @author Bryce
- */
-public class climber_PTOLift extends Command {
-	public climber_PTOLift() {
+import edu.wpi.first.wpilibj.command.Command;
+
+public class climber_ejector extends Command{
+	
+	public climber_ejector() {
 		requires(Robot.climber);
 	}
 
 	protected void initialize() {
-		Robot.climber.PTOLift();
+		Robot.climber.hookerEject();
 	}
 
 	protected void execute() {
@@ -32,4 +27,5 @@ public class climber_PTOLift extends Command {
 	protected void interrupted() {
 		this.end();
 	}
+
 }

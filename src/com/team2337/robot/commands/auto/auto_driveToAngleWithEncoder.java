@@ -36,8 +36,8 @@ public class auto_driveToAngleWithEncoder extends Command {
     }
     
     protected void execute() {
-    	System.out.println(isFinishedPos + "  " + encoderRight + "  " + encoderLeft);
     	double currentAngle = Pigeon.pidgey.getFusedHeading();
+    	System.out.println(isFinishedPos + "  " + encoderRight + "  " + encoderLeft + "  " + currentAngle);
     	//double currentAngularRate = Robot.gyro.getAngularRate();
     	double forward = speed; 	
     	
@@ -63,6 +63,7 @@ public class auto_driveToAngleWithEncoder extends Command {
 	
     protected void end() {
     	RobotMap.drive.arcadeDrive(0,0,true);
+    	System.out.println(Robot.gyro.pidgey.getFusedHeading());
     }
     
     protected void interrupted() {

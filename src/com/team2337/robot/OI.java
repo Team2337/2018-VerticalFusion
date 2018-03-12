@@ -4,6 +4,8 @@ import com.team2337.fusion.controller.JoystickAnalogButton;
 import com.team2337.fusion.controller.JoystickPOVButton;
 
 import com.team2337.robot.commands.*;
+import com.team2337.robot.commands.PTO.PTO_Climb;
+import com.team2337.robot.commands.PTO.PTO_Lift;
 import com.team2337.robot.commands.arm.*;
 import com.team2337.robot.commands.auto.*;
 import com.team2337.robot.commands.bigBrother.*;
@@ -132,9 +134,9 @@ public class OI {
 	JoystickButton 			operatorInt_BlackSwitch				= new JoystickButton(operatorControls, blackSwitch);
 	JoystickButton 			operatorInt_BlueSwitch				= new JoystickButton(operatorControls, blueSwitch);
 	JoystickButton 			operatorInt_WhiteButton				= new JoystickButton(operatorControls, 14);
-	JoystickButton 			operatorInt_YellowButton			= new JoystickButton(operatorControls, 13);
+	JoystickButton 			operatorInt_YellowButton			= new JoystickButton(operatorControls, 6);
 	JoystickButton 			operatorInt_BlueButton				= new JoystickButton(operatorControls, blueButton);
-	JoystickButton 			operatorInt_BlackButton 			= new JoystickButton(operatorControls, 11);
+	JoystickButton 			operatorInt_BlackButton 			= new JoystickButton(operatorControls, 7);
      /* OperatorControl*/
 	
 	public OI() {
@@ -146,8 +148,9 @@ public class OI {
 		driver_BlueX			.whenPressed(new DoNothing());  
 		driver_YellowY			.whenPressed(new DoNothing()); 
 		
-		driver_BumperLeft		.whenPressed(new climber_PTOClimb());
-		driver_BumperRight	    .whenPressed(new climber_PTOLift());
+		driver_BumperLeft		.whileHeld(new shifter_low());
+		driver_BumperLeft		.whenReleased(new shifter_high());
+		driver_BumperRight	    .whenPressed(new shifter_high());
 
 		
 		driver_Back				.whenPressed(new DoNothing()); 
@@ -186,8 +189,8 @@ public class OI {
 	    operator_PalmButton				       .whenPressed(new DoNothing());
 	    operator_BottomIndexButton		       .whenPressed(new DoNothing());
 
-	    operator_SE						 	   .whenPressed(new liftLevelAdjuster(9));     
-	    //operator_ST						   .whenPressed(new DoNothing());
+//	    operator_SE						 	   .whenPressed(new liftLevelAdjuster(9));     
+//	    operator_ST						  	   .whenPressed(new climber_ejector());
 	                                          
 	    operator_JoystickPOVUp			       .whenPressed(new claw_CGOpen());
 	    operator_JoystickPOVUp				   .whenReleased(new claw_CGClose());
@@ -216,10 +219,13 @@ public class OI {
 	    operatorInt_BlackSwitch	.whenPressed(new DoNothing());		//this is being used in ALTControl to disable trolley
 		operatorInt_BlueSwitch	.whenPressed(new DoNothing());		//this is being used in ALTControl to disable lift
 		
-//		operatorInt_BlackButton	.whenPressed(new DoNothing());
-//		operatorInt_BlueButton	.whenPressed(new DoNothing());
-//		operatorInt_YellowButton.whenPressed(new DoNothing());
+//		operatorInt_BlackButton	.whenPressed(new PTO_Climb());
+//		operatorInt_BlueButton	.whileHeld(new lift_climb());
+//		operatorInt_YellowButton.whenPressed(new PTO_Lift());
 //		operatorInt_WhiteButton	.whenPressed(new DoNothing());
+		
+		operatorInt_BlackButton .whenPressed(new CG_returnToALTControl());
+		operatorInt_YellowButton.whenPressed(new CG_defenseMode());
 		///////////////////////////////////////// 
 	}
 

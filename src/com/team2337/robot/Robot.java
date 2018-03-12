@@ -14,6 +14,7 @@ import com.team2337.robot.subsystems.BigBrother;
 import com.team2337.robot.subsystems.Intake;
 import com.team2337.robot.subsystems.LED;
 import com.team2337.robot.subsystems.Lift;
+import com.team2337.robot.subsystems.PTO;
 import com.team2337.robot.subsystems.Trolley;
 import com.team2337.robot.subsystems.Shifter;
 
@@ -42,6 +43,7 @@ public class Robot extends TimedRobot {
 	public static Claw claw;
 	public static BigBrother bigBrother;
 	public static Lift lift;
+	public static PTO pto;
 	public static OI oi;
 	public static Pigeon gyro;
 	public static String ourswitch = "q";
@@ -60,7 +62,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {
-		String mac = Address.getInstance().getMAC();
+		/*String mac = Address.getInstance().getMAC();
 		if (mac.equals("00-80-2F-17-89-85")) {
 			System.out.println("TestBoard " + mac);
 			isComp = false;
@@ -70,7 +72,8 @@ public class Robot extends TimedRobot {
 		} else {  //00-80-2F-17-E5-D2
 			System.out.println("CompBot " + mac);
 			isComp = true;
-		}
+		}*/
+		isComp = true;
 		
 		// Initialize all of the Robots Mappings
 		RobotMap.init();
@@ -88,7 +91,8 @@ public class Robot extends TimedRobot {
 		led = new LED();
 		claw = new Claw();
 		lift = new Lift();
-		bigBrother = new BigBrother();		
+		bigBrother = new BigBrother();	
+		pto = new PTO();
 		gyro = new Pigeon();
 		oi = new OI();
 
@@ -98,7 +102,7 @@ public class Robot extends TimedRobot {
 		// Also include the Auton Chooser
 		Robot.gyro.resetPidgey();
 		Robot.chassis.resetEncoders();
-		Robot.climber.PTOLift();
+		Robot.pto.PTOLift();
 
 		// RobotMap.chassis_leftFront.setSelectedSensorPosition(0, 0, 0);  //replaced by above method
 		// RobotMap.chassis_rightFront.setSelectedSensorPosition(0, 0, 0);
@@ -278,7 +282,7 @@ public class Robot extends TimedRobot {
 		Robot.led.initDefaultCommand();
 
 		if (RobotMap.robot_AllPeriodicDebug) {
-			SmartDashboard.putNumber("claw pressure", (RobotMap.clawPressure.getValue() / 21.37));
+			SmartDashboard.putNumber("claw pressure", (int) (RobotMap.clawPressure.getValue() / 21.37));
 			SmartDashboard.putData("Auto mode", autonchooser);
 			SmartDashboard.putNumber("LeftEncoder", RobotMap.chassis_leftFront.getSelectedSensorPosition(0));
 			SmartDashboard.putNumber("RightEncoder", RobotMap.chassis_rightFront.getSelectedSensorPosition(0));
@@ -290,7 +294,7 @@ public class Robot extends TimedRobot {
 			SmartDashboard.putNumber("centerX", RobotMap.vision.getRevAngle());
 			SmartDashboard.putBoolean("claw Pressure", RobotMap.clawPressureDash);
 			SmartDashboard.putBoolean("Crate Sensor", RobotMap.crateSensor.get());
-			SmartDashboard.putBoolean("gfd", OI.operatorJoystick.getRawButton(11));
+			//SmartDashboard.putNumber("Navx Yaw", RobotMap.navx_gyro.getYaw());
 		}
 	}
 

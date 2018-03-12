@@ -15,7 +15,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Shifter extends Subsystem {
 	
 	private final Solenoid left = RobotMap.shifter_left;
-	private final Solenoid right = RobotMap.shifter_right;
 	
 	public void initDefaultCommand() {
 		setDefaultCommand(new shifter_doNothing());
@@ -24,14 +23,12 @@ public class Shifter extends Subsystem {
 	 * Shift the robot into high gear
 	 */
 	public void shiftHighGear() {
-		left.set(true);
-		right.set(true);
+		left.set(false);
 	}
 	/**
 	 * Shift the robot into low gear
 	 */
 	public void shiftLowGear() {
-		left.set(false);
-		right.set(false);
+		left.set(true);
 	}
 }
