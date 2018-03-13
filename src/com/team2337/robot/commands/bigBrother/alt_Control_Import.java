@@ -45,6 +45,9 @@ public class alt_Control_Import extends Command {
 	int armNegativeAdj = 8;
 	int liftSetPointClimb = 9;
 	int armClimbAdjustment = 10;
+	int armHookClimberSetPoints = 11;
+	int armClimbMode = 12;
+	int trolleyClimbMode = 13;
 		
 	int compTrolleyRestPoint = 61;
 	int practiceTrolleyRestPoint = 61; //111 practice
@@ -150,8 +153,9 @@ public class alt_Control_Import extends Command {
 		}
 		
 		//SETPOINTS For Climbing 
+		/*
 				if(Robot.lift.levelOfLift == liftSetPointClimb) {
-					if((int) throttleValue <= 10 && OI.operatorJoystick.getRawButton(11)) {
+					if((int) throttleValue <= 10) {
 						trolleySetPoint = (points[(int) throttleValue][trolleySetPoints]);
 						armSetPoint = 2100;
 						if (throttleToggle < -0.1) {								
@@ -167,6 +171,18 @@ public class alt_Control_Import extends Command {
 						} 
 						
 					}
+				}
+				*/
+				
+				//NEW SET POINTS for Climb 
+				if(Robot.lift.levelOfLift == armHookClimberSetPoints) {
+					armSetPoint = (points[(int) throttleValue][armHookClimberSetPoints]);
+					trolleySetPoint = (points[(int) throttleValue][trolleyClimbMode]);
+				} else if(Robot.lift.levelOfLift == armClimbMode) {
+					if(throttleValue >=10) {
+						armSetPoint = armCenterPosition;
+					}
+					trolleySetPoint = (points[(int) throttleValue][trolleySetPoints]);
 				}
 
 

@@ -186,8 +186,9 @@ public class OI {
 	    operator_ThrottleMidThumbButton		   .whenPressed(new liftLevelAdjuster(2));
 	    operator_ThrottleBottomThumbButton	   .whenPressed(new liftLevelAdjuster(1));
 	                                           
-	    operator_PalmButton				       .whenPressed(new DoNothing());
-	    operator_BottomIndexButton		       .whenPressed(new DoNothing());
+	    operator_PalmButton				       .whenPressed(new liftLevelAdjuster(11));
+	    operator_TopIndexButton				   .whenPressed(new DoNothing());
+	    operator_BottomIndexButton		       .whenPressed(new liftLevelAdjuster(12));
 
 //	    operator_SE						 	   .whenPressed(new liftLevelAdjuster(9));     
 //	    operator_ST						  	   .whenPressed(new climber_ejector());
