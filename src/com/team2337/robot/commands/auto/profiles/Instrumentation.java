@@ -59,7 +59,7 @@ public class Instrumentation {
 			/* fire a loop every 200ms */
 
 			if (--count <= 0) {
-				count = 8;
+				count = 4;
 				/* every 8 loops, print our columns */
 
 				System.out.format("%-9s\t", "outEn");

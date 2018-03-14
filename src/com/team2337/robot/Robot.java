@@ -209,8 +209,8 @@ public class Robot extends TimedRobot {
 			SmartDashboard.putNumber("LeftEncoder", RobotMap.chassis_leftFront.getSelectedSensorPosition(0));
 			SmartDashboard.putNumber("RightEncoder", RobotMap.chassis_rightFront.getSelectedSensorPosition(0));
 			SmartDashboard.putBoolean("Line Reader", RobotMap.lineReader.get());
-
-
+			SmartDashboard.putNumber("LeftEncoderquad", RobotMap.chassis_leftFront.getSensorCollection().getQuadraturePosition());
+			SmartDashboard.putNumber("RightEncoderquad", RobotMap.chassis_rightFront.getSensorCollection().getQuadraturePosition());
 		}
 	}
 

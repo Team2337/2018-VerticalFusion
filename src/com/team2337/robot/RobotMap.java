@@ -8,6 +8,7 @@ import com.team2337.fusion.drive.*;
 import com.team2337.fusion.led.BlinkIn;
 import com.team2337.fusion.vision.VisionProcessing;
 import com.team2337.robot.Constants;
+import com.team2337.robot.commands.auto.profiles.MotionProfile;
 import com.team2337.robot.commands.auto.profiles.MotionProfileManager;
 
 import edu.wpi.cscore.UsbCamera;
@@ -175,7 +176,7 @@ public class RobotMap {
 		
 		accel = new BuiltInAccelerometer(Accelerometer.Range.k4G);
 		
-		motionManager = new MotionProfileManager(chassis_rightFront);
+		//motionManager = new MotionProfileManager(chassis_rightFront, 0, MotionProfile.Points,MotionProfile.kNumPoints);
 
 }
 }

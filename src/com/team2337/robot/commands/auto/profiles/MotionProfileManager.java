@@ -300,7 +300,7 @@ public class MotionProfileManager {
 	/** Start filling the MPs to all of the involved Talons. */
 	private void startFilling() {
 		/* since this example only has one talon, just update that one */
-		startFilling(MotionProfile.Points, MotionProfile.kNumPoints);
+		startFilling(inprofile, inTotalCount);
 	}
 
 	private void startFilling(double[][] profile, int totalCnt) {

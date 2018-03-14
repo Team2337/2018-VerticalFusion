@@ -70,13 +70,13 @@ public class control extends Command
 	MotionProfileManager motionMgr;// = RobotMap.motionManager;
 	
 	public control() {
-
+		requires(Robot.chassis);
 		
 		 
 	}
 	
 	protected void initialize() {
-		requires(Robot.chassis);
+
 		
 		motionMgr = new MotionProfileManager(rightFront, 0, MotionProfile.Points, MotionProfile.kNumPoints);
 		

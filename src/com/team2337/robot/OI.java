@@ -77,7 +77,7 @@ public class OI {
 	JoystickPOVButton		operator_POVUpLeft		= new JoystickPOVButton(operatorJoystick, 315);
 	*/
 	
-	
+	/*
 	public static Joystick				operatorJoystick		= new Joystick(1);
 	JoystickButton			operator_RightTrigger				= new JoystickButton(operatorJoystick, 1);	//Digital trigger on the back of the joystick
 	JoystickButton			operator_StripedButton				= new JoystickButton(operatorJoystick, 2);	//The orange and black striped button on joystick
@@ -114,7 +114,7 @@ public class OI {
 		3	Joystick rotate	Right/Left (Rotation)	Right
 		4	Throttle rocker	Right/Left (Rocker)		Right
 	 */
-	
+	/*
 	
 	public static Joystick				operatorControls		= new Joystick(2);
 	JoystickButton			operatorInt_GreenButton				= new JoystickButton(operatorControls, 19);
@@ -133,7 +133,7 @@ public class OI {
 		
 		/* ====== DRIVER JOYSTICK ===== */
 		
-		driver_GreenA			.whenPressed(new DoNothing());
+		driver_GreenA			.whenPressed(new control());
 		driver_RedB				.whenPressed(new DoNothing()); 
 		driver_BlueX			.whenPressed(new DoNothing());  
 		driver_YellowY			.whenPressed(new DoNothing()); 
@@ -161,7 +161,7 @@ public class OI {
 	   	//driver_POVUpLeft		.whenPressed(new _DoNothing()); 
 	    
 	    //////////////////////////////////
-	    
+	 /*   
    
 	    operator_RightTrigger			       .whileHeld(new DoNothing());
 	    operator_StripedButton			       .whenPressed(new DoNothing());
@@ -204,9 +204,9 @@ public class OI {
 //		operatorInt_RedButton	.whenPressed(new _DoNothing());
 		
 //		operatorInt_ClearSwitch	.whenPressed(new DoNothing());
-	    operatorInt_YellowSwitch.whenPressed(new DoNothing());		//this is being used in ALTControl to disable arm
-	    operatorInt_BlackSwitch	.whenPressed(new DoNothing());		//this is being used in ALTControl to disable trolley
-		operatorInt_BlueSwitch	.whenPressed(new DoNothing());		//this is being used in ALTControl to disable lift
+	//    operatorInt_YellowSwitch.whenPressed(new DoNothing());		//this is being used in ALTControl to disable arm
+	//    operatorInt_BlackSwitch	.whenPressed(new DoNothing());		//this is being used in ALTControl to disable trolley
+	//	operatorInt_BlueSwitch	.whenPressed(new DoNothing());		//this is being used in ALTControl to disable lift
 		
 //		operatorInt_BlackButton	.whenPressed(new DoNothing());
 //		operatorInt_BlueButton	.whenPressed(new DoNothing());
@@ -219,7 +219,7 @@ public class OI {
 	public Joystick getDriverJoystick() {
 		return driverJoystick;
 	}
-	
+	/*
 	public Joystick getOperatorJoystick() {
 		return operatorJoystick;
 	}
