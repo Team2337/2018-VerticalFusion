@@ -193,12 +193,12 @@ public class OI {
 //	    operator_SE						 	   .whenPressed(new liftLevelAdjuster(9));     
 //	    operator_ST						  	   .whenPressed(new climber_ejector());
 	                                          
-	    operator_JoystickPOVUp			       .whenPressed(new claw_CGOpen());
-	    operator_JoystickPOVUp				   .whenReleased(new claw_CGClose());
-	    operator_JoystickPOVUpRight		       .whenPressed(new claw_CGOpen());
-	    operator_JoystickPOVUpRight			   .whenReleased(new claw_CGClose());
-	    operator_JoystickPOVUpLeft		       .whenPressed(new claw_CGOpen());
-	    operator_JoystickPOVUpLeft			   .whenReleased(new claw_CGClose());
+	    operator_JoystickPOVUp			       .whenPressed(new claw_give60psi());
+//	    operator_JoystickPOVUp				   .whenReleased(new claw_CGClose());
+	    operator_JoystickPOVUpRight		       .whenPressed(new claw_give60psi());
+//	    operator_JoystickPOVUpRight			   .whenReleased(new claw_CGClose());
+	    operator_JoystickPOVUpLeft		       .whenPressed(new claw_give60psi());
+//	    operator_JoystickPOVUpLeft			   .whenReleased(new claw_CGClose());
 	    
 	    operator_JoystickPOVDownRight	       .whenPressed(new DoNothing());
 	    operator_JoystickPOVDown		       .whenPressed(new DoNothing());

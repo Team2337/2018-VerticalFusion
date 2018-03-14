@@ -28,7 +28,7 @@ public class Arm extends Subsystem {
 	private static final double maxSpeedUp 		= 0.7;
 	private static final double maxSpeedDown 	= -0.7;
 	private double nominalSpeed = 0;
-	public static int centerPosition, forwardLevel, forwardSoftLimit, forwardCarry, reverseSoftLimit, climberAdjLimit, armClimbHook, armClimbMode;
+	public static int centerPosition, forwardLevel, forwardSoftLimit, forwardCarry, reverseSoftLimit, climberAdjLimit, armClimbHook, armClimbMode, armHookAdjLimit, armCenterAdjLimit;
 	
 	//ONLY USED IN JOYSTICK CONTROL
 	public static final int forwardTopSL 		= 548;   //548   /// not used /// comp  548??
@@ -43,19 +43,35 @@ public class Arm extends Subsystem {
 		if(Robot.isComp) {
 			centerPosition 		= 2300;
 			
+			forwardLevel 		= centerPosition + 1100;	//975 prac
+			forwardSoftLimit 	= centerPosition + 1150;    //1000 practice    /// comp  350
+			forwardCarry 		= centerPosition + 600;     //420 practice // 900           ///  comp -160
+			
+			reverseSoftLimit	= centerPosition - 1200;	//- 1008;practice //Flat Position //-1100
+			
+			climberAdjLimit		= 1180; //Climber flat position ///Not used, clean up after finish
+			armHookAdjLimit		= 50;
+			armCenterAdjLimit	= 250;
+			
+			armClimbHook		= centerPosition - 1400; //900
+			
 		} else {
 			centerPosition 		= 2300;
+			
+			forwardLevel 		= centerPosition + 975;		//975 prac
+			forwardSoftLimit 	= centerPosition + 1000;    //1000 practice    /// comp  350
+			forwardCarry 		= centerPosition + 420;     //420 practice  // 900           ///  comp -160
+			
+			reverseSoftLimit	= centerPosition - 1008;	//- 1008;practice //Flat Position //-1100
+			
+			climberAdjLimit		= 1180; //Climber flat position
+			armHookAdjLimit		= 50;   //Adj when getting hook
+			armCenterAdjLimit	= 250;	//
+			
+			armClimbHook			= centerPosition - 1300;
 		}
 		
-		forwardLevel 		= centerPosition + 1100;	//975 prac
-		forwardSoftLimit 	= centerPosition + 1150;   //1000 practice    /// comp  350
-		forwardCarry 		= centerPosition + 600;    //420 practice // 900           ///  comp -160
 		
-		reverseSoftLimit	= centerPosition - 1200;//- 1008;practice //Flat Position //-1100
-		
-		climberAdjLimit		= 1180; //Climber flat position
-		
-		armClimbHook			= centerPosition - 2400;
 		
 		setSoftLimits(forwardSoftLimit, reverseSoftLimit);
 				

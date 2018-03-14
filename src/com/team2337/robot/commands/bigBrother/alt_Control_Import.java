@@ -19,8 +19,9 @@ public class alt_Control_Import extends Command {
 	double liftSetPoint;
 	double armAdjPos;
 	double armAdjNeg;
-	double armClimbAdj;
+	double armClimbAdjLimit;
 	double trolleyAdj = 2; // TODO determne rightamount
+	double armCenterAdjLimit = 250;
 	double armEncoder;
 
 	double throttleToggle;
@@ -84,7 +85,7 @@ public class alt_Control_Import extends Command {
 		armSetPoint = ((double) points[(int) throttleValue][armSetPoints]);
 		armAdjPos = (points[(int) throttleValue][armPositiveAdj]);
 		armAdjNeg = (points[(int) throttleValue][armNegativeAdj]);
-		armClimbAdj = (points[(int) throttleValue][armClimbAdjustment]);
+		armClimbAdjLimit = (points[(int) throttleValue][armClimbAdjustment]);
 		liftSetPoint = points[(int) throttleValue][Robot.lift.levelOfLift];
 
 		// Trolley adjustment by joystick
@@ -104,6 +105,16 @@ public class alt_Control_Import extends Command {
 		} else if (throttleToggle < -0.1) {
 			armSetPoint = armSetPoint + (throttleToggle * armAdjNeg);
 		}
+		
+		//NEW SET POINTS for Climb 
+		if(Robot.lift.levelOfLift == armHookClimberSetPoints) {  					//grab hook is enabled
+			liftSetPoint = (points[(int) throttleValue][liftSetPointsA]);
+			armSetPoint = (points[(int) throttleValue][armHookClimberSetPoints]);	//arm set to hook grabbing pos
+			trolleySetPoint = (points[(int) throttleValue][trolleyClimbMode]);		//trolley set to help arm grab hook
+			if ((throttleToggle) < -0.1) {											//if the adjustment analog is greater than 0.1
+				armSetPoint = armSetPoint + (throttleToggle * armClimbAdjLimit);			//set arm setpoint to climbAdj 
+			}
+		} 
 
 		// Arm and Trolley set point override:
 
@@ -127,6 +138,7 @@ public class alt_Control_Import extends Command {
 		} else
 			sameSide = true;
 
+		
 		
 		//Lift & Trolley Override
 		
@@ -174,15 +186,25 @@ public class alt_Control_Import extends Command {
 				}
 				*/
 				
-				//NEW SET POINTS for Climb 
-				if(Robot.lift.levelOfLift == armHookClimberSetPoints) {
-					armSetPoint = (points[(int) throttleValue][armHookClimberSetPoints]);
-					trolleySetPoint = (points[(int) throttleValue][trolleyClimbMode]);
-				} else if(Robot.lift.levelOfLift == armClimbMode) {
-					if(throttleValue >=10) {
-						armSetPoint = armCenterPosition;
-					}
-					trolleySetPoint = (points[(int) throttleValue][trolleySetPoints]);
+				    //CLIMB MODE POINTS
+					if(Robot.lift.levelOfLift == armClimbMode) {	
+						trolleySetPoint = (points[(int) throttleValue][trolleySetPoints]);
+						
+						if(Robot.trolley.getPosition() < Robot.trolley.trolleyPassover) {
+							armSetPoint = Robot.arm.getPosition();
+							liftSetPoint = (points[0][liftSetPointClimb]);
+						} else {
+							liftSetPoint = (points[(int) throttleValue][liftSetPointClimb]);	//climb mode active
+							
+							if(throttleValue > 10) {
+								armSetPoint = armCenterPosition;									//arm goes to center pos
+								if ((throttleToggle) < -0.1) {							
+									armSetPoint = armSetPoint + (throttleToggle * armCenterAdjLimit);		//set the arm setpoint to adj pos
+								}
+							} else if(throttleValue <= 10) {
+							armSetPoint = (points[(int) throttleValue][armSetPoints]);				//set the arm, lift, trolley to points normal
+							}
+						}
 				}
 
 
@@ -246,6 +268,10 @@ public class alt_Control_Import extends Command {
 			// this may be setting the array to the throttle, then getting to
 			// the logic
 			// above
+		}
+		if(RobotMap.climbDebug) {
+			SmartDashboard.putBoolean("ClimbDebug", RobotMap.climbDebug);
+			SmartDashboard.putNumber("armHookSetPoints", points[(int) throttleValue][armHookClimberSetPoints]);
 		}
 	}
 

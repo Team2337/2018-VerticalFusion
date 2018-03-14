@@ -31,7 +31,7 @@ public class intake_in extends Command {
 		} else {
 			time = 0;
 		}
-		if (time > 10) {
+		if (time > 100) {
 			Robot.intake.stop();
 			Robot.claw.give60Hugs();
 		} else {

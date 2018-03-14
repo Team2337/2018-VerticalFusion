@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class BigBrother extends Subsystem {
 
 	int totalRows = 20;
-	int totalColumns = 8;
+	int totalColumns = 13;
 
 	public double points[][] = new double[totalRows][totalColumns];
 
@@ -38,11 +38,7 @@ public class BigBrother extends Subsystem {
 			points = setPointsCompBot.points;
 			System.out.println("Loaded Comp Bot Array");
 		} else {
-			points = setPointsTestPickUpOnly.points;
-			System.out.println(Robot.arm.forwardSoftLimit + "    " + Robot.arm.reverseSoftLimit + "   " + Robot.arm.forwardCarry);
-			System.out.println(points[11][1]);
-			System.out.println(points[16][1]);
-			System.out.println(points[20][1]);
+			points = setPointsPracticeBot.points;
 			System.out.println("Loaded Practice Bot Array");
 		}
 

@@ -62,7 +62,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {
-		/*String mac = Address.getInstance().getMAC();
+		String mac = Address.getInstance().getMAC();
 		if (mac.equals("00-80-2F-17-89-85")) {
 			System.out.println("TestBoard " + mac);
 			isComp = false;
@@ -72,8 +72,7 @@ public class Robot extends TimedRobot {
 		} else {  //00-80-2F-17-E5-D2
 			System.out.println("CompBot " + mac);
 			isComp = true;
-		}*/
-		isComp = true;
+		}
 		
 		// Initialize all of the Robots Mappings
 		RobotMap.init();
@@ -293,7 +292,8 @@ public class Robot extends TimedRobot {
 			SmartDashboard.putBoolean("Line Reader", RobotMap.lineReader.get());
 			SmartDashboard.putNumber("centerX", RobotMap.vision.getRevAngle());
 			SmartDashboard.putBoolean("claw Pressure", RobotMap.clawPressureDash);
-			SmartDashboard.putBoolean("Crate Sensor", RobotMap.crateSensor.get());
+			SmartDashboard.putBoolean("Crate Sensor Red", RobotMap.crateSensor.get());
+			SmartDashboard.putBoolean("Crate Sensor Green", RobotMap.crateSensorGreen.get());
 			//SmartDashboard.putNumber("Navx Yaw", RobotMap.navx_gyro.getYaw());
 		}
 	}

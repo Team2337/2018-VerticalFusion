@@ -2,6 +2,7 @@ package com.team2337.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.team2337.robot.Robot;
 import com.team2337.robot.RobotMap;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -35,8 +36,15 @@ public class Lift extends Subsystem {
 	public static int practiceLiftRestPoint = 100;
 	public static int compLiftRestPoint = 100;
 	
-	public static int liftYellowHigh = 375;
-	public static int liftRedHigh = 600;
+	public static int liftYellowHigh;
+	/**Value between the top yellow and bottom yellow points to prevent the lift from going too fast*/
+	public static int liftYellowNearBottom;
+	public static int liftYellowNearTop;
+	
+	public static int liftRedHigh;
+	/**Value between the top red and bottom red points to prevent the lift from going too fast*/
+	public static int liftRedNearBottom;
+	public static int liftRedNearTop;
 
 	protected void initDefaultCommand() {
 		//setDefaultCommand(new lift_startPID());
@@ -44,6 +52,27 @@ public class Lift extends Subsystem {
 	}
 
 	public Lift() {
+		if(Robot.isComp) {
+			liftYellowHigh = 375;      
+
+			liftYellowNearBottom = 126;
+			liftYellowNearTop = 207;   
+			                           
+			liftRedHigh = 600;         
+			
+			liftRedNearBottom = 225;   
+			liftRedNearTop = 405;      
+		} else {
+			liftYellowHigh = 375;      
+
+			liftYellowNearBottom = 126;
+			liftYellowNearTop = 207;   
+			                           
+			liftRedHigh = 600;         
+			
+			liftRedNearBottom = 225;   
+			liftRedNearTop = 405;
+		}
 		setSoftLimits(forwardLIFTSoftLimit, reverseLIFTSoftLimit);
 		/* set the peak and nominal outputs, 12V? means full */
 		rightFront.configNominalOutputForward(nominalSpeed, 0);

@@ -66,6 +66,7 @@ public class RobotMap {
 	public static TalonSRX intake_left;
 	public static VictorSPX intake_right;
 	public static DigitalInput crateSensor;
+	public static DigitalInput crateSensorGreen;
 	
 	//public static TalonSRX intake_right;
 
@@ -115,6 +116,7 @@ public class RobotMap {
 	public static Boolean alt_ControlDebug = false;
 	public static Boolean chassisDebug = true;
 	public static Boolean intakeDebug = false;
+	public static Boolean climbDebug = true;
 	public static Boolean robot_AllPeriodicDebug = true;
 	public static Boolean clawPressureDash = true;
 	public static Boolean crateBypass = false;
@@ -257,6 +259,7 @@ public class RobotMap {
 		
 		crateSensor = new DigitalInput(0);
 		lineReader = new DigitalInput(1);
+		crateSensorGreen = new DigitalInput(2);
 		/*
 		 * Arm
 		 */
