@@ -28,7 +28,7 @@ public class Arm extends Subsystem {
 	private static final double maxSpeedUp 		= 0.7;
 	private static final double maxSpeedDown 	= -0.7;
 	private double nominalSpeed = 0;
-	public static int centerPosition, forwardLevel, forwardSoftLimit, forwardCarry, reverseSoftLimit, climberAdjLimit, armClimbHook, armClimbMode, armHookAdjLimit, armCenterAdjLimit;
+	public static int forwardClampLimit, centerPosition, forwardLevel, forwardSoftLimit, forwardCarry, reverseSoftLimit, climberAdjLimit, armClimbHook, armClimbMode, armHookAdjLimit, armCenterAdjLimit;
 	
 	//ONLY USED IN JOYSTICK CONTROL
 	public static final int forwardTopSL 		= 548;   //548   /// not used /// comp  548??
@@ -46,6 +46,7 @@ public class Arm extends Subsystem {
 			forwardLevel 		= centerPosition + 1100;	//975 prac
 			forwardSoftLimit 	= centerPosition + 1150;    //1000 practice    /// comp  350
 			forwardCarry 		= centerPosition + 600;     //420 practice // 900           ///  comp -160
+			forwardClampLimit	= centerPosition + 800;
 			
 			reverseSoftLimit	= centerPosition - 1200;	//- 1008;practice //Flat Position //-1100
 			
@@ -61,6 +62,7 @@ public class Arm extends Subsystem {
 			forwardLevel 		= centerPosition + 975;		//975 prac
 			forwardSoftLimit 	= centerPosition + 1000;    //1000 practice    /// comp  350
 			forwardCarry 		= centerPosition + 420;     //420 practice  // 900           ///  comp -160
+			forwardClampLimit	= centerPosition + 800;
 			
 			reverseSoftLimit	= centerPosition - 1008;	//- 1008;practice //Flat Position //-1100
 			

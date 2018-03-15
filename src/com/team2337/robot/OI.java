@@ -174,7 +174,7 @@ public class OI {
 	    //////////////////////////////////
 	    
    
-	    operator_RightTrigger			       .whileHeld(new intake_in(1));
+	    operator_RightTrigger			       .whileHeld(new auto_intake_in(1));
 	    operator_StripedButton			       .whenPressed(new claw_CGOpen());
 	    operator_StripedButton				   .whenReleased(new claw_CGClose());
 	    operator_RightKnucleButton		       .whileHeld(new intake_out(1));

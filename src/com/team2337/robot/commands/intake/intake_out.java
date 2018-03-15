@@ -12,7 +12,6 @@ import com.team2337.robot.RobotMap;
  * @author Brendan
  */
 public class intake_out extends Command {
-	int num = 0;
 
 	private double power = 1;
 
@@ -34,8 +33,8 @@ public class intake_out extends Command {
 	}
 
 	protected void end() {
+		Robot.intake.setFirstIntake(true);
 		Robot.intake.stop();
-		num = 0;
 	}
 
 	protected void interrupted() {

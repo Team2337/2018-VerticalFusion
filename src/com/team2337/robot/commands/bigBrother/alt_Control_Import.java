@@ -138,7 +138,11 @@ public class alt_Control_Import extends Command {
 		} else
 			sameSide = true;
 
-		
+		if(Robot.lift.levelOfLift == armHookClimberSetPoints) { 
+			if(Robot.arm.getPosition() < 1200) {
+				trolleySetPoint = Robot.trolley.trolleyPlus315;
+			}
+		}
 		
 		//Lift & Trolley Override
 		

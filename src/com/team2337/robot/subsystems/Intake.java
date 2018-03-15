@@ -28,6 +28,15 @@ public class Intake extends Subsystem {
 	public boolean hasCrate() {
 		return !RobotMap.crateSensor.get();
 	}
+	
+	public boolean bothSensors() {
+		if (!RobotMap.crateSensor.get() && !RobotMap.crateSensorGreen.get()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	/**
 	 * Move the intake inwards (intake)
 	 * @param power Power of motors (-1.0 to 1.0)

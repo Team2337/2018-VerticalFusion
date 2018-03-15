@@ -109,4 +109,8 @@ public class Pigeon extends Subsystem {
 		angularRate = xyz_dps[2];
 		return angularRate;
 	}
+	
+	public void manualSetYaw(double yaw) {
+		pidgey.setYaw(yaw, timeoutMs);
+	}
 }

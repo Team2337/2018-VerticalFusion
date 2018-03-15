@@ -16,23 +16,24 @@ public class CG_centerSwitchThenScale extends CommandGroup {
 			addParallel(new auto_bigBrother_DoNothing());
 			addSequential(new auto_holdUpperPosition(0.1));
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
-			addSequential(new auto_driveToAngleWithEncoder(.9, 4, 40, 46000, 46000, 0.0175));// speed was .9 
-			addSequential(new auto_driveToAngleWithEncoder(.9, 3, 0, 60000, 60000, 0.02));
-			addSequential(new auto_moveUpperPosition(1800,60));  //-250,60  ///Score into Switch position
-			addParallel(new auto_driveForwardWithTime(.3, 1));
-			addSequential(new auto_clawOpenWithCollision(4));
-			addSequential(new auto_wait(2));
+//			addSequential(new auto_driveToAngleWithEncoder(.9, 4, 40, 46000, 46000, 0.0175));// speed was .9 
+//			addSequential(new auto_driveToAngleWithEncoder(.9, 3, 0, 60000, 60000, 0.02));
+//			addSequential(new auto_moveUpperPosition(1800,60));  //-250,60  ///Score into Switch position
+//			addParallel(new auto_driveForwardWithTime(.3, 2));
+//			addSequential(new auto_clawOpenWithCollision(4));
+//			addSequential(new auto_wait(2));
 			addSequential(new auto_resetEncoder());
+			addSequential(new auto_setYawYaw(10));
 			addParallel(new auto_driveToAngleWithEncoder(-.5, 3, 0, 12000, 12000, 0.02));
-			addSequential(new auto_moveUpperPosition(2127,500));  //50,386  ///Touch down
-			addSequential(new auto_wait(1.6));
-			addSequential(new auto_moveUpperPosition(2900,500));
-			addSequential(new auto_wait(1));
-			addSequential(new auto_moveUpperPosition(2900,100));
-			addSequential(new auto_wait(0.5));
-			addSequential(new auto_resetEncoder());
-			addSequential(new auto_driveToAngleWithEncoder(.5, 4, 50, 16000, 16000, 0.015));
-			addSequential(new auto_driveToAngleWithEncoder(.5, 4, 0, 30000, 30000, 0.0175));
+//			addSequential(new auto_moveUpperPosition(2127,500));  //50,386  ///Touch down
+//			addSequential(new auto_wait(1.6));
+//			addSequential(new auto_moveUpperPosition(2900,500));
+//			addSequential(new auto_wait(1));
+//			addSequential(new auto_moveUpperPosition(2900,100));
+//			addSequential(new auto_wait(0.5));
+//			addSequential(new auto_resetEncoder());
+//			addSequential(new auto_driveToAngleWithEncoder(.5, 4, 50, 16000, 16000, 0.015));
+//			addSequential(new auto_driveToAngleWithEncoder(.5, 4, 0, 30000, 30000, 0.0175));
 			
 			
 			
@@ -57,8 +58,21 @@ public class CG_centerSwitchThenScale extends CommandGroup {
 			addSequential(new auto_moveUpperPosition(2900,100));
 			addSequential(new auto_wait(0.5));
 			addSequential(new auto_resetEncoder());
-			addSequential(new auto_driveToAngleWithEncoder(.5, 4, 50, 16000, 16000, 0.015));
-			addSequential(new auto_driveToAngleWithEncoder(.5, 4, 0, 30000, 30000, 0.0175));
+			//Go around switch to right
+//			addSequential(new auto_driveToAngleWithEncoder(.5, 4, 50, 16000, 16000, 0.015));
+//			addSequential(new auto_driveToAngleWithEncoder(.5, 4, 0, 30000, 30000, 0.0175));
+			
+			
+			addSequential(new auto_driveToAngleWithEncoder(.5, 8, -90, 76000, 76000, 0.0175));
+			addSequential(new auto_driveToAngleWithEncoderandLine(.5, 8, 0, 152000, 152000, 0.0175));
+			addSequential(new auto_brakeModeOn());
+			addSequential(new auto_moveUpperPosition(2900,100));
+			addSequential(new auto_resetEncoder());
+			addSequential(new auto_driveToAngleWithEncoder(-.5, 8, -35, 45000, 45000, 0.0175));
+			
+			
+			
+			addSequential(new auto_brakeModeOff());
 			
 			
 		// **************************  RLR  **************************
@@ -82,8 +96,20 @@ public class CG_centerSwitchThenScale extends CommandGroup {
 			addSequential(new auto_moveUpperPosition(2900,100));
 			addSequential(new auto_wait(0.5));
 			addSequential(new auto_resetEncoder());
-			addSequential(new auto_driveToAngleWithEncoder(.5, 4, -50, 32000, 20000, 0.015));
-			addSequential(new auto_driveToAngleWithEncoder(.5, 4, 0, 65000, 30000, 0.0175));
+			//Go around switch to left
+//			addSequential(new auto_driveToAngleWithEncoder(.5, 4, -50, 32000, 20000, 0.015));
+//			addSequential(new auto_driveToAngleWithEncoder(.5, 4, 0, 65000, 30000, 0.0175));
+			
+			addSequential(new auto_driveToAngleWithEncoder(.5, 8, 90, 76000, 76000, 0.0175));
+			addSequential(new auto_driveToAngleWithEncoderandLine(.5, 8, 0, 152000, 152000, 0.0175));
+			addSequential(new auto_brakeModeOn());
+			addSequential(new auto_moveUpperPosition(2900,100));
+			addSequential(new auto_resetEncoder());
+			addSequential(new auto_driveToAngleWithEncoder(-.5, 8, 35, 45000, 45000, 0.0175));
+			addSequential(new auto_intake_in(1, 2));
+			
+			
+			addSequential(new auto_brakeModeOff());
 			
 			
 		// **************************  RRR  **************************

@@ -45,6 +45,7 @@ public class intake_default extends Command {
 	}
 
 	protected void end() {
+		num = 0;
 	}
 
 	protected void interrupted() {

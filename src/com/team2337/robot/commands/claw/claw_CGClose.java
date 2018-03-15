@@ -9,9 +9,9 @@ public class claw_CGClose extends Action {
 	public claw_CGClose() {
 //		if(RobotMap.crateSensor.get()) {
 		addSequential(new claw_give60psi());
-		addWait(0.3);
+		addWait(0.5);
 		addSequential(new claw_give30psi());
-		addWait(0.3);
+		addWait(0.5);
 //		}
 		addSequential(new claw_close());
 	}

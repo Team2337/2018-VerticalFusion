@@ -296,6 +296,8 @@ public class Robot extends TimedRobot {
 			SmartDashboard.putBoolean("Crate Sensor Green", RobotMap.crateSensorGreen.get());
 			//SmartDashboard.putNumber("Navx Yaw", RobotMap.navx_gyro.getYaw());
 		}
+		SmartDashboard.putString("intake Command", Robot.intake.getCurrentCommandName());
+		SmartDashboard.putBoolean("first intake", RobotMap.firstIntake);
 	}
 
 }
