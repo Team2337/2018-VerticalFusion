@@ -209,7 +209,11 @@ public class alt_Control_Import extends Command {
 							armSetPoint = (points[(int) throttleValue][armSetPoints]);				//set the arm, lift, trolley to points normal
 							}
 						}
-				}
+					}
+					
+					if(Robot.arm.getPosition() < 950 && Robot.lift.levelOfLift == 11) {
+						Robot.climber.hookerEject();
+					}
 
 
 		if (!RobotMap.disabledAtEndOfAuto) { // Disable until throttleToggle activated (see above)									

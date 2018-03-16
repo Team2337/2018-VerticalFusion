@@ -57,12 +57,12 @@ public class Trolley extends Subsystem {
 		if(Robot.isComp) {
 			trolleyLowHold = trolleyStart + 90;
 			trolleyPlus215 = trolleyStart + 215;
-			trolleyPlus315 = trolleyStart + 315;
+			trolleyPlus315 = trolleyStart + 330;	//315
 			trolleyTop	  = trolleyStart + 485;
 		} else {
 			trolleyLowHold = trolleyStart + 90;
 			trolleyPlus215 = trolleyStart + 215;
-			trolleyPlus315 = trolleyStart + 315;
+			trolleyPlus315 = trolleyStart + 330;  //315
 			trolleyTop	  = trolleyStart + 485;
 		}
 		setSoftLimits(forwardTrolleySoftLimit, reverseTrolleySoftLimit);

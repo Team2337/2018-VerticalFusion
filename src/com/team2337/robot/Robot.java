@@ -3,6 +3,9 @@ package com.team2337.robot;
 import com.team2337.robot.subsystems.Chassis;
 import com.team2337.robot.subsystems.Claw;
 import com.team2337.robot.subsystems.Climber;
+
+import java.io.IOException;
+
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.team2337.fusion.address.Address;
 import com.team2337.fusion.gyro.Pigeon;
@@ -62,17 +65,19 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {
-		String mac = Address.getInstance().getMAC();
-		if (mac.equals("00-80-2F-17-89-85")) {
+		String mac;
+		mac = Address.getInstance().getMAC();
+		if (mac.equals("00:80:2F:17:89:85")) {
 			System.out.println("TestBoard " + mac);
 			isComp = false;
-		} else if(mac.equals("00-80-2F-19-21-E1")) {
+		} else if(mac.equals("00:80:2F:19:21:E1")) {
 			System.out.println("PracticeBot " + mac);
 			isComp = false;
 		} else {  //00-80-2F-17-E5-D2
 			System.out.println("CompBot " + mac);
 			isComp = true;
 		}
+		
 		
 		// Initialize all of the Robots Mappings
 		RobotMap.init();
