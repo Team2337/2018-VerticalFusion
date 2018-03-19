@@ -118,8 +118,8 @@ public class Robot extends TimedRobot {
 		autonchooser.addObject("Scale From Left", "ScaleLeft");
 		autonchooser.addObject("Scale From Right", "ScaleRight");
 //		autonchooser.addObject("LiftUpperPosition", "LiftUpperPosition");
-		autonchooser.addObject("PRACTICE CenterSwitchRight", "CenterSwitchRight");
-		autonchooser.addObject("PRACTICE CenterSwitchLeft", "CenterSwitchLeft");
+//		autonchooser.addObject("PRACTICE CenterSwitchRight", "CenterSwitchRight");
+//		autonchooser.addObject("PRACTICE CenterSwitchLeft", "CenterSwitchLeft");
 		//autonchooser.addObject("TESTUTurn", "UTurn");
 		//autonchooser.addObject("TESTLineRead", "line");
 		
@@ -134,7 +134,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void disabledInit() {
 		AutoCommandManager.getInstance().disable();
-		Pigeon.pidgey.setFusedHeading(0.0, 10);
+		Pigeon.pidgey.addYaw(0.0, 10);
 		RobotMap.disabledAtEndOfAuto = true;
 		this.allInit();
 	}
@@ -164,6 +164,7 @@ public class Robot extends TimedRobot {
 		Robot.gyro.resetPidgey();
 		RobotMap.chassis_leftFront.setSelectedSensorPosition(0, 0, 0);
 		RobotMap.chassis_rightFront.setSelectedSensorPosition(0, 0, 0);
+		Robot.trolley.maxSpeedUp = 0.5;
 
 		String gameData;
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
@@ -188,7 +189,7 @@ public class Robot extends TimedRobot {
 			m_autonomousCommand = new CG_autoDoNothing(ourswitch, scale);
 			break;
 		case "ScaleLeft":
-			m_autonomousCommand = new CG_scaleFromLeft2(ourswitch, scale);
+			m_autonomousCommand = new CG_scaleFromLeft(ourswitch, scale);
 			break;
 		case "ScaleRight":
 			m_autonomousCommand = new CG_scaleFromRight(ourswitch, scale);
@@ -240,6 +241,7 @@ public class Robot extends TimedRobot {
 		RobotMap.disabledAtEndOfAuto = true;
 		Robot.bigBrother.holdAltControl();
 		Robot.chassis.setBrakeMode(NeutralMode.Coast);
+		Robot.trolley.maxSpeedUp = 1;
 
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to

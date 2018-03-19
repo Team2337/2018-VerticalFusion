@@ -195,7 +195,7 @@ public class alt_Control_Import extends Command {
 						trolleySetPoint = (points[(int) throttleValue][trolleySetPoints]);
 						
 						if(Robot.trolley.getPosition() < Robot.trolley.trolleyPassover) {
-							armSetPoint = Robot.arm.getPosition();
+//							armSetPoint = Robot.arm.getPosition();
 							liftSetPoint = (points[0][liftSetPointClimb]);
 						} else {
 							liftSetPoint = (points[(int) throttleValue][liftSetPointClimb]);	//climb mode active

@@ -52,7 +52,7 @@ public class Pigeon extends Subsystem {
 		pidgey.getYawPitchRoll(ypr_deg);
 		pidgey.getRawGyro(xyz_dps);
 		
-		//SmartDashboard.putNumber("FusedHeading2", pidgey.getFusedHeading());
+		SmartDashboard.putNumber("FusedHeading", pidgey.getFusedHeading());
 		//SmartDashboard.putNumber("AbsoluteCompass", getThing());
 		SmartDashboard.putNumber("Yaw", getYaw());
 		//SmartDashboard.putNumber("Pitch", getPitch());
@@ -99,9 +99,7 @@ public class Pigeon extends Subsystem {
 	}
 	
 	public void resetPidgey() {
-		pidgey.setFusedHeading(0, timeoutMs);
 		pidgey.setYaw(0, timeoutMs);
-		//RobotMap.navx_gyro.reset();
 	}
 
 	public double getAngularRate() {
@@ -111,6 +109,8 @@ public class Pigeon extends Subsystem {
 	}
 	
 	public void manualSetYaw(double yaw) {
+		yaw *= 64;
 		pidgey.setYaw(yaw, timeoutMs);
+
 	}
 }

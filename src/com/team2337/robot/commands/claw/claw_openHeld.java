@@ -24,24 +24,7 @@ public class claw_openHeld extends Command {
 	}
 	@Override
 	protected void execute() {
-		
-/*
- 		if(Robot.intake.hasCrate() && !OI.operatorControls.getRawButton(Robot.oi.blueSwitch)) {
-			time++;
-			
-		} else {
-			time = 0;
-		}
-		if (time > 7) {
-			if (Robot.lift.getPosition() > 300) {
-				time = 0;
-			} else {
-			Robot.claw.close();
-			done = true;
-			}
-		}
-		*/
-		if(Robot.intake.bothSensors() && !OI.operatorControls.getRawButton(Robot.oi.blueSwitch) && Robot.arm.getPosition() > Robot.arm.forwardClampLimit) {
+		if((Robot.intake.bothSensors() && !OI.operatorControls.getRawButton(Robot.oi.blueSwitch)) && (Robot.arm.getPosition() > Robot.arm.forwardClampLimit || Robot.lift.getPosition() > 200)) {
 			Robot.claw.close();
 			Robot.claw.give60Hugs();
 			done = true;

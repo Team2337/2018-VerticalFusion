@@ -36,7 +36,7 @@ public class auto_driveToAngleWithEncoder2 extends Command {
     
     protected void execute() {
     	
-    	double currentAngle = Pigeon.pidgey.getFusedHeading();
+    	double currentAngle = Robot.gyro.getYaw();
     	//double currentAngularRate = Robot.gyro.getAngularRate();
     	double forward = speed; 	
     	

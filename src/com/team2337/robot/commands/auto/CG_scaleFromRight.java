@@ -14,21 +14,38 @@ public class CG_scaleFromRight extends CommandGroup {
 		this.ourSwitch = ourSwitch;
 		this.scale = scale;		
 		
-		if (scale.equals("L") ||scale.equals("l")) {
+		//Switch and scale are NOT on our side  LLL
+		if  (ourSwitch.equals("L") && scale.equals("L")) {
 			addParallel(new auto_bigBrother_DoNothing());
 			addSequential(new auto_holdUpperPosition(0.1));
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
-			addSequential (new auto_driveToAngleWithEncoder(.5,10,0,201188,201188,.13));
-			addSequential (new auto_brakeModeOn());
-			addSequential (new auto_gyroMMTurn(-90));
+
 			
+			
+			
+		//Switch is NOT on our side scale is  LRL
+		} else if (ourSwitch.equals("L")  && scale.equals("R")) {
+			addParallel(new auto_bigBrother_DoNothing());
+			addSequential(new auto_holdUpperPosition(0.1));
+			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
+			
+			
+			
+		//Switch is on our side scale is NOT  RLR
+		} else if (ourSwitch.equals("R")  && scale.equals("L")) {
+			addParallel(new auto_bigBrother_DoNothing());
+			addSequential(new auto_holdUpperPosition(0.1));
+			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
+			
+			
+			
+			
+		//Switch and scale are on our side.  RRR	
 		} else {
 			addParallel(new auto_bigBrother_DoNothing());
 			addSequential(new auto_holdUpperPosition(0.1));
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
-			addSequential (new auto_driveToAngleWithEncoder(.5,10,0,201188,201188,.13));
-			addSequential (new auto_brakeModeOn());
-			addSequential (new auto_gyroMMTurn(90));
+
 			
 		}
 		

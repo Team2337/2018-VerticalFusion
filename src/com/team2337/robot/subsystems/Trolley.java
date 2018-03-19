@@ -22,7 +22,7 @@ public class Trolley extends Subsystem {
 	//private final static TalonSRX leftFront = RobotMap.trolley_left;  //4
 
 	//private int absolutePosition;  //used to set relative position encoder
-	private double maxSpeedUp = 1;  //1.0
+	public double maxSpeedUp = 1;  //1.0
 	private double maxSpeedDown = 0.7; //.7
 	private double nominalSpeed = 0;
 	private double kF = 0;
@@ -65,6 +65,7 @@ public class Trolley extends Subsystem {
 			trolleyPlus315 = trolleyStart + 330;  //315
 			trolleyTop	  = trolleyStart + 485;
 		}
+		
 		setSoftLimits(forwardTrolleySoftLimit, reverseTrolleySoftLimit);
 		
 		/* set the peak and nominal outputs, 12V? means full */
