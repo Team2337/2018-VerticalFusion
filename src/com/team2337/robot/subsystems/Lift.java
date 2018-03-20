@@ -22,8 +22,8 @@ public class Lift extends Subsystem {
 	public int levelOfLift = 1;
 	//public boolean climb = false;
 	
-	private double maxSpeedUp = 0.7;
-	private double maxSpeedDown = 0.5;
+	private double maxSpeedUp = 0.8;
+	private double maxSpeedDown = 0.3;
 	private double nominalSpeed = 0;
 	private double kF = 0;
 	private double kP = 14;

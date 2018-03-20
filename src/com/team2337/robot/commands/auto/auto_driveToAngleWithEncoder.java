@@ -18,7 +18,6 @@ public class auto_driveToAngleWithEncoder extends Command {
 	
 	public auto_driveToAngleWithEncoder(double speed, double timeout, double angle, int encoderTargetLeft, int encoderTargetRight, double Pgain) {
 		requires(Robot.chassis);
-		//Pgain = 0.04; /* percent throttle per degree of error */
 		Dgain = 0.0004; /* percent throttle per angular velocity dps */
 		MaxCorrectionRatio = 0.30; /* cap corrective turning throttle to 30 percent of forward throttle */
 		this.speed = speed;
@@ -31,7 +30,6 @@ public class auto_driveToAngleWithEncoder extends Command {
 	
 	public auto_driveToAngleWithEncoder(double speed, double timeout, double angle, int encoderTargetLeft, int encoderTargetRight, double Pgain, boolean change) {
 		requires(Robot.chassis);
-		//Pgain = 0.04; /* percent throttle per degree of error */
 		Dgain = 0.0004; /* percent throttle per angular velocity dps */
 		MaxCorrectionRatio = 0.30; /* cap corrective turning throttle to 30 percent of forward throttle */
 		this.speed = speed;
@@ -41,6 +39,18 @@ public class auto_driveToAngleWithEncoder extends Command {
 	    this.encoderRight = encoderTargetRight;
 		this.Pgain = Pgain;
 		this.change = change;
+	}
+	public auto_driveToAngleWithEncoder(double speed, double timeout, double angle, int encoderTargetLeft, int encoderTargetRight, double Pgain, boolean change, double Dgain) {
+		requires(Robot.chassis);
+		MaxCorrectionRatio = 0.30; /* cap corrective turning throttle to 30 percent of forward throttle */
+		this.speed = speed;
+	    this.timeout = timeout;
+	    this.targetAngle = angle;
+	    this.encoderLeft = encoderTargetLeft;
+	    this.encoderRight = encoderTargetRight;
+		this.Pgain = Pgain;
+		this.change = change;
+		this.Dgain = Dgain;
 	}
 	
     protected void initialize() {
@@ -59,10 +69,13 @@ public class auto_driveToAngleWithEncoder extends Command {
     protected void execute() {
     	double currentAngle = Robot.gyro.getYaw();
     	System.out.println(isFinishedPos + "  " + encoderRight + "  " + encoderLeft + "  " + currentAngle);
-    	//double currentAngularRate = Robot.gyro.getAngularRate();
+    	double currentAngularRate = Robot.gyro.getAngularRate();
     	double forward = speed; 	
-    	
-    	turn = -((targetAngle - currentAngle) * Pgain );//- (currentAngularRate) * Dgain;
+    	if((targetAngle - currentAngle) > 75) {
+    		turn = -((targetAngle - currentAngle) * Pgain) - (currentAngularRate) * Dgain;
+    	} else {
+    		turn = -((targetAngle - currentAngle) * Pgain);
+    	}
 
     	RobotMap.drive.arcadeDrive(forward, turn, false);
     	if(isFinishedSide) {
@@ -73,7 +86,9 @@ public class auto_driveToAngleWithEncoder extends Command {
     		//Read right side encoder
     		isFinishedPos = Math.abs(RobotMap.chassis_rightFront.getSelectedSensorPosition(0));
     		encoderEnd = Math.abs(encoderRight);
+    		
     	}
+    	System.out.println(isFinishedPos);
 
     }
 	
