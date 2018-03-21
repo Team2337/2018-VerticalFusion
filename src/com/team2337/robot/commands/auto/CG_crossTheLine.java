@@ -21,11 +21,7 @@ public class CG_crossTheLine extends CommandGroup {
 			addSequential(new auto_driveToAngleWithEncoder(.7, 4, 0, 65000, 65000, 0.04));// speed was .9 
 			addSequential (new auto_brakeModeOn());
 			addSequential(new auto_wait(1));
-			addSequential(new auto_moveUpperPosition(2127,550)); ///Touch down
-			addSequential(new auto_wait(1));
-			addSequential(new auto_moveUpperPosition(2700,550)); // Move to 10
-			addSequential(new auto_wait(.5));
-			addSequential(new auto_moveUpperPosition(2700,100)); // Move to 0
+			addSequential(new commonCG_armToPickupFromFront());
 			addSequential (new auto_brakeModeOff());
 			
 	
