@@ -18,8 +18,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Trolley extends Subsystem {
 
-	private final static TalonSRX rightFront = RobotMap.trolley_right; //3
-	//private final static TalonSRX leftFront = RobotMap.trolley_left;  //4
+	private final static TalonSRX rightFront = RobotMap.trolley_right;
 
 	//private int absolutePosition;  //used to set relative position encoder
 	public double maxSpeedUp = 1;  //1.0

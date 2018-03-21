@@ -11,6 +11,7 @@ import com.team2337.robot.commands.auto.*;
 import com.team2337.robot.commands.bigBrother.*;
 import com.team2337.robot.commands.chassis.*;
 import com.team2337.robot.commands.claw.*;
+import com.team2337.robot.commands.climbWinch.climbWinch_driveVertical;
 import com.team2337.robot.commands.climber.*;
 import com.team2337.robot.commands.intake.*;
 import com.team2337.robot.commands.led.*;
@@ -190,7 +191,7 @@ public class OI {
 	    operator_TopIndexButton				   .whenPressed(new DoNothing());
 	    operator_BottomIndexButton		       .whenPressed(new liftLevelAdjuster(12));
 
-//	    operator_SE						 	   .whenPressed(new liftLevelAdjuster(9));     
+	    operator_SE						 	   .whileHeld(new climbWinch_driveVertical(1));     
 //	    operator_ST						  	   .whenPressed(new climber_ejector());
 	                                          
 	    operator_JoystickPOVUp			       .whenPressed(new claw_give60psi());

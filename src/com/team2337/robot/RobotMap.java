@@ -56,7 +56,7 @@ public class RobotMap {
 	public static TalonSRX lift_right;
 	
 	//Trolley ******
-	public static VictorSPX trolley_left;
+	
 	public static TalonSRX trolley_right;
 	
 	//public static AnalogPotentiometer lift_potentiometer; // Use for string pot  ***** in talon *****
@@ -83,9 +83,8 @@ public class RobotMap {
 	public static Solenoid claw_claw;
 
 	// Climber
-	public static TalonSRX climber_left;
-	public static TalonSRX climber_right;
 	public static Solenoid climb_ejector;
+	public static VictorSPX climb_motor;
 	
 	public static Solenoid PTO;
 	public static Solenoid PTO0;
@@ -129,7 +128,6 @@ public class RobotMap {
 	private final static int chassisRightFront  = 0; //15
 	private final static int chassisRightMid    = 1; //14
 	private final static int chassisRightRear   = 2; //13
-	private final static int climberRight       = 3; //9??  PTO off of lift
 	private final static int trolleyRight       = 4;
 	private final static int intakeRight        = 5;
 	private final static int intakeLeft         = 6;
@@ -137,8 +135,7 @@ public class RobotMap {
 	private final static int liftRight          = 8; //11
 	private final static int liftLeft           = 9; //12
 	private final static int armLeft            = 10; //8
-	private final static int trolleyLeft        = 11; //3
-	private final static int climberLeft        = 12; //10;??  PTO off of lift
+	private final static int climbMotor        = 11; //3
 	private final static int chassisLeftRear    = 13; //2
 	private final static int chassisLeftMid     = 14; //1
 	private final static int chassisLeftFront   = 15; //0
@@ -232,21 +229,13 @@ public class RobotMap {
 		
 		trolley_right = new TalonSRX(trolleyRight); // 4
 		trolley_right.configSelectedFeedbackSensor(FeedbackDevice.Analog, 0, 0);  //string pot
-		trolley_right.setSensorPhase(false);
-		trolley_right.setInverted(false);
+		trolley_right.setSensorPhase(true);
+		trolley_right.setInverted(true);
 		trolley_right.setStatusFramePeriod(0, 0, 0);
 		trolley_right.setNeutralMode(NeutralMode.Brake);
-
-		trolley_left = new VictorSPX(trolleyLeft); // 11
-		trolley_left.follow(trolley_right);
-		trolley_left.setInverted(true);
-
 		trolley_right.configForwardSoftLimitEnable(false, 0);
-		trolley_left.configForwardSoftLimitEnable(false, 0);
-
 		trolley_right.configReverseSoftLimitEnable(false, 0);
-		trolley_left.configReverseSoftLimitEnable(false, 0);
-	
+
 
 		/*
 		 * Intake
@@ -297,8 +286,8 @@ public class RobotMap {
 		/*
 		 * Climber
 		 */
-		climber_left = new TalonSRX(climberLeft); // 10
-		climber_right = new TalonSRX(climberRight); // 9
+		climb_motor = new VictorSPX(climbMotor); // 11
+		climb_motor.setInverted(false);
 		
 		PTO = new Solenoid(PCM_0, climb);
 		PTO0 = new Solenoid(PCM_0, 0);

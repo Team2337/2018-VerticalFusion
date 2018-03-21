@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class auto_gyroMMTurn extends Command { 
 
 	public static double driveFL, drivePL, driveIL, driveDL, driveFR, drivePR, driveIR, driveDR, rev,
-			secondsFromNeutralToFull, angleDifference;
+			secondsFromNeutralToFull, angleDifference, timeout;
 	public static int timeoutMs = 0;
 	public static int slotIdx = 0;
 	public static int sensorUnitsPer100ms, sensorUnitsPer100msPerSec;
@@ -26,9 +26,10 @@ public class auto_gyroMMTurn extends Command {
 	public VisionProcessing boilerVision = RobotMap.vision;
 	static boolean angleDone;
 
-	public auto_gyroMMTurn(int degree) {
+	public auto_gyroMMTurn(int degree, double timeout) {
 		requires(Robot.chassis);
 		this.degree = degree;
+		this.timeout = timeout;
 	}
 
 	// Called just before this Command runs the first time
@@ -42,7 +43,7 @@ public class auto_gyroMMTurn extends Command {
 		
 
 		driveFR = 0.05; 
-		if (degree > 50) {
+		if (Math.abs(degree) > 50) {
 			drivePR = .12;
 		} else {
 			drivePR = 0.16;
@@ -55,7 +56,7 @@ public class auto_gyroMMTurn extends Command {
 		RobotMap.chassis_rightFront.config_kD(slotIdx, driveDR, timeoutMs);
 
 		driveFL = 0.05; 
-		if (degree > 50) {
+		if (Math.abs(degree) > 50) {
 			drivePL = .12;
 		} else {
 			drivePL = 0.16;
@@ -97,10 +98,10 @@ public class auto_gyroMMTurn extends Command {
 			// turn right
 			RobotMap.chassis_leftFront.set(ControlMode.MotionMagic, rev);
 			RobotMap.chassis_rightFront.set(ControlMode.MotionMagic, -rev);
-			System.out.println("Right " + rev + " -" + rev);
+			System.out.println("Right " + rev + " - " + rev);
 		}
 
-		setTimeout(2);
+		setTimeout(timeout);
 	}
 
 	protected void execute() {

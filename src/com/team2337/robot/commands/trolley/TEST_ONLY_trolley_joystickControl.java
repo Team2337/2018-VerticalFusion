@@ -24,7 +24,7 @@ public class TEST_ONLY_trolley_joystickControl extends Command {
 	static int stringPotValue;  
 	
 	static TalonSRX frontRight = RobotMap.trolley_right;
-	static VictorSPX frontLeft = RobotMap.trolley_left;
+	static VictorSPX frontLeft = RobotMap.climb_motor;
 
 	public TEST_ONLY_trolley_joystickControl() {
 		requires(Robot.trolley);

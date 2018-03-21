@@ -14,11 +14,11 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * @category CLIMBER
  * @author Brendan
  */
-public class Climber extends Subsystem {
+public class ClimbPiston extends Subsystem {
 	
 	private final Solenoid climbEjector = RobotMap.climb_ejector;
 
-	public Climber() {
+	public ClimbPiston() {
 	}
 
 	public void initDefaultCommand() {

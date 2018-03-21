@@ -2,7 +2,8 @@ package com.team2337.robot;
 
 import com.team2337.robot.subsystems.Chassis;
 import com.team2337.robot.subsystems.Claw;
-import com.team2337.robot.subsystems.Climber;
+import com.team2337.robot.subsystems.ClimbPiston;
+import com.team2337.robot.subsystems.ClimbWinch;
 
 import java.io.IOException;
 
@@ -42,7 +43,8 @@ public class Robot extends TimedRobot {
 	public static LED led;
 	public static Trolley trolley;
 	public static Shifter shifter;
-	public static Climber climber;
+	public static ClimbPiston climber;
+	public static ClimbWinch climbWinch;
 	public static Claw claw;
 	public static BigBrother bigBrother;
 	public static Lift lift;
@@ -90,7 +92,8 @@ public class Robot extends TimedRobot {
 		trolley = new Trolley();
 		intake = new Intake();
 		arm = new Arm();
-		climber = new Climber();
+		climber = new ClimbPiston();
+		climbWinch = new ClimbWinch();
 		shifter = new Shifter();
 		led = new LED();
 		claw = new Claw();
@@ -113,10 +116,11 @@ public class Robot extends TimedRobot {
 
 		autonchooser.addObject("Cross the Line", "CrossLine");
 		autonchooser.addDefault("Center Switch", "CenterSwitch");
-		autonchooser.addObject("Center Switch then Scale", "CenterSwitchScale");
 		autonchooser.addObject("Do Nothing", "DoNothing");
 		autonchooser.addObject("Scale From Left", "ScaleLeft");
 		autonchooser.addObject("Scale From Right", "ScaleRight");
+		autonchooser.addObject("Center Switch Scale Our Side", "CenterSwitchScaleOurSide");
+		autonchooser.addObject("Center Switch Scale Their Side", "CenterSwitchScaleTheirSide");
 //		autonchooser.addObject("LiftUpperPosition", "LiftUpperPosition");
 //		autonchooser.addObject("PRACTICE CenterSwitchRight", "CenterSwitchRight");
 //		autonchooser.addObject("PRACTICE CenterSwitchLeft", "CenterSwitchLeft");
@@ -181,7 +185,13 @@ public class Robot extends TimedRobot {
 			break;
 		case "CenterSwitchScale":
 			m_autonomousCommand = new CG_centerSwitchThenScale(ourswitch, scale);
-			break;			
+			break;	
+		case "CenterSwitchScaleOurSide":
+			m_autonomousCommand = new CG_centerSwitchThenScaleOurSide(ourswitch, scale);
+			break;
+		case "CenterSwitchScaleTheirSide":
+			m_autonomousCommand = new CG_centerSwitchThenScaleTheirSide(ourswitch, scale);
+			break;
 		case "CrossLine":
 			m_autonomousCommand = new CG_crossTheLine(ourswitch, scale);
 			break;
