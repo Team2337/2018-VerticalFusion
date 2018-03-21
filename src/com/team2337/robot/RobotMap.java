@@ -288,6 +288,7 @@ public class RobotMap {
 		 */
 		climb_motor = new VictorSPX(climbMotor); // 11
 		climb_motor.setInverted(false);
+		climb_motor.setNeutralMode(NeutralMode.Brake);
 		
 		PTO = new Solenoid(PCM_0, climb);
 		PTO0 = new Solenoid(PCM_0, 0);

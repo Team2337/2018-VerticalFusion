@@ -144,7 +144,7 @@ public class OI {
 		
 		/* ====== DRIVER JOYSTICK ===== */
 		
-		driver_GreenA			.whenPressed(new climber_ejector());
+		driver_GreenA			.whileHeld(new climbWinch_driveVertical(1));
 		driver_RedB				.whenPressed(new PTO_Climb()); 
 		driver_BlueX			.whenPressed(new PTO_Lift());  
 		driver_YellowY			.whileHeld(new lift_climb()); 
