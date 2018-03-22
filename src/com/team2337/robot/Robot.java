@@ -119,6 +119,8 @@ public class Robot extends TimedRobot {
 		autonchooser.addObject("Do Nothing", "DoNothing");
 		autonchooser.addObject("Scale From Left", "ScaleLeft");
 		autonchooser.addObject("Scale From Right", "ScaleRight");
+		autonchooser.addObject("Scale From Left Score On Side", "ScaleLeftSide");
+		autonchooser.addObject("Scale From Right Score On Side", "ScaleRightSide");
 		autonchooser.addObject("Center Switch Scale Our Side", "CenterSwitchScaleOurSide");
 		autonchooser.addObject("Center Switch Scale Their Side", "CenterSwitchScaleTheirSide");
 //		autonchooser.addObject("LiftUpperPosition", "LiftUpperPosition");
@@ -199,10 +201,16 @@ public class Robot extends TimedRobot {
 			m_autonomousCommand = new CG_autoDoNothing(ourswitch, scale);
 			break;
 		case "ScaleLeft":
-			m_autonomousCommand = new CG_scaleFromLeft(ourswitch, scale);
+			m_autonomousCommand = new CG_scaleFromLeftScoreAngle(ourswitch, scale);
 			break;
 		case "ScaleRight":
-			m_autonomousCommand = new CG_scaleFromRight(ourswitch, scale);
+			m_autonomousCommand = new CG_scaleFromRightScoreScoreAngle(ourswitch, scale);
+			break;
+		case "ScaleLeftSide":
+			m_autonomousCommand = new CG_scaleFromLeftScoreOnSide(ourswitch, scale);
+			break;
+		case "ScaleRightSide":
+			m_autonomousCommand = new CG_scaleFromRightScoreOnSide(ourswitch, scale);
 			break;
 		case "LiftUpperPosition":
 			m_autonomousCommand = new CG_scorePosition();
