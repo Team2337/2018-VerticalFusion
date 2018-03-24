@@ -20,21 +20,33 @@ public class CG_scaleFromLeftScoreOnSide extends CommandGroup {
 					addSequential(new auto_holdUpperPosition(0.1));
 					//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
 					addSequential (new auto_driveToAngleWithEncoder(.7,10,0,80000,80000,.13));
-					addSequential (new auto_driveToAngleWithEncoder(.6,10,0,160000,160000,.13));
 					addParallel (new auto_moveUpperPosition(2127, 500));
+					addSequential (new auto_driveToAngleWithEncoder(.6,10,0,140000,140000,.13));
+					addParallel (new auto_moveUpperPosition(2300, 500));
 					addSequential (new auto_driveToAngleWithEncoderandLine(.5,10,0,160000,160000,.13)); 
 					addSequential (new auto_brakeModeOn());
-					addSequential(new auto_wait(1));
-//					addSequential (new auto_MMdrive(0));
-					addSequential (new auto_gyroMMTurn(-90, 1));
-//						addSequential (new auto_moveUpperPosition(2127, 500));
-//						addSequential (new auto_wait(1));
+					addSequential (new auto_moveUpperPosition(2300, 500));
+					addSequential (new auto_wait(1));
 					addSequential (new auto_LiftUp(600));
-					addSequential (new auto_resetEncoder());
-					addSequential (new auto_driveToAngleWithEncoder(.5,10,-90,5000,5000,.13));
+					
+					addSequential(new shifter_low());
+//						addSequential (new auto_MMdrive(0));
+					addSequential (new auto_gyroMMTurn(-90, 1));
+					addParallel (new auto_driveForwardWithTime(0,1));
 					addSequential (new auto_moveUpperPosition(1850, 500));
 					addSequential (new auto_wait(0.5));
+					addSequential(new auto_intakeOut(0.8,2));
 					addSequential (new auto_clawOpen());
+					addSequential (new auto_moveUpperPosition(2800, 500));
+					addSequential (new auto_wait(1));
+					addSequential (new auto_LiftDown(100, 120));
+					addSequential (new auto_moveUpperPosition(2800, 80));
+//					addSequential (new auto_gyroMMTurn(0, 1));
+//					addSequential (new auto_resetEncoder());
+//					addSequential (new auto_driveToAngleWithEncoder(.5,10,-90,5000,5000,.13));
+//					addSequential (new auto_moveUpperPosition(1850, 500));
+//					addSequential (new auto_wait(0.5));
+//					addSequential (new auto_clawOpen());
 					
 					
 					

@@ -19,7 +19,7 @@ public class CG_autoFavorOpponentsScale extends CommandGroup {
 			addParallel(new auto_bigBrother_DoNothing());
 			addSequential(new auto_holdUpperPosition(0.1));
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
-			addSequential(new commonCG_scoreLeftSwitch());
+//			addSequential(new commonCG_scoreLeftSwitch());
 			addSequential(new commonCG_armToPickupFromFront());
 			addSequential(new commonCG_driveAroundSwitchRight());
 			
@@ -37,23 +37,25 @@ public class CG_autoFavorOpponentsScale extends CommandGroup {
 			addParallel(new auto_bigBrother_DoNothing());
 			addSequential(new auto_holdUpperPosition(0.1));
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
-			addSequential(new commonCG_scoreLeftSwitch());
+//			addSequential(new commonCG_scoreLeftSwitch());
 			addSequential(new commonCG_armToPickupFromFront());
 			addSequential(new commonCG_driveAroundNearSwitchLeft());
 //			addSequential(new auto_driveToAngleWithEncoder(.3, 3, 0, 9000, 9000, 0.04, true));
 			
-			
-			addSequential(new auto_driveToAngleWithEncoder(-.3, 3, 0, 13000, 13000, 0.04, true));
-			addSequential(new auto_moveUpperPosition(2900,100));
-			addSequential(new auto_intakeOut(.6,1));
-			addSequential(new auto_driveToAngleWithEncoder(.3, 3, 20, 20000, 20000, 0.04, true));
-			addSequential(new auto_gyroMMTurn(-10,1));
-			addSequential(new auto_clawCGOpenClose());
-			addParallel(new auto_moveUpperPosition(3300,100));
 			addSequential(new auto_resetEncoder());
-			addSequential(new auto_driveToAngleWithEncoder(-.3, 3, 20, 10000, 10000, 0.04, true));
-			addSequential(new auto_wait(1.2));
-			addParallel(new auto_intake_in(1, 3));
+			addParallel(new auto_intake_in(1, 2));
+			addSequential(new auto_driveToAngleWithEncoder(.5, 3, 24, 9000, 9000, 0.04, true));
+			addSequential(new auto_moveUpperPosition(2600,100));
+			addSequential(new auto_driveToAngleWithEncoder(-.5, 2, 24, 18000, 18000, 0.04, true));
+			addSequential(new auto_intakeOut(1,1));
+//			addSequential(new auto_driveToAngleWithEncoder(.3, 3, 20, 20000, 20000, 0.04, true));
+//			addSequential(new auto_gyroMMTurn(-10,1));
+//			addSequential(new auto_clawCGOpenClose());
+//			addParallel(new auto_moveUpperPosition(3300,100));
+//			addSequential(new auto_resetEncoder());
+//			addSequential(new auto_driveToAngleWithEncoder(-.3, 3, 20, 10000, 10000, 0.04, true));
+//			addSequential(new auto_wait(1.2));
+//			addParallel(new auto_intake_in(1, 3));
 
 			
 			
@@ -65,7 +67,7 @@ public class CG_autoFavorOpponentsScale extends CommandGroup {
 			addParallel(new auto_bigBrother_DoNothing());
 			addSequential(new auto_holdUpperPosition(0.1));
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!		
-			addSequential(new commonCG_scoreRightSwitch());
+//			addSequential(new commonCG_scoreRightSwitch());
 	
 
 			addSequential(new commonCG_armToPickupFromFront());
@@ -92,7 +94,7 @@ public class CG_autoFavorOpponentsScale extends CommandGroup {
 			addParallel(new auto_bigBrother_DoNothing());
 			addSequential(new auto_holdUpperPosition(0.1));
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!		
-			addSequential(new commonCG_scoreRightSwitch());
+//			addSequential(new commonCG_scoreRightSwitch());
 			addSequential(new commonCG_armToPickupFromFront());
 			addSequential(new commonCG_driveAroundSwitchLeft());
 			
