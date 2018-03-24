@@ -28,7 +28,7 @@ public class PixyCam extends Subsystem {
 
 	public PixyCam(){
 		// Open a pipeline to a Pixy camera.
-		//pixy1 = new PixySPI(new SPI(port), packets, new PixyException(print));
+		pixy1 = new PixySPI(new SPI(port), packets, new PixyException(print));
 		//pixy1 = new PixySPI();
 	}
 
@@ -38,7 +38,9 @@ public class PixyCam extends Subsystem {
 		// setDefaultCommand(new MySpecialCommand());
 	}
 	
-
+	public void periodic() {
+		testPixy1();
+	}
 	
 
 	public void testPixy1(){
