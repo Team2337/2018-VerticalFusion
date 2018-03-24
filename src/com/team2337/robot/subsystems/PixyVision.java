@@ -8,14 +8,19 @@ import java.util.HashMap;
 import com.team2337.fusion.PixyCam.PixyException;
 import com.team2337.fusion.PixyCam.PixyPacket;
 import com.team2337.fusion.PixyCam.PixySPI;
+import com.team2337.robot.commands.pixy.pixy_Monitor;
 
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
-public class PixyCam extends Subsystem {
-
+public class PixyVision extends Subsystem {
+	
+	public double centerXX = 100;
+	public double pixyPixeltoDegree = 0; ///  NEED TO CALCULATE
+	public double xx = 0;
+	public double yy = 0;
 
 	// These values are the default if you instantiate a PixySPI without arguments.
 	// To create multiple PixySPI objects and thus use multiple Pixy cameras via SPI
@@ -26,21 +31,18 @@ public class PixyCam extends Subsystem {
 	String print;
 	public HashMap<Integer, ArrayList<PixyPacket>> packets = new HashMap<Integer, ArrayList<PixyPacket>>();
 
-	public PixyCam(){
+	public PixyVision(){
 		// Open a pipeline to a Pixy camera.
 		pixy1 = new PixySPI(new SPI(port), packets, new PixyException(print));
-		//pixy1 = new PixySPI();
 	}
 
 
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
-		// setDefaultCommand(new MySpecialCommand());
+		setDefaultCommand(new pixy_Monitor());
 	}
 	
-	public void periodic() {
-		testPixy1();
-	}
+
 	
 
 	public void testPixy1(){
@@ -56,16 +58,17 @@ public class PixyCam extends Subsystem {
 		}
 		
 		for(int i = 1; i <= PixySPI.PIXY_SIG_COUNT ; i++) {
-			SmartDashboard.putString("Pixy Vision: Signature: ", Integer.toString(i));
+			//SmartDashboard.putString("Pixy Vision: Signature: ", Integer.toString(i));
 
-			SmartDashboard.putNumber("Pixy Vision: packet: " + Integer.toString(i) + ": size: ", packets.get(i).size());
+			//SmartDashboard.putNumber("Pixy Vision: packet: " + Integer.toString(i) + ": size: ", packets.get(i).size());
 			
 			// Loop through the packets for this signature.
 			
 			for(int j=0; j < packets.get(i).size(); j++) {
 				packets.get(1).size();
 
-				double xx = packets.get(1).get(j).X;
+				xx = packets.get(1).get(j).X;
+				yy = packets.get(1).get(j).Y;
 				
 				SmartDashboard.putBoolean("in loop", true);
 				
@@ -73,6 +76,7 @@ public class PixyCam extends Subsystem {
 				SmartDashboard.putNumber("Pixy Vision: " + Integer.toString(i) + ": Y: ", packets.get(i).get(j).Y);
 				SmartDashboard.putNumber("Pixy Vision: " + Integer.toString(i) + ": Width: ", packets.get(i).get(j).Width);
 				SmartDashboard.putNumber("Pixy Vision: " + Integer.toString(i) + ": Height: ", packets.get(i).get(j).Height);
+				
 			}
 		}
 	}

@@ -17,8 +17,8 @@ public class pixy_Monitor extends Command {
 
 	protected void execute() {
 		Robot.pixy.testPixy1();
-		SmartDashboard.putNumber("Pixy X Value", Robot.pixy.xx);
-		SmartDashboard.putNumber("Pixy Y Value", Robot.pixy.yy);
+		SmartDashboard.putNumber("Pixy Xx Value", Robot.pixy.xx);
+		SmartDashboard.putNumber("Pixy Yy Value", Robot.pixy.yy);
 	}
 
 	protected boolean isFinished() {

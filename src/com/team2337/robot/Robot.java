@@ -19,7 +19,7 @@ import com.team2337.robot.subsystems.Intake;
 import com.team2337.robot.subsystems.LED;
 import com.team2337.robot.subsystems.Lift;
 import com.team2337.robot.subsystems.PTO;
-import com.team2337.robot.subsystems.PixyCam;
+import com.team2337.robot.subsystems.PixyVision;
 import com.team2337.robot.subsystems.Trolley;
 import com.team2337.robot.subsystems.Shifter;
 
@@ -52,7 +52,7 @@ public class Robot extends TimedRobot {
 	public static PTO pto;
 	public static OI oi;
 	public static Pigeon gyro;
-	public static PixyCam pixy;
+	public static PixyVision pixy;
 	public static String ourswitch = "q";
 	public static String scale = "q";
 	public static String oppswitch = "q";
@@ -71,6 +71,7 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 		String mac;
 		mac = Address.getInstance().getMAC();
+		/*
 		if (mac.equals("00:80:2F:17:89:85")) {
 			System.out.println("TestBoard " + mac);
 			isComp = false;
@@ -81,7 +82,7 @@ public class Robot extends TimedRobot {
 			System.out.println("CompBot " + mac);
 			isComp = true;
 		}
-		
+		*/
 		
 		// Initialize all of the Robots Mappings
 		RobotMap.init();
@@ -103,7 +104,7 @@ public class Robot extends TimedRobot {
 		bigBrother = new BigBrother();	
 		pto = new PTO();
 		gyro = new Pigeon();
-		pixy = new PixyCam();
+		pixy = new PixyVision();
 		oi = new OI();
 
 		AutoCommandManager.getInstance().init();
