@@ -48,6 +48,13 @@ public class led_runtime extends Command {
 			} else if (Robot.lift.levelOfLift == 9) {
 					RobotMap.blinkin.setColor(0.87);  //Solid blue
 			}
+			
+			if(Robot.arm.getPosition() > Robot.arm.forwardCarry - 100) {
+				RobotMap.blinkin.setColor(.99);
+				if(Robot.intake.bothSensors() && RobotMap.clawPressureDash) {
+					RobotMap.blinkin.setColor(0.76);
+				}
+			} 
 			// -0.59 = rainbow party
 			// RobotMap.blinkin.flow();
 		}
