@@ -126,6 +126,11 @@ public class Robot extends TimedRobot {
 		autonchooser.addObject("Scale From Right Score On Side", "ScaleRightSide");
 		autonchooser.addObject("Center Switch Scale Our Side", "CenterSwitchScaleOurSide");
 		autonchooser.addObject("Center Switch Scale Their Side", "CenterSwitchScaleTheirSide");
+		
+		autonchooser.addObject("Partner Scale On Our Left", "PartnerScaleOnOurLeft");
+		autonchooser.addObject("Partner Scale On Our Right", "PartnerScaleOnOurRight");
+		autonchooser.addObject("Favor Opponents Scale", "FavorOpponentsScale");
+		autonchooser.addObject("Favor Our Scale Solo", "FavorOurScaleSolo");
 //		autonchooser.addObject("LiftUpperPosition", "LiftUpperPosition");
 //		autonchooser.addObject("PRACTICE CenterSwitchRight", "CenterSwitchRight");
 //		autonchooser.addObject("PRACTICE CenterSwitchLeft", "CenterSwitchLeft");
@@ -223,6 +228,18 @@ public class Robot extends TimedRobot {
 			break;
 		case "CenterSwitchRight":
 			m_autonomousCommand = new CG_centerSwitchRight(ourswitch, scale);
+			break;
+		case "PartnerScaleOnOurLeft":
+			m_autonomousCommand = new CG_autoPartnerScaleOnOurLeft(ourswitch, scale);
+			break;
+		case "PartnerScaleOnOurRight":
+			m_autonomousCommand = new CG_autoPartnerScaleOnOurRight(ourswitch, scale);
+			break;
+		case "FavorOpponentsScale":
+			m_autonomousCommand = new CG_autoFavorOpponentsScale(ourswitch, scale);
+			break;
+		case "FavorOurScaleSolo":
+			m_autonomousCommand = new CG_autoFavorOurScaleSolo(ourswitch, scale);
 			break;
 		default:
 			m_autonomousCommand = new CG_autoDoNothing(ourswitch, scale);

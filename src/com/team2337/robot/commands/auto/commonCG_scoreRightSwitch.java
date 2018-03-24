@@ -16,5 +16,6 @@ public class commonCG_scoreRightSwitch extends CommandGroup {
 		addSequential(new auto_clawOpenWithCollision(4));
 		addSequential (new auto_intakeOut(.3,1));
 		addSequential(new auto_wait(1));
+		addSequential(new auto_resetEncoder());
 	}
 }
