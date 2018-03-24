@@ -49,9 +49,9 @@ public class led_runtime extends Command {
 					RobotMap.blinkin.setColor(0.87);  //Solid blue
 			}
 			
-			if(Robot.arm.getPosition() > Robot.arm.forwardCarry - 100) {
+			if(Robot.arm.getPosition() > Robot.arm.forwardCarry + 200) {
 				RobotMap.blinkin.setColor(.99);
-				if(Robot.intake.bothSensors() && RobotMap.clawPressureDash) {
+				if((RobotMap.clawPressure.getValue() / 21.37)>50) {
 					RobotMap.blinkin.setColor(0.76);
 				}
 			} 

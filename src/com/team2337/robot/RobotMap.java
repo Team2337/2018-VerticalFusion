@@ -115,7 +115,7 @@ public class RobotMap {
 	public static Boolean alt_ControlDebug = false;
 	public static Boolean chassisDebug = true;
 	public static Boolean intakeDebug = false;
-	public static Boolean climbDebug = true;
+	public static Boolean climbDebug = false;
 	public static Boolean robot_AllPeriodicDebug = true;
 	public static Boolean clawPressureDash = true;
 	public static Boolean crateBypass = false;

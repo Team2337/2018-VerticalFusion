@@ -191,9 +191,12 @@ public class OI {
 	    operator_TopIndexButton				   .whenPressed(new DoNothing());
 	    operator_BottomIndexButton		       .whenPressed(new liftLevelAdjuster(12));
 
-	    operator_SE						 	   .whileHeld(new climbWinch_driveVertical(1));     
+//	    operator_SE						 	   .whileHeld(new climbWinch_driveVertical(1));     
 //	    operator_ST						  	   .whenPressed(new climber_ejector());
-	                                          
+	    
+	    operator_SE						 	   .whileHeld(new CG_defenseMode()); 
+	    operator_ST						  	   .whenPressed(new CG_returnToALTControl());  
+	    
 	    operator_JoystickPOVUp			       .whenPressed(new claw_give60psi());
 //	    operator_JoystickPOVUp				   .whenReleased(new claw_CGClose());
 	    operator_JoystickPOVUpRight		       .whenPressed(new claw_give60psi());

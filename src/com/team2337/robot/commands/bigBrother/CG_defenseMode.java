@@ -13,12 +13,12 @@ public class CG_defenseMode extends CommandGroup {
 
 	public CG_defenseMode() {
 		requires(Robot.bigBrother);
-		addSequential(new auto_moveUpperPosition(2850, 550)); // Move to 10
-		addSequential(new auto_wait(1));
-		addSequential(new auto_moveUpperPosition(2000, 550)); // Move to 10
-		addSequential(new auto_wait(1));
-		addSequential(new auto_moveUpperPosition(2000, 100)); // Move to 10
-		addSequential(new auto_bigBrother_DoNothing());
+		addSequential(new auto_moveUpperPosition(2127,500));  //50,386  ///Touch down
+		addSequential(new auto_wait(0.175));
+		addSequential(new auto_moveUpperPosition(2900,500));
+		addSequential(new auto_wait(0.35));
+		addSequential(new auto_moveUpperPosition(2900,100));
+		addSequential(new auto_wait(0.25));
 	}
 
 }
