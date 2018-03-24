@@ -90,13 +90,21 @@ public class CG_centerSwitchThenScaleOurSide extends CommandGroup {
 			addParallel(new auto_bigBrother_DoNothing());
 			addSequential(new auto_holdUpperPosition(0.1));
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!		
-			addSequential(new commonCG_scoreRightSwitch());
+			//addSequential(new commonCG_scoreRightSwitch());
 			addSequential(new auto_resetEncoder());
-			addParallel(new auto_driveToAngleWithEncoder(-.5, 3, 0, 27000, 12000, 0.02));
+			addParallel(new auto_driveToAngleWithEncoder(-.5, 3, 0, 30000, 30000, 0.02));
 			addSequential(new commonCG_armToPickupFromFront());
 			addSequential(new auto_resetEncoder());
-			addSequential(new auto_driveToAngleWithEncoder(.5, 4, -50, 32000, 20000, 0.015));
-			addSequential(new auto_driveToAngleWithEncoder(.5, 4, 0, 65000, 30000, 0.0175));
+			addSequential(new auto_driveToAngleWithEncoder(.5, 4, -50, 38000, 38000, 0.015));
+			addSequential(new auto_driveToAngleWithEncoder(.5, 4, 0, 105000, 105000, 0.03));
+			
+			addSequential(new auto_brakeModeOn());
+			addSequential(new auto_clawCGOpenClose());
+			addParallel(new auto_moveUpperPosition(3300,100));
+			addSequential(new auto_resetEncoder());
+			addParallel(new auto_driveToAngleWithEncoder(-.5, 8, -35, 16000, 16000, 0.04, true));
+			addSequential(new auto_wait(1.2));
+			addParallel(new auto_intake_in(1, 3));
 			
 		}
 		
