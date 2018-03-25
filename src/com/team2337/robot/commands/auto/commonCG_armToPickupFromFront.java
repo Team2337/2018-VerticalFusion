@@ -13,7 +13,7 @@ public class commonCG_armToPickupFromFront extends CommandGroup {
 		addSequential(new auto_wait(0.175));
 		addSequential(new auto_moveUpperPosition(2900,500));
 		addSequential(new auto_wait(0.35));
-		addSequential(new auto_moveUpperPosition(2900,100));
+		addSequential(new auto_moveUpperPosition(2900,80));
 		addSequential(new auto_wait(0.25));
 	}
 }

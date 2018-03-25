@@ -19,13 +19,14 @@ public class CG_autoFavorOurScaleSolo extends CommandGroup {
 			addParallel(new auto_bigBrother_DoNothing());
 			addSequential(new auto_holdUpperPosition(0.1));
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
-			addSequential(new commonCG_scoreLeftSwitch());
+//			addSequential(new commonCG_scoreLeftSwitch());
 			addSequential(new commonCG_armToPickupFromFront());
 			addSequential(new commonCG_driveAroundNearSwitchLeft());
 			
 			addSequential(new auto_resetEncoder());
-			addSequential(new auto_driveToAngleWithEncoder(.3, 3, 0, 9000, 9000, 0.04, true));
-			addSequential(new auto_driveToAngleWithEncoderandLine(.3, 3, 0, 9000, 9000, 0.04));
+			addParallel(new auto_intake_in(0.6, 2));
+			addSequential(new auto_driveToAngleWithEncoder(.5, 3, 0, 9000, 9000, 0.04, true));
+//			addSequential(new auto_driveToAngleWithEncoderandLine(.5, 3, 0, 9000, 9000, 0.04));
 			
 //			addSequential (new CG_scorePosition());
 //			addSequential (new auto_clawOpen());
@@ -38,15 +39,16 @@ public class CG_autoFavorOurScaleSolo extends CommandGroup {
 			addParallel(new auto_bigBrother_DoNothing());
 			addSequential(new auto_holdUpperPosition(0.1));
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
-			addSequential(new commonCG_scoreLeftSwitch());
+//			addSequential(new commonCG_scoreLeftSwitch());
 			addSequential(new commonCG_armToPickupFromFront());
 			addSequential(new commonCG_driveAroundSwitchRight());
 //			addSequential(new auto_driveToAngleWithEncoder(.3, 3, 0, 9000, 9000, 0.04, true));
 			
 			
 			addSequential(new auto_resetEncoder());
-			addSequential(new auto_driveToAngleWithEncoder(.3, 3, 0, 9000, 9000, 0.04, true));
-			addSequential(new auto_driveToAngleWithEncoderandLine(.3, 3, 0, 9000, 9000, 0.04));
+			addParallel(new auto_intake_in(0.6, 2));
+			addSequential(new auto_driveToAngleWithEncoder(.5, 3, 0, 9000, 9000, 0.04, true));
+			addSequential(new auto_driveToAngleWithEncoderandLine(.5, 3, 0, 9000, 9000, 0.04));
 			
 //			addSequential (new CG_scorePosition());
 //			addSequential (new auto_clawOpen());
@@ -61,7 +63,7 @@ public class CG_autoFavorOurScaleSolo extends CommandGroup {
 			addParallel(new auto_bigBrother_DoNothing());
 			addSequential(new auto_holdUpperPosition(0.1));
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!		
-			addSequential(new commonCG_scoreRightSwitch());
+//			addSequential(new commonCG_scoreRightSwitch());
 	
 
 			addSequential(new commonCG_armToPickupFromFront());
@@ -69,8 +71,9 @@ public class CG_autoFavorOurScaleSolo extends CommandGroup {
 //			addSequential(new auto_driveToAngleWithEncoder(.3, 3, 0, 9000, 9000, 0.04, true));
 			
 			addSequential(new auto_resetEncoder());
-			addSequential(new auto_driveToAngleWithEncoder(.3, 3, 0, 9000, 9000, 0.04, true));
-			addSequential(new auto_driveToAngleWithEncoderandLine(.3, 3, 0, 9000, 9000, 0.04));
+			addParallel(new auto_intake_in(0.6, 2));
+			addSequential(new auto_driveToAngleWithEncoder(.5, 3, 0, 9000, 9000, 0.04, true));
+			addSequential(new auto_driveToAngleWithEncoderandLine(.5, 3, 0, 9000, 9000, 0.04));
 			
 //			addSequential (new CG_scorePosition());
 //			addSequential (new auto_clawOpen());
@@ -84,14 +87,15 @@ public class CG_autoFavorOurScaleSolo extends CommandGroup {
 			addParallel(new auto_bigBrother_DoNothing());
 			addSequential(new auto_holdUpperPosition(0.1));
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!		
-			addSequential(new commonCG_scoreRightSwitch());
+//			addSequential(new commonCG_scoreRightSwitch());
 			addSequential(new commonCG_armToPickupFromFront());
 			addSequential(new commonCG_driveAroundNearSwitchRight());
 			
 			
 			addSequential(new auto_resetEncoder());
-			addSequential(new auto_driveToAngleWithEncoder(.3, 3, 0, 9000, 9000, 0.04, true));
-			addSequential(new auto_driveToAngleWithEncoderandLine(.3, 3, 0, 9000, 9000, 0.04));
+			addParallel(new auto_intake_in(0.6, 2));
+			addSequential(new auto_driveToAngleWithEncoder(.5, 3, 0, 9000, 9000, 0.04, true));
+			addSequential(new auto_driveToAngleWithEncoderandLine(.5, 3, 0, 9000, 9000, 0.04));
 			
 //			addSequential (new CG_scorePosition());
 //			addSequential (new auto_clawOpen());
