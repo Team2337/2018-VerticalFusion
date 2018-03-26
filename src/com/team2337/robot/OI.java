@@ -155,7 +155,7 @@ public class OI {
 
 		
 		driver_Back				.whenPressed(new DoNothing()); 
-		driver_Start			.whenPressed(new DoNothing()); 
+		driver_Start			.whenPressed(new CG_scorePosition()); 
 		
 		driver_LeftStick		.whenPressed(new DoNothing()); 
 		driver_RightStick		.whenPressed(new DoNothing()); 

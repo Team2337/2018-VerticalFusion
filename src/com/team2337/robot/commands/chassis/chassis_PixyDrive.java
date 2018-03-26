@@ -16,24 +16,32 @@ import com.team2337.robot.RobotMap;
 public class chassis_PixyDrive extends Command {
 
 	private Joystick driverJoystick = Robot.oi.driverJoystick;
-	private static final double turnP = 0.01;
-	private double moveSpeed, turnSpeed;
+	private static final double turnP = 0.025;
+	private double moveSpeed, turnSpeed, cubeX, turnAngle;
+	private double pixlesPerDegree = 3.86;
 
 	public chassis_PixyDrive() {
 		requires(Robot.chassis);
 	}
 
 	protected void initialize() {
+		cubeX = Robot.pixy.xx;
+		turnAngle = (cubeX - Robot.pixy.centerXX) / pixlesPerDegree;
 	}
 
 	protected void execute() {
+		double currentAngle = Robot.gyro.getYaw();
+		
+		if((turnAngle - currentAngle) > 75) {
+			turnSpeed = -((turnAngle - currentAngle) * turnP);
+    	} else {
+    		turnSpeed = -((turnAngle - currentAngle) * turnP);
+    	}
+		
 		moveSpeed = -driverJoystick.getRawAxis(1); // Left Y
-		if (Robot.pixy.xx > 0) {
-			turnSpeed = (Robot.pixy.xx - Robot.pixy.centerXX) * turnP;
-		} else {
-			turnSpeed = 0;
-		}
+		
 		RobotMap.drive.arcadeDrive(moveSpeed, turnSpeed, true);
+		System.out.println(turnAngle + "   " + currentAngle + "   " + turnSpeed);
 	}
 
 	protected boolean isFinished() {

@@ -87,7 +87,7 @@ public class Robot extends TimedRobot {
 		// Initialize all of the Robots Mappings
 		RobotMap.init();
 		// Also start the camera(s)
-		RobotMap.startCamera();
+		//RobotMap.startCamera();
 
 		// Reference all of the subsystems
 
@@ -344,6 +344,9 @@ public class Robot extends TimedRobot {
 		}
 		SmartDashboard.putString("intake Command", Robot.intake.getCurrentCommandName());
 		SmartDashboard.putBoolean("first intake", RobotMap.firstIntake);
+		SmartDashboard.putString("Pixy Command", Robot.pixy.getCurrentCommandName());
+		SmartDashboard.putNumber("Pixy Xx Value", Robot.pixy.xx);
+		SmartDashboard.putNumber("Pixy Yy Value", Robot.pixy.yy);
 	}
 
 }

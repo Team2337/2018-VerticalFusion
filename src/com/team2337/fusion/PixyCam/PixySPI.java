@@ -34,7 +34,7 @@ public class PixySPI {
 	private ArrayDeque<Byte> outBuf = new ArrayDeque<>(); // Future use for sending commands to Pixy.
 	private ArrayList<int[]> blocks = new ArrayList<int[]>();
 	private boolean skipStart = false;
-	private int debug = 1; // 0 - none, 1 - SmartDashboard, 2 - log to console/file 
+	private int debug = 0; // 0 - none, 1 - SmartDashboard, 2 - log to console/file 
 
 	private static final Logger logger =
 			Logger.getLogger(PixySPI.class.getName());
