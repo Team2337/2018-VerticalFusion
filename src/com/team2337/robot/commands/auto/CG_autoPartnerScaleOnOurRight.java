@@ -73,7 +73,7 @@ public class CG_autoPartnerScaleOnOurRight extends CommandGroup {
 			
 		// **************************  RRR  **************************
 		// Score in switch, get cube, score in scale.			
-		} else {
+		} else if (ourSwitch.equals("R")  && scale.equals("R")) {
 			addParallel(new auto_bigBrother_DoNothing());
 			addSequential(new auto_holdUpperPosition(0.1));
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!		
@@ -95,10 +95,9 @@ public class CG_autoPartnerScaleOnOurRight extends CommandGroup {
 			addSequential(new auto_brakeModeOff());
 			
 			
-			
+			//didnt get any game data, so we run into switch and hope we guessed right
+		} else {
+			addSequential(new commonCG_rightSwitchDontScore());
 		}
-		
-		
-	
 	}
 }

@@ -6,9 +6,9 @@ import com.team2337.robot.commands.shifter.shifter_low;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class commonCG_driveAroundSwitchRight extends CommandGroup {
+public class commonCG_switchLeftBackOut extends CommandGroup {
 
-	public commonCG_driveAroundSwitchRight() {
+	public commonCG_switchLeftBackOut() {
 		addSequential(new auto_resetEncoder());
 		addSequential(new auto_driveToAngleWithEncoder(-.5, 3, 0, 41000, 41000, 0.04));
 		

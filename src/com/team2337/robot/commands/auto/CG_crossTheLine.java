@@ -9,10 +9,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class CG_crossTheLine extends CommandGroup {
 
-	String ourSwitch, scale;
-	public CG_crossTheLine(String ourSwitch, String scale) {
-		this.ourSwitch = ourSwitch;
-		this.scale = scale;		
+	public CG_crossTheLine() {	
 	
 			addParallel(new auto_bigBrother_DoNothing());
 			addSequential(new auto_holdUpperPosition(0.1));
@@ -23,8 +20,6 @@ public class CG_crossTheLine extends CommandGroup {
 			addSequential(new auto_wait(1));
 			addSequential(new commonCG_armToPickupFromFront());
 			addSequential (new auto_brakeModeOff());
-			
-	
 		
 	
 	}

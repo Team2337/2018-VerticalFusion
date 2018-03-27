@@ -14,8 +14,8 @@ public class CG_scaleFromLeftScoreOnSide extends CommandGroup {
 		this.ourSwitch = ourSwitch;
 		this.scale = scale;		
 		
-		// Score Scale, get cube, Score Scale, get cube,  Score Scale
-				if  (ourSwitch.equals("L") && scale.equals("L")) {
+		// Score Scale, get cube, Score Scale, get cube,  Score Scale	//LLL AND RLR
+				if  (scale.equals("L")) {
 					addParallel(new auto_bigBrother_DoNothing());
 					addSequential(new auto_holdUpperPosition(0.1));
 					//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
@@ -30,7 +30,6 @@ public class CG_scaleFromLeftScoreOnSide extends CommandGroup {
 					addSequential (new auto_LiftUp(600));
 					
 					addSequential(new shifter_low());
-//						addSequential (new auto_MMdrive(0));
 					addSequential (new auto_gyroMMTurn(-90, 1));
 					addParallel (new auto_driveForwardWithTime(0,1));
 					addSequential (new auto_moveUpperPosition(1850, 500));
@@ -41,39 +40,35 @@ public class CG_scaleFromLeftScoreOnSide extends CommandGroup {
 					addSequential (new auto_wait(1));
 					addSequential (new auto_LiftDown(100, 120));
 					addSequential (new auto_moveUpperPosition(2800, 80));
-//					addSequential (new auto_gyroMMTurn(0, 1));
-//					addSequential (new auto_resetEncoder());
-//					addSequential (new auto_driveToAngleWithEncoder(.5,10,-90,5000,5000,.13));
-//					addSequential (new auto_moveUpperPosition(1850, 500));
-//					addSequential (new auto_wait(0.5));
-//					addSequential (new auto_clawOpen());
 					
 					
 					
-				//Switch is NOT on our side scale is  LRL
+				//Switch is on our side scale is not LRL
+					//Score in switch from side and try to grab cube
 				} else if (ourSwitch.equals("L")  && scale.equals("R")) {
 					addParallel(new auto_bigBrother_DoNothing());
 					addSequential(new auto_holdUpperPosition(0.1));
 					//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
+					addSequential (new auto_driveToAngleWithEncoder(.7, 4, 0, 65000, 65000, 0.04));// speed was .9 
+					addSequential (new auto_brakeModeOn());
+					addSequential (new auto_gyroMMTurn(-90, 1));
+					addSequential (new auto_driveForwardWithTime(.5,2));
+					addSequential (new auto_moveUpperPosition(1800,60));  //-250,60  ///Score into Switch position
+					addSequential (new auto_wait(0.3));
+					addSequential (new auto_resetEncoder());
+					addSequential (new auto_intakeOut(.8,1.5));
+					addSequential (new commonCG_armToPickupFromFront());
+					addSequential (new auto_driveToAngleWithEncoder(-.5, 4, -90, 12000, 12000, 0.04));
 					
-					
-					
-				//Switch is on our side scale is NOT  RLR
-				} else if (ourSwitch.equals("R")  && scale.equals("L")) {
-					addParallel(new auto_bigBrother_DoNothing());
-					addSequential(new auto_holdUpperPosition(0.1));
+				//Switch is NOT on our side scale is NOT RLR
+					//Cross the line
+				} else if (ourSwitch.equals("R")  && scale.equals("R")) {
+					addSequential(new CG_crossTheLine());
 					//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
 					
-					
-					
-					
-				//Switch and scale are on our side.  RRR	
 				} else {
-					addParallel(new auto_bigBrother_DoNothing());
-					addSequential(new auto_holdUpperPosition(0.1));
+					addSequential(new CG_crossTheLine());
 					//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
-
-					
 				}
 		//Switch and scale are NOT on our side  LLL
 		

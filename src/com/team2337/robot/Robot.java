@@ -56,6 +56,7 @@ public class Robot extends TimedRobot {
 	public static String ourswitch = "q";
 	public static String scale = "q";
 	public static String oppswitch = "q";
+	public static String gameData = null;
 
 	public static boolean isComp = false;
 	// public static char ourswitch, scale, oppswitch;
@@ -71,7 +72,7 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 		String mac;
 		mac = Address.getInstance().getMAC();
-		/*
+		
 		if (mac.equals("00:80:2F:17:89:85")) {
 			System.out.println("TestBoard " + mac);
 			isComp = false;
@@ -82,7 +83,7 @@ public class Robot extends TimedRobot {
 			System.out.println("CompBot " + mac);
 			isComp = true;
 		}
-		*/
+		
 		
 		// Initialize all of the Robots Mappings
 		RobotMap.init();
@@ -107,6 +108,8 @@ public class Robot extends TimedRobot {
 		pixy = new PixyVision();
 		oi = new OI();
 
+		System.out.println("Disabled Game Data Values: " + gameData + "\nOurSwitch: " + ourswitch + "   Scale: " + scale + "   OppSwitch: " + oppswitch);
+		
 		AutoCommandManager.getInstance().init();
 		AutoCommandManager.getInstance().setBlinkin(RobotMap.blinkin);
 
@@ -121,20 +124,20 @@ public class Robot extends TimedRobot {
 		autonchooser.addObject("Cross the Line", "CrossLine");
 		autonchooser.addDefault("Center Switch", "CenterSwitch");
 		autonchooser.addObject("Do Nothing", "DoNothing");
-		autonchooser.addObject("Scale From Left", "ScaleLeft");
-		autonchooser.addObject("Scale From Right", "ScaleRight");
+//		autonchooser.addObject("Scale From Left", "ScaleLeft");
+//		autonchooser.addObject("Scale From Right", "ScaleRight");
 		autonchooser.addObject("Scale From Left Score On Side", "ScaleLeftSide");
 		autonchooser.addObject("Scale From Right Score On Side", "ScaleRightSide");
-		autonchooser.addObject("Center Switch Scale Our Side", "CenterSwitchScaleOurSide");
-		autonchooser.addObject("Center Switch Scale Their Side", "CenterSwitchScaleTheirSide");
 		
 		autonchooser.addObject("Partner Scale On Our Left", "PartnerScaleOnOurLeft");
 		autonchooser.addObject("Partner Scale On Our Right", "PartnerScaleOnOurRight");
 		autonchooser.addObject("Favor Opponents Scale", "FavorOpponentsScale");
 		autonchooser.addObject("Favor Our Scale Solo", "FavorOurScaleSolo");
 //		autonchooser.addObject("LiftUpperPosition", "LiftUpperPosition");
-//		autonchooser.addObject("PRACTICE CenterSwitchRight", "CenterSwitchRight");
-//		autonchooser.addObject("PRACTICE CenterSwitchLeft", "CenterSwitchLeft");
+		autonchooser.addObject("PRACTICE CenterSwitchRight", "CenterSwitchRight");
+		autonchooser.addObject("PRACTICE CenterSwitchLeft", "CenterSwitchLeft");
+		
+		autonchooser.addObject("Score Switch Then Go Around", "SwitchThenGoAround");
 		//autonchooser.addObject("TESTUTurn", "UTurn");
 		//autonchooser.addObject("TESTLineRead", "line");
 		
@@ -181,9 +184,11 @@ public class Robot extends TimedRobot {
 		RobotMap.chassis_rightFront.setSelectedSensorPosition(0, 0, 0);
 		Robot.trolley.maxSpeedUp = 0.5;
 
-		String gameData;
+		
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
-
+		
+		System.out.println(gameData);
+		
 		ourswitch = gameData.substring(0, 1);
 		scale = gameData.substring(1, 2);
 		oppswitch = gameData.substring(2, 3);
@@ -194,9 +199,6 @@ public class Robot extends TimedRobot {
 		case "CenterSwitch":
 			m_autonomousCommand = new CG_centerSwitch(ourswitch, scale);
 			break;
-		case "CenterSwitchScale":
-			m_autonomousCommand = new CG_centerSwitchThenScale(ourswitch, scale);
-			break;	
 		case "CenterSwitchScaleOurSide":
 			m_autonomousCommand = new CG_centerSwitchThenScaleOurSide(ourswitch, scale);
 			break;
@@ -204,7 +206,7 @@ public class Robot extends TimedRobot {
 			m_autonomousCommand = new CG_centerSwitchThenScaleTheirSide(ourswitch, scale);
 			break;
 		case "CrossLine":
-			m_autonomousCommand = new CG_crossTheLine(ourswitch, scale);
+			m_autonomousCommand = new CG_crossTheLine();
 			break;
 		case "DoNothing":
 			m_autonomousCommand = new CG_autoDoNothing(ourswitch, scale);
@@ -241,6 +243,9 @@ public class Robot extends TimedRobot {
 			break;
 		case "FavorOurScaleSolo":
 			m_autonomousCommand = new CG_autoFavorOurScaleSolo(ourswitch, scale);
+			break;
+		case "SwitchThenGoAround":
+			m_autonomousCommand = new CG_centerSwitchThenGoAroundSwitch(ourswitch, scale);
 			break;
 		default:
 			m_autonomousCommand = new CG_autoDoNothing(ourswitch, scale);
