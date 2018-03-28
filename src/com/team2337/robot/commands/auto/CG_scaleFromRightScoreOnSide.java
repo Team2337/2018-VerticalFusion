@@ -20,13 +20,13 @@ public class CG_scaleFromRightScoreOnSide extends CommandGroup {
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
 			addSequential (new auto_driveToAngleWithEncoder(.7,10,0,80000,80000,.13));
 			addParallel (new auto_moveUpperPosition(2127, 500));
-			addSequential (new auto_driveToAngleWithEncoder(.6,10,0,140000,140000,.13));
+			addSequential (new auto_driveToAngleWithEncoder(.6,10,0,137000,137000,.13));
 			addParallel (new auto_moveUpperPosition(2300, 500));
-			addSequential (new auto_driveToAngleWithEncoderandLine(.5,10,0,160000,160000,.13)); 
+			addSequential (new auto_driveToAngleWithEncoderandLine(.5,0.5,0,160000,160000,.13)); 
 			addSequential (new auto_brakeModeOn());
 			addSequential (new auto_moveUpperPosition(2300, 500));
 			addSequential (new auto_wait(1));
-			addSequential (new auto_LiftUp(600));
+			addSequential (new auto_LiftUp(580)); //600 practice
 			
 			addSequential(new shifter_low());
 			addSequential (new auto_gyroMMTurn(90, 1));
@@ -37,7 +37,7 @@ public class CG_scaleFromRightScoreOnSide extends CommandGroup {
 			addSequential (new auto_clawOpen());
 			addSequential (new auto_moveUpperPosition(2800, 500));
 			addSequential (new auto_wait(1));
-			addSequential (new auto_LiftDown(100, 120));
+			addSequential (new auto_LiftDown(60, 80)); //100,120 practice
 			addSequential (new auto_moveUpperPosition(2800, 80));
 			
 			

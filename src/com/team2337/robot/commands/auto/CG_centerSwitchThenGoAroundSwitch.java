@@ -18,7 +18,7 @@ public class CG_centerSwitchThenGoAroundSwitch extends CommandGroup {
 			addParallel(new auto_bigBrother_DoNothing());
 			addSequential(new auto_holdUpperPosition(0.1));
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
-			addSequential(new commonCG_scoreLeftSwitch());
+//			addSequential(new commonCG_scoreLeftSwitch());
 			addSequential(new commonCG_armToPickupFromFront());
 			addSequential(new commonCG_driveAroundSwitchLeft());
 			
@@ -29,7 +29,7 @@ public class CG_centerSwitchThenGoAroundSwitch extends CommandGroup {
 			addParallel(new auto_bigBrother_DoNothing());
 			addSequential(new auto_holdUpperPosition(0.1));
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
-			addSequential(new commonCG_scoreLeftSwitch());
+//			addSequential(new commonCG_scoreLeftSwitch());
 			addSequential(new commonCG_armToPickupFromFront());
 			addSequential(new commonCG_driveAroundSwitchLeft());
 			
@@ -41,7 +41,7 @@ public class CG_centerSwitchThenGoAroundSwitch extends CommandGroup {
 			addParallel(new auto_bigBrother_DoNothing());
 			addSequential(new auto_holdUpperPosition(0.1));
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!		
-			addSequential(new commonCG_scoreRightSwitch());
+//			addSequential(new commonCG_scoreRightSwitch());
 			addSequential(new commonCG_armToPickupFromFront());
 			addSequential(new commonCG_driveAroundSwitchRight());
 			
@@ -52,7 +52,7 @@ public class CG_centerSwitchThenGoAroundSwitch extends CommandGroup {
 			addParallel(new auto_bigBrother_DoNothing());
 			addSequential(new auto_holdUpperPosition(0.1));
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
-			addSequential(new commonCG_scoreRightSwitch());
+//			addSequential(new commonCG_scoreRightSwitch());
   			addSequential(new commonCG_armToPickupFromFront());
   			addSequential(new commonCG_driveAroundSwitchRight());
 			

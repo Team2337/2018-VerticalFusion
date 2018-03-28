@@ -10,7 +10,7 @@ public class commonCG_armToPickupFromFront extends CommandGroup {
 
 	public commonCG_armToPickupFromFront() {
 		addSequential(new auto_moveUpperPosition(2127,500));  //50,386  ///Touch down
-		addSequential(new auto_wait(0.175));
+		addSequential(new auto_wait(0.25)); //0.175 
 		addSequential(new auto_moveUpperPosition(2900,500));
 		addSequential(new auto_wait(0.35));
 		addSequential(new auto_moveUpperPosition(2900,80));

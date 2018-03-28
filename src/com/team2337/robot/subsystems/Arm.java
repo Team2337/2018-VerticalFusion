@@ -43,18 +43,18 @@ public class Arm extends Subsystem {
 		if(Robot.isComp) {
 			centerPosition 		= 2300;
 			
-			forwardLevel 		= centerPosition + 1100;	//975 prac
-			forwardSoftLimit 	= centerPosition + 1150;    //1000 practice    /// comp  350
-			forwardCarry 		= centerPosition + 600;     //420 practice // 900           ///  comp -160
+			forwardLevel 		= centerPosition + 975;		//975 prac
+			forwardSoftLimit 	= centerPosition + 1000;    //1000 practice    /// comp  350
+			forwardCarry 		= centerPosition + 420;     //420 practice  // 900           ///  comp -160
 			forwardClampLimit	= centerPosition + 800;
 			
-			reverseSoftLimit	= centerPosition - 1200;	//- 1008;practice //Flat Position //-1100
+			reverseSoftLimit	= centerPosition - 1008;	//- 1008;practice //Flat Position //-1100
 			
-			climberAdjLimit		= 1180; //Climber flat position ///Not used, clean up after finish
-			armHookAdjLimit		= 250; 
-			armCenterAdjLimit	= 300;
+			climberAdjLimit		= 1180; //Climber flat position
+			armHookAdjLimit		= 200;   //Adj when getting hook
+			armCenterAdjLimit	= 250;	//
 			
-			armClimbHook		= centerPosition - 1400; //900
+			armClimbHook			= centerPosition - 1300;
 			
 		} else {
 			centerPosition 		= 2300;

@@ -17,7 +17,7 @@ public class commonCG_switchLeftBackOut extends CommandGroup {
 		addSequential(new auto_driveToAngleWithEncoder(.6, 8, 0, 195000, 195000, 0.02));
 		addSequential(new auto_brakeModeOn());
 		addSequential(new auto_clawCGOpenClose());
-		addParallel(new auto_moveUpperPosition(3300,80));
+		addParallel(new auto_moveUpperPosition(3300,45)); //80 practice
 		addSequential(new auto_resetEncoder());
 
 	}

@@ -80,7 +80,7 @@ public class CG_autoFavorOpponentsScale extends CommandGroup {
 			addSequential(new auto_driveToAngleWithEncoder(.3, 3, -20, 20000, 20000, 0.04, true));
 			addSequential(new auto_gyroMMTurn(10,1));
 			addSequential(new auto_clawCGOpenClose());
-			addParallel(new auto_moveUpperPosition(3300,100));
+			addParallel(new auto_moveUpperPosition(3300,60)); // 100 practice
 			addSequential(new auto_resetEncoder());
 			addSequential(new auto_driveToAngleWithEncoder(-.3, 3, -20, 10000, 10000, 0.04, true));
 			addSequential(new auto_wait(1.2));

@@ -72,7 +72,7 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 		String mac;
 		mac = Address.getInstance().getMAC();
-		
+		/*
 		if (mac.equals("00:80:2F:17:89:85")) {
 			System.out.println("TestBoard " + mac);
 			isComp = false;
@@ -83,7 +83,8 @@ public class Robot extends TimedRobot {
 			System.out.println("CompBot " + mac);
 			isComp = true;
 		}
-		
+		*/
+		isComp = true;
 		
 		// Initialize all of the Robots Mappings
 		RobotMap.init();

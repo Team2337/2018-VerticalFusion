@@ -15,7 +15,7 @@ public class commonCG_driveAroundNearSwitchLeft extends CommandGroup {
 		addSequential(new auto_driveToAngleWithEncoder(.6, 4, 0, 115000, 115000, 0.03));
 		addSequential(new auto_brakeModeOn());
 		addSequential(new auto_clawCGOpenClose());
-		addParallel(new auto_moveUpperPosition(3300,100));
+		addParallel(new auto_moveUpperPosition(3300, 45)); //100 practice bot
 		addSequential(new auto_resetEncoder());
 		addSequential(new auto_clawOpen());
 		addParallel(new auto_driveToAngleWithEncoder(-.5, 8, 24, 16000, 16000, 0.04, true));

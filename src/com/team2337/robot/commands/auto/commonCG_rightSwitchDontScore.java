@@ -14,7 +14,7 @@ public class commonCG_rightSwitchDontScore extends CommandGroup {
 		//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
 		addSequential(new auto_driveToAngleWithEncoder(.9, 4, -40, 44000, 44000, 0.0175)); // right was 44000 left was 28000 left was 22000 
 		addSequential(new auto_driveToAngleWithEncoder(.9, 3, 0, 60000, 60000, 0.02));
-		addSequential(new auto_moveUpperPosition(1800,60));  //-250,60
+		addSequential(new auto_moveUpperPosition(1800,60));  //60 practice
 		addParallel(new auto_driveForwardWithTime(.3, 1));
 		addSequential(new auto_resetEncoder());
 		addSequential(new commonCG_armToPickupFromFront());

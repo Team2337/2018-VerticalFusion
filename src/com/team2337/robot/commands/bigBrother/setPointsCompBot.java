@@ -27,7 +27,7 @@ public class setPointsCompBot {
 	
 	static int arm95Carry = (armForwardCarry-718);
 	static int arm95Minus100 = arm95Carry - 100;
-	static int arm95Minus200 = arm95Carry - 300;	//1882
+	static int arm95Minus200 = arm95Carry - 150;	//1882
 	
 	public static double points[][] = new double[][] {
 		

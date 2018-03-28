@@ -122,7 +122,7 @@ public class RobotMap {
 	
 	//Public Variables
 	public static Boolean disabledAtEndOfAuto = true;  		//Also set to true in Robot.TeleOpInit & Robot.disabledInint
-	public static Boolean firstIntake = true;
+	public static Boolean firstIntake = false;
 	
 	//CAN Ports
 	private final static int chassisRightFront  = 0; //15
@@ -229,8 +229,8 @@ public class RobotMap {
 		
 		trolley_right = new TalonSRX(trolleyRight); // 4
 		trolley_right.configSelectedFeedbackSensor(FeedbackDevice.Analog, 0, 0);  //string pot
-		trolley_right.setSensorPhase(true);
-		trolley_right.setInverted(true);
+		trolley_right.setSensorPhase(false);//set false for comp
+		trolley_right.setInverted(false);//set false for comp
 		trolley_right.setStatusFramePeriod(0, 0, 0);
 		trolley_right.setNeutralMode(NeutralMode.Brake);
 		trolley_right.configForwardSoftLimitEnable(false, 0);

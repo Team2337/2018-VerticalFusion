@@ -44,7 +44,7 @@ public class auto_gyroMMTurn extends Command {
 
 		driveFR = 0.05; 
 		if (Math.abs(degree) > 50) {
-			drivePR = .12;
+			drivePR = .16;
 		} else {
 			drivePR = 0.16;
 		}
@@ -57,7 +57,7 @@ public class auto_gyroMMTurn extends Command {
 
 		driveFL = 0.05; 
 		if (Math.abs(degree) > 50) {
-			drivePL = .12;
+			drivePL = .16; //0.12 practice
 		} else {
 			drivePL = 0.16;
 		}

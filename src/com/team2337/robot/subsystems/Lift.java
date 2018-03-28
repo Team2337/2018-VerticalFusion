@@ -23,7 +23,7 @@ public class Lift extends Subsystem {
 	//public boolean climb = false;
 	
 	private double maxSpeedUp = 0.8;
-	private double maxSpeedDown = 0.3;
+	private double maxSpeedDown = 0.5;
 	private double nominalSpeed = 0;
 	private double kF = 0;
 	private double kP = 14;
@@ -34,7 +34,7 @@ public class Lift extends Subsystem {
 	public static int forwardLIFTSoftLimit = 590;					 ///need to set *****************//TODO
 	public static int reverseLIFTSoftLimit = 40;				 ///need to set *****************//TODO
 	public static int practiceLiftRestPoint = 100;
-	public static int compLiftRestPoint = 100;
+	public static int compLiftRestPoint = 70;
 	
 	public static int liftYellowHigh;
 	/**Value between the top yellow and bottom yellow points to prevent the lift from going too fast*/
@@ -58,7 +58,7 @@ public class Lift extends Subsystem {
 			liftYellowNearBottom = 126;
 			liftYellowNearTop = 207;   
 			                           
-			liftRedHigh = 600;         
+			liftRedHigh = 580;         
 			
 			liftRedNearBottom = 225;   
 			liftRedNearTop = 405;      
