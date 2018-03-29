@@ -19,9 +19,14 @@ public class commonCG_driveAroundSwitchLeft extends CommandGroup {
 		addSequential(new auto_clawCGOpenClose());
 		addParallel(new auto_moveUpperPosition(3300,45)); //80 practice 
 		addSequential(new auto_resetEncoder());
+		addSequential(new auto_clawOpen());
 		addParallel(new auto_driveToAngleWithEncoder(-.5, 8, 20, 17000, 17000, 0.04, true));
-		addSequential(new auto_wait(0.6));
+		addSequential(new auto_wait(0.8));
 		addParallel(new auto_intake_in(1, 3));
+		addSequential(new auto_wait(1));
+		addSequential(new auto_clawClose());
+		addSequential(new auto_claw60());
+		addSequential(new auto_driveToAngleWithEncoder(.5, 3, 0, 9000, 9000, 0.04, true));
 
 	}
 }

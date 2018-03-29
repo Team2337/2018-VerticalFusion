@@ -15,6 +15,7 @@ public class CG_centerSwitchLeft extends CommandGroup {
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
 			addSequential(new commonCG_scoreLeftSwitch());
 			addSequential(new commonCG_armToPickupFromFront());
+			addSequential(new commonCG_switchBackoutLeftToLeft());
 			
 			
 		// **************************  LRL  **************************

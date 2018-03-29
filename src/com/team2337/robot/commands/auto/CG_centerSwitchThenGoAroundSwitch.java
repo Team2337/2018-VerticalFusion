@@ -20,7 +20,7 @@ public class CG_centerSwitchThenGoAroundSwitch extends CommandGroup {
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
 //			addSequential(new commonCG_scoreLeftSwitch());
 			addSequential(new commonCG_armToPickupFromFront());
-			addSequential(new commonCG_driveAroundSwitchLeft());
+			addSequential(new commonCG_switchBackoutLeftToLeft());
 			
 			
 		// **************************  LRL  **************************
@@ -31,7 +31,7 @@ public class CG_centerSwitchThenGoAroundSwitch extends CommandGroup {
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
 //			addSequential(new commonCG_scoreLeftSwitch());
 			addSequential(new commonCG_armToPickupFromFront());
-			addSequential(new commonCG_driveAroundSwitchLeft());
+			addSequential(new commonCG_switchBackoutLeftToRight());
 			
 			
 			
@@ -43,7 +43,7 @@ public class CG_centerSwitchThenGoAroundSwitch extends CommandGroup {
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!		
 //			addSequential(new commonCG_scoreRightSwitch());
 			addSequential(new commonCG_armToPickupFromFront());
-			addSequential(new commonCG_driveAroundSwitchRight());
+			addSequential(new commonCG_switchBackoutRightToLeft());
 			
 			
 		// **************************  RRR  **************************
@@ -54,7 +54,7 @@ public class CG_centerSwitchThenGoAroundSwitch extends CommandGroup {
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
 //			addSequential(new commonCG_scoreRightSwitch());
   			addSequential(new commonCG_armToPickupFromFront());
-  			addSequential(new commonCG_driveAroundSwitchRight());
+  			addSequential(new commonCG_switchBackoutRightToRight());
 			
   			//didnt get any game data, so we run into switch and hope we guessed right
 		} else {

@@ -9,7 +9,8 @@ public class CG_scorePosition extends CommandGroup{
 		addParallel(new auto_bigBrother_DoNothing());
 		addSequential(new auto_holdUpperPosition(0.1));
 		//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
-		addParallel(new auto_driveToAngleWithEncoder(0.5, 2, 0, 28000, 28000, 0.03));
+		
+//		addParallel(new auto_driveToAngleWithEncoder(0.5, 2, 0, 28000, 28000, 0.03));	//Practice only***********************************************************
 		
 		addSequential(new auto_wait(0.3));
 		addSequential(new auto_moveUpperPositionWithIsFinished(2850,500,475)); //525, 500 practice
@@ -22,8 +23,7 @@ public class CG_scorePosition extends CommandGroup{
 		addSequential(new auto_wait(0.2));
 		addSequential(new auto_moveUpperPositionWithIsFinished(2850,500)); //525 practice
 		addSequential(new auto_wait(0.4));
-//		addParallel(new auto_driveToAngleWithEncoder(-0.5, 2, 0, 0, 0, 0.02));
-		addParallel(new auto_driveForwardWithTime(-0.5, 1));
+//		addParallel(new auto_driveForwardWithTime(-0.5, 1));		//Practice only***********************************************************
 		addSequential(new auto_LiftDown(90, 300));
 		addSequential(new auto_moveUpperPositionWithIsFinished(2850,60)); //100 practice
 		addSequential(new auto_wait(0.3));

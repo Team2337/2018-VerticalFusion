@@ -49,10 +49,10 @@ public class CG_scaleFromLeftScoreOnSide extends CommandGroup {
 					addParallel(new auto_bigBrother_DoNothing());
 					addSequential(new auto_holdUpperPosition(0.1));
 					//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
-					addSequential (new auto_driveToAngleWithEncoder(.7, 4, 0, 65000, 65000, 0.04));// speed was .9 
+					addSequential (new auto_driveToAngleWithEncoder(.5, 4, 0, 93000, 93000, 0.04));// speed was .9 
 					addSequential (new auto_brakeModeOn());
-					addSequential (new auto_gyroMMTurn(-90, 1));
-					addSequential (new auto_driveForwardWithTime(.5,2));
+					addSequential (new auto_gyroMMTurn(-100, 1));
+					addSequential (new auto_driveForwardWithTime(.5,0.5)); //.5,2
 					addSequential (new auto_moveUpperPosition(1800,60));  //-250,60  ///Score into Switch position
 					addSequential (new auto_wait(0.3));
 					addSequential (new auto_resetEncoder());

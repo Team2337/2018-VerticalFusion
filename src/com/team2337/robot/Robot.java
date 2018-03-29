@@ -122,23 +122,24 @@ public class Robot extends TimedRobot {
 		// RobotMap.chassis_leftFront.setSelectedSensorPosition(0, 0, 0);  //replaced by above method
 		// RobotMap.chassis_rightFront.setSelectedSensorPosition(0, 0, 0);
 
+		autonchooser.addObject("Do Nothing", "DoNothing");
 		autonchooser.addObject("Cross the Line", "CrossLine");
 		autonchooser.addDefault("Center Switch", "CenterSwitch");
-		autonchooser.addObject("Do Nothing", "DoNothing");
+		autonchooser.addObject("Center Switch Then Go Around", "SwitchThenGoAround");
+		
 //		autonchooser.addObject("Scale From Left", "ScaleLeft");
 //		autonchooser.addObject("Scale From Right", "ScaleRight");
 		autonchooser.addObject("Scale From Left Score On Side", "ScaleLeftSide");
 		autonchooser.addObject("Scale From Right Score On Side", "ScaleRightSide");
 		
-		autonchooser.addObject("Partner Scale On Our Left", "PartnerScaleOnOurLeft");
-		autonchooser.addObject("Partner Scale On Our Right", "PartnerScaleOnOurRight");
-		autonchooser.addObject("Favor Opponents Scale", "FavorOpponentsScale");
-		autonchooser.addObject("Favor Our Scale Solo", "FavorOurScaleSolo");
+		autonchooser.addObject("*Partner Scale On Our Left", "PartnerScaleOnOurLeft");
+		autonchooser.addObject("*Partner Scale On Our Right", "PartnerScaleOnOurRight");
+		autonchooser.addObject("*Favor Opponents Scale", "FavorOpponentsScale");
+		autonchooser.addObject("*Favor Our Scale Solo", "FavorOurScaleSolo");
 //		autonchooser.addObject("LiftUpperPosition", "LiftUpperPosition");
 		autonchooser.addObject("PRACTICE CenterSwitchRight", "CenterSwitchRight");
 		autonchooser.addObject("PRACTICE CenterSwitchLeft", "CenterSwitchLeft");
-		
-		autonchooser.addObject("Score Switch Then Go Around", "SwitchThenGoAround");
+	
 		//autonchooser.addObject("TESTUTurn", "UTurn");
 		//autonchooser.addObject("TESTLineRead", "line");
 		
