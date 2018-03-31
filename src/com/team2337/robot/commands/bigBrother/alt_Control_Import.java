@@ -245,7 +245,7 @@ public class alt_Control_Import extends Command {
 		if (!RobotMap.disabledAtEndOfAuto) { // Disable until throttleToggle activated (see above)									
 
 			// Set Set points, suspend PID if at pickup position
-			if ((throttleToggle > 0.9) && (throttleStick < -0.9) && (Robot.arm.armIsLevel())) {
+			if (((throttleToggle > 0.9) && (throttleStick < -0.9) && (Robot.arm.armIsLevel())) || (Robot.arm.armBadPos())) {
 				Robot.arm.stop();
 			} else {
 				if(OI.operatorControls.getRawButton(Robot.oi.yellowSwitch)) {

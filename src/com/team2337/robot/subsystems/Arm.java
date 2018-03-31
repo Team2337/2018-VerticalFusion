@@ -206,6 +206,15 @@ public class Arm extends Subsystem {
 		}
 	}
 	
+	public boolean armBadPos() {
+		if(getPosition() > 4096 || getPosition() < 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
 	public boolean isScore() {
 		if(getPosition() < centerPosition) {
 			return true;
