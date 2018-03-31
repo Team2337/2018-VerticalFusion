@@ -97,10 +97,12 @@ public class alt_Control_Import extends Command {
 		armPos = armPos%4096;
 		RobotMap.arm_right.setSelectedSensorPosition((int)armPos,0,0);
 		System.out.println("***********ARM BROKE greater than 4096************");
+		RobotMap.brokenArmPos = true;
 		} else if(armPos < 0) {
 		armPos = 4096 - (Math.abs(armPos)%4096);
 		RobotMap.arm_right.setSelectedSensorPosition((int)armPos,0,0);
 		System.out.println("***********ARM BROKE less than zero************");
+		RobotMap.brokenArmNeg = true;
 		}
 
 		

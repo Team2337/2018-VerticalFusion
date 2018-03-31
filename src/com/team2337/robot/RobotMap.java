@@ -121,6 +121,8 @@ public class RobotMap {
 	public static Boolean crateBypass = false;
 	
 	//Public Variables
+	public static boolean brokenArmPos = false;
+	public static boolean brokenArmNeg = false;
 	public static Boolean disabledAtEndOfAuto = true;  		//Also set to true in Robot.TeleOpInit & Robot.disabledInint
 	public static Boolean firstIntake = false;
 	

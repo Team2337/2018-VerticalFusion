@@ -357,6 +357,8 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putString("Pixy Command", Robot.pixy.getCurrentCommandName());
 		SmartDashboard.putNumber("Pixy Xx Value", Robot.pixy.xx);
 		SmartDashboard.putNumber("Pixy Yy Value", Robot.pixy.yy);
+		SmartDashboard.putBoolean("brokenArmNeg", RobotMap.brokenArmNeg);
+		SmartDashboard.putBoolean("brokenArmPos", RobotMap.brokenArmPos);
 	}
 
 }
