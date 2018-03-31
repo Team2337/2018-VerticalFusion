@@ -18,12 +18,22 @@ public class CG_scaleFromRightScoreOnSide extends CommandGroup {
 			addParallel(new auto_bigBrother_DoNothing());
 			addSequential(new auto_holdUpperPosition(0.1));
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
+			/*
 			addSequential (new auto_driveToAngleWithEncoder(.7,10,0,80000,80000,.13));
 			addParallel (new auto_moveUpperPosition(2127, 500));
 			addSequential (new auto_driveToAngleWithEncoder(.6,10,0,137000,137000,.13));
 			addParallel (new auto_moveUpperPosition(2300, 500));
 			addSequential (new auto_driveToAngleWithEncoderandLine(.5,0.5,0,160000,160000,.13)); 
 			addSequential (new auto_brakeModeOn());
+			addSequential (new auto_moveUpperPosition(2300, 500));
+			addSequential (new auto_wait(1));
+			addSequential (new auto_LiftUp(580)); //600 practice
+			*/
+			
+			addSequential (new auto_moveUpperPosition(2127, 500));
+			addSequential (new auto_wait(0.5));
+			addSequential (new auto_moveUpperPosition(2300, 500));
+			addSequential (new auto_wait(0.5));
 			addSequential (new auto_moveUpperPosition(2300, 500));
 			addSequential (new auto_wait(1));
 			addSequential (new auto_LiftUp(580)); //600 practice
@@ -40,6 +50,21 @@ public class CG_scaleFromRightScoreOnSide extends CommandGroup {
 			addSequential (new auto_LiftDown(60, 80)); //100,120 practice
 			addSequential (new auto_moveUpperPosition(2800, 80));
 			
+//			addSequential (new auto_gyroMMTurn(179, 1));
+			addSequential(new auto_resetEncoder());
+			addSequential(new auto_clawOpen());
+			addSequential (new auto_driveToAngleWithEncoder(.5,10,-15,18000,18000,.2));
+			addSequential(new auto_resetEncoder());
+			addSequential(new shifter_high());
+			addSequential (new auto_driveToAngleWithEncoder(-.6,10,-35,18000,18000,.08));
+			addParallel (new auto_moveUpperPosition(3300, 80));
+			addSequential(new auto_wait(0.8));
+			addParallel(new auto_intake_in(1, 3));
+			addSequential(new auto_wait(1));
+			addSequential(new auto_clawClose());
+			addSequential(new auto_claw60());
+			addSequential(new auto_driveToAngleWithEncoder(.5, 3, 0, 9000, 9000, 0.04, true));
+			addParallel (new auto_moveUpperPosition(2800, 80));
 			
 		//Switch is on our side scale is  RLR
 		//  We should never get here as it is covered in the first if, but if we diverge....	
