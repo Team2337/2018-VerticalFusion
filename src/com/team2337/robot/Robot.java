@@ -189,7 +189,10 @@ public class Robot extends TimedRobot {
 		
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
 		
-		System.out.println(gameData);
+		System.out.println("*************************Game Data from FMS: " + gameData + "*************************************");
+		System.out.println("*************************Game Data from FMS: " + "***************************************");
+		System.out.println("Game Data from FMS: ");
+		
 		
 		ourswitch = gameData.substring(0, 1);
 		scale = gameData.substring(1, 2);
@@ -345,8 +348,8 @@ public class Robot extends TimedRobot {
 			SmartDashboard.putBoolean("Line Reader", RobotMap.lineReader.get());
 			SmartDashboard.putNumber("centerX", RobotMap.vision.getRevAngle());
 			SmartDashboard.putBoolean("claw Pressure", RobotMap.clawPressureDash);
-			SmartDashboard.putBoolean("Crate Sensor Red", RobotMap.crateSensor.get());
-			SmartDashboard.putBoolean("Crate Sensor Green", RobotMap.crateSensorGreen.get());
+			SmartDashboard.putBoolean("Crate Sensor Red", RobotMap.crateSensorLeft.get());
+			SmartDashboard.putBoolean("Crate Sensor Green", RobotMap.crateSensorRight.get());
 			//SmartDashboard.putNumber("Navx Yaw", RobotMap.navx_gyro.getYaw());
 		}
 		SmartDashboard.putString("intake Command", Robot.intake.getCurrentCommandName());

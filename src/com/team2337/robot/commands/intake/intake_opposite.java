@@ -25,7 +25,7 @@ public class intake_opposite extends Command {
 		
 	}
 	protected void execute() {
-		Robot.intake.rotate(this.power);
+		Robot.intake.rotateRight(this.power);
 		
 	}
 	protected boolean isFinished() {

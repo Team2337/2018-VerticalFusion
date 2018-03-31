@@ -18,7 +18,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class PixyVision extends Subsystem {
 	
-	public double centerXX = 171;
+	public double centerXX = 190;
 	public double pixyPixeltoDegree = 0; ///  NEED TO CALCULATE
 	public double xx = 0;
 	public double yy = 0;

@@ -68,7 +68,7 @@ public class auto_driveToAngleWithEncoder extends Command {
     
     protected void execute() {
     	double currentAngle = Robot.gyro.getYaw();
-    	System.out.println(isFinishedPos + "  " + encoderRight + "  " + encoderLeft + "  " + currentAngle);
+//    	System.out.println(isFinishedPos + "  " + encoderRight + "  " + encoderLeft + "  " + currentAngle);
     	double currentAngularRate = Robot.gyro.getAngularRate();
     	double forward = speed; 	
     	if((targetAngle - currentAngle) > 75) {
@@ -88,7 +88,7 @@ public class auto_driveToAngleWithEncoder extends Command {
     		encoderEnd = Math.abs(encoderRight);
     		
     	}
-    	System.out.println(isFinishedPos);
+//    	System.out.println(isFinishedPos);
 
     }
 	
@@ -99,7 +99,7 @@ public class auto_driveToAngleWithEncoder extends Command {
 	
     protected void end() {
     	RobotMap.drive.arcadeDrive(0,0,true);
-    	System.out.println(Robot.gyro.pidgey.getFusedHeading());
+//    	System.out.println(Robot.gyro.pidgey.getFusedHeading());
     }
     
     protected void interrupted() {

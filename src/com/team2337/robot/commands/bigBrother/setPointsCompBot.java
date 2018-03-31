@@ -23,11 +23,13 @@ public class setPointsCompBot {
 	static int trolleyLowHold = Robot.trolley.trolleyLowHold;
 	static int trolleyPlus215 = Robot.trolley.trolleyPlus215;
 	static int trolleyPlus315 = Robot.trolley.trolleyPlus315;
+	static int trolleyHookPos = Robot.trolley.trolleyHookPos;
 	static int trolleyTop	  = Robot.trolley.trolleyTop;
 	
 	static int arm95Carry = (armForwardCarry-718);
 	static int arm95Minus100 = arm95Carry - 100;
-	static int arm95Minus200 = arm95Carry - 150;	//1882
+	static int arm95Minus200 = arm95Carry - 200;	//1882
+	static int armAdjFlat = 600; //3320
 	
 	public static double points[][] = new double[][] {
 		
@@ -48,16 +50,16 @@ public class setPointsCompBot {
 		 *12: arm Climb Mode - Used when releasing hook
 		 *13: trolley climb mode - 0-10 same, 11-20 inverted values of 0-10
 		 */
-		{trolleyStart,liftLowPoint,liftLowPoint,liftLowPoint,armForwardCarry,armForwardSoftLimit,armReverseSoftLimit,450,0,liftLowPoint,0,armForwardCarry,armForwardCarry,trolleyStart},
-		{trolleyLowHold,liftLowPoint,liftLowPoint,liftLowPoint,armForwardCarry,armForwardSoftLimit,armReverseSoftLimit,450,0,liftLowPoint,0,armForwardCarry,armForwardCarry,trolleyLowHold},
-		{trolleyLowHold,liftLowPoint,liftLowPoint,liftLowPoint,armForwardCarry,armForwardSoftLimit,armReverseSoftLimit,450,0,liftLowPoint,0,armForwardCarry,armForwardCarry,trolleyLowHold},
-		{trolleyLowHold,liftLowPoint,liftLowPoint,liftLowPoint,armForwardCarry,armForwardSoftLimit,armReverseSoftLimit,450,0,liftLowPoint,0,armForwardCarry,armForwardCarry,trolleyLowHold},
-		{trolleyLowHold,liftLowPoint,liftLowPoint,liftLowPoint,armForwardCarry,armForwardSoftLimit,armReverseSoftLimit,450,0,liftLowPoint,0,armForwardCarry,armForwardCarry,trolleyLowHold},
-		{trolleyPlus215,liftLowPoint,liftLowPoint,liftLowPoint,armForwardCarry,armForwardSoftLimit,armReverseSoftLimit,450,0,liftLowPoint,0,armForwardCarry,armForwardCarry,trolleyPlus215},
-		{trolleyPlus315,liftLowPoint,liftLowPoint,liftLowPoint,armForwardCarry,armForwardSoftLimit,armReverseSoftLimit,450,0,liftLowPoint,0,armForwardCarry,armForwardCarry,trolleyPlus315},
-		{trolleyTop,liftLowPoint,liftLowPoint,liftLowPoint,armForwardCarry,armForwardSoftLimit,armReverseSoftLimit,450,0,liftLowPoint,0,armForwardCarry,armForwardCarry,trolleyTop},
-		{trolleyTop,liftLowPoint,liftYellowNearBottom,liftRedNearBottom,armForwardCarry,armForwardSoftLimit,armReverseSoftLimit,450,0,liftLowPoint,0,armForwardCarry,armForwardCarry,trolleyTop},               
-		{trolleyTop,liftLowPoint,liftYellowNearTop,liftRedNearTop,armForwardCarry,armForwardSoftLimit,armReverseSoftLimit,450,0,liftLowPoint,0,armForwardCarry,armForwardCarry,trolleyTop},               
+		{trolleyStart,liftLowPoint,liftLowPoint,liftLowPoint,armForwardCarry,armForwardSoftLimit,armReverseSoftLimit,armAdjFlat,0,liftLowPoint,0,armForwardCarry,armForwardCarry,trolleyStart},
+		{trolleyLowHold,liftLowPoint,liftLowPoint,liftLowPoint,armForwardCarry,armForwardSoftLimit,armReverseSoftLimit,armAdjFlat,0,liftLowPoint,0,armForwardCarry,armForwardCarry,trolleyLowHold},
+		{trolleyLowHold,liftLowPoint,liftLowPoint,liftLowPoint,armForwardCarry,armForwardSoftLimit,armReverseSoftLimit,armAdjFlat,0,liftLowPoint,0,armForwardCarry,armForwardCarry,trolleyLowHold},
+		{trolleyLowHold,liftLowPoint,liftLowPoint,liftLowPoint,armForwardCarry,armForwardSoftLimit,armReverseSoftLimit,armAdjFlat,0,liftLowPoint,0,armForwardCarry,armForwardCarry,trolleyLowHold},
+		{trolleyLowHold,liftLowPoint,liftLowPoint,liftLowPoint,armForwardCarry,armForwardSoftLimit,armReverseSoftLimit,armAdjFlat,0,liftLowPoint,0,armForwardCarry,armForwardCarry,trolleyLowHold},
+		{trolleyPlus215,liftLowPoint,liftLowPoint,liftLowPoint,armForwardCarry,armForwardSoftLimit,armReverseSoftLimit,armAdjFlat,0,liftLowPoint,0,armForwardCarry,armForwardCarry,trolleyPlus215},
+		{trolleyPlus315,liftLowPoint,liftLowPoint,liftLowPoint,armForwardCarry,armForwardSoftLimit,armReverseSoftLimit,armAdjFlat,0,liftLowPoint,0,armForwardCarry,armForwardCarry,trolleyPlus315},
+		{trolleyTop,liftLowPoint,liftLowPoint,liftLowPoint,armForwardCarry,armForwardSoftLimit,armReverseSoftLimit,armAdjFlat,0,liftLowPoint,0,armForwardCarry,armForwardCarry,trolleyTop},
+		{trolleyTop,liftLowPoint,liftYellowNearBottom,liftRedNearBottom,armForwardCarry,armForwardSoftLimit,armReverseSoftLimit,armAdjFlat,0,liftLowPoint,0,armForwardCarry,armForwardCarry,trolleyTop},               
+		{trolleyTop,liftLowPoint,liftYellowNearTop,liftRedNearTop,armForwardCarry,armForwardSoftLimit,armReverseSoftLimit,armAdjFlat,0,liftLowPoint,0,armForwardCarry,armForwardCarry,trolleyTop},               
 		{trolleyTop,liftLowPoint,liftYellowHigh,liftRedHigh,armForwardCarry,armForwardSoftLimit,armReverseSoftLimit,50,50,liftLowPoint,0,armForwardCarry,armForwardCarry,trolleyTop}, 
 		
 		{trolleyTop,liftLowPoint,liftYellowHigh,liftRedHigh,arm95Carry,armForwardSoftLimit,armReverseSoftLimit,0,0,150,0,arm95Carry,armClimbMode,trolleyTop},
@@ -67,9 +69,9 @@ public class setPointsCompBot {
 		{trolleyTop,liftLowPoint,liftYellowHigh,liftRedHigh,arm95Minus100,armForwardSoftLimit,armReverseSoftLimit,armCenterAdjLimit,armCenterAdjLimit,350,0,arm95Minus100,armClimbMode,trolleyPlus315},
 		{trolleyTop,liftLowPoint,liftYellowHigh,liftRedHigh,arm95Minus100,armForwardSoftLimit,armReverseSoftLimit,armCenterAdjLimit,armCenterAdjLimit,400,armHookAdjLimit,arm95Minus200,armClimbMode,trolleyPlus315},
 		{trolleyTop,liftLowPoint,liftYellowHigh,liftRedHigh,arm95Minus100,armForwardSoftLimit,armReverseSoftLimit,armCenterAdjLimit,armCenterAdjLimit,450,armHookAdjLimit,arm95Minus200,armClimbMode,trolleyPlus315},
-		{trolleyTop,liftLowPoint,liftYellowHigh,liftRedHigh,arm95Minus200,armForwardSoftLimit,armReverseSoftLimit,armCenterAdjLimit,armCenterAdjLimit,500,armHookAdjLimit,armClimbHook,armClimbMode,trolleyPlus315},
-		{trolleyTop,liftLowPoint,liftYellowHigh,liftRedHigh,arm95Minus200,armForwardSoftLimit,armReverseSoftLimit,armCenterAdjLimit,armCenterAdjLimit,550,armHookAdjLimit,armClimbHook,armClimbMode,trolleyPlus315},
-		{trolleyTop,liftLowPoint,liftYellowHigh,liftRedHigh,arm95Minus200,armForwardSoftLimit,armReverseSoftLimit,armCenterAdjLimit,armCenterAdjLimit,600,armHookAdjLimit,armClimbHook,armClimbMode,trolleyPlus315},
+		{trolleyTop,liftLowPoint,liftYellowHigh,liftRedHigh,arm95Minus200,armForwardSoftLimit,armReverseSoftLimit,armCenterAdjLimit,armCenterAdjLimit,500,armHookAdjLimit,armClimbHook,armClimbMode,trolleyHookPos},
+		{trolleyTop,liftLowPoint,liftYellowHigh,liftRedHigh,arm95Minus200,armForwardSoftLimit,armReverseSoftLimit,armCenterAdjLimit,armCenterAdjLimit,550,armHookAdjLimit,armClimbHook,armClimbMode,trolleyHookPos},
+		{trolleyTop,liftLowPoint,liftYellowHigh,liftRedHigh,arm95Minus200,armForwardSoftLimit,armReverseSoftLimit,armCenterAdjLimit,armCenterAdjLimit,600,armHookAdjLimit,armClimbHook,armClimbMode,trolleyHookPos},
 	};
 		
 }

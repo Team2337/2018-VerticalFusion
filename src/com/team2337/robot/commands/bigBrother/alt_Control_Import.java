@@ -23,6 +23,7 @@ public class alt_Control_Import extends Command {
 	double trolleyAdj = 2; // TODO determne rightamount
 	double armCenterAdjLimit = 250;
 	double armEncoder;
+	double armPos;
 
 	double throttleToggle;
 	double trolleyStick;
@@ -87,7 +88,25 @@ public class alt_Control_Import extends Command {
 		armAdjNeg = (points[(int) throttleValue][armNegativeAdj]);
 		armClimbAdjLimit = (points[(int) throttleValue][armClimbAdjustment]);
 		liftSetPoint = points[(int) throttleValue][Robot.lift.levelOfLift];
+		
+		// Arm Safety, check for bad value
+		
+		armPos = Robot.arm.getPosition();
+		
+		if(armPos > 4096) {
+		armPos = armPos%4096;
+		RobotMap.arm_right.setSelectedSensorPosition((int)armPos,0,0);
+		System.out.println("***********ARM BROKE greater than 4096************");
+		} else if(armPos < 0) {
+		armPos = 4096 - (Math.abs(armPos)%4096);
+		RobotMap.arm_right.setSelectedSensorPosition((int)armPos,0,0);
+		System.out.println("***********ARM BROKE less than zero************");
+		}
 
+		
+		
+		
+		
 		// Trolley adjustment by joystick
 
 		// Adjust trolley setpoint based on joystick input
@@ -139,8 +158,8 @@ public class alt_Control_Import extends Command {
 			sameSide = true;
 
 		if(Robot.lift.levelOfLift == armHookClimberSetPoints) { 
-			if(Robot.arm.getPosition() < 1200) {
-				trolleySetPoint = Robot.trolley.trolleyPlus315;
+			if(Robot.arm.getPosition() < 850) {	//1200 prac
+				trolleySetPoint = Robot.trolley.trolleyHookPos;
 			}
 		}
 		
@@ -192,7 +211,11 @@ public class alt_Control_Import extends Command {
 				
 				    //CLIMB MODE POINTS
 					if(Robot.lift.levelOfLift == armClimbMode) {	
+						if(Robot.lift.getPosition() > 100) {
+							trolleySetPoint = Robot.trolley.trolleyTop;
+						} else {
 						trolleySetPoint = (points[(int) throttleValue][trolleySetPoints]);
+						}
 						
 						if(Robot.trolley.getPosition() < Robot.trolley.trolleyPassover) {
 //							armSetPoint = Robot.arm.getPosition();
@@ -202,16 +225,17 @@ public class alt_Control_Import extends Command {
 							
 							if(throttleValue > 10) {
 								armSetPoint = armCenterPosition;									//arm goes to center pos
-								if ((throttleToggle) < -0.1) {							
+								if ((throttleToggle) < -0.1 && throttleValue >= 15) {							
 									armSetPoint = armSetPoint + (throttleToggle * armCenterAdjLimit);		//set the arm setpoint to adj pos
 								}
+								
 							} else if(throttleValue <= 10) {
 							armSetPoint = (points[(int) throttleValue][armSetPoints]);				//set the arm, lift, trolley to points normal
 							}
 						}
 					}
 					
-					if(Robot.arm.getPosition() < 950 && Robot.lift.levelOfLift == 11) {
+					if(Robot.arm.getPosition() < 950 && Robot.lift.levelOfLift == 11 && throttleToggle < -0.5) {
 						Robot.climber.hookerEject();
 					}
 

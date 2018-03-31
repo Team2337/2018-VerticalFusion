@@ -17,7 +17,7 @@ public class CG_returnToALTControl extends CommandGroup {
 	addSequential(new auto_wait(1));
 	addSequential(new auto_moveUpperPosition(2700,550)); // Move to 10
 	addSequential(new auto_wait(.5));
-	addSequential(new auto_moveUpperPosition(2700,100)); // Move to 0
+	addSequential(new auto_moveUpperPosition(2700,60)); // Move to 0
 	}
 
 }

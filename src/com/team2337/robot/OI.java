@@ -145,8 +145,8 @@ public class OI {
 		/* ====== DRIVER JOYSTICK ===== */
 		
 		driver_GreenA			.whileHeld(new climbWinch_driveVertical(1));
-		driver_RedB				.whenPressed(new PTO_Climb()); 
-		driver_BlueX			.whenPressed(new PTO_Lift());  
+		driver_RedB				.whenPressed(new DoNothing()); 
+		driver_BlueX			.whenPressed(new DoNothing());  
 		driver_YellowY			.whileHeld(new lift_climb()); 
 		
 		driver_BumperLeft		.whileHeld(new shifter_low());
@@ -155,7 +155,7 @@ public class OI {
 
 		
 		driver_Back				.whenPressed(new DoNothing()); 
-		driver_Start			.whenPressed(new CG_scorePosition()); 
+		driver_Start			.whenPressed(new auto_gyroMMTurnWithCam(1)); 
 		
 		driver_LeftStick		.whenPressed(new DoNothing()); 
 		driver_RightStick		.whenPressed(new DoNothing()); 

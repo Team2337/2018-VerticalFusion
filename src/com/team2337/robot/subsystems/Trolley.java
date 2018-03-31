@@ -33,14 +33,14 @@ public class Trolley extends Subsystem {
 	
 	//comp  
 	
-	public double trolleyPassover = 510;  //practice 540, comp 510
+	public double trolleyPassover = 460;  //practice 540, comp 510
 	
 	public static int trolleyStart = 60;
 	
 	public static int trolleyLowHold;
 	public static int trolleyPlus215;
 	public static int trolleyPlus315;
-	public static int trolleyTop;
+	public static int trolleyTop, trolleyHookPos;
 
 	public static int forwardTrolleySoftLimit = 585;
 	public static int reverseTrolleySoftLimit = 50;
@@ -57,7 +57,8 @@ public class Trolley extends Subsystem {
 			trolleyLowHold = trolleyStart + 90;
 			trolleyPlus215 = trolleyStart + 215;
 			trolleyPlus315 = trolleyStart + 330;	//315
-			trolleyTop	  = trolleyStart + 485;
+			trolleyTop	  = trolleyStart + 485; //545
+			trolleyHookPos = trolleyStart + 300;
 		} else {
 			trolleyLowHold = trolleyStart + 90;
 			trolleyPlus215 = trolleyStart + 215;

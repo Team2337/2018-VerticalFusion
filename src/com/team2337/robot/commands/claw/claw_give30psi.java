@@ -19,7 +19,7 @@ public class claw_give30psi extends Command {
 	}
 	@Override
 	protected void initialize() {
-		if(RobotMap.crateSensor.get() && !OI.operatorControls.getRawButton(Robot.oi.blueSwitch)) {
+		if(RobotMap.crateSensorLeft.get() && !OI.operatorControls.getRawButton(Robot.oi.blueSwitch)) {
 		Robot.claw.give30Hugs();
 		}
 	}

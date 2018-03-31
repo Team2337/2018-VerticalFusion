@@ -65,8 +65,8 @@ public class RobotMap {
 	// Intake
 	public static TalonSRX intake_left;
 	public static VictorSPX intake_right;
-	public static DigitalInput crateSensor;
-	public static DigitalInput crateSensorGreen;
+	public static DigitalInput crateSensorLeft;
+	public static DigitalInput crateSensorRight;
 	
 	//public static TalonSRX intake_right;
 
@@ -246,9 +246,9 @@ public class RobotMap {
 		intake_right = new VictorSPX(intakeRight);
 		intake_right.setInverted(false);
 		
-		crateSensor = new DigitalInput(0);
+		crateSensorLeft = new DigitalInput(0);
 		lineReader = new DigitalInput(1);
-		crateSensorGreen = new DigitalInput(2);
+		crateSensorRight = new DigitalInput(2);
 		/*
 		 * Arm
 		 */

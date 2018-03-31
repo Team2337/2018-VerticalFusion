@@ -45,10 +45,13 @@ public class auto_gyroMMTurnWithCam extends Command {
 		cubeX = Robot.pixy.xx;
 		degree = (cubeX - Robot.pixy.centerXX) / pixlesPerDegree;
 		
-
+		System.out.println(degree);
+		
 		driveFR = 0.05; 
 		if (Math.abs(degree) > 50) {
 			drivePR = .12;
+		} else if(Math.abs(degree) < 10) {
+			drivePR = 0.5;
 		} else {
 			drivePR = 0.35;
 		}
@@ -92,6 +95,8 @@ public class auto_gyroMMTurnWithCam extends Command {
 		Robot.chassis.setBrakeMode(NeutralMode.Coast);
 		rev = Math.abs(degree) * 145;
 
+		System.out.println("rev: " + rev);
+		
 		if (degree > 0) {
 			// turn left
 			RobotMap.chassis_leftFront.set(ControlMode.MotionMagic, -rev);

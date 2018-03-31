@@ -51,7 +51,7 @@ public class Arm extends Subsystem {
 			reverseSoftLimit	= centerPosition - 1008;	//- 1008;practice //Flat Position //-1100
 			
 			climberAdjLimit		= 1180; //Climber flat position
-			armHookAdjLimit		= 200;   //Adj when getting hook
+			armHookAdjLimit		= 225;   //Adj when getting hook 
 			armCenterAdjLimit	= 250;	//
 			
 			armClimbHook			= centerPosition - 1300;

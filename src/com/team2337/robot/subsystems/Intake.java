@@ -26,11 +26,11 @@ public class Intake extends Subsystem {
 		setDefaultCommand(new intake_default());
 	}
 	public boolean hasCrate() {
-		return !RobotMap.crateSensor.get();
+		return !RobotMap.crateSensorLeft.get();
 	}
 	
 	public boolean bothSensors() {
-		if (!RobotMap.crateSensor.get() && !RobotMap.crateSensorGreen.get()) {
+		if (!RobotMap.crateSensorLeft.get() && !RobotMap.crateSensorRight.get()) {
 			return true;
 		} else {
 			return false;
@@ -48,12 +48,18 @@ public class Intake extends Subsystem {
 	}
 	/**
 	 * Move the intake inwards (intake)
-	 * @param power Power of motors (-1.0 to 1.0)
+	 * @param power Power of motors (1.0 to 0.5)
 	 */
-	public void rotate(double power) {
+	public void rotateRight(double power) {
 		intakeOn = true;
 		right.set(ControlMode.PercentOutput, power);
-		left.set(ControlMode.PercentOutput, -power);
+		left.set(ControlMode.PercentOutput, power/2);
+		
+	}
+	public void rotateLeft(double power) {
+		intakeOn = true;
+		right.set(ControlMode.PercentOutput, power/2);
+		left.set(ControlMode.PercentOutput, power);
 		
 	}
 	/**
@@ -78,7 +84,7 @@ public class Intake extends Subsystem {
 	}
 	public void periodic() {
 		if (RobotMap.intakeDebug) {
-			SmartDashboard.putBoolean("crate", RobotMap.crateSensor.get());
+			SmartDashboard.putBoolean("crate", RobotMap.crateSensorLeft.get());
 		}
 	}
 
