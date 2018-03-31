@@ -44,7 +44,7 @@ public class Arm extends Subsystem {
 			centerPosition 		= 2300;
 			
 			forwardLevel 		= centerPosition + 975;		//975 prac
-			forwardSoftLimit 	= centerPosition + 1200;    //1000 practice    /// comp  350
+			forwardSoftLimit 	= centerPosition + 1200;    //1000 practice    /// comp  350 //1200
 			forwardCarry 		= centerPosition + 420;     //420 practice  // 900           ///  comp -160
 			forwardClampLimit	= centerPosition + 800;
 			

@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class auto_gyroMMTurnWithCam extends Command { 
 
-	public static double driveFL, drivePL, driveIL, driveDL, driveFR, drivePR, driveIR, driveDR, rev,
+	public static double driveFL, drivePL, driveIL, driveDL, driveFR, drivePR, driveIR, driveDR, rev, centerX,
 			secondsFromNeutralToFull, angleDifference, timeout;
 	public static int timeoutMs = 0;
 	public static int slotIdx = 0;
@@ -42,8 +42,9 @@ public class auto_gyroMMTurnWithCam extends Command {
 		RobotMap.chassis_rightFront.setSelectedSensorPosition(0, 0, timeoutMs);
 		RobotMap.chassis_leftFront.setSelectedSensorPosition(0, 0, timeoutMs);
 		
+		centerX = Robot.pixy.centerXX;
 		cubeX = Robot.pixy.xx;
-		degree = (cubeX - Robot.pixy.centerXX) / pixlesPerDegree;
+		degree = (cubeX - centerX) / pixlesPerDegree;
 		
 		System.out.println(degree);
 		
@@ -97,13 +98,13 @@ public class auto_gyroMMTurnWithCam extends Command {
 
 		System.out.println("rev: " + rev);
 		
-		if (degree > 0) {
+		if (degree > 0 && (centerX < 250 && centerX > 75)) {
 			// turn left
 			RobotMap.chassis_leftFront.set(ControlMode.MotionMagic, -rev);
 			RobotMap.chassis_rightFront.set(ControlMode.MotionMagic, rev);
 
 			System.out.println("Left -" + rev + " " + rev  + "  " + degree);
-		} else {
+		} else if (degree < 0 && (centerX < 250 && centerX > 75)) {
 			// turn right
 			RobotMap.chassis_leftFront.set(ControlMode.MotionMagic, rev);
 			RobotMap.chassis_rightFront.set(ControlMode.MotionMagic, -rev);
