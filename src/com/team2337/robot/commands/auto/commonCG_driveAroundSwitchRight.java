@@ -20,7 +20,7 @@ public class commonCG_driveAroundSwitchRight extends CommandGroup {
 		addParallel(new auto_moveUpperPosition(3300,45)); // 80 practice
 		addSequential(new auto_resetEncoder());
 		addSequential(new auto_clawOpen());
-		addParallel(new auto_driveToAngleWithEncoder(-.5, 8, -50, 16000, 16000, 0.04, true));
+		addParallel(new auto_driveToAngleWithEncoder(-.5, 8, -45, 16000, 16000, 0.04, true));
 		addSequential(new auto_wait(0.8));
 		addParallel(new auto_intake_in(1, 3));
 		addSequential(new auto_wait(1));

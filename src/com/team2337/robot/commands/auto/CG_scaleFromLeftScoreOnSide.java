@@ -41,6 +41,21 @@ public class CG_scaleFromLeftScoreOnSide extends CommandGroup {
 					addSequential (new auto_LiftDown(60, 80)); //100,120 practice
 					addSequential (new auto_moveUpperPosition(2800, 80));
 					
+					addSequential(new auto_resetEncoder());
+					addSequential(new auto_clawOpen());
+					addSequential (new auto_driveToAngleWithEncoder(.5,10,15,18000,18000,.2));
+					addSequential(new auto_resetEncoder());
+					addSequential(new shifter_high());
+					addParallel (new auto_moveUpperPosition(3300, 80));
+					addSequential (new auto_driveToAngleWithEncoder(-.6,10,35,18000,18000,.08));
+
+					addSequential(new auto_wait(0.8));
+					addParallel(new auto_intake_in(1, 3));
+					addSequential(new auto_wait(1));
+					addSequential(new auto_clawClose());
+					addSequential(new auto_claw60());
+					addSequential(new auto_driveToAngleWithEncoder(.5, 3, 0, 9000, 9000, 0.04, true));
+					addParallel (new auto_moveUpperPosition(2800, 80));
 					
 					
 				//Switch is on our side scale is not LRL
