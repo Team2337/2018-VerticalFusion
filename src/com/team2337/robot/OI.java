@@ -8,6 +8,8 @@ import com.team2337.robot.commands.PTO.PTO_Climb;
 import com.team2337.robot.commands.PTO.PTO_Lift;
 import com.team2337.robot.commands.arm.*;
 import com.team2337.robot.commands.auto.*;
+import com.team2337.robot.commands.auto.claw.auto_clawCGOpenClose;
+import com.team2337.robot.commands.auto.motionMagic.auto_gyroMMTurnWithCam;
 import com.team2337.robot.commands.bigBrother.*;
 import com.team2337.robot.commands.chassis.*;
 import com.team2337.robot.commands.claw.*;

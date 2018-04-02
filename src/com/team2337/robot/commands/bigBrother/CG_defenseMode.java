@@ -2,9 +2,9 @@ package com.team2337.robot.commands.bigBrother;
 
 import com.team2337.robot.Robot;
 import com.team2337.robot.commands.auto.auto_bigBrother_DoNothing;
-import com.team2337.robot.commands.auto.auto_brakeModeOff;
-import com.team2337.robot.commands.auto.auto_moveUpperPosition;
 import com.team2337.robot.commands.auto.auto_wait;
+import com.team2337.robot.commands.auto.driveCommands.brakeMode.auto_brakeModeOff;
+import com.team2337.robot.commands.auto.upperPosition.auto_moveUpperPosition;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
