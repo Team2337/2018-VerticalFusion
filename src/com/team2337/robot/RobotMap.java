@@ -113,7 +113,7 @@ public class RobotMap {
 	//*********************************************************************************************************
 	//Debug
 	public static Boolean alt_ControlDebug = false;
-	public static Boolean chassisDebug = true;
+	public static Boolean chassisDebug = false;
 	public static Boolean intakeDebug = false;
 	public static Boolean climbDebug = false;
 	public static Boolean robot_AllPeriodicDebug = true;
@@ -332,6 +332,7 @@ public class RobotMap {
         }
         */
 		
+		/*
 		vision = new VisionProcessing("GRIP/vision");
 		vision.setCameraVerticalOffset(Constants.TargetingCamera_VerticalOffset); // Offset from front of robot
 		vision.setCameraHorizontalOffset(Constants.TargetingCamera_HorizontalOffset); // Offset from front of robot
@@ -347,6 +348,7 @@ public class RobotMap {
 		vision.setAreas(Constants.TargetingCamera_AreaMin, Constants.TargetingCamera_AreaMax);
 		vision.setDegreePerPixel(Constants.TargetingCamera_PixelDegree);
 		vision.setRevolutionPerDegree(Constants.TargetingCamera_RevDegree);
+		*/
 	}
 	public static void startCamera() {
 		try {

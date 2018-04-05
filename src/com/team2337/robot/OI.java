@@ -154,7 +154,7 @@ public class OI {
 		driver_BumperRight	    .whenPressed(new shifter_high());
 
 		
-		driver_Back				.whenPressed(new DoNothing()); 
+		driver_Back				.whenPressed(new CG_ScaleScore()); 
 		driver_Start			.whenPressed(new auto_gyroMMTurnWithCam(1)); 
 		
 		driver_LeftStick		.whenPressed(new DoNothing()); 

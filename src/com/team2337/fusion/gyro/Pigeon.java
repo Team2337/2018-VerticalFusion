@@ -27,7 +27,7 @@ public class Pigeon extends Subsystem {
 
 		//pidgey = new PigeonIMU(RobotMap.intake_left);
 		pidgey = new PigeonIMU(0);
-		pidgey.enterCalibrationMode(CalibrationMode.BootTareGyroAccel, 10);
+		//pidgey.enterCalibrationMode(CalibrationMode.BootTareGyroAccel, 10);
 		gyrofusionStatus = new PigeonIMU.FusionStatus();
 		gyroGenStatus = new PigeonIMU.GeneralStatus();
 		ypr_deg = new double[3];
@@ -52,7 +52,7 @@ public class Pigeon extends Subsystem {
 		pidgey.getYawPitchRoll(ypr_deg);
 		pidgey.getRawGyro(xyz_dps);
 		
-		SmartDashboard.putNumber("FusedHeading", pidgey.getFusedHeading());
+		//SmartDashboard.putNumber("FusedHeading", pidgey.getFusedHeading());
 		//SmartDashboard.putNumber("AbsoluteCompass", getThing());
 		SmartDashboard.putNumber("Yaw", getYaw());
 		//SmartDashboard.putNumber("Pitch", getPitch());

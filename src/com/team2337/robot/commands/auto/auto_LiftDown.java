@@ -40,6 +40,7 @@ public class auto_LiftDown extends Command{
 	}
 
 	protected void end() {
+		System.out.println("lift ended");
 	}
 
 	protected void interrupted() {

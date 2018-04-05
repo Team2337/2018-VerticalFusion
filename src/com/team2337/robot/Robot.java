@@ -131,6 +131,8 @@ public class Robot extends TimedRobot {
 //		autonchooser.addObject("Scale From Right", "ScaleRight");
 		autonchooser.addObject("Scale From Left Score On Side", "ScaleLeftSide");
 		autonchooser.addObject("Scale From Right Score On Side", "ScaleRightSide");
+		autonchooser.addObject("Scale From Right Mutli Cube", "ScaleRightSideMutli");
+		autonchooser.addObject("Scale From Left Mutli Cube", "ScaleLeftSideMutli");
 		
 		autonchooser.addObject("*Partner Scale On Our Left", "PartnerScaleOnOurLeft");
 		autonchooser.addObject("*Partner Scale On Our Right", "PartnerScaleOnOurRight");
@@ -216,11 +218,11 @@ public class Robot extends TimedRobot {
 		case "DoNothing":
 			m_autonomousCommand = new CG_autoDoNothing(ourswitch, scale);
 			break;
-		case "ScaleLeft":
-			m_autonomousCommand = new CG_scaleFromLeftScoreAngle(ourswitch, scale);
+		case "ScaleLeftSideMutli":
+			m_autonomousCommand = new CG_scaleFromLeftMultiCube(ourswitch, scale);
 			break;
-		case "ScaleRight":
-			m_autonomousCommand = new CG_scaleFromRightScoreScoreAngle(ourswitch, scale);
+		case "ScaleRightSideMutli":
+			m_autonomousCommand = new CG_scaleFromRightMultiCube(ourswitch, scale);
 			break;
 		case "ScaleLeftSide":
 			m_autonomousCommand = new CG_scaleFromLeftScoreOnSide(ourswitch, scale);
@@ -346,19 +348,21 @@ public class Robot extends TimedRobot {
 			SmartDashboard.putNumber("TrolleyPosition - 454", RobotMap.trolley_right.getSelectedSensorPosition(0));
 			SmartDashboard.putNumber("armEncoderPositionPWM - 2300ish", RobotMap.arm_right.getSensorCollection().getPulseWidthPosition());
 			SmartDashboard.putBoolean("Line Reader", RobotMap.lineReader.get());
-			SmartDashboard.putNumber("centerX", RobotMap.vision.getRevAngle());
+			//SmartDashboard.putNumber("centerX", RobotMap.vision.getRevAngle());
 			SmartDashboard.putBoolean("claw Pressure", RobotMap.clawPressureDash);
 			SmartDashboard.putBoolean("Crate Sensor Red", RobotMap.crateSensorLeft.get());
 			SmartDashboard.putBoolean("Crate Sensor Green", RobotMap.crateSensorRight.get());
 			//SmartDashboard.putNumber("Navx Yaw", RobotMap.navx_gyro.getYaw());
 		}
-		SmartDashboard.putString("intake Command", Robot.intake.getCurrentCommandName());
+		//SmartDashboard.putString("intake Command", Robot.intake.getCurrentCommandName());
 		SmartDashboard.putBoolean("first intake", RobotMap.firstIntake);
-		SmartDashboard.putString("Pixy Command", Robot.pixy.getCurrentCommandName());
+		//SmartDashboard.putString("Pixy Command", Robot.pixy.getCurrentCommandName());
 		SmartDashboard.putNumber("Pixy Xx Value", Robot.pixy.xx);
-		SmartDashboard.putNumber("Pixy Yy Value", Robot.pixy.yy);
+		//SmartDashboard.putNumber("Pixy Yy Value", Robot.pixy.yy);
 		SmartDashboard.putBoolean("brokenArmNeg", RobotMap.brokenArmNeg);
 		SmartDashboard.putBoolean("brokenArmPos", RobotMap.brokenArmPos);
+		
+		//System.out.println(gyro.gyrofusionStatus.bIsValid);
 	}
 
 }
