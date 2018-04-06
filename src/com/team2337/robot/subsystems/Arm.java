@@ -52,7 +52,7 @@ public class Arm extends Subsystem {
 			
 			climberAdjLimit		= 1180; //Climber flat position
 			armHookAdjLimit		= 245;   //Adj when getting hook 
-			armCenterAdjLimit	= 250;	//
+			armCenterAdjLimit	= 300;	//
 			
 			armClimbHook			= centerPosition - 1300;
 			

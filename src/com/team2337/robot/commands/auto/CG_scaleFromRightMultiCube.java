@@ -73,7 +73,7 @@ public class CG_scaleFromRightMultiCube extends CommandGroup {
 			addParallel(new auto_bigBrother_DoNothing());
 			addSequential(new auto_holdUpperPosition(0.1));
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
-			addSequential (new auto_driveToAngleWithEncoder(.8, 4, 0, 110000, 110000, 0.04));// speed was .7 //115000
+			addSequential (new auto_driveToAngleWithEncoder(.8, 4, 0, 118000, 118000, 0.04));// speed was .7 //115000
 			addSequential (new auto_brakeModeOn());
 			addSequential (new auto_driveToAngleWithEncoder(.6, 4, 90, 200000, 200000, 0.032));// speed was .5 
 			addParallel (new CG_ArmToTop());

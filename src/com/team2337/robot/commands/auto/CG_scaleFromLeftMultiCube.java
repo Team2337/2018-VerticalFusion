@@ -26,11 +26,12 @@ public class CG_scaleFromLeftMultiCube extends CommandGroup {
 					addSequential (new auto_driveToAngleWithEncoder(.6,10,-9,148000,148000,.06));
 
 					addParallel(new CG_ScaleScore());
-					addSequential (new auto_driveToAngleWithEncoderandLine(.3,1.1,-20,165000,165000,.03)); 
+					addSequential (new auto_driveToAngleWithEncoder(.3,.8,-20,160000,160000,.03)); 
+					//addSequential (new auto_driveToAngleWithEncoderandLine(.3,.8,-20,165000,165000,.03)); 
 					addSequential (new auto_brakeModeOn());
 					
 					
-					addSequential(new auto_wait(2.0));
+					addSequential(new auto_wait(2.3));
 					addSequential(new auto_resetEncoder());
 					addSequential(new auto_clawOpen());
 					// Drive to second cube
@@ -69,7 +70,21 @@ public class CG_scaleFromLeftMultiCube extends CommandGroup {
 					addSequential(new auto_resetEncoder());
 					
 					addSequential(new auto_driveToAngleWithEncoder(.6,10,35,18000,18000,.045));
-					addSequential(new auto_driveToAngleWithEncoder(.6,10,0,30000,30000,.045));
+					addParallel (new CG_ArmToTop());
+					addSequential(new auto_driveToAngleWithEncoder(.6,10,0,24000,24000,.045));
+					
+					
+					addSequential(new auto_LiftUp(300, 260)); //600, 500 practice
+					addSequential(new auto_moveUpperPosition(1850, 525)); //540 practice
+					addSequential(new auto_wait(0.2));
+					addSequential(new claw_open());
+					addSequential(new auto_wait(0.2));
+					addSequential(new auto_moveUpperPositionWithIsFinished(2850,500)); //525 practice
+					addSequential(new auto_wait(0.4));
+					addSequential(new auto_LiftDown(90, 300));
+					addSequential(new auto_moveUpperPosition(2850,60)); //100 practice
+					addSequential(new auto_wait(0.3));
+					addSequential(new auto_liftStop());
 
 
 
@@ -78,13 +93,13 @@ public class CG_scaleFromLeftMultiCube extends CommandGroup {
 				} else if (scale.equals("R")) {
 					addParallel(new auto_bigBrother_DoNothing());
 					addSequential(new auto_holdUpperPosition(0.1));
-					//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
-					addSequential (new auto_driveToAngleWithEncoder(.8, 4, 0, 110000, 110000, 0.04));// speed was .7 //115000
+					//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE8 LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
+					addSequential (new auto_driveToAngleWithEncoder(.8, 4, 0, 118000, 118000, 0.04));// speed was .7 //115000
 					addSequential (new auto_brakeModeOn());
 					addSequential (new auto_driveToAngleWithEncoder(.6, 4, -93, 200000, 200000, 0.032));// speed was .5 
 					addParallel (new CG_ArmToTop());
-					addSequential (new auto_driveToAngleWithEncoder(.6, 4, -95, 282000, 282000, 0.035));// speed was .6 //282000
-					addSequential (new auto_driveToAngleWithEncoder(.5, 4, 5, 265000, 265000, 0.04, true));// speed was .5 //276000
+					addSequential (new auto_driveToAngleWithEncoder(.6, 4, -95, 292000, 290000, 0.035));// speed was .6 //282000
+					addSequential (new auto_driveToAngleWithEncoder(.6, 4, 5, 273000, 273000, 0.04, true, 0.02, "Right"));// speed was .5 //276000
 					addSequential(new auto_LiftUp(580, 500)); //600, 500 practice
 					addSequential(new auto_moveUpperPosition(1850, 525)); //540 practice
 					addSequential(new auto_resetEncoder());

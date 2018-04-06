@@ -21,7 +21,7 @@ public class alt_Control_Import extends Command {
 	double armAdjNeg;
 	double armClimbAdjLimit;
 	double trolleyAdj = 2; // TODO determne rightamount
-	double armCenterAdjLimit = 250;
+	double armCenterAdjLimit = 300;
 	double armEncoder;
 	double armPos;
 

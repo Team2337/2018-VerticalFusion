@@ -131,8 +131,8 @@ public class Robot extends TimedRobot {
 //		autonchooser.addObject("Scale From Right", "ScaleRight");
 		autonchooser.addObject("Scale From Left Score On Side", "ScaleLeftSide");
 		autonchooser.addObject("Scale From Right Score On Side", "ScaleRightSide");
-		autonchooser.addObject("Scale From Right Mutli Cube", "ScaleRightSideMutli");
-		autonchooser.addObject("Scale From Left Mutli Cube", "ScaleLeftSideMutli");
+		autonchooser.addObject("*Scale Greedy Right", "ScaleRightSideMutli");
+		autonchooser.addObject("*Scale Greedy Left", "ScaleLeftSideMutli");
 		
 		autonchooser.addObject("*Partner Scale On Our Left", "PartnerScaleOnOurLeft");
 		autonchooser.addObject("*Partner Scale On Our Right", "PartnerScaleOnOurRight");

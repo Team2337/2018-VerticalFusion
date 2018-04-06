@@ -11,7 +11,7 @@ public class CG_ScaleScore extends CommandGroup{
 //		addSequential(new auto_moveUpperPositionWithIsFinished(2000,500,475)); //525, 500 practice
 //		addSequential(new auto_moveUpperPositionWithIsFinished(2300,525)); //540 practice
 		addSequential(new auto_LiftUp(580, 500)); //600, 500 practice
-		addSequential(new auto_moveUpperPosition(1850, 525)); //540 practice
+		addSequential(new auto_moveUpperPosition(1600, 525)); //540 practice
 		addSequential(new auto_wait(0.3));
 
 		addSequential(new claw_open());
