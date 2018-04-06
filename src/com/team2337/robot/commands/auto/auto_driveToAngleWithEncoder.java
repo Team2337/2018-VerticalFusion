@@ -78,8 +78,11 @@ public class auto_driveToAngleWithEncoder extends Command {
    			isFinishedSide = !isFinishedSide;
    		}
    		
-   		if (changeScaleEnc.equals("Right") && Robot.ourswitch.equals("R")) {
-   			isFinishedSide = !isFinishedSide;
+   		if (changeScaleEnc.equals("Right") && Robot.ourswitch.equals("L")) {
+   			isFinishedSide = false;  //Read Right Encoder
+   		}
+   		if (changeScaleEnc.equals("Left") && Robot.ourswitch.equals("R")) {
+   			isFinishedSide = true;  // Read Left Encoder
    		}
     }
     

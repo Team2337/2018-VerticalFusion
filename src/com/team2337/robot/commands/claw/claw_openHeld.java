@@ -28,7 +28,7 @@ public class claw_openHeld extends Command {
 		if((Robot.intake.bothSensors() && !OI.operatorControls.getRawButton(Robot.oi.blueSwitch)) && (Robot.arm.getPosition() > Robot.arm.forwardClampLimit)) {
 			if(Robot.lift.getPosition() > 200) {
 				
-			} else if (Robot.trolley.getPosition() > 500) {
+			} else if (Robot.trolley.getPosition() > 430) {
 			} else {
 			Robot.claw.close();
 			Robot.claw.give60Hugs();
@@ -43,6 +43,7 @@ public class claw_openHeld extends Command {
 	}
 	@Override
 	protected void end() {
+		done = false;
 		Robot.claw.give60Hugs();
 	}
 	@Override

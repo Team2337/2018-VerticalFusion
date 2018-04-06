@@ -16,17 +16,17 @@ public class CG_scaleFromRightMultiCube extends CommandGroup {
 			addParallel(new auto_bigBrother_DoNothing());
 			addSequential(new auto_holdUpperPosition(0.1));
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
-			
+			///////         First Cube
 			addSequential (new auto_driveToAngleWithEncoder(.7,10,0,80000,80000,.13));
-			addParallel (new CG_ArmToTop());
-			addSequential (new auto_driveToAngleWithEncoder(.6,10,9,165000,165000,.06));
+			addParallel (new CG_ArmToTop());  //Arm to top to
+			addSequential (new auto_driveToAngleWithEncoder(.6,10,9,148000,148000,.06));
 
-			addParallel(new CG_ScaleScore());
-			addSequential (new auto_driveToAngleWithEncoderandLine(.3,1.5,18,165000,165000,.03)); 
+			addParallel(new CG_ScaleScore()); //Score first cube
+			addSequential (new auto_driveToAngleWithEncoderandLine(.3,.8,18,160000,160000,.03)); 
 			addSequential (new auto_brakeModeOn());
 			
-			
-			addSequential(new auto_wait(2.2));
+			///delay to allow arm to come to ground
+			addSequential(new auto_wait(2.3));
 			addSequential(new auto_resetEncoder());
 			addSequential(new auto_clawOpen());
 			// Drive to second cube
@@ -58,8 +58,8 @@ public class CG_scaleFromRightMultiCube extends CommandGroup {
 			//drive to third cube
 			addSequential(new auto_driveToAngleWithEncoder(-.6,10,-35,26000,26000,.045));
 			addSequential(new auto_wait(0.2));
-			addParallel(new auto_intake_in(1, 3));
-			addSequential(new auto_wait(.4));
+			addParallel(new auto_intake_in(1, 4));
+			addSequential(new auto_wait(.8));
 			addSequential(new auto_clawClose());
 			addSequential(new auto_claw60());
 			addSequential(new auto_resetEncoder());
@@ -73,14 +73,14 @@ public class CG_scaleFromRightMultiCube extends CommandGroup {
 			addParallel(new auto_bigBrother_DoNothing());
 			addSequential(new auto_holdUpperPosition(0.1));
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
-			addSequential (new auto_driveToAngleWithEncoder(.8, 4, 0, 118000, 118000, 0.04));// speed was .7 //115000
+			addSequential (new auto_driveToAngleWithEncoder(.8, 4, 0, 118000, 118000, 0.04, true, 0.02, "Right"));// speed was .7 //115000
 			addSequential (new auto_brakeModeOn());
-			addSequential (new auto_driveToAngleWithEncoder(.6, 4, 90, 200000, 200000, 0.032));// speed was .5 
+			addSequential (new auto_driveToAngleWithEncoder(.6, 4, 90, 200000, 200000, 0.032, true, 0.02, "Right"));// speed was .5 
 			addParallel (new CG_ArmToTop());
-			addSequential (new auto_driveToAngleWithEncoder(.6, 4, 90, 260000, 260000, 0.04));// speed was .6 //282000
-			addSequential (new auto_driveToAngleWithEncoder(.5, 4, 0, 245000, 245000, 0.03, true));// speed was .5 //276000
+			addSequential (new auto_driveToAngleWithEncoder(.6, 4, 90, 260000, 260000, 0.04, true, 0.02, "Right"));// speed was .6 //282000
+			addSequential (new auto_driveToAngleWithEncoder(.5, 4, 0, 245000, 245000, 0.03, true, 0.02, "Left"));// speed was .5 //276000
 			
-			/*
+			
 			addSequential(new auto_LiftUp(580, 500)); //600, 500 practice
 			addSequential(new auto_moveUpperPosition(1850, 525)); //540 practice
 			addSequential(new auto_resetEncoder());
@@ -127,7 +127,7 @@ public class CG_scaleFromRightMultiCube extends CommandGroup {
 			addSequential(new auto_wait(0.3));
 			addSequential(new auto_liftStop());
 			addSequential(new auto_moveUpperPosition(3300,60)); //100 practice
-			*/
+			
 			
 		//You choose poorly.  Switch and scale are NOT on our side.  RRR	
 		//Drive to Center line?	
