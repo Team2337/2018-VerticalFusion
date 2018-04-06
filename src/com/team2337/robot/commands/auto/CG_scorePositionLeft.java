@@ -14,7 +14,7 @@ public class CG_scorePositionLeft extends CommandGroup{
 		addSequential(new auto_moveUpperPositionWithIsFinished(2300,525)); //540 practice
 		addSequential(new auto_LiftUp(580, 500)); //600, 500 practice
 		addSequential(new auto_moveUpperPosition(1600, 525)); //540 practice
-		addSequential(new auto_wait(0.7));
+		addSequential(new auto_wait(0.4));
 //			addSequential(new auto_intakeOut(0.4, 0.4));
 		addSequential(new claw_open());
 		addSequential(new auto_wait(0.2));

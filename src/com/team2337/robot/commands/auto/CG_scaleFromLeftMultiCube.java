@@ -31,7 +31,7 @@ public class CG_scaleFromLeftMultiCube extends CommandGroup {
 					addSequential (new auto_brakeModeOn());
 					
 					///delay to allow arm to come to ground
-					addSequential(new auto_wait(2.3));
+					addSequential(new auto_wait(2.2));
 					addSequential(new auto_resetEncoder());
 					addSequential(new auto_clawOpen());
 					// Drive to second cube
@@ -71,7 +71,7 @@ public class CG_scaleFromLeftMultiCube extends CommandGroup {
 					
 					addSequential(new auto_driveToAngleWithEncoder(.6,10,35,18000,18000,.045));
 					addParallel (new CG_ArmToTop());
-					addSequential(new auto_driveToAngleWithEncoder(.6,10,0,24000,24000,.045));
+					addSequential(new auto_driveToAngleWithEncoder(.6,10,0,23000,23000,.045));
 					
 					
 					addSequential(new auto_LiftUp(300, 260)); //600, 500 practice
@@ -98,8 +98,8 @@ public class CG_scaleFromLeftMultiCube extends CommandGroup {
 					addSequential (new auto_brakeModeOn());
 					addSequential (new auto_driveToAngleWithEncoder(.6, 4, -93, 200000, 200000, 0.032, true, 0.02, "Left"));// speed was .5 
 					addParallel (new CG_ArmToTop());
-					addSequential (new auto_driveToAngleWithEncoder(.6, 4, -95, 292000, 290000, 0.035, true, 0.02, "Left"));// speed was .6 //282000
-					addSequential (new auto_driveToAngleWithEncoder(.5, 4, 5, 273000, 273000, 0.04, true, 0.02, "Right"));//276000
+					addSequential (new auto_driveToAngleWithEncoder(.6, 4, -95, 292000, 292000, 0.035, true, 0.02, "Left"));// speed was .6 //282000
+					addSequential (new auto_driveToAngleWithEncoder(.6, 4, -5, 292000, 292000, 0.04, true, 0.02, "Right"));//276000
 					addSequential(new auto_LiftUp(580, 500)); //600, 500 practice
 					addSequential(new auto_moveUpperPosition(1850, 525)); //540 practice
 					addSequential(new auto_resetEncoder());
