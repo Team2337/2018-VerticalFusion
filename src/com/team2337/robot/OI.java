@@ -155,7 +155,7 @@ public class OI {
 
 		
 		driver_Back				.whenPressed(new CG_ScaleScore()); 
-		driver_Start			.whenPressed(new auto_gyroMMTurnWithCam(1)); 
+		driver_Start			.whenPressed(new auto_driveToAngleWithEncoderAfterCam(0.5,2,10000,10000,0.2,"Right")); 
 		
 		driver_LeftStick		.whenPressed(new DoNothing()); 
 		driver_RightStick		.whenPressed(new DoNothing()); 

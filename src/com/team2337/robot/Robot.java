@@ -84,7 +84,7 @@ public class Robot extends TimedRobot {
 			isComp = true;
 		}
 		*/
-		isComp = true;
+		//isComp = true;
 		
 		// Initialize all of the Robots Mappings
 		RobotMap.init();
@@ -219,7 +219,7 @@ public class Robot extends TimedRobot {
 			m_autonomousCommand = new CG_autoDoNothing(ourswitch, scale);
 			break;
 		case "ScaleLeftSideMutli":
-			m_autonomousCommand = new CG_scaleFromLeftMultiCube(ourswitch, scale);
+			m_autonomousCommand = new CG_scaleFromLeftMultiCube2(ourswitch, scale);
 			break;
 		case "ScaleRightSideMutli":
 			m_autonomousCommand = new CG_scaleFromRightMultiCube(ourswitch, scale);
@@ -350,6 +350,7 @@ public class Robot extends TimedRobot {
 			SmartDashboard.putNumber("lift Level", Robot.lift.levelOfLift);
 			SmartDashboard.putNumber("TrolleyPosition - 454", RobotMap.trolley_right.getSelectedSensorPosition(0));
 			SmartDashboard.putNumber("armEncoderPositionPWM - 2300ish", RobotMap.arm_right.getSensorCollection().getPulseWidthPosition());
+			SmartDashboard.putNumber("armEncoderPosition - 2300ish", RobotMap.arm_right.getSelectedSensorPosition(0));
 			SmartDashboard.putBoolean("Line Reader", RobotMap.lineReader.get());
 			//SmartDashboard.putNumber("centerX", RobotMap.vision.getRevAngle());
 			SmartDashboard.putBoolean("claw Pressure", RobotMap.clawPressureDash);

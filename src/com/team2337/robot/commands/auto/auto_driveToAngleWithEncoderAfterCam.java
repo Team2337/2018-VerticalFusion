@@ -15,44 +15,11 @@ public class auto_driveToAngleWithEncoderAfterCam extends Command {
 	int encoderLeft, encoderRight,encoderEnd;
 	boolean isFinishedSide = false;
 	boolean change = false;
+	private double moveSpeed, cubeX, turnAngle, centerX, degree;
+	private double pixlesPerDegree = 3.86;
+	String changeScaleEnc = "false";
 	
-	public auto_driveToAngleWithEncoderAfterCam(double speed, double timeout, double angle, int encoderTargetLeft, int encoderTargetRight, double Pgain) {
-		requires(Robot.chassis);
-		Dgain = 0.0004; /* percent throttle per angular velocity dps */
-		MaxCorrectionRatio = 0.30; /* cap corrective turning throttle to 30 percent of forward throttle */
-		this.speed = speed;
-	    this.timeout = timeout;
-	    this.targetAngle = angle;
-	    this.encoderLeft = encoderTargetLeft;
-	    this.encoderRight = encoderTargetRight;
-		this.Pgain = Pgain;
-	}
-	
-	public auto_driveToAngleWithEncoderAfterCam(double speed, double timeout, double angle, int encoderTargetLeft, int encoderTargetRight, double Pgain, boolean change) {
-		requires(Robot.chassis);
-		Dgain = 0.0004; /* percent throttle per angular velocity dps */
-		MaxCorrectionRatio = 0.30; /* cap corrective turning throttle to 30 percent of forward throttle */
-		this.speed = speed;
-	    this.timeout = timeout;
-	    this.targetAngle = angle;
-	    this.encoderLeft = encoderTargetLeft;
-	    this.encoderRight = encoderTargetRight;
-		this.Pgain = Pgain;
-		this.change = change;
-	}
-	public auto_driveToAngleWithEncoderAfterCam(double speed, double timeout, double angle, int encoderTargetLeft, int encoderTargetRight, double Pgain, boolean change, double Dgain) {
-		requires(Robot.chassis);
-		MaxCorrectionRatio = 0.30; /* cap corrective turning throttle to 30 percent of forward throttle */
-		this.speed = speed;
-	    this.timeout = timeout;
-	    this.targetAngle = angle;
-	    this.encoderLeft = encoderTargetLeft;
-	    this.encoderRight = encoderTargetRight;
-		this.Pgain = Pgain;
-		this.change = change;
-		this.Dgain = Dgain;
-	}
-	public auto_driveToAngleWithEncoderAfterCam(double speed, double timeout, int encoderTargetLeft, int encoderTargetRight, double Pgain, boolean change) {
+	public auto_driveToAngleWithEncoderAfterCam(double speed, double timeout, int encoderTargetLeft, int encoderTargetRight, double Pgain, String changeScaleEnc) {
 		requires(Robot.chassis);
 		MaxCorrectionRatio = 0.30; /* cap corrective turning throttle to 30 percent of forward throttle */
 		this.speed = speed;
@@ -60,20 +27,26 @@ public class auto_driveToAngleWithEncoderAfterCam extends Command {
 	    this.encoderLeft = encoderTargetLeft;
 	    this.encoderRight = encoderTargetRight;
 		this.Pgain = Pgain;
-		this.change = change;
-		this.targetAngle = Robot.gyro.getYaw();
+		this.changeScaleEnc = changeScaleEnc;
 	}
     protected void initialize() {
-    	
-    	if (Robot.ourswitch.equals("R") || Robot.ourswitch.equals("r") ) {
-    		isFinishedSide = true;
-   		}
    		setTimeout(timeout);
    		
-   		if(change) {
-   			isFinishedSide = !isFinishedSide;
+   		if (changeScaleEnc.equals("Right") && Robot.ourswitch.equals("L")) {
+   			isFinishedSide = false;  //Read Right Encoder
    		}
+   		if (changeScaleEnc.equals("Left") && Robot.ourswitch.equals("R")) {
+   			isFinishedSide = true;  // Read Left Encoder
+   		}
+   		centerX = Robot.pixy.centerXX;
+		cubeX = Robot.pixy.xx;
+		degree = (cubeX - centerX) / pixlesPerDegree;
+		
+		System.out.println(degree);
+		
+		targetAngle = degree;
     }
+    
     
     
     

@@ -7,11 +7,11 @@ import com.team2337.robot.commands.shifter.shifter_low;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class CG_scaleFromLeftMultiCube extends CommandGroup {
+public class CG_scaleFromLeftMultiCube2 extends CommandGroup {
 
 
 	String ourSwitch, scale;
-	public CG_scaleFromLeftMultiCube(String ourSwitch, String scale) {
+	public CG_scaleFromLeftMultiCube2(String ourSwitch, String scale) {
 		this.ourSwitch = ourSwitch;
 		this.scale = scale;		
 		
@@ -25,28 +25,26 @@ public class CG_scaleFromLeftMultiCube extends CommandGroup {
 					addParallel (new CG_ArmToTop());  //arm to top midway through drive
 					addSequential (new auto_driveToAngleWithEncoder(.6,10,-9,148000,148000,.06));
 
-					addParallel(new CG_ScaleScore());  //Score first cube
+					addParallel(new CG_ScaleScore2());  //Score first cube
 					addSequential (new auto_driveToAngleWithEncoder(.3,.8,-20,160000,160000,.03)); 
 					//addSequential (new auto_driveToAngleWithEncoderandLine(.3,.8,-20,165000,165000,.03)); 
 					addSequential (new auto_brakeModeOn());
 					
 					///delay to allow arm to come to ground
-					addSequential(new auto_wait(2.2));
+					addSequential(new auto_wait(1.5));
 					addSequential(new auto_resetEncoder());
 					addSequential(new auto_clawOpen());
-					// Drive to second cube
-					addSequential(new auto_driveToAngleWithEncoder(-.7,10,10,30000,30000,.06));
 					
-					/*
 					addSequential(new auto_LiftDown(90, 300));
-					addSequential(new auto_moveUpperPositionWithIsFinished(2850,60)); //100 practice
-					addSequential(new auto_wait(0.3));
-					addSequential(new auto_liftStop());
+					// Drive to second cube
+					addParallel(new auto_driveToAngleWithEncoder(-.7,10,10,34000,34000,.06));
+				
 					addSequential(new auto_moveUpperPositionWithIsFinished(3300,60)); //100 practice
-					addSequential(new auto_wait(0.3));
-					*/
+//					addSequential(new auto_wait(0.3));
+					addSequential(new auto_liftStop());
 					
-					addSequential(new auto_wait(0.2));
+					
+					addSequential(new auto_wait(1));
 					addParallel(new auto_intake_in(1, 3));
 					addSequential(new auto_wait(.1));
 					addSequential(new auto_clawClose());
