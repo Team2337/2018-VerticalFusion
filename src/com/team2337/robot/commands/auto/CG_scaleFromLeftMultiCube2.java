@@ -21,13 +21,15 @@ public class CG_scaleFromLeftMultiCube2 extends CommandGroup {
 					addSequential(new auto_holdUpperPosition(0.1));
 					//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
 					///////         First Cube
-					addSequential (new auto_driveToAngleWithEncoder(.7,10,0,80000,80000,.13));
+					addSequential (new auto_driveToAngleWithEncoder(1,10,0,70000,70000,.13));
 					addParallel (new CG_ArmToTop());  //arm to top midway through drive
-					addSequential (new auto_driveToAngleWithEncoder(.6,10,-9,148000,148000,.06));
+					addSequential (new auto_driveToAngleWithEncoder(.8,10,-9,110000,110000,.06));
+					addSequential (new auto_driveToAngleWithEncoder(.6,10,-12,128000,128000,.06));
 
 					addParallel(new CG_ScaleScore2());  //Score first cube
-					addSequential (new auto_driveToAngleWithEncoder(.3,.8,-20,160000,160000,.03)); 
+					addSequential (new auto_driveToAngleWithEncoder(.3,.8,-20,136000,136000,.03)); 
 					//addSequential (new auto_driveToAngleWithEncoderandLine(.3,.8,-20,165000,165000,.03)); 
+					
 					addSequential (new auto_brakeModeOn());
 					
 					///delay to allow arm to come to ground
@@ -36,17 +38,18 @@ public class CG_scaleFromLeftMultiCube2 extends CommandGroup {
 					addSequential(new auto_clawOpen());
 					
 					addSequential(new auto_LiftDown(90, 300));
+					
 					// Drive to second cube
 					addParallel(new auto_driveToAngleWithEncoder(-.7,10,10,34000,34000,.06));
 				
 					addSequential(new auto_moveUpperPositionWithIsFinished(3300,60)); //100 practice
-//					addSequential(new auto_wait(0.3));
+					addSequential(new auto_wait(0.3));
 					addSequential(new auto_liftStop());
 					
 					
-					addSequential(new auto_wait(1));
-					addParallel(new auto_intake_in(1, 3));
-					addSequential(new auto_wait(.1));
+					addSequential(new auto_wait(0.1));
+					addParallel(new auto_intake_in(0.6, 3));
+					addSequential(new auto_wait(0.7));
 					addSequential(new auto_clawClose());
 					addSequential(new auto_claw60());
 					addSequential(new auto_resetEncoder());
@@ -61,25 +64,25 @@ public class CG_scaleFromLeftMultiCube2 extends CommandGroup {
 					//drive to third cube
 					addParallel(new auto_driveToAngleWithEncoder(-.6,10,40,26000,26000,.045));
 					addSequential(new auto_wait(0.2));
-					addParallel(new auto_intake_in(1, 4));
+					addParallel(new auto_intake_in(0.6, 2));
 					addSequential(new auto_wait(.8));
 					addSequential(new auto_clawClose());
 					addSequential(new auto_claw60());
 					addSequential(new auto_resetEncoder());
 					
 					addSequential(new auto_driveToAngleWithEncoder(.6,10,35,18000,18000,.045));
-					addParallel (new CG_ArmToTop());
-					addSequential(new auto_driveToAngleWithEncoder(.6,10,0,23000,23000,.045));
+					addParallel (new CG_ArmToTop2());
+					addSequential(new auto_driveToAngleWithEncoder(.6,10,0,23000,23000,.06));
 					
-					
-					addSequential(new auto_LiftUp(300, 260)); //600, 500 practice
-					addSequential(new auto_moveUpperPosition(1850, 525)); //540 practice
-					addSequential(new auto_wait(0.2));
+					addSequential(new auto_wait(0.35));
+					addSequential(new auto_LiftUp(400, 300)); //600, 500 practice
+					addSequential(new auto_moveUpperPosition(1600, 525)); //540 practice
+					addSequential(new auto_wait(0.6));
 					addSequential(new claw_open());
 					addSequential(new auto_wait(0.2));
 					addSequential(new auto_moveUpperPositionWithIsFinished(2850,500)); //525 practice
 					addSequential(new auto_wait(0.4));
-					addSequential(new auto_LiftDown(90, 300));
+					addSequential(new auto_LiftDown(90, 150));
 					addSequential(new auto_moveUpperPosition(2850,60)); //100 practice
 					addSequential(new auto_wait(0.3));
 					addSequential(new auto_liftStop());
