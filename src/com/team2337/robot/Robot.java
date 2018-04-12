@@ -84,7 +84,7 @@ public class Robot extends TimedRobot {
 			isComp = true;
 		}
 		*/
-		//isComp = true;
+		isComp = true;
 		
 		// Initialize all of the Robots Mappings
 		RobotMap.init();
@@ -222,7 +222,7 @@ public class Robot extends TimedRobot {
 			m_autonomousCommand = new CG_scaleFromLeftMultiCube2(ourswitch, scale);
 			break;
 		case "ScaleRightSideMutli":
-			m_autonomousCommand = new CG_scaleFromRightMultiCube(ourswitch, scale);
+			m_autonomousCommand = new CG_scaleFromRightMultiCube2(ourswitch, scale);
 			break;
 		case "ScaleLeftSideMutliWithSwitch":
 			m_autonomousCommand = new CG_scaleFromLeftMultiCubeTwoSwitch(ourswitch, scale);
@@ -359,12 +359,12 @@ public class Robot extends TimedRobot {
 			//SmartDashboard.putNumber("Navx Yaw", RobotMap.navx_gyro.getYaw());
 		}
 		//SmartDashboard.putString("intake Command", Robot.intake.getCurrentCommandName());
-		SmartDashboard.putBoolean("first intake", RobotMap.firstIntake);
+//		SmartDashboard.putBoolean("first intake", RobotMap.firstIntake);
 		//SmartDashboard.putString("Pixy Command", Robot.pixy.getCurrentCommandName());
-		SmartDashboard.putNumber("Pixy Xx Value", Robot.pixy.xx);
+//		SmartDashboard.putNumber("Pixy Xx Value", Robot.pixy.xx);
 		//SmartDashboard.putNumber("Pixy Yy Value", Robot.pixy.yy);
-		SmartDashboard.putBoolean("brokenArmNeg", RobotMap.brokenArmNeg);
-		SmartDashboard.putBoolean("brokenArmPos", RobotMap.brokenArmPos);
+//		SmartDashboard.putBoolean("brokenArmNeg", RobotMap.brokenArmNeg);
+//		SmartDashboard.putBoolean("brokenArmPos", RobotMap.brokenArmPos);
 		
 		//System.out.println(gyro.gyrofusionStatus.bIsValid);
 	}

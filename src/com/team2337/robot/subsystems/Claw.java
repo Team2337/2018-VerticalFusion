@@ -49,6 +49,6 @@ public class Claw extends Subsystem {
 	}
 	
 	public void periodic() {
-		SmartDashboard.putString("Claw Command", Robot.claw.getCurrentCommandName());
+//		SmartDashboard.putString("Claw Command", Robot.claw.getCurrentCommandName());
 	}
 }

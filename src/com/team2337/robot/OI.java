@@ -154,8 +154,8 @@ public class OI {
 		driver_BumperRight	    .whenPressed(new shifter_high());
 
 		
-		driver_Back				.whenPressed(new CG_ScaleScore()); 
-		driver_Start			.whenPressed(new auto_driveToAngleWithEncoderAfterCam(0.5,2,10000,10000,0.2,"Right")); 
+		driver_Back				.whenPressed(new DoNothing()); 
+		driver_Start			.whenPressed(new DoNothing()); 
 		
 		driver_LeftStick		.whenPressed(new DoNothing()); 
 		driver_RightStick		.whenPressed(new DoNothing()); 
@@ -197,12 +197,12 @@ public class OI {
 	    operator_SE						 	   .whileHeld(new CG_defenseMode()); 
 	    operator_ST						  	   .whenPressed(new CG_returnToALTControl());  
 	    
-	    operator_JoystickPOVUp			       .whenPressed(new claw_give60psi());
-//	    operator_JoystickPOVUp				   .whenReleased(new claw_CGClose());
-	    operator_JoystickPOVUpRight		       .whenPressed(new claw_give60psi());
-//	    operator_JoystickPOVUpRight			   .whenReleased(new claw_CGClose());
-	    operator_JoystickPOVUpLeft		       .whenPressed(new claw_give60psi());
-//	    operator_JoystickPOVUpLeft			   .whenReleased(new claw_CGClose());
+	    operator_JoystickPOVUp			       .whenPressed(new claw_CGOpenNoSensor());	//previously: claw give 60 
+	    operator_JoystickPOVUp				   .whenReleased(new claw_CGCloseNoSensor());
+	    operator_JoystickPOVUpRight		       .whenPressed(new claw_CGOpenNoSensor());
+	    operator_JoystickPOVUpRight			   .whenReleased(new claw_CGCloseNoSensor());
+	    operator_JoystickPOVUpLeft		       .whenPressed(new claw_CGOpenNoSensor());
+	    operator_JoystickPOVUpLeft			   .whenReleased(new claw_CGCloseNoSensor());
 	    
 	    operator_JoystickPOVDownRight	       .whenPressed(new DoNothing());
 	    operator_JoystickPOVDown		       .whenPressed(new DoNothing());

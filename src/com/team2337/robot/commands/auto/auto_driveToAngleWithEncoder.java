@@ -68,6 +68,18 @@ public class auto_driveToAngleWithEncoder extends Command {
 		this.changeScaleEnc = changeScaleEnc;
 	}
 	
+	public auto_driveToAngleWithEncoder(double speed, double timeout, double angle, int encoderTargetLeft, int encoderTargetRight, double Pgain, String changeScaleEnc) {
+		requires(Robot.chassis);
+		MaxCorrectionRatio = 0.30; /* cap corrective turning throttle to 30 percent of forward throttle */
+		this.speed = speed;
+	    this.timeout = timeout;
+	    this.targetAngle = angle;
+	    this.encoderLeft = encoderTargetLeft;
+	    this.encoderRight = encoderTargetRight;
+		this.Pgain = Pgain;
+		this.changeScaleEnc = changeScaleEnc;
+	}
+	
     protected void initialize() {
     	if (Robot.ourswitch.equals("R") || Robot.ourswitch.equals("r") ) {
     		isFinishedSide = true;
