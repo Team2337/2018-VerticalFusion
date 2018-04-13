@@ -138,6 +138,7 @@ public class Robot extends TimedRobot {
 		autonchooser.addObject("*Partner Scale On Our Right", "PartnerScaleOnOurRight");
 		autonchooser.addObject("*Favor Opponents Scale", "FavorOpponentsScale");
 		autonchooser.addObject("*Favor Our Scale Solo", "FavorOurScaleSolo");
+		autonchooser.addObject("*Left Only Scale or Switch", "CG_beesMatch");
 //		autonchooser.addObject("LiftUpperPosition", "LiftUpperPosition");
 //		autonchooser.addObject("PRACTICE CenterSwitchRight", "CenterSwitchRight");
 //		autonchooser.addObject("PRACTICE CenterSwitchLeft", "CenterSwitchLeft");
@@ -257,6 +258,9 @@ public class Robot extends TimedRobot {
 		case "SwitchThenGoAround":
 			m_autonomousCommand = new CG_centerSwitchThenGoAroundSwitch(ourswitch, scale);
 			break;
+		case "CG_beesMatch":
+			m_autonomousCommand = new CG_beesMatch(ourswitch, scale);
+			break;
 		default:
 			m_autonomousCommand = new CG_autoDoNothing(ourswitch, scale);
 			break;
@@ -363,8 +367,7 @@ public class Robot extends TimedRobot {
 		//SmartDashboard.putString("Pixy Command", Robot.pixy.getCurrentCommandName());
 //		SmartDashboard.putNumber("Pixy Xx Value", Robot.pixy.xx);
 		//SmartDashboard.putNumber("Pixy Yy Value", Robot.pixy.yy);
-		SmartDashboard.putBoolean("brokenArmNeg", RobotMap.brokenArmNeg);
-		SmartDashboard.putBoolean("brokenArmPos", RobotMap.brokenArmPos);
+		SmartDashboard.putBoolean("brokenArm", RobotMap.brokenArm);
 		
 		//System.out.println(gyro.gyrofusionStatus.bIsValid);
 	}

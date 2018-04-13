@@ -36,7 +36,8 @@ public class alt_Control_Import extends Command {
 	 * reverse soft limits 7: arm positive adjustment 8: arm negative adjustment
 	 */
 
-	int trolleySetPoints = 0;
+	//Array Points
+	int trolleySetPoints = 0;	
 	int liftSetPointsA = 1;
 	int liftSetPointsB = 2;
 	int liftSetPointsC = 3;
@@ -50,18 +51,22 @@ public class alt_Control_Import extends Command {
 	int armHookClimberSetPoints = 11;
 	int armClimbMode = 12;
 	int trolleyClimbMode = 13;
-		
+	
+	//Comp rest Points	
 	int compTrolleyRestPoint = 61;
 	int practiceTrolleyRestPoint = 61; //111 practice
 	
+	//Lift rest points
 	int compLiftRestPoint = Robot.lift.compLiftRestPoint;
 	int practiceLiftRestPoint = Robot.lift.practiceLiftRestPoint;
 	
+	//double values
 	double armCenterPosition = Robot.arm.centerPosition;
-	double climberAdjLimit = Robot.arm.climberAdjLimit;
+	double climberAdjLimit = Robot.arm.climberAdjLimit;  //Hook adjustment 
 	double armHookAdjLimit = 0;
 
-	boolean sameSide = true;
+	//used to check if the arm set point is on teh same side as the actual arm position
+	boolean sameSide = true; 
 
 	public alt_Control_Import() {
 		requires(Robot.bigBrother);
@@ -87,7 +92,7 @@ public class alt_Control_Import extends Command {
 		armSetPoint = ((double) points[(int) throttleValue][armSetPoints]);
 		armAdjPos = (points[(int) throttleValue][armPositiveAdj]);
 		armAdjNeg = (points[(int) throttleValue][armNegativeAdj]);
-		armClimbAdjLimit = (points[(int) throttleValue][armClimbAdjustment]);
+		armClimbAdjLimit = (points[(int) throttleValue][armClimbAdjustment]);  //hook adj array points
 		liftSetPoint = points[(int) throttleValue][Robot.lift.levelOfLift];
 		
 		// Arm Safety, check for bad value
@@ -198,28 +203,6 @@ public class alt_Control_Import extends Command {
 				//SmartDashboard.putBoolean("Disabled: endOfAuto - checking throttle toggle", RobotMap.disabledAtEndOfAuto);
 			}
 		}
-		
-		//SETPOINTS For Climbing 
-		/*
-				if(Robot.lift.levelOfLift == liftSetPointClimb) {
-					if((int) throttleValue <= 10) {
-						trolleySetPoint = (points[(int) throttleValue][trolleySetPoints]);
-						armSetPoint = 2100;
-						if (throttleToggle < -0.1) {								
-							armSetPoint = armSetPoint + (throttleToggle * Robot.arm.climberAdjLimit); 
-						}
-					} else if((int) throttleValue >= 11) {								//else if the throttleValue is greater than 10
-						armSetPoint = armCenterPosition;
-						if ((throttleToggle) > 0.1) {									//if the adjustment analog is greater than 0.1
-							armSetPoint = armSetPoint + (throttleToggle * armAdjPos);	//set the arm setpoint 
-						} else if (throttleToggle < -0.1) {								
-							armSetPoint = armSetPoint + (throttleToggle * armClimbAdj); 
-							//set the negative adjustment (the arm adj on score side) to the soft limit of the climber
-						} 
-						
-					}
-				}
-				*/
 				
 				    //CLIMB MODE POINTS
 					if(Robot.lift.levelOfLift == armClimbMode) {	

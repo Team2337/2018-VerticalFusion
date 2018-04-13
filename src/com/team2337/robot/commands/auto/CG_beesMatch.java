@@ -7,11 +7,11 @@ import com.team2337.robot.commands.shifter.shifter_low;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class CG_scaleFromLeftMultiCube2 extends CommandGroup {
+public class CG_beesMatch extends CommandGroup {
 
 
 	String ourSwitch, scale;
-	public CG_scaleFromLeftMultiCube2(String ourSwitch, String scale) {
+	public CG_beesMatch(String ourSwitch, String scale) {
 		this.ourSwitch = ourSwitch;
 		this.scale = scale;		
 		
@@ -95,71 +95,20 @@ public class CG_scaleFromLeftMultiCube2 extends CommandGroup {
 
 				//Switch is on our side scale is not LRL
 					//Score in switch from side and try to grab cube
-				} else if (scale.equals("R")) {
+				}  else if (ourSwitch.equals("L")  && scale.equals("R")) {
 					addParallel(new auto_bigBrother_DoNothing());
 					addSequential(new auto_holdUpperPosition(0.1));
-					//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE8 LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
-					addSequential (new auto_driveToAngleWithEncoder(.8, 4, 0, 118000, 118000, 0.04, true, 0.02, "Left"));// speed was .7 //115000
-					addSequential (new auto_brakeModeOn());
-					addSequential (new auto_driveToAngleWithEncoder(.6, 4, -93, 200000, 200000, 0.032, true, 0.02, "Left"));// speed was .5 
-					addParallel (new CG_ArmToTop());
-					addSequential (new auto_driveToAngleWithEncoder(.6, 4, -95, 296000, 296000, 0.035, true, 0.02, "Left"));// speed was .6 //282000
-					addSequential (new auto_driveToAngleWithEncoder(.6, 4, -5, 305000, 305000, 0.04, true, 0.02, "Right"));//276000
-					addSequential(new auto_LiftUp(580, 500)); //600, 500 practice
-					addSequential(new auto_moveUpperPosition(1850, 525)); //540 practice
-					addSequential(new auto_resetEncoder());
-					addSequential(new auto_wait(0.2));
-					addSequential(new claw_open());
-					addSequential(new auto_wait(0.2));
-					addSequential(new auto_driveForwardWithTime(-0.5, .2));
-
-					addSequential(new auto_moveUpperPositionWithIsFinished(2850,500)); //525 practice
-					addSequential(new auto_wait(0.4));
-					addSequential(new auto_LiftDown(90, 300));
-					addSequential(new auto_moveUpperPosition(2850,60)); //100 practice
-					addSequential(new auto_wait(0.3));
-					addSequential(new auto_liftStop());
-					addSequential(new auto_moveUpperPosition(3300,60)); //100 practice
-				
-					addParallel (new auto_driveToAngleWithEncoder(-.5, 4, -13, 33000, 33000, 0.04, true));// speed was .9 
-
-					addSequential(new auto_wait(0.2));
-					addParallel(new auto_intake_in(1, 3.2));
-					addSequential(new auto_wait(1.6));
-					addSequential(new auto_clawClose());
-					addSequential(new auto_claw60());
-					addSequential(new auto_wait(.2));
-					addSequential(new auto_resetEncoder());
-					
-					
-					addParallel(new auto_driveToAngleWithEncoder(0.6, .9, 0, 44000, 44000, 0.06));
-					
-					addSequential(new auto_wait(0.3));
-					addSequential(new auto_moveUpperPositionWithIsFinished(2850,500,475)); //525, 500 practice
-					addSequential(new auto_moveUpperPositionWithIsFinished(2300,525)); //540 practice
-					addSequential(new auto_LiftUp(500, 420)); //600, 500 practice  /// 580, 500******
-					addSequential(new auto_moveUpperPosition(1700, 525)); //540 practice
-					addSequential(new auto_wait(0.8)); // hold arm to place cube instead of throwing it....
-//						addSequential(new auto_intakeOut(0.4, 0.4));
-					addSequential(new claw_open());
-					addSequential(new auto_wait(0.4));
-					addSequential(new auto_moveUpperPositionWithIsFinished(2850,500)); //525 practice
-					addSequential(new auto_wait(0.4));
-//					addParallel (new auto_driveToAngleWithEncoder(-.5, 4, -30, 10000, 10000, 0.04, true));// speed was .9		//Practice only***********************************************************
-					addParallel(new auto_driveToAngleWithEncoder(-.6, 4, 0, 10000, 10000, 0.04, true));
-					addSequential(new auto_LiftDown(90, 300));
-					addSequential(new auto_moveUpperPosition(2850,60)); //100 practice
-					addSequential(new auto_wait(0.3));
-					addParallel(new auto_driveToAngleWithEncoder(-.6, 4, -30, 26000, 26000, 0.04, true));
-					addSequential(new auto_liftStop());
-					addSequential(new auto_moveUpperPosition(3300,60)); //100 practice
-					
-				//Switch is NOT on our side scale is NOT RLR
-					//Cross the line
-				} else if (ourSwitch.equals("R")  && scale.equals("R")) {
-					addSequential(new CG_crossTheLine());
 					//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
-					
+					addSequential (new auto_driveToAngleWithEncoder(.5, 4, 0, 93000, 93000, 0.04));// speed was .9 
+					addSequential (new auto_brakeModeOn());
+					addSequential (new auto_gyroMMTurn(-80, 1));
+					addSequential (new auto_driveForwardWithTime(.5,0.5)); //.5,2
+					addSequential (new auto_moveUpperPosition(1800,60));  //-250,60  ///Score into Switch position
+					addSequential (new auto_wait(0.3));
+					addSequential (new auto_resetEncoder());
+					addSequential (new auto_intakeOut(.8,1.5));
+					addSequential (new commonCG_armToPickupFromFront());
+					addSequential (new auto_driveToAngleWithEncoder(-.5, 4, -90, 12000, 12000, 0.04));
 				} else {
 					addSequential(new CG_crossTheLine());
 					//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
