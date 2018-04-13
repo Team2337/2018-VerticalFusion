@@ -7,11 +7,11 @@ import com.team2337.robot.commands.shifter.shifter_low;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class CG_scaleFromRightMultiCube2 extends CommandGroup {
+public class CG_scaleFromRightMultiCube3 extends CommandGroup {
 
 
 	String ourSwitch, scale;
-	public CG_scaleFromRightMultiCube2(String ourSwitch, String scale) {
+	public CG_scaleFromRightMultiCube3(String ourSwitch, String scale) {
 		this.ourSwitch = ourSwitch;
 		this.scale = scale;		
 		
@@ -21,19 +21,20 @@ public class CG_scaleFromRightMultiCube2 extends CommandGroup {
 					addSequential(new auto_holdUpperPosition(0.1));
 					//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
 					///////         First Cube
-					addSequential (new auto_driveToAngleWithEncoder(.9,10,0,70000,70000,.13,"Right"));
+					addSequential (new auto_driveToAngleWithEncoder(1,10,0,70000,70000,.13, "Right"));
 					addParallel (new CG_ArmToTop());  //arm to top midway through drive
-					addSequential (new auto_driveToAngleWithEncoder(.8,10,9,120000,120000,.06,"Right"));
-					addSequential (new auto_driveToAngleWithEncoder(.6,10,18,136000,136000,.06,"Right"));
+					addSequential (new auto_driveToAngleWithEncoder(.8,10,12,110000,110000,.06,"Right"));
+					addSequential (new auto_driveToAngleWithEncoder(.6,10,18,128000,128000,.06,"Right"));
 
 					addParallel(new CG_ScaleScore2());  //Score first cube
-					//changed from 145000 to 148000 before q49
-					addSequential (new auto_driveToAngleWithEncoder(.3,.8,20,168000,168000,.03,"Right"));
+					//change from 148000 to 145000 before q49
+					addSequential (new auto_driveToAngleWithEncoder(.3,.8,20,148000,148000,.03,"Right")); 
+					//addSequential (new auto_driveToAngleWithEncoderandLine(.3,.8,-20,165000,165000,.03)); 
 					
 					addSequential (new auto_brakeModeOn());
-					
+					/*
 					///delay to allow arm to come to ground
-					addSequential(new auto_wait(1.6));
+					addSequential(new auto_wait(1.7));
 					addSequential(new auto_resetEncoder());
 					addSequential(new auto_clawOpen());
 					
@@ -75,7 +76,7 @@ public class CG_scaleFromRightMultiCube2 extends CommandGroup {
 					addSequential(new auto_driveToAngleWithEncoder(.6,10,-35,16000,16000,.045,"Left"));
 					addParallel (new CG_ArmToTop2());
 					//change from 26000 to 30000 before q49
-					addSequential(new auto_driveToAngleWithEncoder(.6,10,0,37000,37000,.06,"Left"));
+					addSequential(new auto_driveToAngleWithEncoder(.6,10,0,30000,30000,.06,"Left"));
 					
 					addSequential(new auto_wait(0.35));
 					addSequential(new auto_LiftUp(400, 300)); //600, 500 practice
@@ -91,7 +92,7 @@ public class CG_scaleFromRightMultiCube2 extends CommandGroup {
 					addSequential(new auto_liftStop());
 
 
-
+*/
 				//Switch is on our side scale is not LRL
 					//Score in switch from side and try to grab cube
 				} else if (scale.equals("L")) {
