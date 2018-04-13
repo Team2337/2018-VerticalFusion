@@ -40,7 +40,9 @@ public class CG_scaleFromLeftScoreOnSide extends CommandGroup {
 					addSequential (new auto_wait(1));
 					addSequential (new auto_LiftDown(60, 80)); //100,120 practice
 					addSequential (new auto_moveUpperPosition(2800, 80));
-					
+					addSequential (new auto_driveForwardWithTime(-.3,0.5));
+/*					
+ * 					Drive to next cube
 					addSequential(new auto_resetEncoder());
 					addSequential(new auto_clawOpen());
 					addSequential (new auto_driveToAngleWithEncoder(.5,10,15,18000,18000,.2));
@@ -56,7 +58,7 @@ public class CG_scaleFromLeftScoreOnSide extends CommandGroup {
 					addSequential(new auto_claw60());
 					addSequential(new auto_driveToAngleWithEncoder(.5, 3, 0, 9000, 9000, 0.04, true));
 					addParallel (new auto_moveUpperPosition(2800, 80));
-					
+					*/
 					
 				//Switch is on our side scale is not LRL
 					//Score in switch from side and try to grab cube

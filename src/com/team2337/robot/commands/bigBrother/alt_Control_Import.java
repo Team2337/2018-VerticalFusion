@@ -59,6 +59,7 @@ public class alt_Control_Import extends Command {
 	
 	double armCenterPosition = Robot.arm.centerPosition;
 	double climberAdjLimit = Robot.arm.climberAdjLimit;
+	double armHookAdjLimit = 0;
 
 	boolean sameSide = true;
 
@@ -98,11 +99,13 @@ public class alt_Control_Import extends Command {
 		RobotMap.arm_right.setSelectedSensorPosition((int)armPos,0,0);
 		System.out.println("***********ARM BROKE greater than 4096************");
 		RobotMap.brokenArmPos = true;
+		RobotMap.brokenArm = true;
 		} else if(armPos < 0) {
 		armPos = 4096 - (Math.abs(armPos)%4096);
 		RobotMap.arm_right.setSelectedSensorPosition((int)armPos,0,0);
 		System.out.println("***********ARM BROKE less than zero************");
 		RobotMap.brokenArmNeg = true;
+		RobotMap.brokenArm = true;
 		}
 
 		
@@ -133,8 +136,15 @@ public class alt_Control_Import extends Command {
 			armSetPoint = (points[(int) throttleValue][armHookClimberSetPoints]);	//arm set to hook grabbing pos
 			trolleySetPoint = (points[(int) throttleValue][trolleyClimbMode]);		//trolley set to help arm grab hook
 			if ((throttleToggle) < -0.1) {											//if the adjustment analog is greater than 0.1
+				if(RobotMap.brokenArm) {
+					if(Robot.oi.operatorControls.getRawButton(Robot.oi.blueButton)) {
+						armHookAdjLimit = 50;
+					}
+					armSetPoint = armSetPoint + (throttleToggle * (armClimbAdjLimit + armHookAdjLimit + 50));
+				} else {
 				armSetPoint = armSetPoint + (throttleToggle * armClimbAdjLimit);			//set arm setpoint to climbAdj 
-			}
+				}
+			} 
 		} 
 
 		// Arm and Trolley set point override:

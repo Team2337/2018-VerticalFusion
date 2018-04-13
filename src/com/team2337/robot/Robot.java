@@ -139,8 +139,8 @@ public class Robot extends TimedRobot {
 		autonchooser.addObject("*Favor Opponents Scale", "FavorOpponentsScale");
 		autonchooser.addObject("*Favor Our Scale Solo", "FavorOurScaleSolo");
 //		autonchooser.addObject("LiftUpperPosition", "LiftUpperPosition");
-		autonchooser.addObject("PRACTICE CenterSwitchRight", "CenterSwitchRight");
-		autonchooser.addObject("PRACTICE CenterSwitchLeft", "CenterSwitchLeft");
+//		autonchooser.addObject("PRACTICE CenterSwitchRight", "CenterSwitchRight");
+//		autonchooser.addObject("PRACTICE CenterSwitchLeft", "CenterSwitchLeft");
 	
 		//autonchooser.addObject("TESTUTurn", "UTurn");
 		//autonchooser.addObject("TESTLineRead", "line");
@@ -363,8 +363,8 @@ public class Robot extends TimedRobot {
 		//SmartDashboard.putString("Pixy Command", Robot.pixy.getCurrentCommandName());
 //		SmartDashboard.putNumber("Pixy Xx Value", Robot.pixy.xx);
 		//SmartDashboard.putNumber("Pixy Yy Value", Robot.pixy.yy);
-//		SmartDashboard.putBoolean("brokenArmNeg", RobotMap.brokenArmNeg);
-//		SmartDashboard.putBoolean("brokenArmPos", RobotMap.brokenArmPos);
+		SmartDashboard.putBoolean("brokenArmNeg", RobotMap.brokenArmNeg);
+		SmartDashboard.putBoolean("brokenArmPos", RobotMap.brokenArmPos);
 		
 		//System.out.println(gyro.gyrofusionStatus.bIsValid);
 	}
