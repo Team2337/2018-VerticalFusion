@@ -122,7 +122,7 @@ public class CG_scaleFromRightMultiCube2 extends CommandGroup {
 					addSequential(new auto_liftStop());
 					addSequential(new auto_moveUpperPosition(3300,60)); //100 practice
 				
-					addParallel (new auto_driveToAngleWithEncoder(-.5, 4, 13, 33000, 33000, 0.04, true));// speed was .9 
+					addParallel (new auto_driveToAngleWithEncoder(-.5, 4, 13, 33000, 33000, 0.04, "Right"));// speed was .9 
 
 					addSequential(new auto_wait(0.2));
 					addParallel(new auto_intake_in(1, 3.2));
@@ -133,7 +133,7 @@ public class CG_scaleFromRightMultiCube2 extends CommandGroup {
 					addSequential(new auto_resetEncoder());
 					
 					
-					addParallel(new auto_driveToAngleWithEncoder(0.6, .9, 0, 44000, 44000, 0.06));
+					addParallel(new auto_driveToAngleWithEncoder(0.6, .9, 0, 44000, 44000, 0.06, "Left"));
 					
 					addSequential(new auto_wait(0.3));
 					addSequential(new auto_moveUpperPositionWithIsFinished(2850,500,475)); //525, 500 practice
@@ -146,11 +146,11 @@ public class CG_scaleFromRightMultiCube2 extends CommandGroup {
 					addSequential(new auto_wait(0.4));
 					addSequential(new auto_moveUpperPositionWithIsFinished(2850,500)); //525 practice
 					addSequential(new auto_wait(0.4));
-					addParallel (new auto_driveToAngleWithEncoder(-.6, 4, 0, 10000, 10000, 0.04, true));// speed was .9		//Practice only***********************************************************
+					addParallel (new auto_driveToAngleWithEncoder(-.6, 4, 0, 10000, 10000, 0.04, "Right"));// speed was .9		//Practice only***********************************************************
 					addSequential(new auto_LiftDown(90, 300));
 					addSequential(new auto_moveUpperPosition(2850,60)); //100 practice
 					addSequential(new auto_wait(0.3));
-					addParallel(new auto_driveToAngleWithEncoder(-.6, 4, 30, 26000, 26000, 0.04, true));
+					addParallel(new auto_driveToAngleWithEncoder(-.6, 4, 30, 26000, 26000, 0.04, "Right"));
 					addSequential(new auto_liftStop());
 					addSequential(new auto_moveUpperPosition(3300,60)); //100 practice
 					

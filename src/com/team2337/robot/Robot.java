@@ -139,6 +139,7 @@ public class Robot extends TimedRobot {
 		autonchooser.addObject("*Favor Opponents Scale", "FavorOpponentsScale");
 		autonchooser.addObject("*Favor Our Scale Solo", "FavorOurScaleSolo");
 		autonchooser.addObject("*Left Only Scale or Switch", "CG_beesMatch");
+		autonchooser.addObject("*Testing for CMP", "CG_pyramid");
 //		autonchooser.addObject("LiftUpperPosition", "LiftUpperPosition");
 //		autonchooser.addObject("PRACTICE CenterSwitchRight", "CenterSwitchRight");
 //		autonchooser.addObject("PRACTICE CenterSwitchLeft", "CenterSwitchLeft");
@@ -260,6 +261,9 @@ public class Robot extends TimedRobot {
 			break;
 		case "CG_beesMatch":
 			m_autonomousCommand = new CG_beesMatch(ourswitch, scale);
+			break;
+		case "CG_pyramid":
+			m_autonomousCommand = new CG_autoFavorOurScaleSoloFromPyramid(ourswitch, scale);
 			break;
 		default:
 			m_autonomousCommand = new CG_autoDoNothing(ourswitch, scale);

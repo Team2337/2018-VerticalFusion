@@ -7,14 +7,14 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class CG_scorePositionLeft extends CommandGroup{
 	public CG_scorePositionLeft() {
 		
-		addParallel(new auto_driveToAngleWithEncoder(0.5, 2, 0, 34000, 34000, 0.06));	//Practice only***********************************************************
+		addParallel(new auto_driveToAngleWithEncoder(0.5, 2, 0, 32000, 32000, 0.06, "Right"));	//Practice only***********************************************************
 		
 		addSequential(new auto_wait(0.3));
 		addSequential(new auto_moveUpperPositionWithIsFinished(2850,500,475)); //525, 500 practice
 		addSequential(new auto_moveUpperPositionWithIsFinished(2300,525)); //540 practice
 		addSequential(new auto_LiftUp(580, 500)); //600, 500 practice
-		addSequential(new auto_moveUpperPosition(1600, 525)); //540 practice
-		addSequential(new auto_wait(0.55));
+		addSequential(new auto_moveUpperPosition(1750, 525)); //540 practice
+		addSequential(new auto_wait(0.6));
 //			addSequential(new auto_intakeOut(0.4, 0.4));
 		addSequential(new claw_open());
 		addSequential(new auto_wait(0.2));
