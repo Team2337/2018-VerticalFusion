@@ -130,19 +130,34 @@ public class CG_autoFavorOurScaleSoloFromPyramid extends CommandGroup {
 			addParallel(new auto_bigBrother_DoNothing());
 			addSequential(new auto_holdUpperPosition(0.1));
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!		
-			addSequential(new commonCG_scoreRightSwitch());
-			addSequential(new commonCG_armToPickupFromFront());
-			addSequential(new commonCG_driveAroundNearSwitchRight());
-			
+//			addSequential(new commonCG_scoreRightSwitch());
+			addParallel(new commonCG_armToPickupFromFront());
+			addSequential(new auto_wait(.25));
 			
 			addSequential(new auto_resetEncoder());
-			addSequential(new auto_driveToAngleWithEncoder(.5, 3, 0, 9000, 9000, 0.04, true));
-//			addSequential(new auto_driveToAngleWithEncoderandLine(.5, 3, 0, 9000, 9000, 0.04));
+			addSequential(new auto_driveToAngleWithEncoder(-.5, 3, 0, 27500, 27500, 0.04, "Right"));
+			addSequential(new auto_clawOpen());
 			
-//			addSequential (new CG_scorePosition());
-//			addSequential (new auto_clawOpen());
+			addSequential(new auto_gyroMMTurn(-105, 0.9));
+			addSequential(new auto_moveUpperPosition(3300,45)); // 80 practice);
+			addSequential(new auto_resetEncoder());
 			
-			addSequential(new auto_brakeModeOff());
+			addSequential(new auto_driveToAngleWithEncoder(-.7, 8, -105, 22000, 22000, 0.025, "Right"));
+			addParallel(new auto_intake_in(0.5, 1));
+			addSequential(new auto_driveToAngleWithEncoder(-.7, 8, -90, 32000, 32000, 0.025, "Right"));
+			addSequential(new auto_wait(.75));
+			addSequential(new auto_clawClose());
+			addSequential(new auto_claw60());
+			addSequential(new auto_wait(.25));
+			addSequential(new auto_moveUpperPosition(2700,45));
+//			addParallel(new auto_intake_in(0.5, 1));
+			
+			addSequential(new auto_resetEncoder());
+			addSequential(new auto_driveToAngleWithEncoder(.7, 8, -95, 40000, 40000, 0.025, "Right"));
+			addParallel(new auto_intake_in(0.5, 1));
+			addSequential(new auto_driveToAngleWithEncoder(.7, 8, -95, 85000, 85000, 0.025, "Right"));
+			addSequential(new auto_driveToAngleWithEncoder(.7, 8, -2, 180000, 180000, 0.03, "Right"));
+			addSequential(new auto_brakeModeOn());
 			
 			//didnt get any game data, so we run into switch and hope we guessed right
 		} else {

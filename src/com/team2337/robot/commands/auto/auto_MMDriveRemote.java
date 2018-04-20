@@ -1,5 +1,6 @@
 package com.team2337.robot.commands.auto;
 
+import com.team2337.fusion.gyro.Pigeon;
 import com.team2337.fusion.vision.VisionProcessing;
 import com.team2337.robot.RobotMap;
 import com.team2337.robot.Robot;
@@ -57,24 +58,24 @@ public class auto_MMDriveRemote extends Command {
 				REMOTE_0,
 				timeoutMs);
 		/* Remote 1 will be a pigeon */
-		RobotMap.chassis_rightFront.configRemoteFeedbackFilter(	RobotMap.intake_left.getDeviceID(),
+		RobotMap.chassis_rightFront.configRemoteFeedbackFilter(	Pigeon.pidgey.getDeviceID(),
 				RemoteSensorSource.Pigeon_Yaw,
 				REMOTE_1,
 				timeoutMs);
 		
 		RobotMap.chassis_rightFront.configSensorTerm(SensorTerm.Sum0, FeedbackDevice.RemoteSensor0, timeoutMs);
-		RobotMap.chassis_rightFront.configSensorTerm(SensorTerm.Sum1, FeedbackDevice.QuadEncoder, timeoutMs);
-		RobotMap.chassis_rightFront.configSensorTerm(SensorTerm.Diff1, FeedbackDevice.RemoteSensor0, timeoutMs);
-		RobotMap.chassis_rightFront.configSensorTerm(SensorTerm.Diff0, FeedbackDevice.QuadEncoder, timeoutMs);
-		/* select sum for distance(0), different for turn(1) */
-		RobotMap.chassis_rightFront.configSelectedFeedbackSensor(FeedbackDevice.SensorSum, 0, timeoutMs);
+		RobotMap.chassis_rightFront.configSensorTerm(SensorTerm.Sum1, FeedbackDevice.RemoteSensor1, timeoutMs);
+		RobotMap.chassis_rightFront.configSensorTerm(SensorTerm.Diff0, FeedbackDevice.RemoteSensor0, timeoutMs);
+		RobotMap.chassis_rightFront.configSensorTerm(SensorTerm.Diff1, FeedbackDevice.RemoteSensor1, timeoutMs);
+		/// select sum for distance(0), different for turn(1) 
+		RobotMap.chassis_rightFront.configSelectedFeedbackSensor(FeedbackDevice.SensorSum, 1, timeoutMs);
 		
 		
 		RobotMap.chassis_rightFront.configSelectedFeedbackCoefficient(1.0, distancePIDSlot_0, timeoutMs);
 
 		RobotMap.chassis_rightFront.configSelectedFeedbackSensor(FeedbackDevice.RemoteSensor1, turningPIDSlot_1, timeoutMs);
 
-		RobotMap.chassis_rightFront.configSelectedFeedbackCoefficient(kTurnTravelUnitsPerRotation / kPigeonUnitsPerRotation, distancePIDSlot_0, timeoutMs);
+		RobotMap.chassis_rightFront.configSelectedFeedbackCoefficient(kTurnTravelUnitsPerRotation / kPigeonUnitsPerRotation, turningPIDSlot_1, timeoutMs);
 		
 		
 		RobotMap.chassis_rightFront.setStatusFramePeriod(StatusFrame.Status_12_Feedback1, 20, timeoutMs);
@@ -90,7 +91,7 @@ public class auto_MMDriveRemote extends Command {
 		RobotMap.chassis_leftFront.setSelectedSensorPosition(0, 0, timeoutMs);
 
 		driveFR = 0; // 0.00425; //.01370574769317461; forward .17
-		drivePR = 0.13;// .03; // forward .013
+		drivePR = 0.10;// .03; // forward .013
 		driveIR = 0;
 		driveDR = 2;
 		drivePeak = .5;
@@ -101,7 +102,7 @@ public class auto_MMDriveRemote extends Command {
 		RobotMap.chassis_rightFront.configClosedLoopPeakOutput(distancePIDSlot_0, drivePeak, timeoutMs);
 
 		turnF = 0;
-		turnP = 0;
+		turnP = 1;
 		turnI = 0;
 		turnD = 0;
 		turnPeak = .5;
@@ -123,12 +124,12 @@ public class auto_MMDriveRemote extends Command {
 
 		RobotMap.chassis_leftFront.configClosedloopRamp(secondsFromNeutralToFull, timeoutMs);
 		RobotMap.chassis_rightFront.configClosedloopRamp(secondsFromNeutralToFull, timeoutMs);
-		
+		/*
 		RobotMap.chassis_leftFront.configNominalOutputForward(.2, timeoutMs);
 		RobotMap.chassis_rightFront.configNominalOutputForward(.2, timeoutMs);
 		RobotMap.chassis_leftFront.configNominalOutputReverse(-.2, timeoutMs);
 		RobotMap.chassis_rightFront.configNominalOutputReverse(-.2, timeoutMs);
-		
+		*/
 		RobotMap.chassis_leftFront.configPeakOutputForward(+1.0, timeoutMs);
 		RobotMap.chassis_leftFront.configPeakOutputReverse(-1.0, timeoutMs);
 		RobotMap.chassis_rightFront.configPeakOutputForward(+1.0, timeoutMs);
@@ -142,9 +143,9 @@ public class auto_MMDriveRemote extends Command {
 		
 		
 
-		RobotMap.chassis_rightFront.set(ControlMode.MotionMagic, distance, DemandType.AuxPID, degree);
+		RobotMap.chassis_rightFront.set(ControlMode.MotionMagic, distance, DemandType.AuxPID, 10);
 		RobotMap.chassis_leftFront.follow(RobotMap.chassis_rightFront, FollowerType.AuxOutput1);
-		setTimeout(10);
+		setTimeout(4);
 	}
 
 	// Called repeatedly when this Command is scheduled to run

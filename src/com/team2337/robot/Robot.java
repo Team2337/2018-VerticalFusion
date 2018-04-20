@@ -263,7 +263,7 @@ public class Robot extends TimedRobot {
 			m_autonomousCommand = new CG_beesMatch(ourswitch, scale);
 			break;
 		case "CG_pyramid":
-			m_autonomousCommand = new CG_autoFavorOurScaleSoloFromPyramid2(ourswitch, scale);
+			m_autonomousCommand = new CG_autoFavorOurScaleSoloFromPyramid(ourswitch, scale);
 			break;
 		default:
 			m_autonomousCommand = new CG_autoDoNothing(ourswitch, scale);
