@@ -24,7 +24,8 @@ public class CG_autoFavorOurScaleSolo extends CommandGroup {
 			addSequential(new commonCG_driveAroundNearSwitchLeft());
 			
 			addSequential(new auto_resetEncoder());
-			addSequential(new auto_driveToAngleWithEncoder(.5, 3, 0, 9000, 9000, 0.04, true));
+			addSequential(new CG_scorePositionLeft());
+			
 			
 			addSequential(new auto_brakeModeOff());
 			
@@ -38,16 +39,9 @@ public class CG_autoFavorOurScaleSolo extends CommandGroup {
 			addSequential(new commonCG_armToPickupFromFront());
 			addSequential(new commonCG_driveAroundSwitchRight());
 
-			
-			
 			addSequential(new auto_resetEncoder());
-			addSequential(new auto_driveToAngleWithEncoder(.5, 3, 0, 9000, 9000, 0.04, true));
-//			addSequential(new auto_driveToAngleWithEncoderandLine(.5, 3, 0, 9000, 9000, 0.04));
-			
-//			addSequential (new CG_scorePosition());
-//			addSequential (new auto_clawOpen());
-			
-			
+			addSequential(new CG_scorePositionLeft());
+//			addSequential(new auto_driveToAngleWithEncoder(.5, 3, 0, 9000, 9000, 0.04, true));	
 			
 			addSequential(new auto_brakeModeOff());
 			
@@ -62,12 +56,8 @@ public class CG_autoFavorOurScaleSolo extends CommandGroup {
 			addSequential(new commonCG_driveAroundSwitchLeft());
 			
 			addSequential(new auto_resetEncoder());
-			addSequential(new auto_driveToAngleWithEncoder(.5, 3, 0, 9000, 9000, 0.04, true));
-//			addSequential(new auto_driveToAngleWithEncoderandLine(.5, 3, 0, 9000, 9000, 0.04));
-			
-//			addSequential (new CG_scorePosition());
-//			addSequential (new auto_clawOpen());
-			
+//			addSequential(new auto_driveToAngleWithEncoder(.5, 3, 0, 9000, 9000, 0.04, true));
+			addSequential(new CG_scorePositionLeft());
 			
 			addSequential(new auto_brakeModeOff());
 			
@@ -83,11 +73,9 @@ public class CG_autoFavorOurScaleSolo extends CommandGroup {
 			
 			
 			addSequential(new auto_resetEncoder());
-			addSequential(new auto_driveToAngleWithEncoder(.5, 3, 0, 9000, 9000, 0.04, true));
-//			addSequential(new auto_driveToAngleWithEncoderandLine(.5, 3, 0, 9000, 9000, 0.04));
-			
-//			addSequential (new CG_scorePosition());
-//			addSequential (new auto_clawOpen());
+			addSequential(new CG_scorePositionLeft());
+//			addSequential(new auto_driveToAngleWithEncoder(.5, 3, 0, 9000, 9000, 0.04, true));
+
 			
 			addSequential(new auto_brakeModeOff());
 			

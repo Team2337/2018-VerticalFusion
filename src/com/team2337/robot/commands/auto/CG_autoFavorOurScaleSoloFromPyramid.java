@@ -19,14 +19,24 @@ public class CG_autoFavorOurScaleSoloFromPyramid extends CommandGroup {
 			addParallel(new auto_bigBrother_DoNothing());
 			addSequential(new auto_holdUpperPosition(0.1));
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
-			addSequential(new commonCG_scoreLeftSwitch());
-			addSequential(new commonCG_armToPickupFromFront());
-			addSequential(new commonCG_driveAroundNearSwitchLeft());
+//			addSequential(new commonCG_scoreLeftSwitch());
+			addSequential(new commonCG_grabPyramidCubeFromLeftSwitch());
+			
+			addSequential(new auto_wait(.75));
+			addSequential(new auto_clawClose());
+			addSequential(new auto_claw60());
+			addSequential(new auto_wait(.25));
+			addSequential(new auto_moveUpperPosition(2700,45));
 			
 			addSequential(new auto_resetEncoder());
-			addSequential(new auto_driveToAngleWithEncoder(.5, 3, 0, 9000, 9000, 0.04, true));
+			addSequential(new auto_driveToAngleWithEncoder(.7, 8, 95, 40000, 40000, 0.025, "Right"));
+			addParallel(new auto_intake_in(0.5, 1));
+			/*
+			addSequential(new auto_driveToAngleWithEncoder(.7, 8, 95, 85000, 85000, 0.025, "Right"));
+			addSequential(new auto_driveToAngleWithEncoder(.7, 8, 2, 180000, 180000, 0.03, "Right"));
+			addSequential(new auto_brakeModeOn());
+			*/
 			
-			addSequential(new auto_brakeModeOff());
 			
 		// **************************  LRL  **************************
 		// Score in switch, get cube drive to center.	
@@ -35,21 +45,25 @@ public class CG_autoFavorOurScaleSoloFromPyramid extends CommandGroup {
 			addSequential(new auto_holdUpperPosition(0.1));
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
 //				addSequential(new commonCG_scoreLeftSwitch());
-
+			
+			//grabPyramidCubeFromRightSwitch
 			addParallel(new commonCG_armToPickupFromFront());
-//			addSequential(new commonCG_driveAroundSwitchRight());
+
 			addSequential(new auto_wait(.25));
-			
+
 			addSequential(new auto_resetEncoder());
-			addSequential(new auto_driveToAngleWithEncoder(-.5, 3, 0, 23500, 23500, 0.04, "Left"));
+			addSequential(new auto_driveToAngleWithEncoder(-.5, 3, 0, 27500, 27500, 0.04, "Right"));
 			addSequential(new auto_clawOpen());
-			
-			addSequential(new auto_gyroMMTurn(105, 0.9));
-			addSequential(new auto_moveUpperPosition(3300,45)); // 80 practice);
+
+			addSequential(new auto_gyroMMTurn(-105, 0.9));
+			addSequential(new auto_moveUpperPosition(3300, 45)); // 80 practice);
 			addSequential(new auto_resetEncoder());
+
+			addSequential(new auto_driveToAngleWithEncoder(-.7, 8, -105, 22000, 22000, 0.025, "Right"));
+			addParallel(new auto_intake_in(0.5, 1));
+			addSequential(new auto_driveToAngleWithEncoder(-.7, 8, -85, 32000, 32000, 0.04, "Right"));
 			
 			
-			addSequential(new auto_driveToAngleWithEncoder(-.7, 8, 105, 20000, 20000, 0.025, "Left"));
 			addSequential(new auto_driveToAngleWithEncoder(-.7, 8, 85, 85000, 85000, 0.04, "Left"));	//44000
 //				addSequential(new auto_wait(0.7));
 				addSequential(new auto_clawClose());
@@ -61,7 +75,9 @@ public class CG_autoFavorOurScaleSoloFromPyramid extends CommandGroup {
 			addSequential(new auto_driveToAngleWithEncoder(-.6, 8, 178, 160000, 160000, 0.03, "Right"));
 			addSequential(new auto_moveUpperPosition(2500,525));
 			addSequential(new auto_driveToAngleWithEncoder(-.6, 8, 178, 230000, 230000, 0.03, "Right"));
-			addSequential(new auto_brakeModeOn());
+//			addSequential(new auto_brakeModeOn());
+			addSequential(new auto_brakeModeOff());//remove after practice
+			/*
 			
 			//Score on side
 			addSequential(new shifter_low());
@@ -73,36 +89,8 @@ public class CG_autoFavorOurScaleSoloFromPyramid extends CommandGroup {
 			addSequential (new auto_wait(1));
 			addSequential (new auto_moveUpperPosition(2800, 80));
 
-			/*
-			addSequential(new auto_clawCGOpenClose());
-			addParallel(new auto_moveUpperPosition(3300,45)); // 80 practice
-			addSequential(new auto_resetEncoder());
-			addSequential(new auto_clawOpen());
-			addParallel(new auto_driveToAngleWithEncoder(-.5, 8, -45, 16000, 16000, 0.04, true));
-			addSequential(new auto_wait(0.8));
-			addParallel(new auto_intake_in(1, 3));
-			addSequential(new auto_wait(1));
-			addSequential(new auto_clawClose());
-			addSequential(new auto_claw60());
-			addSequential(new auto_driveToAngleWithEncoder(.5, 3, 0, 9000, 9000, 0.04, true));
+			addSequential(new auto_brakeModeOff());*/
 			
-			
-			
-
-			
-			
-			addSequential(new auto_resetEncoder());
-			addSequential(new auto_driveToAngleWithEncoder(.5, 3, 0, 9000, 9000, 0.04, true));
-			
-			*/
-//			addSequential(new auto_driveToAngleWithEncoderandLine(.5, 3, 0, 9000, 9000, 0.04));
-			
-//			addSequential (new CG_scorePosition());
-//			addSequential (new auto_clawOpen());
-			
-			
-			
-			addSequential(new auto_brakeModeOff());
 			
 		// **************************  RLR  **************************
 		// Score in switch, get cube drive to center.		
@@ -110,19 +98,34 @@ public class CG_autoFavorOurScaleSoloFromPyramid extends CommandGroup {
 			addParallel(new auto_bigBrother_DoNothing());
 			addSequential(new auto_holdUpperPosition(0.1));
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!		
-			addSequential(new commonCG_scoreRightSwitch());
+//			addSequential(new commonCG_scoreRightSwitch());
 			addSequential(new commonCG_armToPickupFromFront());
-			addSequential(new commonCG_driveAroundSwitchLeft());
+			addSequential(new commonCG_grabPyramidCubeFromRightSwitch());
 			
-			addSequential(new auto_resetEncoder());
-			addSequential(new auto_driveToAngleWithEncoder(.5, 3, 0, 9000, 9000, 0.04, true));
-//			addSequential(new auto_driveToAngleWithEncoderandLine(.5, 3, 0, 9000, 9000, 0.04));
-			
-//			addSequential (new CG_scorePosition());
-//			addSequential (new auto_clawOpen());
-			
-			
-			addSequential(new auto_brakeModeOff());
+			addSequential(new auto_driveToAngleWithEncoder(-.7, 8, -85, 85000, 85000, 0.04, "Left"));	//44000
+//			addSequential(new auto_wait(0.7));
+			addSequential(new auto_clawClose());
+			addSequential(new auto_claw60());
+		
+		addSequential(new auto_driveToAngleWithEncoder(-.6, 8, -178, 130000, 130000, 0.03, "Right"));
+		addSequential(new auto_moveUpperPosition(2700,525));
+		addParallel(new auto_intake_in(0.5, 0.2));
+		addSequential(new auto_driveToAngleWithEncoder(-.6, 8, -178, 160000, 160000, 0.03, "Right"));
+		addSequential(new auto_moveUpperPosition(2500,525));
+		addSequential(new auto_driveToAngleWithEncoder(-.6, 8, -178, 230000, 230000, 0.03, "Right"));
+		addSequential(new auto_brakeModeOn());
+		
+		//Score on side
+		addSequential(new shifter_low());
+		addSequential (new auto_gyroMMTurn(-90, 1));
+		addParallel (new auto_driveForwardWithTime(0,1));
+		addSequential(new auto_intakeOut(1, 1));
+		addSequential (new auto_wait(1));
+		addSequential (new auto_moveUpperPosition(2800, 525));
+		addSequential (new auto_wait(1));
+		addSequential (new auto_moveUpperPosition(2800, 80));
+
+		addSequential(new auto_brakeModeOff());
 			
 		// **************************  RRR  **************************
 		// Score in switch, get cube, score in scale.			
@@ -131,26 +134,31 @@ public class CG_autoFavorOurScaleSoloFromPyramid extends CommandGroup {
 			addSequential(new auto_holdUpperPosition(0.1));
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!		
 //			addSequential(new commonCG_scoreRightSwitch());
-			addParallel(new commonCG_armToPickupFromFront());
-			addSequential(new auto_wait(.25));
 			
+			
+			//grabPyramidCubeFromRightSwitch
+			addParallel(new commonCG_armToPickupFromFront());
+
+			addSequential(new auto_wait(.25));
+
 			addSequential(new auto_resetEncoder());
 			addSequential(new auto_driveToAngleWithEncoder(-.5, 3, 0, 27500, 27500, 0.04, "Right"));
 			addSequential(new auto_clawOpen());
-			
+
 			addSequential(new auto_gyroMMTurn(-105, 0.9));
-			addSequential(new auto_moveUpperPosition(3300,45)); // 80 practice);
+			addSequential(new auto_moveUpperPosition(3300, 45)); // 80 practice);
 			addSequential(new auto_resetEncoder());
-			
+
 			addSequential(new auto_driveToAngleWithEncoder(-.7, 8, -105, 22000, 22000, 0.025, "Right"));
 			addParallel(new auto_intake_in(0.5, 1));
-			addSequential(new auto_driveToAngleWithEncoder(-.7, 8, -90, 32000, 32000, 0.025, "Right"));
+			addSequential(new auto_driveToAngleWithEncoder(-.7, 8, -85, 32000, 32000, 0.04, "Right"));
+			
+			
 			addSequential(new auto_wait(.75));
 			addSequential(new auto_clawClose());
 			addSequential(new auto_claw60());
 			addSequential(new auto_wait(.25));
 			addSequential(new auto_moveUpperPosition(2700,45));
-//			addParallel(new auto_intake_in(0.5, 1));
 			
 			addSequential(new auto_resetEncoder());
 			addSequential(new auto_driveToAngleWithEncoder(.7, 8, -95, 40000, 40000, 0.025, "Right"));

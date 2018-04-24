@@ -24,7 +24,7 @@ public class commonCG_driveAroundNearSwitchLeft extends CommandGroup {
 		addSequential(new auto_wait(1));
 		addSequential(new auto_clawClose());
 		addSequential(new auto_claw60());
-		addSequential(new auto_driveToAngleWithEncoder(.5, 3, 0, 9000, 9000, 0.04, true));
+//		addSequential(new auto_driveToAngleWithEncoder(.5, 3, 0, 9000, 9000, 0.04, true));
 		
 	}
 }
