@@ -19,7 +19,7 @@ public class CG_autoFavorOurScaleSoloFromPyramid extends CommandGroup {
 			addParallel(new auto_bigBrother_DoNothing());
 			addSequential(new auto_holdUpperPosition(0.1));
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
-//			addSequential(new commonCG_scoreLeftSwitch());
+			addSequential(new commonCG_scoreLeftSwitch());
 			addSequential(new commonCG_grabPyramidCubeFromLeftSwitch());
 			
 			addSequential(new auto_wait(.75));
@@ -31,11 +31,11 @@ public class CG_autoFavorOurScaleSoloFromPyramid extends CommandGroup {
 			addSequential(new auto_resetEncoder());
 			addSequential(new auto_driveToAngleWithEncoder(.7, 8, 95, 40000, 40000, 0.025, "Right"));
 			addParallel(new auto_intake_in(0.5, 1));
-			/*
+			
 			addSequential(new auto_driveToAngleWithEncoder(.7, 8, 95, 85000, 85000, 0.025, "Right"));
 			addSequential(new auto_driveToAngleWithEncoder(.7, 8, 2, 180000, 180000, 0.03, "Right"));
 			addSequential(new auto_brakeModeOn());
-			*/
+			
 			
 			
 		// **************************  LRL  **************************
@@ -44,9 +44,9 @@ public class CG_autoFavorOurScaleSoloFromPyramid extends CommandGroup {
 			addParallel(new auto_bigBrother_DoNothing());
 			addSequential(new auto_holdUpperPosition(0.1));
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
-//				addSequential(new commonCG_scoreLeftSwitch());
+			addSequential(new commonCG_scoreLeftSwitch());
 			
-			//grabPyramidCubeFromRightSwitch
+			//grab Pyramid Cube From Right Switch
 			addParallel(new commonCG_armToPickupFromFront());
 
 			addSequential(new auto_wait(.25));
@@ -75,8 +75,7 @@ public class CG_autoFavorOurScaleSoloFromPyramid extends CommandGroup {
 			addSequential(new auto_driveToAngleWithEncoder(-.6, 8, 178, 160000, 160000, 0.03, "Right"));
 			addSequential(new auto_moveUpperPosition(2500,525));
 			addSequential(new auto_driveToAngleWithEncoder(-.6, 8, 178, 230000, 230000, 0.03, "Right"));
-//			addSequential(new auto_brakeModeOn());
-			addSequential(new auto_brakeModeOff());//remove after practice
+			addSequential(new auto_brakeModeOn());
 			/*
 			
 			//Score on side
@@ -98,7 +97,7 @@ public class CG_autoFavorOurScaleSoloFromPyramid extends CommandGroup {
 			addParallel(new auto_bigBrother_DoNothing());
 			addSequential(new auto_holdUpperPosition(0.1));
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!		
-//			addSequential(new commonCG_scoreRightSwitch());
+			addSequential(new commonCG_scoreRightSwitch());
 			addSequential(new commonCG_armToPickupFromFront());
 			addSequential(new commonCG_grabPyramidCubeFromRightSwitch());
 			
@@ -116,6 +115,7 @@ public class CG_autoFavorOurScaleSoloFromPyramid extends CommandGroup {
 		addSequential(new auto_brakeModeOn());
 		
 		//Score on side
+		/*
 		addSequential(new shifter_low());
 		addSequential (new auto_gyroMMTurn(-90, 1));
 		addParallel (new auto_driveForwardWithTime(0,1));
@@ -126,6 +126,7 @@ public class CG_autoFavorOurScaleSoloFromPyramid extends CommandGroup {
 		addSequential (new auto_moveUpperPosition(2800, 80));
 
 		addSequential(new auto_brakeModeOff());
+		*/
 			
 		// **************************  RRR  **************************
 		// Score in switch, get cube, score in scale.			
@@ -133,10 +134,10 @@ public class CG_autoFavorOurScaleSoloFromPyramid extends CommandGroup {
 			addParallel(new auto_bigBrother_DoNothing());
 			addSequential(new auto_holdUpperPosition(0.1));
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!		
-//			addSequential(new commonCG_scoreRightSwitch());
+			addSequential(new commonCG_scoreRightSwitch());
 			
 			
-			//grabPyramidCubeFromRightSwitch
+			//grab Pyramid Cube From Right Switch
 			addParallel(new commonCG_armToPickupFromFront());
 
 			addSequential(new auto_wait(.25));

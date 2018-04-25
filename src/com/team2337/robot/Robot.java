@@ -133,13 +133,14 @@ public class Robot extends TimedRobot {
 		autonchooser.addObject("Scale From Right Score On Side", "ScaleRightSide");
 		autonchooser.addObject("*Scale Greedy Right", "ScaleRightSideMutli");
 		autonchooser.addObject("*Scale Greedy Left", "ScaleLeftSideMutli");
-		autonchooser.addObject("*Scale Left Only with Switches", "ScaleLeftSideMutliWithSwitch");
+//		autonchooser.addObject("*Scale Left Only with Switches", "ScaleLeftSideMutliWithSwitch");
 		autonchooser.addObject("*Partner Scale On Our Left", "PartnerScaleOnOurLeft");
 		autonchooser.addObject("*Partner Scale On Our Right", "PartnerScaleOnOurRight");
 		autonchooser.addObject("*Favor Opponents Scale", "FavorOpponentsScale");
 		autonchooser.addObject("*Favor Our Scale Solo", "FavorOurScaleSolo");
 		autonchooser.addObject("*Left Only Scale or Switch", "CG_beesMatch");
-		autonchooser.addObject("*Testing for CMP", "CG_pyramid");
+		autonchooser.addObject("*Triple Left Scale Single Right","CG_scaleFromLeftMultiCubeFarRightScale");
+		autonchooser.addObject("*Switch From Center Pyramid Cube to Scale", "CG_pyramid");
 //		autonchooser.addObject("LiftUpperPosition", "LiftUpperPosition");
 //		autonchooser.addObject("PRACTICE CenterSwitchRight", "CenterSwitchRight");
 //		autonchooser.addObject("PRACTICE CenterSwitchLeft", "CenterSwitchLeft");
@@ -221,7 +222,7 @@ public class Robot extends TimedRobot {
 			m_autonomousCommand = new CG_autoDoNothing(ourswitch, scale);
 			break;
 		case "ScaleLeftSideMutli":
-			m_autonomousCommand = new CG_scaleFromLeftMultiCube2(ourswitch, scale);
+			m_autonomousCommand = new CG_scaleFromLeftMultiCubeFast(ourswitch, scale);//CG_scaleFromLeftMultiCube2(ourswitch, scale);
 			break;
 		case "ScaleRightSideMutli":
 			m_autonomousCommand = new CG_scaleFromRightMultiCube2(ourswitch, scale);
@@ -262,8 +263,11 @@ public class Robot extends TimedRobot {
 		case "CG_beesMatch":
 			m_autonomousCommand = new CG_beesMatch(ourswitch, scale);
 			break;
+		case "CG_scaleFromLeftMultiCubeFarRightScale":
+			m_autonomousCommand = new CG_scaleFromLeftMultiCubeFarRightScale(ourswitch, scale);
+			break;
 		case "CG_pyramid":
-			m_autonomousCommand = new commonCG_scoreScale();
+			m_autonomousCommand = new CG_autoFavorOurScaleSoloFromPyramid(ourswitch, scale);
 			break;
 		default:
 			m_autonomousCommand = new CG_autoDoNothing(ourswitch, scale);

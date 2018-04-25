@@ -13,8 +13,7 @@ public class commonCG_scoreScale extends CommandGroup{
 	addSequential(new auto_intakeOutWithEncoder(0.75, 10, 60000));
 //	addSequential(new auto_clawOpenWithEncoder(1.0, 10, 60000));
 	
-	addSequential(new auto_moveUpperPosition(2800,525)); //525, 500 practice
-	addSequential(new auto_wait(0.35));
+	addSequential(new auto_armMoveWithFinish(2800, 2700));
 	addParallel(new auto_moveUpperPosition(2800,60)); //525, 500 practice
 	addSequential(new auto_LiftDown(90, 150));
 	addSequential(new auto_liftStop());
