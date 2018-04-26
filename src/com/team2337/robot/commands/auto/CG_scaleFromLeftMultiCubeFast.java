@@ -28,7 +28,7 @@ public class CG_scaleFromLeftMultiCubeFast extends CommandGroup {
 					addSequential (new auto_driveToAngleWithEncoder(.6,10,-18,136000,136000,.06,"Left"));
 					/////////////////////////////////////////////////////////////////////////////////////
 					
-					addParallel(new auto_intakeOutWithEncoder(0.6, 10, 168000));	//guessing this is where the scale is
+					addParallel(new auto_intakeOutWithEncoder(0.65, 10, 168000));	//guessing this is where the scale is
 //					addSequential(new auto_clawOpenWithEncoder(1.0, 10, 60000));
 					addSequential (new auto_driveToAngleWithEncoder(.3,.8,-20,168000,168000,.03,"Left"));
 					addSequential (new auto_brakeModeOn());
@@ -104,7 +104,7 @@ public class CG_scaleFromLeftMultiCubeFast extends CommandGroup {
 //					addParallel (new CG_ArmToTopTrolleyAndLift());
 					addParallel (new CG_ArmToTop2());
 					//change from 26000 to 30000 before q49
-					addSequential(new auto_driveToAngleWithEncoder(.6,10,0,37000,37000,.06,"Right"));
+					addSequential(new auto_driveToAngleWithEncoder(.6,10,0,35000,35000,.06,"Right"));
 					
 					//score third cube
 					addSequential(new auto_wait(0.35));
@@ -143,9 +143,9 @@ public class CG_scaleFromLeftMultiCubeFast extends CommandGroup {
 					addSequential (new auto_brakeModeOn());
 					addSequential (new auto_driveToAngleWithEncoder(.6, 4, -93, 200000, 200000, 0.032, true, 0.02, "Left"));// speed was .5 
 					addParallel (new CG_ArmToTop());
-					addSequential (new auto_driveToAngleWithEncoder(.6, 4, -95, 296000, 296000, 0.035, true, 0.02, "Left"));// speed was .6 //282000
+					addSequential (new auto_driveToAngleWithEncoder(.6, 4, -95, 293000, 293000, 0.035, true, 0.02, "Left"));// 296000
 					//**changed to 303000 from 305000 before q43**//
-					addSequential (new auto_driveToAngleWithEncoder(.6, 4, -5, 303000, 303000, 0.04, true, 0.02, "Right"));//276000
+					addSequential (new auto_driveToAngleWithEncoder(.6, 4, 0, 306000, 306000, 0.04, true, 0.02, "Right"));//276000
 					addSequential(new auto_LiftUp(580, 500)); //600, 500 practice
 					addSequential(new auto_moveUpperPosition(1850, 525)); //540 practice
 					addSequential(new auto_resetEncoder());
@@ -174,8 +174,8 @@ public class CG_scaleFromLeftMultiCubeFast extends CommandGroup {
 					addSequential(new auto_wait(.2));
 					addSequential(new auto_resetEncoder());
 					
-					// Drive to scale
-					addParallel(new auto_driveToAngleWithEncoder(0.6, .9, 0, 44000, 44000, 0.06, "Right"));
+					// Drive to scale 2nd cube
+					addParallel(new auto_driveToAngleWithEncoder(0.6, .9, 5, 36000, 36000, 0.06, "Right"));
 					
 					addSequential(new auto_wait(0.3));
 					addSequential(new auto_moveUpperPositionWithIsFinished(2850,500,475)); //525, 500 practice

@@ -138,7 +138,7 @@ public class Robot extends TimedRobot {
 		autonchooser.addObject("*Partner Scale On Our Right", "PartnerScaleOnOurRight");
 		autonchooser.addObject("*Favor Opponents Scale", "FavorOpponentsScale");
 		autonchooser.addObject("*Favor Our Scale Solo", "FavorOurScaleSolo");
-		autonchooser.addObject("*Left Only Scale or Switch", "CG_beesMatch");
+		autonchooser.addObject("*Bees Match", "CG_beesMatch");
 		autonchooser.addObject("*Triple Left Scale Single Right","CG_scaleFromLeftMultiCubeFarRightScale");
 		autonchooser.addObject("*Switch From Center Pyramid Cube to Scale", "CG_pyramid");
 //		autonchooser.addObject("LiftUpperPosition", "LiftUpperPosition");

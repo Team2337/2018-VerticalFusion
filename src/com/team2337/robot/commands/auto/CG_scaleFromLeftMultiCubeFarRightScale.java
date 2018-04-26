@@ -141,32 +141,37 @@ public class CG_scaleFromLeftMultiCubeFarRightScale extends CommandGroup {
 					addParallel(new auto_bigBrother_DoNothing());
 					addSequential(new auto_holdUpperPosition(0.1));
 					//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
-					addSequential (new auto_wait(4)); //allows partner to go by first
+//					addSequential (new auto_wait(4)); //allows partner to go by first
 					
 					addSequential(new auto_driveToAngleWithEncoder(.7, 3, 0, 9000, 9000, 0.02)); //Drive Forward
 //					addSequential(new auto_gyroMMTurn(-75, 0.75)); //Turn Right
-					addSequential(new auto_driveToAngleWithEncoder(.7, 8, -85, 155000, 155000, 0.025, "Left")); //101000 - Drive forward
+					addSequential(new auto_driveToAngleWithEncoder(.7, 8, -85, 180000, 180000, 0.025, "Left")); //101000 - Drive forward
 					
-					addSequential(new auto_driveToAngleWithEncoder(.7, 3, 0, 190000, 190000, 0.02, "Right"));
+					addSequential(new auto_driveToAngleWithEncoder(.7, 3, 0, 200000, 200000, 0.025, "Right"));
 					addParallel (new auto_moveUpperPosition(2127, 500));
-					addSequential(new auto_driveToAngleWithEncoder(.7, 3, 0, 247000, 247000, 0.02, "Right"));
+					addSequential(new auto_driveToAngleWithEncoder(.7, 3, 2, 247000, 247000, 0.025, "Right"));
 					addParallel (new auto_moveUpperPosition(2300, 500));
-					addSequential(new auto_driveToAngleWithEncoder(.7, 3, 0, 300000, 300000, 0.02, "Right"));
+					addSequential(new auto_driveToAngleWithEncoder(.7, 3, 2, 329000, 329000, 0.025, "Right"));
 					addSequential (new auto_brakeModeOn());
-					addSequential (new auto_moveUpperPosition(2300, 500));
-					addSequential (new auto_wait(1));
+//					addSequential (new auto_moveUpperPosition(2300, 500));
+//					addSequential (new auto_wait(1));
 					addSequential (new auto_LiftUp(580)); //600 practice
 					//150000 at 8ft to 204in 
 					
+					//thursday night changes:
+					//changed drive angle from 3 to 2
+					//commented moveuppos and auto wait 1sec
+					//commented claw open
+					
 					addSequential(new shifter_low());
-					addSequential (new auto_gyroMMTurn(60, 1));
+					addSequential (new auto_gyroMMTurn(75, 1));
 					addParallel (new auto_driveForwardWithTime(0,1));
 					addSequential (new auto_moveUpperPosition(1700, 500));
 					addSequential (new auto_wait(0.5));
-					addSequential(new auto_intakeOut(0.8,2));
-					addSequential (new auto_clawOpen());
+					addSequential(new auto_intakeOut(0.8,0.75));
+//					addSequential (new auto_clawOpen());
 					addSequential (new auto_moveUpperPosition(2800, 500));
-					addSequential (new auto_wait(1));
+					addSequential (new auto_wait(0.5));
 					addSequential (new auto_LiftDown(60, 80)); //100,120 practice
 					addSequential (new auto_moveUpperPosition(2800, 80));
 					addSequential (new auto_driveForwardWithTime(-.3,0.5));
