@@ -225,7 +225,7 @@ public class Robot extends TimedRobot {
 			m_autonomousCommand = new CG_scaleFromLeftMultiCubeFast(ourswitch, scale);//CG_scaleFromLeftMultiCube2(ourswitch, scale);
 			break;
 		case "ScaleRightSideMutli":
-			m_autonomousCommand = new CG_scaleFromRightMultiCube2(ourswitch, scale);
+			m_autonomousCommand = new CG_scaleFromRightMultiCubeFast(ourswitch, scale);
 			break;
 		case "ScaleLeftSideMutliWithSwitch":
 			m_autonomousCommand = new CG_scaleFromLeftMultiCubeTwoSwitch(ourswitch, scale);

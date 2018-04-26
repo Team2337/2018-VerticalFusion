@@ -187,14 +187,14 @@ public class alt_Control_Import extends Command {
 		 * So we don't crush the snakes
 		 */
 		
-		/*if(liftSetPoint > practiceLiftRestPoint && Robot.trolley.getPosition() < Robot.trolley.trolleyPassover) {
+		if(liftSetPoint > practiceLiftRestPoint && Robot.trolley.getPosition() < Robot.trolley.trolleyPassover) {
 			liftSetPoint = practiceLiftRestPoint;
-		}*/
-		/*
+		}
+		
 		if(Robot.lift.getPosition() > practiceLiftRestPoint) {
 			trolleySetPoint = points[10][trolleySetPoints];
 		}
-		*/
+		
 		// SET ALL SETPOINTS
 
 		// Disabled after Autonomous until throttleToggle activated.

@@ -9,7 +9,7 @@ public class CG_ArmToTopTrolleyAndLift extends CommandGroup{
 
 //		addSequential(new auto_wait(0.3));
 		addParallel(new auto_LiftUp(400, 300));
-		addSequential(new auto_moveUpperPositionWithIsFinished(2000,500,475)); //525, 500 practice
+		addSequential(new auto_moveUpperPositionWithIsFinished(2000,525,500)); //525, 500 practice
 		addSequential(new auto_moveUpperPositionWithIsFinished(2300,525)); //540 practice
 		
 		/*

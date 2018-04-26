@@ -28,31 +28,32 @@ public class CG_scaleFromLeftMultiCubeFast extends CommandGroup {
 					addSequential (new auto_driveToAngleWithEncoder(.6,10,-18,136000,136000,.06,"Left"));
 					/////////////////////////////////////////////////////////////////////////////////////
 					
-					addParallel(new auto_intakeOutWithEncoder(0.75, 10, 172000));	//guessing this is where the scale is
+					addParallel(new auto_intakeOutWithEncoder(0.6, 10, 168000));	//guessing this is where the scale is
 //					addSequential(new auto_clawOpenWithEncoder(1.0, 10, 60000));
 					addSequential (new auto_driveToAngleWithEncoder(.3,.8,-20,168000,168000,.03,"Left"));
 					addSequential (new auto_brakeModeOn());
-					
+					addSequential(new auto_clawOpen());
 					addSequential(new auto_armMoveWithFinish(2800, 2700));
-					addParallel(new auto_moveUpperPosition(2800,60)); //525, 500 practice
+					addParallel(new auto_moveUpperPosition(2800,45)); //525, 500 practice
 					addSequential(new auto_LiftDown(90, 150));
-//					addSequential(new auto_liftStop());
+//					addSequential(new auaddSequential(new auto_clawOpen());to_liftStop());
+					addSequential(new auto_clawOpen());
 					addSequential(new auto_resetEncoder());
 					
 					
 					
 					// Drive to second cube
-					addParallel(new auto_driveToAngleWithEncoder(-.7,10,10,34000,34000,.06,"Right"));
 					addSequential(new auto_clawOpen());
+					addParallel(new auto_driveToAngleWithEncoder(-.7,10,7,30000,30000,.06,"Right"));
 					//Move arm to the pickup position 
-					addSequential(new auto_moveUpperPositionWithIsFinished(3300,60)); //100 practice
-					addSequential(new auto_wait(0.3));
+					addSequential(new auto_moveUpperPositionWithIsFinished(3300,45)); //100 practice
+					addSequential(new auto_wait(0.4));
 					addSequential(new auto_liftStop());
 					
 					//grab second cube
 					addSequential(new auto_wait(0.1));
-					addParallel(new auto_intake_in(0.6, 3));
-					addSequential(new auto_wait(0.7));
+					addParallel(new auto_intake_in(0.6, 3)); 
+					addSequential(new auto_wait(0.6));
 					addSequential(new auto_clawClose());
 					addSequential(new auto_claw60());
 					addParallel(new auto_intake_in(1.0, 1));
@@ -62,13 +63,14 @@ public class CG_scaleFromLeftMultiCubeFast extends CommandGroup {
 //					addSequential(new CG_scorePositionLeftFast());  //score second cube
 					
 					
-					addParallel(new auto_driveToAngleWithEncoder(0.5, 2, 0, 32000, 32000, 0.06, "Right"));	//Practice only***********************************************************
+					addParallel(new auto_driveToAngleWithEncoder(0.5, 2, 0, 26000, 26000, 0.06, "Right"));	//Practice only***********************************************************
 					
-					addSequential(new auto_wait(0.5));
+					addSequential(new auto_wait(0.4));
 					addSequential(new auto_moveUpperPositionWithIsFinished(2300,525)); //540 practice
 					addSequential(new auto_LiftUp(580, 500)); //600, 500 practice
+					addSequential(new auto_wait(0.1));
 					addSequential(new auto_moveUpperPosition(1750, 525)); //540 practice
-					addSequential(new auto_wait(0.6));
+					addSequential(new auto_wait(0.7));
 //						addSequential(new auto_intakeOut(0.4, 0.4));
 					addSequential(new claw_open());
 					addSequential(new auto_wait(0.2));
@@ -76,10 +78,10 @@ public class CG_scaleFromLeftMultiCubeFast extends CommandGroup {
 					addSequential(new auto_wait(0.4));
 					addParallel(new auto_driveForwardWithTime(-0.5, .5));		//Practice only***********************************************************
 					addSequential(new auto_LiftDown(90, 300));
-					addParallel(new auto_moveUpperPosition(2850,60)); //100 practice
+					addParallel(new auto_moveUpperPosition(2850,45)); //100 practice
 					addSequential(new auto_wait(0.3));
 					addSequential(new auto_liftStop());
-					addSequential(new auto_moveUpperPosition(3300,60)); //100 practice
+					addSequential(new auto_moveUpperPosition(3300,45)); //100 practice
 					
 					
 					addSequential(new auto_resetEncoder());
@@ -99,11 +101,25 @@ public class CG_scaleFromLeftMultiCubeFast extends CommandGroup {
 					
 					//go to carry and move to score
 					addSequential(new auto_driveToAngleWithEncoder(.6,10,35,16000,16000,.045,"Right"));
-					addParallel (new CG_ArmToTopTrolleyAndLift());
+//					addParallel (new CG_ArmToTopTrolleyAndLift());
+					addParallel (new CG_ArmToTop2());
 					//change from 26000 to 30000 before q49
 					addSequential(new auto_driveToAngleWithEncoder(.6,10,0,37000,37000,.06,"Right"));
 					
 					//score third cube
+					addSequential(new auto_wait(0.35));
+					addSequential(new auto_LiftUp(400, 300)); //600, 500 practice
+					addSequential(new auto_moveUpperPosition(1600, 525)); //540 practice
+					addSequential(new auto_wait(0.6));
+					addSequential(new claw_open());
+					addSequential(new auto_wait(0.2));
+					addSequential(new auto_moveUpperPositionWithIsFinished(2850,500)); //525 practice
+					addSequential(new auto_wait(0.4));
+					addSequential(new auto_LiftDown(90, 150));
+					addSequential(new auto_moveUpperPosition(2850,60)); //100 practice
+					addSequential(new auto_wait(0.3));
+					addSequential(new auto_liftStop());
+					/*
 					addSequential(new auto_wait(0.35));
 					addSequential(new auto_moveUpperPosition(1600, 525)); //540 practice
 					addSequential(new auto_wait(0.6));
@@ -115,6 +131,7 @@ public class CG_scaleFromLeftMultiCubeFast extends CommandGroup {
 					addSequential(new auto_moveUpperPosition(2850,60)); //100 practice
 					addSequential(new auto_wait(0.3));
 					addSequential(new auto_liftStop());
+					*/
 					
 				//Switch is on our side scale is not LRL
 					//Score in switch from side and try to grab cube
@@ -140,10 +157,10 @@ public class CG_scaleFromLeftMultiCubeFast extends CommandGroup {
 					addSequential(new auto_moveUpperPositionWithIsFinished(2850,500)); //525 practice
 					addSequential(new auto_wait(0.4));
 					addSequential(new auto_LiftDown(90, 300));
-					addSequential(new auto_moveUpperPosition(2850,60)); //100 practice
+					addSequential(new auto_moveUpperPosition(2850,45)); //100 practice
 					addSequential(new auto_wait(0.3));
 					addSequential(new auto_liftStop());
-					addSequential(new auto_moveUpperPosition(3300,60)); //100 practice
+					addSequential(new auto_moveUpperPosition(3300,45)); //100 practice
 					
 					//Drive to second cube.
 				
@@ -174,11 +191,11 @@ public class CG_scaleFromLeftMultiCubeFast extends CommandGroup {
 //					addParallel (new auto_driveToAngleWithEncoder(-.5, 4, -30, 10000, 10000, 0.04, true));// speed was .9		//Practice only***********************************************************
 					addParallel(new auto_driveToAngleWithEncoder(-.6, 4, 0, 10000, 10000, 0.04, "Left"));
 					addSequential(new auto_LiftDown(90, 300));
-					addSequential(new auto_moveUpperPosition(2850,60)); //100 practice
+					addSequential(new auto_moveUpperPosition(2850,45)); //100 practice
 					addSequential(new auto_wait(0.3));
 					addParallel(new auto_driveToAngleWithEncoder(-.6, 4, -30, 26000, 26000, 0.04, "Left"));
 					addSequential(new auto_liftStop());
-					addSequential(new auto_moveUpperPosition(3300,60)); //100 practice
+					addSequential(new auto_moveUpperPosition(3300,45)); //100 practice
 					
 				//Switch is NOT on our side scale is NOT RLR
 					//Cross the line
