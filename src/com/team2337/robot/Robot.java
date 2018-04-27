@@ -132,7 +132,8 @@ public class Robot extends TimedRobot {
 		autonchooser.addObject("Scale From Left Score On Side", "ScaleLeftSide");
 		autonchooser.addObject("Scale From Right Score On Side", "ScaleRightSide");
 		autonchooser.addObject("*Scale Greedy Right", "ScaleRightSideMutli");
-		autonchooser.addObject("*Scale Greedy Left", "ScaleLeftSideMutli");
+		autonchooser.addObject("*Scale Greedy Left Red", "ScaleLeftSideMutli");
+		autonchooser.addObject("*Scale Greedy Left Blue", "ScaleLeftSideMutliBlue");
 //		autonchooser.addObject("*Scale Left Only with Switches", "ScaleLeftSideMutliWithSwitch");
 		autonchooser.addObject("*Partner Scale On Our Left", "PartnerScaleOnOurLeft");
 		autonchooser.addObject("*Partner Scale On Our Right", "PartnerScaleOnOurRight");
@@ -223,6 +224,9 @@ public class Robot extends TimedRobot {
 			break;
 		case "ScaleLeftSideMutli":
 			m_autonomousCommand = new CG_scaleFromLeftMultiCubeFast(ourswitch, scale);//CG_scaleFromLeftMultiCube2(ourswitch, scale);
+			break;
+		case "ScaleLeftSideMutliBlue":
+			m_autonomousCommand = new CG_scaleFromLeftMultiCubeFastBlue(ourswitch, scale);//CG_scaleFromLeftMultiCube2(ourswitch, scale);
 			break;
 		case "ScaleRightSideMutli":
 			m_autonomousCommand = new CG_scaleFromRightMultiCubeFast(ourswitch, scale);

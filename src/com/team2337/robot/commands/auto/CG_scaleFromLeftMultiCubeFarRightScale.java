@@ -153,8 +153,8 @@ public class CG_scaleFromLeftMultiCubeFarRightScale extends CommandGroup {
 					addParallel (new auto_moveUpperPosition(2300, 500));
 					addSequential(new auto_driveToAngleWithEncoder(.7, 3, 2, 329000, 329000, 0.025, "Right"));
 					addSequential (new auto_brakeModeOn());
-//					addSequential (new auto_moveUpperPosition(2300, 500));
-//					addSequential (new auto_wait(1));
+					addSequential (new auto_moveUpperPosition(2300, 500));
+					addSequential (new auto_wait(1));
 					addSequential (new auto_LiftUp(580)); //600 practice
 					//150000 at 8ft to 204in 
 					
@@ -164,9 +164,9 @@ public class CG_scaleFromLeftMultiCubeFarRightScale extends CommandGroup {
 					//commented claw open
 					
 					addSequential(new shifter_low());
-					addSequential (new auto_gyroMMTurn(75, 1));
+					addSequential (new auto_gyroMMTurn(83, 1));
 					addParallel (new auto_driveForwardWithTime(0,1));
-					addSequential (new auto_moveUpperPosition(1700, 500));
+					addSequential (new auto_moveUpperPosition(1800, 500));
 					addSequential (new auto_wait(0.5));
 					addSequential(new auto_intakeOut(0.8,0.75));
 //					addSequential (new auto_clawOpen());

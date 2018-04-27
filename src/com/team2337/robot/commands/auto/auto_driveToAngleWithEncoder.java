@@ -133,7 +133,7 @@ public class auto_driveToAngleWithEncoder extends Command {
 	
     protected void end() {
     	RobotMap.drive.arcadeDrive(0,0,true);
-    	System.out.println(isFinishedPos);
+    	System.out.println(isFinishedPos + "  " + targetAngle + "  " + Robot.gyro.getYaw());
     }
     
     protected void interrupted() {
