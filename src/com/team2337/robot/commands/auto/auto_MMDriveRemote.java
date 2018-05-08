@@ -91,7 +91,7 @@ public class auto_MMDriveRemote extends Command {
 		RobotMap.chassis_leftFront.setSelectedSensorPosition(0, 0, timeoutMs);
 
 		driveFR = 0; // 0.00425; //.01370574769317461; forward .17
-		drivePR = 0.10;// .03; // forward .013
+		drivePR = 0.05;// .03; // forward .013
 		driveIR = 0;
 		driveDR = 2;
 		drivePeak = .5;
@@ -145,7 +145,7 @@ public class auto_MMDriveRemote extends Command {
 
 		RobotMap.chassis_rightFront.set(ControlMode.MotionMagic, distance, DemandType.AuxPID, 10);
 		RobotMap.chassis_leftFront.follow(RobotMap.chassis_rightFront, FollowerType.AuxOutput1);
-		setTimeout(4);
+		setTimeout(2.5);
 	}
 
 	// Called repeatedly when this Command is scheduled to run
@@ -172,7 +172,9 @@ public class auto_MMDriveRemote extends Command {
 	// Called once after isFinished returns true
 	protected void end() {
 		angleDone = false;
-		Robot.chassis.setBrakeMode(NeutralMode.Coast);
+		Robot.chassis.setBrakeMode(NeutralMode.Brake);
+		RobotMap.chassis_rightFront.set(ControlMode.PercentOutput, 0);
+		RobotMap.chassis_leftFront.set(ControlMode.PercentOutput, 0);
 	}
 
 	// Called when another command which requires one or more of the same
