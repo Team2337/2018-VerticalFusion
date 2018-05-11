@@ -145,13 +145,13 @@ public class auto_MMDriveRemote extends Command {
 
 		RobotMap.chassis_rightFront.set(ControlMode.MotionMagic, distance, DemandType.AuxPID, 10);
 		RobotMap.chassis_leftFront.follow(RobotMap.chassis_rightFront, FollowerType.AuxOutput1);
-		setTimeout(2.5);
+		setTimeout(6);
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		/*
-		if (var) {
+		
+		if (RobotMap.chassis_rightFront.getSelectedSensorPosition(0) > distance - 500 && RobotMap.chassis_rightFront.getSelectedSensorPosition(0) < distance) {
 			time++;
 		} else {
 			time = 0;
@@ -160,12 +160,12 @@ public class auto_MMDriveRemote extends Command {
 			angleDone = true;
 			time = 0;
 		}
-*/
+
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return isTimedOut(); //|| angleDone; // || getBetween(rev, RobotMap.chassis_leftFront.getPosition(), 0.002) ||
+		return isTimedOut() || angleDone; //|| angleDone; // || getBetween(rev, RobotMap.chassis_leftFront.getPosition(), 0.002) ||
 											// Robot.oi.getOperatorControls().getRawButton(3);
 	}
 
