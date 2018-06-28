@@ -145,9 +145,9 @@ public class OI {
 		/* ====== DRIVER JOYSTICK ===== */
 		
 		driver_GreenA			.whileHeld(new climbWinch_driveVertical(1));
-		driver_RedB				.whenPressed(new DoNothing()); 
-		driver_BlueX			.whenPressed(new DoNothing());  
-		driver_YellowY			.whileHeld(new lift_climb()); 
+		driver_RedB				.whenPressed(new CG_driverCubeHigh()); 
+		driver_BlueX			.whenPressed(new CG_driverCubeLow());  
+		driver_YellowY			.whenPressed(new CG_driverCubeMid()); 
 		
 		driver_BumperLeft		.whileHeld(new shifter_low());
 		driver_BumperLeft		.whenReleased(new shifter_high());
@@ -160,10 +160,10 @@ public class OI {
 		driver_LeftStick		.whenPressed(new DoNothing()); 
 		driver_RightStick		.whenPressed(new DoNothing()); 
 		
-		driver_TriggerLeft		.whileHeld(new DoNothing());
-		driver_TriggerRight		.whileHeld(new DoNothing());
+		driver_TriggerLeft		.whileHeld(new intake_out(1.0));
+		driver_TriggerRight		.whenPressed(new claw_CGCloseAndIntake());
 		
-		driver_POVUp			.whenPressed(new DoNothing());  
+		driver_POVUp			.whenPressed(new CG_returnToPickup());  
 		//driver_POVUpRight		.whenPressed(new _DoNothing()); 
 	    driver_POVRight			.whenPressed(new DoNothing()); 
 	   	//driver_POVDownRight	.whenPressed(new _DoNothing()); 

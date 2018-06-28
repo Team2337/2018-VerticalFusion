@@ -19,14 +19,14 @@ public class CG_bootCamp extends CommandGroup {
 			
 			/////Start here
 			
-			addParallel(new auto_MMDriveRemote(70000, 0));
+//			addParallel(new auto_MMDriveRemote(xxx, 0));
 //							addParallel(new auto_MMDriveRemote(70000, 0));
 		
-			
+			/*
 			addSequential(new auto_wait(1));
-			addSequential(new auto_moveUpperPositionWithIsFinished(2000, 525, 500));
-			addSequential(new auto_moveUpperPosition(2300, 525));
-			addSequential(new auto_LiftUp(600));
+			addSequential(new auto_moveUpperPositionWithIsFinished(2000, xxx, 500));
+			addSequential(new auto_moveUpperPosition(xxx, 525));
+			addSequential(new auto_LiftUp(xxx));
 			
 		
 //			addSequential(new auto_wait(1));
@@ -36,7 +36,7 @@ public class CG_bootCamp extends CommandGroup {
 
 			
 			addSequential(new auto_wait(1));
-			addSequential(new auto_moveUpperPosition(1500, 525));
+			addSequential(new auto_moveUpperPosition(xxx, 525));
 //						addSequential(new auto_moveUpperPosition(1500, 525));
 			addSequential(new auto_wait(1));
 			addSequential(new auto_intakeOut(0.6, 1));
@@ -44,13 +44,21 @@ public class CG_bootCamp extends CommandGroup {
 			
 			
 			addSequential(new auto_wait(.375));
-			addSequential(new auto_moveUpperPosition(2800, 525));
+			addSequential(new auto_moveUpperPosition(xxx, 525));
 			addSequential(new auto_wait(1));
 			addSequential(new auto_LiftDown(60, 200));
-			addSequential(new auto_moveUpperPosition(2800, 60));
+			addSequential(new auto_moveUpperPosition(2800, xxx));
 			addSequential(new auto_wait(1));
-			addSequential(new auto_moveUpperPosition(3300, 60));
+			addSequential(new auto_moveUpperPosition(xxx, 60));
 			
+			
+//			addSequential(new auto_wait(.375));
+//			addSequential(new auto_moveUpperPosition(2800, 525));
+//			addSequential(new auto_wait(1));
+//			addSequential(new auto_LiftDown(60, 200));
+//			addSequential(new auto_moveUpperPosition(2800, 60));
+//			addSequential(new auto_wait(1));
+//			addSequential(new auto_moveUpperPosition(3300, 60));
 			
 			
 //			base do not delete
