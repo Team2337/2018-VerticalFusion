@@ -188,18 +188,20 @@ public class auto_MMDrivePigeon extends Command {
 
 
 	protected void execute() {
-
+		//I'm not sure if anything needs to go here
 	}
 
 
 	protected boolean isFinished() {
-		return isTimedOut(); 
+		//Ends the command if time is up, or the right encoder is equal to the disired position
+		return isTimedOut() || chassis_rightFront.getSensorCollection().getQuadraturePosition() == distance; 
 
 	}
 
 
 	protected void end() {
-
+		chassis_rightFront.set(ControlMode.PercentOutput, 0);
+		chassis_leftFront.set(ControlMode.PercentOutput, 0);
 	}
 
 
