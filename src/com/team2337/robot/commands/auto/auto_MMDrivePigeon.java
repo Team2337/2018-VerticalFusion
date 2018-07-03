@@ -12,6 +12,7 @@ import com.team2337.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.ctre.phoenix.motorcontrol.StatusFrame;
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -28,19 +29,23 @@ public class auto_MMDrivePigeon extends Command {
 	TalonSRX chassis_leftFront = RobotMap.chassis_leftFront;
 	TalonSRX chassis_rightFront = RobotMap.chassis_rightFront;
 	public int distance;
-	public int degree;
+	public double degree;
+	double degreeDifference, acceptableDistError, time, timeSlices, angleSlices;
+	boolean distDone, var = false; 
+	double x, timeSlicesX, slice;
 	PigeonIMU pidgey = Pigeon.pidgey;
 	
 
 
-	public auto_MMDrivePigeon(int distance, int degree) {
+	public auto_MMDrivePigeon(int distance, double degree) {
 		requires(Robot.chassis);
 		this.distance = distance;
-		this.degree = degree;
+		this.degree = degree * 10;
 	}
 
 
 	protected void initialize() {
+		acceptableDistError = 1000;
 		/* Disable all motor controllers */
 		chassis_rightFront.set(ControlMode.PercentOutput, 0);
 		chassis_leftFront.set(ControlMode.PercentOutput, 0);
@@ -184,17 +189,47 @@ public class auto_MMDrivePigeon extends Command {
 		chassis_rightFront.set(ControlMode.MotionMagic, distance, DemandType.AuxPID, degree);
 		chassis_leftFront.follow(chassis_rightFront, FollowerType.AuxOutput1);
 
+		slice = 500; 
+		timeSlices = distance / slice;
+		angleSlices = degree / timeSlices;
+		x = 1;
+		timeSlicesX = slice;
 	}
 
 
 	protected void execute() {
-		//I'm not sure if anything needs to go here
+		if(chassis_rightFront.getSelectedSensorPosition(0) > timeSlicesX) {
+			degree = angleSlices * x;
+			x++;
+			timeSlicesX += slice; 
+		}
+		chassis_rightFront.set(ControlMode.MotionMagic, distance, DemandType.AuxPID, degree);
+		
+		degreeDifference = Math.abs(chassis_rightFront.getSelectedSensorPosition(0)) - distance;
+		var = (Math.abs(degreeDifference) < acceptableDistError);
+		
+		SmartDashboard.putNumber("TIME", time);
+		SmartDashboard.putBoolean("VAR", var);
+		SmartDashboard.putNumber("DEGREEDIFF", degreeDifference);
+		SmartDashboard.putNumber("Degree", degree);
+		SmartDashboard.putNumber("QuadPosRight", chassis_rightFront.getSelectedSensorPosition(0));
+		
+		if (var) {
+			time++;
+		} else {
+			time = 0;
+		}
+		if (time > 5) {
+			distDone = true;
+			time = 0;
+		}
+
 	}
 
 
 	protected boolean isFinished() {
 		//Ends the command if time is up, or the right encoder is equal to the disired position
-		return isTimedOut() || chassis_rightFront.getSensorCollection().getQuadraturePosition() == distance; 
+		return isTimedOut() || distDone; 
 
 	}
 

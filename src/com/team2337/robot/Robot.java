@@ -142,7 +142,7 @@ public class Robot extends TimedRobot {
 		autonchooser.addObject("*Bees Match", "CG_beesMatch");
 		autonchooser.addObject("*Triple Left Scale Single Right","CG_scaleFromLeftMultiCubeFarRightScale");
 		autonchooser.addObject("*Switch From Center Pyramid Cube to Scale", "CG_pyramid");
-		autonchooser.addObject("Boot Camp 2018", "CG_bootCamp");
+	    autonchooser.addObject("CG_MMDrive", "CG_MMDrive");
 		
 //		autonchooser.addObject("LiftUpperPosition", "LiftUpperPosition");
 //		autonchooser.addObject("PRACTICE CenterSwitchRight", "CenterSwitchRight");
@@ -278,6 +278,8 @@ public class Robot extends TimedRobot {
 		case "CG_bootCamp":
 			m_autonomousCommand = new CG_bootCamp();
 			break;
+		case "CG_MMDrive" :
+			m_autonomousCommand = new CG_autoMMDrivePigeon();
 		default:
 			m_autonomousCommand = new CG_autoDoNothing(ourswitch, scale);
 			break;
