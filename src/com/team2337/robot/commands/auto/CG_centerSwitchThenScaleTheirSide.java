@@ -18,7 +18,7 @@ public class CG_centerSwitchThenScaleTheirSide extends CommandGroup {
 			addParallel(new auto_bigBrother_DoNothing());
 			addSequential(new auto_holdUpperPosition(0.1));
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
-//			addSequential(new commonCG_scoreLeftSwitch());
+			addSequential(new commonCG_scoreLeftSwitch());
 			addSequential(new auto_resetEncoder());
 			
 			addSequential(new auto_moveUpperPosition(2127,500));   ///Touch down
@@ -54,6 +54,7 @@ public class CG_centerSwitchThenScaleTheirSide extends CommandGroup {
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
 			addSequential(new commonCG_scoreLeftSwitch());
 			addSequential(new commonCG_armToPickupFromFront());
+			addSequential(new commonCG_driveAroundNearSwitchLeft());
 
 			
 		// **************************  RLR  **************************
@@ -64,6 +65,7 @@ public class CG_centerSwitchThenScaleTheirSide extends CommandGroup {
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!		
 			addSequential(new commonCG_scoreRightSwitch());
 			addSequential(new commonCG_armToPickupFromFront());
+			addSequential(new commonCG_driveAroundSwitchRight());
 			
 		// **************************  RRR  **************************
 		//Score in right switch, drive left around opp switch to scale and get cube.			
@@ -73,6 +75,7 @@ public class CG_centerSwitchThenScaleTheirSide extends CommandGroup {
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!		
 			addSequential(new commonCG_scoreRightSwitch());
 			addSequential(new commonCG_armToPickupFromFront());
+			addSequential(new commonCG_driveAroundSwitchLeft());
 			
 		}
 		

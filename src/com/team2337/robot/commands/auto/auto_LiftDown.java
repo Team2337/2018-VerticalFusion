@@ -20,6 +20,11 @@ public class auto_LiftDown extends Command{
 		liftDone = true;
 	}
 	
+	/**
+	 * This command sets the setpoint on the lift, and does NOT end the command until a certain point has been reached
+	 * @param lift
+	 * @param liftEnd
+	 */
 	public auto_LiftDown(double lift, double liftEnd) {
 		this.lift = lift;
 		this.liftEnd = liftEnd;

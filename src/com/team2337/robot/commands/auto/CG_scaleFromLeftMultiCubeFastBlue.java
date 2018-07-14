@@ -145,7 +145,8 @@ public class CG_scaleFromLeftMultiCubeFastBlue extends CommandGroup {
 					addParallel (new CG_ArmToTop());
 					addSequential (new auto_driveToAngleWithEncoder(.6, 4, -95, 293000, 293000, 0.035, true, 0.02, "Left"));// 296000
 					//**changed to 303000 from 305000 before q43**//
-					addSequential (new auto_driveToAngleWithEncoder(.6, 4, 2.5, 306000, 306000, 0.04, true, 0.02, "Right"));//276000
+					addSequential (new auto_driveToAngleWithEncoder(.6, 4, 2.5, 301000, 301000, 0.04, true, 0.02, "Right"));//276000
+					//changed from 306000 to 301000 because the scale was hit
 					addSequential(new auto_LiftUp(580, 500)); //600, 500 practice
 					addSequential(new auto_moveUpperPosition(1850, 525)); //540 practice
 					addSequential(new auto_resetEncoder());

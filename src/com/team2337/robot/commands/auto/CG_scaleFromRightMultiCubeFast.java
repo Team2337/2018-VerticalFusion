@@ -104,7 +104,10 @@ public class CG_scaleFromRightMultiCubeFast extends CommandGroup {
 //					addParallel (new CG_ArmToTopTrolleyAndLift());
 					addParallel (new CG_ArmToTop2());
 					//change from 26000 to 30000 before q49
-					addSequential(new auto_driveToAngleWithEncoder(.6,10,0,37000,37000,.06,"Left"));
+					addSequential(new auto_driveToAngleWithEncoder(.6,10,0,40000,40000,.06,"Left"));
+//					addSequential(new auto_driveToAngleWithEncoder(.6,10,0,37000,37000,.06,"Left"));
+					//changed in practice
+					
 					
 					//score third cube
 					addSequential(new auto_wait(0.35));

@@ -145,9 +145,9 @@ public class OI {
 		/* ====== DRIVER JOYSTICK ===== */
 		
 		driver_GreenA			.whileHeld(new climbWinch_driveVertical(1));
-		driver_RedB				.whenPressed(new CG_driverCubeHigh()); 
-		driver_BlueX			.whenPressed(new CG_driverCubeLow());  
-		driver_YellowY			.whenPressed(new CG_driverCubeMid()); 
+		driver_RedB				.whenPressed(new DoNothing()); 
+		driver_BlueX			.whenPressed(new DoNothing());  
+		driver_YellowY			.whenPressed(new DoNothing()); 
 		
 		driver_BumperLeft		.whileHeld(new shifter_low());
 		driver_BumperLeft		.whenReleased(new shifter_high());

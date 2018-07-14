@@ -68,6 +68,24 @@ public class auto_driveToAngleWithEncoder extends Command {
 		this.changeScaleEnc = changeScaleEnc;
 	}
 	
+	/**
+	 * This command drives the chassis motors, using a PID, towards a given setpoint
+	 * @param speed
+	 * Percent of power output on the motor
+	 * @param timeout
+	 * The amount of time the command is allowed the run until it is forced to terminate
+	 * @param angle
+	 * The desired angle the robot should be at, at the end of the command
+	 * @param encoderTargetLeft
+	 * The destination of the Left drive encoder
+	 * @param encoderTargetRight
+	 * The destination of the Right drive encoder
+	 * @param Pgain
+	 * The P given to the drive 
+	 * @param changeScaleEnc
+	 * Decides which drive encoder is read
+	 * Input "Right" or "Left" to decide what side to read
+	 */
 	public auto_driveToAngleWithEncoder(double speed, double timeout, double angle, int encoderTargetLeft, int encoderTargetRight, double Pgain, String changeScaleEnc) {
 		requires(Robot.chassis);
 		MaxCorrectionRatio = 0.30; /* cap corrective turning throttle to 30 percent of forward throttle */
@@ -81,6 +99,7 @@ public class auto_driveToAngleWithEncoder extends Command {
 	}
 	
     protected void initialize() {
+    	
     	if (Robot.ourswitch.equals("R") || Robot.ourswitch.equals("r") ) {
     		isFinishedSide = true;
    		}
@@ -120,9 +139,7 @@ public class auto_driveToAngleWithEncoder extends Command {
     		//Read right side encoder
     		isFinishedPos = Math.abs(RobotMap.chassis_rightFront.getSelectedSensorPosition(0));
     		encoderEnd = Math.abs(encoderRight);
-    		
     	}
-//    	System.out.println(isFinishedPos);
 
     }
 	

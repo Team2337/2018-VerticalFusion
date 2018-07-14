@@ -2,6 +2,7 @@ package com.team2337.robot.subsystems;
 
 import com.team2337.robot.RobotMap;
 import com.team2337.robot.commands.shifter.shifter_doNothing;
+import com.team2337.robot.commands.shifter.shifter_high;
 import com.team2337.robot.commands.shifter.shifter_low;
 
 import edu.wpi.first.wpilibj.Solenoid;
@@ -18,7 +19,7 @@ public class Shifter extends Subsystem {
 	private final Solenoid left = RobotMap.shifter_left;
 	
 	public void initDefaultCommand() {
-		setDefaultCommand(new shifter_low()); //Changed from do nothing to low for demo
+		setDefaultCommand(new shifter_doNothing()); //Changed from do nothing to low for demo
 	}
 	/**
 	 * Shift the robot into high gear

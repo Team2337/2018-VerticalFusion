@@ -7,6 +7,13 @@ import edu.wpi.first.wpilibj.command.Command;
 public class auto_moveUpperPosition extends Command {
 	double arm,trolley;
 	
+	/**
+	 * Sets the setpoints of the arm and trolley at the same time
+	 * @param arm
+	 * Arm setpoint
+	 * @param trolley
+	 * Trolley setpoint
+	 */
 	public auto_moveUpperPosition(double arm, double trolley) {
 		requires(Robot.arm);
 		this.arm = arm;

@@ -18,7 +18,7 @@ public class CG_centerSwitchThenScaleOurSide extends CommandGroup {
 			addParallel(new auto_bigBrother_DoNothing());
 			addSequential(new auto_holdUpperPosition(0.1));
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
-//			addSequential(new commonCG_scoreLeftSwitch());
+			addSequential(new commonCG_scoreLeftSwitch());
 			addSequential(new auto_resetEncoder());
 			addParallel(new auto_driveToAngleWithEncoder(-.5, 3, 0, 20000, 20000, 0.02));
 			addSequential(new commonCG_armToPickupFromFront());
@@ -34,7 +34,7 @@ public class CG_centerSwitchThenScaleOurSide extends CommandGroup {
 			addParallel(new auto_bigBrother_DoNothing());
 			addSequential(new auto_holdUpperPosition(0.1));
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
-//			addSequential(new commonCG_scoreLeftSwitch());
+			addSequential(new commonCG_scoreLeftSwitch());
 			addSequential(new auto_resetEncoder());
 
 			addSequential(new commonCG_armToPickupFromFront());
@@ -90,7 +90,7 @@ public class CG_centerSwitchThenScaleOurSide extends CommandGroup {
 			addParallel(new auto_bigBrother_DoNothing());
 			addSequential(new auto_holdUpperPosition(0.1));
 			//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE LINES YOU WILL SEND THE TROLLEY FLYING!!!!!		
-			//addSequential(new commonCG_scoreRightSwitch());
+			addSequential(new commonCG_scoreRightSwitch());
 			addSequential(new auto_resetEncoder());
 			addParallel(new auto_driveToAngleWithEncoder(-.5, 3, 0, 30000, 30000, 0.02));
 			addSequential(new commonCG_armToPickupFromFront());

@@ -13,7 +13,8 @@ public class commonCG_driveAroundSwitchRight extends CommandGroup {
 		addSequential(new auto_driveToAngleWithEncoder(-.5, 3, 0, 42000, 42000, 0.04));
 		
 		addSequential(new auto_gyroMMTurn(-75, 0.75));
-		addSequential(new auto_driveToAngleWithEncoder(.7, 8, -75, 101000, 101000, 0.025, true));
+		addSequential(new auto_driveToAngleWithEncoder(.7, 8, -75, 95000, 95000, 0.025, true));
+		//Changed dist from 101000 to 95000 to compensate for the worn treads
 		addSequential(new auto_driveToAngleWithEncoder(.6, 8, 0, 210000, 210000, 0.01));
 		addSequential(new auto_brakeModeOn());
 		addSequential(new auto_clawCGOpenClose());

@@ -20,6 +20,13 @@ public class auto_armMoveWithFinish extends Command{
 		armDone = true;
 	}
 	
+	/**
+	 * This command sets the setpoint on the arm, and does NOT end the command until a certain point has been reached
+	 * @param arm
+	 * Desired Setpoint of the arm
+	 * @param armEnd
+	 * Position in which the arm should be at before ending the command 
+	 */
 	public auto_armMoveWithFinish(double arm, double armEnd) {
 		this.arm = arm;
 		this.armEnd = armEnd;
