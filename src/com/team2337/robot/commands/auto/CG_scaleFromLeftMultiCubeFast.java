@@ -29,7 +29,7 @@ public class CG_scaleFromLeftMultiCubeFast extends CommandGroup {
 					/////////////////////////////////////////////////////////////////////////////////////
 					
 					// This command shoots the cube as the robot comes to its position at the scale
-					addParallel(new auto_intakeOutWithEncoder(9.0, 10, 168000));	//guessing this is where the scale is
+					addParallel(new auto_intakeOutWithEncoder(0.8, 10, 168000));	//guessing this is where the scale is
 //					addParallel(new auto_intakeOutWithEncoder(0.65, 10, 168000));
 					/* Changed after last match Friday
 					 * The intake is is unable to spit out the first cube
@@ -105,7 +105,8 @@ public class CG_scaleFromLeftMultiCubeFast extends CommandGroup {
 					addSequential(new auto_clawOpen());
 					
 					//drive to third cube
-					addParallel(new auto_driveToAngleWithEncoder(-.6,10,28,28000,28000,.045,"Right"));
+					addParallel(new auto_driveToAngleWithEncoder(-.6,10,28,28500,28500,.045,"Right"));
+					//changed 28000 to 28500 allowing the intake to grab the cube
 					
 					//grab third cube
 					addSequential(new auto_wait(0.2));
@@ -138,6 +139,7 @@ public class CG_scaleFromLeftMultiCubeFast extends CommandGroup {
 					addSequential(new auto_moveUpperPosition(2850,60)); //100 practice
 					addSequential(new auto_wait(0.3));
 					addSequential(new auto_liftStop());
+					
 					/*
 					addSequential(new auto_wait(0.35));
 					addSequential(new auto_moveUpperPosition(1600, 525)); //540 practice
@@ -158,13 +160,13 @@ public class CG_scaleFromLeftMultiCubeFast extends CommandGroup {
 					addParallel(new auto_bigBrother_DoNothing());
 					addSequential(new auto_holdUpperPosition(0.1));
 					//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE8 LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
-					addSequential (new auto_driveToAngleWithEncoder(.8, 4, 0, 120000, 120000, 0.04, true, 0.02, "Left"));// speed was .7 //115000
-					addSequential (new auto_brakeModeOn());
-					addSequential (new auto_driveToAngleWithEncoder(.6, 4, -93, 200000, 200000, 0.032, true, 0.02, "Left"));// speed was .5 
-					addParallel (new CG_ArmToTop());
-					addSequential (new auto_driveToAngleWithEncoder(.6, 4, -95, 293000, 293000, 0.035, true, 0.02, "Left"));// 296000
+					addSequential(new auto_driveToAngleWithEncoder(.8, 4, 0, 120000, 120000, 0.04, true, 0.02, "Left"));// speed was .7 //115000
+					addSequential(new auto_brakeModeOn());
+					addSequential(new auto_driveToAngleWithEncoder(.6, 4, -93, 200000, 200000, 0.032, true, 0.02, "Left"));// speed was .5 
+					addParallel(new CG_ArmToTop());
+					addSequential(new auto_driveToAngleWithEncoder(.6, 4, -95, 293000, 293000, 0.035, true, 0.02, "Left"));// 296000
 					//**changed to 303000 from 305000 before q43**//
-					addSequential (new auto_driveToAngleWithEncoder(.6, 4, 0, 306000, 306000, 0.04, true, 0.02, "Right"));//276000
+					addSequential(new auto_driveToAngleWithEncoder(.6, 4, 0, 306000, 306000, 0.04, true, 0.02, "Right"));//276000
 					addSequential(new auto_LiftUp(580, 500)); //600, 500 practice
 					addSequential(new auto_moveUpperPosition(1850, 525)); //540 practice
 					addSequential(new auto_resetEncoder());

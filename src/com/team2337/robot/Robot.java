@@ -142,6 +142,7 @@ public class Robot extends TimedRobot {
 		autonchooser.addObject("*Bees Match", "CG_beesMatch");
 		autonchooser.addObject("*Triple Left Scale Single Right","CG_scaleFromLeftMultiCubeFarRightScale");
 		autonchooser.addObject("*Switch From Center Pyramid Cube to Scale", "CG_pyramid");
+		autonchooser.addObject("Left Side 3 Cube/ Right Cross Line", "3CubeOrCross");
 
 		
 //		autonchooser.addObject("LiftUpperPosition", "LiftUpperPosition");
@@ -274,6 +275,9 @@ public class Robot extends TimedRobot {
 			break;
 		case "CG_pyramid":
 			m_autonomousCommand = new CG_autoFavorOurScaleSoloFromPyramid(ourswitch, scale);
+			break;
+		case "3CubeOrCross":
+			m_autonomousCommand = new auto_CGLeftMultiOrRightCross(ourswitch, scale);
 			break;
 		default:
 			m_autonomousCommand = new CG_autoDoNothing(ourswitch, scale);

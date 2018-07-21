@@ -1,6 +1,7 @@
 package com.team2337.robot.commands.led;
 
 import com.team2337.fusion.wrappers.auto.AutoCommandManager;
+import com.team2337.robot.OI;
 import com.team2337.robot.Robot;
 import com.team2337.robot.RobotMap;
 
@@ -11,6 +12,10 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class led_runtime extends Command {
 
+	int rightBumper = 6;
+	int timesThrough = 0;
+	int blinkNum = 5;
+	
 	public led_runtime() {
 		requires(Robot.led);
 	}
@@ -21,6 +26,9 @@ public class led_runtime extends Command {
 
 	protected void execute() {
 		if (AutoCommandManager.getInstance().state.equals("teleop")) {
+			if(OI.driverJoystick.getRawButton(rightBumper)) {
+				RobotMap.blinkin.setColor(0.93);
+		} else {
 			if (Robot.lift.levelOfLift == 1) {
 				if (!RobotMap.crateSensorLeft.get()) {
 					RobotMap.blinkin.setColor(0.76);  // Solid Green
@@ -65,6 +73,7 @@ public class led_runtime extends Command {
 		} else {
 			RobotMap.clawPressureDash = true;
 		}
+	}
 	}
 
 	protected boolean isFinished() {

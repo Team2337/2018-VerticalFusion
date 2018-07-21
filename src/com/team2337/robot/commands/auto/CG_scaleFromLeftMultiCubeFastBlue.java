@@ -28,7 +28,7 @@ public class CG_scaleFromLeftMultiCubeFastBlue extends CommandGroup {
 					addSequential (new auto_driveToAngleWithEncoder(.6,10,-18,136000,136000,.06,"Left"));
 					/////////////////////////////////////////////////////////////////////////////////////
 					
-					addParallel(new auto_intakeOutWithEncoder(0.65, 10, 168000));	//guessing this is where the scale is
+					addParallel(new auto_intakeOutWithEncoder(0.8, 10, 168000));	//guessing this is where the scale is
 //					addSequential(new auto_clawOpenWithEncoder(1.0, 10, 60000));
 					addSequential (new auto_driveToAngleWithEncoder(.3,.8,-20,168000,168000,.03,"Left"));
 					addSequential (new auto_brakeModeOn());
@@ -139,7 +139,7 @@ public class CG_scaleFromLeftMultiCubeFastBlue extends CommandGroup {
 					addParallel(new auto_bigBrother_DoNothing());
 					addSequential(new auto_holdUpperPosition(0.1));
 					//STOP  DO NOT CHANGE THE ABOVE OR PUT ANY CODE BEFORE THESE8 LINES YOU WILL SEND THE TROLLEY FLYING!!!!!
-					addSequential (new auto_driveToAngleWithEncoder(.8, 4, 0, 118000, 118000, 0.04, true, 0.02, "Left"));// speed was .7 //115000
+					addSequential (new auto_driveToAngleWithEncoder(.8, 4, 0, 120000, 120000, 0.04, true, 0.02, "Left"));// speed was .7 //115000
 					addSequential (new auto_brakeModeOn());
 					addSequential (new auto_driveToAngleWithEncoder(.6, 4, -93, 200000, 200000, 0.032, true, 0.02, "Left"));// speed was .5 
 					addParallel (new CG_ArmToTop());
@@ -165,7 +165,7 @@ public class CG_scaleFromLeftMultiCubeFastBlue extends CommandGroup {
 					
 					//Drive to second cube.
 				
-					addParallel (new auto_driveToAngleWithEncoder(-.5, 4, -13, 33000, 33000, 0.04, "Left"));// speed was .9 
+					addParallel (new auto_driveToAngleWithEncoder(-.5, 4, -14, 34500, 34500, 0.04, "Left"));// speed was .9 
 
 					addSequential(new auto_wait(0.2));
 					addParallel(new auto_intake_in(1, 3.2));
