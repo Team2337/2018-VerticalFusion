@@ -164,7 +164,7 @@ public class CG_scaleFromLeftMultiCubeFast extends CommandGroup {
 					addSequential(new auto_brakeModeOn());
 					addSequential(new auto_driveToAngleWithEncoder(.6, 4, -93, 200000, 200000, 0.032, true, 0.02, "Left"));// speed was .5 
 					addParallel(new CG_ArmToTop());
-					addSequential(new auto_driveToAngleWithEncoder(.6, 4, -95, 293000, 293000, 0.035, true, 0.02, "Left"));// 296000
+					addSequential(new auto_driveToAngleWithEncoder(.6, 4, -95, 296000, 296000, 0.035, true, 0.02, "Left"));// 296000
 					//**changed to 303000 from 305000 before q43**//
 					addSequential(new auto_driveToAngleWithEncoder(.6, 4, 0, 306000, 306000, 0.04, true, 0.02, "Right"));//276000
 					addSequential(new auto_LiftUp(580, 500)); //600, 500 practice

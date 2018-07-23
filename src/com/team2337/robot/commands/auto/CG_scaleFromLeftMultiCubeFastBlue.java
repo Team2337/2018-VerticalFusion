@@ -28,7 +28,7 @@ public class CG_scaleFromLeftMultiCubeFastBlue extends CommandGroup {
 					addSequential (new auto_driveToAngleWithEncoder(.6,10,-18,136000,136000,.06,"Left"));
 					/////////////////////////////////////////////////////////////////////////////////////
 					
-					addParallel(new auto_intakeOutWithEncoder(0.8, 10, 168000));	//guessing this is where the scale is
+					addParallel(new auto_intakeOutWithEncoder(0.75, 10, 168000));	//guessing this is where the scale is
 //					addSequential(new auto_clawOpenWithEncoder(1.0, 10, 60000));
 					addSequential (new auto_driveToAngleWithEncoder(.3,.8,-20,168000,168000,.03,"Left"));
 					addSequential (new auto_brakeModeOn());
@@ -143,7 +143,8 @@ public class CG_scaleFromLeftMultiCubeFastBlue extends CommandGroup {
 					addSequential (new auto_brakeModeOn());
 					addSequential (new auto_driveToAngleWithEncoder(.6, 4, -93, 200000, 200000, 0.032, true, 0.02, "Left"));// speed was .5 
 					addParallel (new CG_ArmToTop());
-					addSequential (new auto_driveToAngleWithEncoder(.6, 4, -95, 293000, 293000, 0.035, true, 0.02, "Left"));// 296000
+					addSequential (new auto_driveToAngleWithEncoder(.6, 4, -95, 296000, 296000, 0.035, true, 0.02, "Left"));// 296000
+					//Changed to 296000 from 293000
 					//**changed to 303000 from 305000 before q43**//
 					addSequential (new auto_driveToAngleWithEncoder(.6, 4, 2.5, 301000, 301000, 0.04, true, 0.02, "Right"));//276000
 					//changed from 306000 to 301000 because the scale was hit
