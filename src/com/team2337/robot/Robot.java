@@ -60,7 +60,23 @@ public class Robot extends TimedRobot {
 
 	public static boolean isComp = false;
 	// public static char ourswitch, scale, oppswitch;
-
+	
+	//Brownout Prevention Vars
+	public static double totalMotorsRunning = 0; 
+	public static double maxCurrent = x;
+	
+	public static double chassisTotalCurrentDraw; 
+	public static double intakeTotalCurrentDraw; 
+	public static double armTotalCurrentDraw;
+	public static double trolleyTotalCurrentDraw; 
+	public static double liftTotalCurrentDraw;
+	
+	public static double chassisMaxCurrent; 
+	public static double intakeMaxCurrent;
+	public static double armMaxCurrent;
+	public static double trolleyMaxCurrent;
+	public static double liftMaxCurrent;
+	
 	Command m_autonomousCommand;
 	SendableChooser<String> autonchooser = new SendableChooser<>();
 
@@ -363,6 +379,19 @@ public class Robot extends TimedRobot {
 
 		Robot.led.initDefaultCommand();
 		
+		chassisTotalCurrentDraw = RobotMap.chassis_leftFront.getOutputCurrent() + RobotMap.chassis_leftMid.getOutputCurrent() + RobotMap.chassis_leftRear.getOutputCurrent()
+		+ RobotMap.chassis_rightFront.getOutputCurrent() + RobotMap.chassis_rightMid.getOutputCurrent() + RobotMap.chassis_rightRear.getOutputCurrent();
+		
+		intakeTotalCurrentDraw = RobotMap.intake_left.getOutputCurrent() + RobotMap.intake_right.getOutputCurrent();
+		
+		armTotalCurrentDraw = RobotMap.arm_left.getOutputCurrent() + RobotMap.arm_right.getOutputCurrent();
+		
+		trolleyTotalCurrentDraw = RobotMap.trolley_right.getOutputCurrent();
+		
+		liftTotalCurrentDraw = RobotMap.lift_left.getOutputCurrent() + RobotMap.lift_right.getOutputCurrent(); 
+		
+		chassisMaxCurrent = maxCurrent/totalMotorsRunning;
+		
 		if (RobotMap.robot_AllPeriodicDebug) {
 			SmartDashboard.putNumber("claw pressure", (int) (RobotMap.clawPressure.getValue() / 21.37));
 			SmartDashboard.putData("Auto mode", autonchooser);
@@ -379,6 +408,8 @@ public class Robot extends TimedRobot {
 			SmartDashboard.putBoolean("Crate Sensor Red", RobotMap.crateSensorLeft.get());
 			SmartDashboard.putBoolean("Crate Sensor Green", RobotMap.crateSensorRight.get());
 			//SmartDashboard.putNumber("Navx Yaw", RobotMap.navx_gyro.getYaw());
+			
+			SmartDashboard.putNumber("Total Chassis Current Draw", chassisTotalCurrentDraw);
 		}
 		//SmartDashboard.putString("intake Command", Robot.intake.getCurrentCommandName());
 //		SmartDashboard.putBoolean("first intake", RobotMap.firstIntake);
