@@ -18,6 +18,7 @@ import com.team2337.robot.commands.led.*;
 import com.team2337.robot.commands.lift.*;
 import com.team2337.robot.commands.shifter.*;
 import com.team2337.robot.commands.trolley.*;
+import com.team2337.robot.subsystems.BigBrother;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -149,10 +150,9 @@ public class OI {
 		driver_BlueX			.whenPressed(new DoNothing());  
 		driver_YellowY			.whenPressed(new DoNothing()); 
 		
-		driver_BumperLeft		.whileHeld(new shifter_low());
-		driver_BumperLeft		.whenReleased(new shifter_high());
-		driver_BumperRight	    .whenPressed(new shifter_high());
-
+		driver_BumperLeft	    .whenPressed(new DoNothing());
+		driver_BumperRight		.whileHeld(new shifter_low());
+		driver_BumperRight		.whenReleased(new shifter_high());
 		
 		driver_Back				.whenPressed(new DoNothing()); 
 		driver_Start			.whenPressed(new DoNothing()); 
@@ -160,10 +160,10 @@ public class OI {
 		driver_LeftStick		.whenPressed(new DoNothing()); 
 		driver_RightStick		.whenPressed(new DoNothing()); 
 		
-		driver_TriggerLeft		.whileHeld(new intake_out(1.0));
-		driver_TriggerRight		.whenPressed(new claw_CGCloseAndIntake());
+		driver_TriggerLeft		.whileHeld(new DoNothing());
+		driver_TriggerRight		.whenPressed(new DoNothing());
 		
-		driver_POVUp			.whenPressed(new CG_returnToPickup());  
+		driver_POVUp			.whenPressed(new DoNothing());  
 		//driver_POVUpRight		.whenPressed(new _DoNothing()); 
 	    driver_POVRight			.whenPressed(new DoNothing()); 
 	   	//driver_POVDownRight	.whenPressed(new _DoNothing()); 
@@ -194,8 +194,8 @@ public class OI {
 //	    operator_SE						 	   .whileHeld(new climbWinch_driveVertical(1));     
 //	    operator_ST						  	   .whenPressed(new climber_ejector());
 	    
-	    operator_SE						 	   .whileHeld(new CG_defenseMode()); 
-	    operator_ST						  	   .whenPressed(new CG_returnToALTControl());  
+	    operator_SE						 	   .whileHeld(new DoNothing()); 
+	    operator_ST						  	   .whenPressed(new DoNothing());  
 	    
 	    operator_JoystickPOVUp			       .whenPressed(new claw_CGOpenNoSensor());	//previously: claw give 60 
 	    operator_JoystickPOVUp				   .whenReleased(new claw_CGCloseNoSensor());
@@ -220,7 +220,8 @@ public class OI {
 //		operatorInt_RedButton	.whenPressed(new _DoNothing());
 		
 //		operatorInt_ClearSwitch	.whenPressed(new DoNothing());
-	    operatorInt_YellowSwitch.whenPressed(new DoNothing());		//this is being used in ALTControl to disable arm
+	    operatorInt_YellowSwitch.whileHeld(new auto_bigBrother_DoNothing());		//this is being used in ALTControl to disable arm
+	    operatorInt_YellowSwitch.whenReleased(new DoNothing());
 	    operatorInt_BlackSwitch	.whenPressed(new DoNothing());		//this is being used in ALTControl to disable trolley
 		operatorInt_BlueSwitch	.whenPressed(new DoNothing());		//this is being used in ALTControl to disable lift
 		
