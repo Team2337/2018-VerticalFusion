@@ -220,7 +220,7 @@ public class OI {
 //		operatorInt_RedButton	.whenPressed(new _DoNothing());
 		
 //		operatorInt_ClearSwitch	.whenPressed(new DoNothing());
-	    operatorInt_YellowSwitch.whileHeld(new auto_bigBrother_DoNothing());		//this is being used in ALTControl to disable arm
+	    operatorInt_YellowSwitch.whileHeld(new DoNothing());		//this is being used in ALTControl to disable arm
 	    operatorInt_YellowSwitch.whenReleased(new DoNothing());
 	    operatorInt_BlackSwitch	.whenPressed(new DoNothing());		//this is being used in ALTControl to disable trolley
 		operatorInt_BlueSwitch	.whenPressed(new DoNothing());		//this is being used in ALTControl to disable lift
