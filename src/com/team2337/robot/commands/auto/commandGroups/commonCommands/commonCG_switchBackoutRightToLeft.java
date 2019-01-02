@@ -6,6 +6,9 @@ import com.team2337.robot.commands.shifter.shifter_low;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
+/**
+ * Scores first cube in the right switch, then backs out to the left
+ */
 public class commonCG_switchBackoutRightToLeft extends CommandGroup {
 
 	public commonCG_switchBackoutRightToLeft() {

@@ -7,8 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 
 /**
  * MoveForward - Move the robot forward for specified time
- * @category CHASSSIS AUTON
- * @author Jennah
+ * 
+ * @category CHASSIS AUTON
+ * @author Brendan F.
  */
 public class chassis_moveForward extends Command {
 	private double time = 10;

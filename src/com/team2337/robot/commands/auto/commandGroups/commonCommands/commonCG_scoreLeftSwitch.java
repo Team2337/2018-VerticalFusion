@@ -6,6 +6,10 @@ import com.team2337.robot.commands.shifter.shifter_low;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
+/**
+ * Drives to the left side of the switch, scoring the cube
+ * Main command used when scoring in the switch
+ */
 public class commonCG_scoreLeftSwitch extends CommandGroup {
 
 	public commonCG_scoreLeftSwitch() {

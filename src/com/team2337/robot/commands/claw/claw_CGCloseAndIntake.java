@@ -6,6 +6,13 @@ import com.team2337.robot.commands.auto.auto_intake_in;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
+/**
+ * Fusion Command Group
+ * Closes the claw at 60 psi, and runs the intake inwards to bring the cube in with a firm grip
+ * 
+ * @category CLAW
+ * @author Brendan F.
+ */
 public class claw_CGCloseAndIntake extends Action {
 	public claw_CGCloseAndIntake() {
 		addSequential(new claw_give60psi());

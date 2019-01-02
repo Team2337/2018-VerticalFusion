@@ -8,13 +8,23 @@ import com.team2337.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
+/**
+ * Drives the chassis forward until it reaches a line, using the encoders
+ * Ends when the line reader reads a line 
+ */
 public class auto_driveToLineWithEncoder extends AutoCommand {
-	double speed, degree, timeout, Pgain, turn;
+	double speed, timeout, Pgain, turn;
 	
-	public auto_driveToLineWithEncoder(double speed,double degree, double timeout) {
+	/**
+	 * This command drives the chassis motors, using a PID, towards a given setpoint
+	 * @param speed
+	 * Percent of power output on the motor
+	 * @param timeout
+	 * The amount of time the command is allowed the run until it is forced to terminate
+	 */
+	public auto_driveToLineWithEncoder(double speed, double timeout) {
 		this.timeout = timeout;
 		this.speed = speed;
-		this.degree = degree;
 		Pgain = .000001;
 	}
 
@@ -25,13 +35,7 @@ public class auto_driveToLineWithEncoder extends AutoCommand {
 
 
 	protected void execute() {
-			
-	//	double currentAngle = Pigeon.pidgey.getFusedHeading();
     	double forward = speed; 	
-    	
-    	//turn = -((degree - currentAngle) * Pgain );
-    	
-		//RobotMap.drive.arcadeDrive(forward, 0, false);
 		RobotMap.drive.tankDrive(speed, speed);
 	}
 

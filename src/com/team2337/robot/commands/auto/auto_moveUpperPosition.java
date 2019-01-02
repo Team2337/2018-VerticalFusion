@@ -4,6 +4,12 @@ import com.team2337.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
+/**
+ * Sets the setpoints of the arm and trolley at the same time 
+ * 
+ * @category AUTO-BIGBROTHER
+ * @author Bryce G. 
+ */
 public class auto_moveUpperPosition extends Command {
 	double arm,trolley;
 	

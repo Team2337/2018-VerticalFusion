@@ -16,11 +16,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * The CLAW! 
  * Runs the claw pressure and open and close of it as well
  * 
  * @category CLAW
- * @author Team2337 - EngiNERDs
+ * @author Brendan F. 
  */
 public class Claw extends Subsystem {
 	public static Solenoid hugger = RobotMap.claw_hugger;
@@ -33,21 +32,38 @@ public class Claw extends Subsystem {
 		setDefaultCommand(new claw_DoNothing());
 		
 	}
+
+	/**
+	 * Puts 60 psi into the claw pneumatic solenoids
+	 */
 	public void give60Hugs() {
 		hugger.set(false);
 	}
+
+	/**
+	 * Puts 30 psi into the claw pneumatic solenoids
+	 */
 	public void give30Hugs() {
 		hugger.set(true);
 	}
 	
+	/**
+	 * Opens the claw by releasing pressure
+	 */
 	public void open() {
 		claw.set(true);
 	}
 
+	/**
+	 * Closes the claw at 60 psi
+	 */
 	public void close() {
 		claw.set(false);
 	}
 	
+	/**
+	 * runs while this subsystem is in use
+	 */
 	public void periodic() {
 //		SmartDashboard.putString("Claw Command", Robot.claw.getCurrentCommandName());
 	}

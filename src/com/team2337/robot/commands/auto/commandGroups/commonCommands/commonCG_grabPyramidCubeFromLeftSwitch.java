@@ -2,6 +2,9 @@ package com.team2337.robot.commands.auto;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
+/**
+ * Starts on the left side of the front switch wall, then drive to the front of the pyramid to pickup the front cube
+ */
 public class commonCG_grabPyramidCubeFromLeftSwitch extends CommandGroup {
 
 	public commonCG_grabPyramidCubeFromLeftSwitch() {

@@ -6,15 +6,21 @@ import com.team2337.robot.Robot;
 import com.team2337.robot.RobotMap;
 
 /**
- * Intake: OUT - Move the intake out
- * @category INTAKE
- * @author Brendan
+ * Opens the claw once the chassis passes a given encoder tick
+ * @category AUTO-INTAKE
+ * @author Brendan F.
  */
 public class auto_clawOpenWithEncoder extends Command {
 	private double power = 1;
 	private double timeout, enc;
 	private int time = 0;
 	private boolean end = false;
+
+	/**
+	 * @param power Percent power of the motors (Values -1 -> 1)
+	 * @param timeout Amount of time the command is allowed to run, inmilliseconds, if it hasn't ended by another means yet
+	 * @param enc The chassis encoder value (full rotation = 0-4096)
+	 */
 	public auto_clawOpenWithEncoder(double power, double timeout,double enc) {
 		requires(Robot.claw);
 		this.power = power;

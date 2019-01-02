@@ -9,6 +9,12 @@ import com.team2337.robot.RobotMap;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+/**
+ * Drives the chassis motors to an angle using the gyro and encoders after a pixy cam command has ended
+ * 
+ * @category AUTO-PIXY
+ * @author Robin B., Sean L.
+ */
 public class auto_driveToAngleWithEncoderAfterCam extends Command {
 
 	double speed, turn, Pgain, Dgain, MaxCorrectionRatio, targetAngle, timeout, isFinishedPos;
@@ -19,6 +25,24 @@ public class auto_driveToAngleWithEncoderAfterCam extends Command {
 	private double pixlesPerDegree = 3.86;
 	String changeScaleEnc = "false";
 	
+	/**
+	 * This command drives the chassis motors, using a PID, towards a given setpoint
+	 * @param speed
+	 * Percent of power output on the motor
+	 * @param timeout
+	 * The amount of time the command is allowed the run until it is forced to terminate
+	 * @param angle
+	 * The desired angle the robot should be at, at the end of the command
+	 * @param encoderTargetLeft
+	 * The destination of the Left drive encoder
+	 * @param encoderTargetRight
+	 * The destination of the Right drive encoder
+	 * @param Pgain
+	 * The P given to the drive 
+	 * @param changeScaleEnc
+	 * Decides which drive encoder is read
+	 * Input "Right" or "Left" to decide what side to read
+	 */
 	public auto_driveToAngleWithEncoderAfterCam(double speed, double timeout, int encoderTargetLeft, int encoderTargetRight, double Pgain, String changeScaleEnc) {
 		requires(Robot.chassis);
 		MaxCorrectionRatio = 0.30; /* cap corrective turning throttle to 30 percent of forward throttle */

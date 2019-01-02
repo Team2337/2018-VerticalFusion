@@ -9,18 +9,17 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 /**
- * The system to move lift up and down
+ * Controls lift movement using PID setpoints
  * 
- * @category lift
- * @author Bryce
+ * @category LIFT
+ * @author Bryce G.
  */
 public class Lift extends Subsystem {
 
-	private final static TalonSRX rightFront = RobotMap.lift_right; //3
-	//private final static TalonSRX leftFront = RobotMap.lift_left;  //4
+	private final static TalonSRX rightFront = RobotMap.lift_right;
 	
+	//defualt lift level
 	public int levelOfLift = 1;
-	//public boolean climb = false;
 	
 	private double maxSpeedUp = 0.8;
 	private double maxSpeedDown = 0.5;
@@ -29,10 +28,10 @@ public class Lift extends Subsystem {
 	private double kP = 14;
 	private double kI = 0;
 	private double kD = 0;
-	private int allowableError = 0;     						 ///need to set *****************//TODO
+	private int allowableError = 0;
 	
-	public static int forwardLIFTSoftLimit = 590;					 ///need to set *****************//TODO
-	public static int reverseLIFTSoftLimit = 40;				 ///need to set *****************//TODO
+	public static int forwardLIFTSoftLimit = 590;
+	public static int reverseLIFTSoftLimit = 40;
 	public static int practiceLiftRestPoint = 100;
 	public static int compLiftRestPoint = 70;
 	
@@ -79,11 +78,7 @@ public class Lift extends Subsystem {
 		rightFront.configNominalOutputReverse(nominalSpeed, 0);
 		rightFront.configPeakOutputForward(maxSpeedUp, 0);
 		rightFront.configPeakOutputReverse(-maxSpeedDown, 0);
-		
-		//leftFront.configNominalOutputForward(nominalSpeed, 0);
-		//leftFront.configNominalOutputReverse(nominalSpeed, 0);
-		//leftFront.configPeakOutputForward(maxSpeed, 0);
-		//leftFront.configPeakOutputReverse(-maxSpeed, 0);
+	
 		/*
 		 * set the allowable closed-loop error, Closed-Loop output will be
 		 * neutral within this range. See Table in Section 17.2.1 for native

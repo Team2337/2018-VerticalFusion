@@ -8,7 +8,10 @@ import com.team2337.robot.RobotMap;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Does nothing. Placeholder/filler command for buttons or other triggers.
+ * Controls the LEDs depending on the level of the lift, state of the cube in the claw, and level of the arm
+ * 
+ * @category LED
+ * @author Bryce G.
  */
 public class led_runtime extends Command {
 

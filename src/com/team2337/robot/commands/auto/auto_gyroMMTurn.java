@@ -11,7 +11,10 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- *
+ * Turns using the gyro alongside MotionMagic code to turn to a desired angle 
+ * 
+ * @category AUTO-TURN
+ * @author Chris B., Sean L.
  */
 public class auto_gyroMMTurn extends Command { 
 
@@ -26,6 +29,12 @@ public class auto_gyroMMTurn extends Command {
 	public VisionProcessing boilerVision = RobotMap.vision;
 	static boolean angleDone;
 
+	/**
+	 * @param degree
+	 * Desired degree to turn the robot
+	 * @param timeout 
+	 * The amount of time the command is allowed to run until it is forced to terminate
+	 */
 	public auto_gyroMMTurn(int degree, double timeout) {
 		requires(Robot.chassis);
 		this.degree = degree;
@@ -63,6 +72,8 @@ public class auto_gyroMMTurn extends Command {
 		}
 		driveIL = 0;
 		driveDL = 2;
+
+		/* --- Motion Magic Code --- */
 		RobotMap.chassis_leftFront.config_kF(slotIdx, driveFL, timeoutMs);
 		RobotMap.chassis_leftFront.config_kP(slotIdx, drivePL, timeoutMs);
 		RobotMap.chassis_leftFront.config_kI(slotIdx, driveIL, timeoutMs);

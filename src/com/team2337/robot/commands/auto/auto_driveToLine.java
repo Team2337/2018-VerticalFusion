@@ -8,13 +8,26 @@ import com.team2337.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
+/**
+ * Drives forward until it crosses a line
+ * Finished when the line sensor reads a line
+ * 
+ * @category AUTO-DRIVE
+ * @author Bryce G., Sean L.
+ */
 public class auto_driveToLine extends AutoCommand {
-	double speed, degree, timeout, Pgain, turn;
+	double speed, timeout, Pgain, turn;
 	
-	public auto_driveToLine(double speed,double degree, double timeout) {
+	/**
+	 * This command drives the chassis motors, using a PID, towards a given setpoint
+	 * @param speed
+	 * Percent of power output on the motor
+	 * @param timeout
+	 * The amount of time the command is allowed to run until it is forced to terminate
+	 */
+	public auto_driveToLine(double speed, double timeout) {
 		this.timeout = timeout;
 		this.speed = speed;
-		this.degree = degree;
 		Pgain = .000001;
 	}
 
@@ -25,13 +38,7 @@ public class auto_driveToLine extends AutoCommand {
 
 
 	protected void execute() {
-			
-	//	double currentAngle = Pigeon.pidgey.getFusedHeading();
     	double forward = speed; 	
-    	
-    	//turn = -((degree - currentAngle) * Pgain );
-    	
-		//RobotMap.drive.arcadeDrive(forward, 0, false);
 		RobotMap.drive.tankDrive(speed, speed);
 	}
 

@@ -7,16 +7,19 @@ import com.team2337.robot.Robot;
 import com.team2337.robot.RobotMap;
 
 /**
- * Intake: IN - Move the intake in
+ * Intake: IN - Move the intake in and rotate the cube
  * 
  * @category INTAKE
- * @author Brendan
+ * @author Brendan F.
  */
 public class intake_inRotate extends Command {
 	private double power = .75;
 	
 	
 	private int time = 0;
+	/**
+	 * @param power Percent of the power of the motors (Values of 0-1)
+	 */
 	public intake_inRotate(double power) {
 		requires(Robot.intake);
 		this.power = power;

@@ -13,7 +13,10 @@ import com.team2337.robot.Robot;
 import com.team2337.robot.RobotMap;
 
 /**
- * An example command.  You can replace me with your own command.
+ * Sets the claw pressure at 60 psi 
+ * 
+ * @category CLAW
+ * @author Brendan F. 
  */
 public class claw_give60psi extends Command {
 	public claw_give60psi() {

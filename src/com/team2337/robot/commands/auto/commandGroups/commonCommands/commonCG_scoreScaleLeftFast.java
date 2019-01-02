@@ -2,7 +2,10 @@ package com.team2337.robot.commands.auto;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class commonCG_scoreScaleLeftFast extends CommandGroup{
+/**
+ * Drives to the scale from the starting position and scores the cube on the switch
+ */
+public class commonCG_scoreScaleLeftFast extends CommandGroup {
 	public commonCG_scoreScaleLeftFast() {
 	addParallel(new auto_bigBrother_DoNothing());
 	addSequential(new auto_holdUpperPosition(0.1));

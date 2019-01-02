@@ -7,14 +7,23 @@ import com.team2337.robot.RobotMap;
 
 /**
  * Intake: OUT - Move the intake out
- * @category INTAKE
- * @author Brendan
+ * @category AUTO-INTAKE
+ * @author Brendan F.
  */
 public class auto_intakeOutWithEncoder extends Command {
 	private double power = 1;
 	private double timeout, enc;
 	private int time = 0;
 	private boolean end = false;
+
+	/**
+	 * @param speed
+	 * Percent of power output on the motor
+	 * @param timeout
+	 * The amount of time the command is allowed the run until it is forced to terminate
+	 * @param enc
+	 * The position of the chassis in which the intake will shoot out the cube
+	 */
 	public auto_intakeOutWithEncoder(double power, double timeout,double enc) {
 		requires(Robot.intake);
 		this.power = power;

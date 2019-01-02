@@ -6,6 +6,11 @@ import com.team2337.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
+/**
+ * Turns brake mode on for the chassis
+ * @category AUTO-CHASSIS
+ * @author Bryce G., Sean L.
+ */
 public class auto_brakeModeOn extends Command {
 	String ourSwitch;
 	public auto_brakeModeOn() {

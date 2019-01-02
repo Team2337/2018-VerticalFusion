@@ -9,7 +9,7 @@ import com.team2337.robot.RobotMap;
 /**
  * Shifter: HIGH - Shifts drive train into high gear
  * @category SHIFTER
- * @author Brendan
+ * @author Brendan F.
  */
 public class shifter_high extends Command {
 	public shifter_high() {

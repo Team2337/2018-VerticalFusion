@@ -6,6 +6,12 @@ import com.team2337.robot.RobotMap;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+/**
+ * Is run at the beginning of the tele op period to release pressure in the claw, for easier cube pickup
+ * 
+ * @category INTAKE
+ * @author Bryce G., Sean L. 
+ */
 public class intake_default extends Command {
 	int num = 0;
 	public intake_default() {

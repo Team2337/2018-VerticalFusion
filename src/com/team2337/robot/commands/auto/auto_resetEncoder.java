@@ -4,7 +4,12 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.team2337.fusion.wrappers.auto.AutoCommand;
 import com.team2337.robot.RobotMap;
 
-
+/**
+ * Resets the drive encoders 
+ * 
+ * @category AUTO-DRIVE
+ * @author Bryce G. 
+ */
 public class auto_resetEncoder extends AutoCommand {
 	
 	public auto_resetEncoder() {

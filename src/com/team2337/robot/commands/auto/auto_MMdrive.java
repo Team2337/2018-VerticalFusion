@@ -11,7 +11,10 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- *
+ * Driving forward using MotionMagic
+ * 
+ * @category AUTO-DRIVE
+ * @author Chris B., Sean L.
  */
 public class auto_MMdrive extends Command {
 

@@ -8,7 +8,10 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * Control the Lift-Trolley-Arm based on throttle/joystick input
+ * Control the Lift-Trolley-Arm simotaniously based on throttle/joystick input, using array set point values
+ * 
+ * @category BIGBROTHER
+ * @author Bryce G., Robin B., Sean L. 
  */
 public class alt_Control_Import extends Command {
 
@@ -31,12 +34,24 @@ public class alt_Control_Import extends Command {
 	double throttleValue;
 
 	/*
-	 * Columns 0: trolley set points 1: lift set points A 2: lift set points B
-	 * 3: lift set points C 4: arm set points 5: arm forward soft limits 6: arm
-	 * reverse soft limits 7: arm positive adjustment 8: arm negative adjustment
+	 * Columns:
+	 * 0:  trolley set points 
+	 * 1:  lift set points A 
+	 * 2:  lift set points B
+	 * 3:  lift set points C 
+	 * 4:  arm set points 
+	 * 5:  arm forward soft limits 
+	 * 6:  arm reverse soft limits 
+	 * 7:  arm positive adjustment 
+	 * 8:  arm negative adjustment
+	 * 9:  climb set points Lift
+	 * 10: arm adjustment for climb
+	 * 11: arm hook grab set points
+	 * 12: arm climb set points
+	 * 13: trolley climb set points
 	 */
 
-	//Array Points
+	/* --- Array Collumns --- */
 	int trolleySetPoints = 0;	
 	int liftSetPointsA = 1;
 	int liftSetPointsB = 2;
@@ -52,15 +67,14 @@ public class alt_Control_Import extends Command {
 	int armClimbMode = 12;
 	int trolleyClimbMode = 13;
 	
-	//Comp rest Points	
+	/* --- Comp Rest Points --- */	
 	int compTrolleyRestPoint = 61;
-	int practiceTrolleyRestPoint = 61; //111 practice
-	
+	int practiceTrolleyRestPoint = 61; 
 	//Lift rest points
 	int compLiftRestPoint = Robot.lift.compLiftRestPoint;
 	int practiceLiftRestPoint = Robot.lift.practiceLiftRestPoint;
 	
-	//double values
+	
 	double armCenterPosition = Robot.arm.centerPosition;
 	double climberAdjLimit = Robot.arm.climberAdjLimit;  //Hook adjustment 
 	double armHookAdjLimit = 0;
@@ -77,8 +91,6 @@ public class alt_Control_Import extends Command {
 	}
 
 	protected void execute() {
-
-		// liftPot = RobotMap.lift_right.getSelectedSensorPosition(0);
 
 		// Read Joystick and Throttle Input
 		trolleyStick = OI.operatorJoystick.getRawAxis(1);
@@ -99,6 +111,11 @@ public class alt_Control_Import extends Command {
 		
 		armPos = Robot.arm.getPosition();
 		
+		/*
+		 * If the arm encoder values excede a full rotation (4096), get the remainder of the current position
+		 * divided by 4096. Then set the arm position to that value, and change the "armBroken" variable
+		 * to true to show that the encoder malfunctioned
+		 */ 
 		if(armPos > 4096) {
 		armPos = armPos%4096;
 		RobotMap.arm_right.setSelectedSensorPosition((int)armPos,0,0);
@@ -113,18 +130,13 @@ public class alt_Control_Import extends Command {
 		RobotMap.brokenArm = true;
 		}
 
-		
-		
-		
-		
-		// Trolley adjustment by joystick
 
 		// Adjust trolley setpoint based on joystick input
 		if (Math.abs(trolleyStick) > 0.1) {
 			trolleySetPoint = trolleySetPoint + (trolleyStick * trolleyAdj);
 		}
 
-		// Arm adjustment by toggle
+		/* --- Arm adjustment by toggle --- */
 
 		// Adjust arm set point based on throttle toggle input. Different
 		// adjustments
@@ -135,7 +147,7 @@ public class alt_Control_Import extends Command {
 			armSetPoint = armSetPoint + (throttleToggle * armAdjNeg);
 		}
 		
-		//NEW SET POINTS for Climb 
+		/* --- Set Points for Climb --- */ 
 		if(Robot.lift.levelOfLift == armHookClimberSetPoints) {  					//grab hook is enabled
 			liftSetPoint = (points[(int) throttleValue][liftSetPointsA]);
 			armSetPoint = (points[(int) throttleValue][armHookClimberSetPoints]);	//arm set to hook grabbing pos
@@ -180,10 +192,12 @@ public class alt_Control_Import extends Command {
 			}
 		}
 		
-		//Lift & Trolley Override
+
+		/* --- Lift & Trolley Override --- */
 		
-		/* put lift down before trolley
-		 * trolley goes up before lift
+		/* 
+		 * Put lift down before trolley
+		 * Trolley goes up before lift
 		 * So we don't crush the snakes
 		 */
 		
@@ -195,7 +209,7 @@ public class alt_Control_Import extends Command {
 			trolleySetPoint = points[10][trolleySetPoints];
 		}
 		
-		// SET ALL SETPOINTS
+		/* --- SET ALL SETPOINTS --- */
 
 		// Disabled after Autonomous until throttleToggle activated.
 		if (RobotMap.disabledAtEndOfAuto) {
@@ -206,7 +220,7 @@ public class alt_Control_Import extends Command {
 			}
 		}
 				
-				    //CLIMB MODE POINTS
+				    /* --- Climb Set Points --- */
 					if(Robot.lift.levelOfLift == armClimbMode) {	
 						if(Robot.lift.getPosition() > 100) {
 							trolleySetPoint = Robot.trolley.trolleyTop;
@@ -236,8 +250,8 @@ public class alt_Control_Import extends Command {
 						Robot.climber.hookerEject();
 					}
 
-
-		if (!RobotMap.disabledAtEndOfAuto) { // Disable until throttleToggle activated (see above)									
+		// Disable until throttleToggle activated (see above)
+		if (!RobotMap.disabledAtEndOfAuto) { 									
 
 			// Set Set points, suspend PID if at pickup position
 			if (((throttleToggle > 0.9) && (throttleStick < -0.9) && (Robot.arm.armIsLevel())) || (Robot.arm.armBadPos())) {
@@ -266,37 +280,24 @@ public class alt_Control_Import extends Command {
 			if (RobotMap.lift_right.getSelectedSensorPosition(0) < (Robot.lift.practiceLiftRestPoint-10) && liftSetPoint <= Robot.lift.practiceLiftRestPoint) {
 				Robot.lift.stop();
 			} else {
-//				if(OI.operatorControls.getRawButton(Robot.oi.blueSwitch)) {
-//					Robot.lift.stop();
-//				} else {
 				Robot.lift.setSetpoint(liftSetPoint);
-//				}
 			}
 		}
 
-		
+		/* --- Print Debug Values --- */
 		// Print Debug info to SmartDashboard if turned on in RobotMap.
 		if (RobotMap.alt_ControlDebug) {
 			SmartDashboard.putBoolean("endOFAuto - debug", RobotMap.disabledAtEndOfAuto);
-			//SmartDashboard.putBoolean("sameSide", Robot.arm.sameSide(armEncoder, armSetPoint));
 			SmartDashboard.putNumber("trolleyStick", trolleyStick);
 			SmartDashboard.putNumber("TrolleySetPoint", Robot.trolley.getSetpoint());
 			SmartDashboard.putBoolean("XXXsameSideXXX", sameSide);
 			SmartDashboard.putNumber("throttleValue", throttleValue);
 			SmartDashboard.putNumber("ArmSetPoint", armSetPoint);
-			// SmartDashboard.putNumber("trolleyOutputPercent",
-			// RobotMap.trolley_right.getMotorOutputPercent());
 			SmartDashboard.putNumber("trolleyOutputXXXXXXXX", RobotMap.trolley_right.getMotorOutputPercent());
 			
 			SmartDashboard.putNumber("LIFTSetPointXXXXXX", Robot.lift.getSetpoint());
 			SmartDashboard.putNumber("liftArray SetPoint", points[(int) throttleValue][Robot.lift.levelOfLift]);
 			SmartDashboard.putNumber("throttleStick", throttleStick);
-
-			// SmartDashboard.putNumber("TrolleyArrayValue", points[(int)
-			// throttleValue][trolleySetPoints]);
-			// this may be setting the array to the throttle, then getting to
-			// the logic
-			// above
 		}
 		if(RobotMap.climbDebug) {
 			SmartDashboard.putBoolean("ClimbDebug", RobotMap.climbDebug);
@@ -309,6 +310,7 @@ public class alt_Control_Import extends Command {
 	}
 
 	protected void end() {
+
 	}
 
 	protected void interrupted() {

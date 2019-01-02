@@ -4,6 +4,12 @@ import com.team2337.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
+/**
+ * Holds the position of the arm and trolley
+ * 
+ * @category AUTO-BIGBROTHER
+ * @author Bryce G.
+ */
 public class auto_holdUpperPosition extends Command {
 	double timeout;
 	

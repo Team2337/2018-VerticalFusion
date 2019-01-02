@@ -4,6 +4,10 @@ import com.team2337.fusion.wrappers.commands.Action;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
+/**
+ * Fusion Command Group
+ * Opens the claw at 60 psi without the cube sensor 
+ */
 public class claw_CGOpenNoSensor extends Action {
 	public claw_CGOpenNoSensor() {
 		addSequential(new claw_give60psi());

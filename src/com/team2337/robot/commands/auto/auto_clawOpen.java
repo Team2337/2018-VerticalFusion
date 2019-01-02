@@ -5,9 +5,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import com.team2337.robot.Robot;
 
 /**
- * Claw: CLOSE - Closes the claw
- * @category CLAW
- * @author Brendan
+ * Claw: OPEN - Opens the claw
+ * @category AUTO-CLAW
+ * @author Brendan F.
  */
 public class auto_clawOpen extends Command {
 	public auto_clawOpen() {

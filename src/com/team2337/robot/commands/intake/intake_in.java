@@ -10,7 +10,7 @@ import com.team2337.robot.RobotMap;
  * Intake: IN - Move the intake in
  * 
  * @category INTAKE
- * @author Brendan
+ * @author Brendan F.
  */
 public class intake_in extends Command {
 	private double power = .75;

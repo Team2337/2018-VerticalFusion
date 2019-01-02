@@ -10,10 +10,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * Allows for cubes to be intaked or blooped (released)
+ * Allows for cubes to be intaked or released
  * 
  * @category INTAKE
- * @author Brendan
+ * @author Brendan F.
  */
 public class Intake extends Subsystem {
 
@@ -25,6 +25,7 @@ public class Intake extends Subsystem {
 	public void initDefaultCommand() {
 		setDefaultCommand(new intake_default());
 	}
+
 	public boolean hasCrate() {
 		return !RobotMap.crateSensorLeft.get();
 	}
@@ -46,6 +47,7 @@ public class Intake extends Subsystem {
 		right.set(ControlMode.PercentOutput, power);
 		left.set(ControlMode.PercentOutput, power);
 	}
+
 	/**
 	 * Move the intake inwards (intake)
 	 * @param power Power of motors (1.0 to 0.5)
@@ -56,12 +58,14 @@ public class Intake extends Subsystem {
 		left.set(ControlMode.PercentOutput, power/2);
 		
 	}
+
 	public void rotateLeft(double power) {
 		intakeOn = true;
 		right.set(ControlMode.PercentOutput, power/2);
 		left.set(ControlMode.PercentOutput, power);
 		
 	}
+
 	/**
 	 * Move the intake outwards (release/bloop it)
 	 * @param power Power of motors (-1.0 to 1.0) 
@@ -71,6 +75,7 @@ public class Intake extends Subsystem {
 		right.set(ControlMode.PercentOutput, -power);
 		left.set(ControlMode.PercentOutput, -power);
 	}
+
 	/**
 	 * Stop the intake
 	 */

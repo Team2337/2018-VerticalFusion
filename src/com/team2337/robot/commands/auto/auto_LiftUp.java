@@ -4,22 +4,32 @@ import com.team2337.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
+/**
+ * Moves the lift up to the desired position
+ * 
+ * @category AUTO-LIFT
+ * @author Bryce G.
+ */
 public class auto_LiftUp extends Command{
 	
 	double lift, liftEnd;
 	boolean liftDone = false;
+
 	/**
-	 * 
-	 * @param col
-	 * @param row 
-	 * Row, grabs the position in the array
-	 * Col, grabs the type of points in the array 
+	 * @param lift
+	 * Set point of the lift  
 	 */
 	public auto_LiftUp(double lift) {
 		this.lift = lift;
 		liftDone = true;
 	}
 	
+	/**
+	 * @param lift
+	 * Desired position of the lift
+	 * @param liftEnd
+	 * Position of the lift when the command will end
+	 */
 	public auto_LiftUp(double lift, double liftEnd) {
 		this.lift = lift;
 		this.liftEnd = liftEnd;

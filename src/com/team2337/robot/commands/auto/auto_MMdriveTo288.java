@@ -11,7 +11,10 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- *
+ * Drive forward using Motion Magic, multiplying the ticks by 288
+ * 
+ * @category AUTO-DRIVE
+ * @author Chris B., Sean L.
  */
 public class auto_MMdriveTo288 extends Command {
 

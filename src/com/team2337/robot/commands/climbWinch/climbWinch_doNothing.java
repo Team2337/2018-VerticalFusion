@@ -4,6 +4,9 @@ import com.team2337.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
+/**
+ * Does nothing, place holder for buttons
+ */
 public class climbWinch_doNothing extends Command{
 
 	public climbWinch_doNothing() {

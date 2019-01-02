@@ -8,8 +8,9 @@ import com.team2337.robot.RobotMap;
 import com.team2337.robot.RobotMap.*;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.team2337.fusion.drive.*;
+
 /**
- * Chassis: DRIVE - The drive for the chassis thats runs arcadeD
+ * Chassis: DRIVE - The drive for the chassis thats runs arcade drive
  * @category CHASSIS
  * @author Team2337 - EngiNERDs
  */
@@ -32,8 +33,12 @@ public class chassis_drive extends Command {
 		
 	}
 
-	protected boolean isFinished() {return false;}
-	protected void end() {}
+	protected boolean isFinished() {
+		return false;
+	}
+	protected void end() {
+		
+	}
 	protected void interrupted() {
 		this.end();
 	}

@@ -5,9 +5,10 @@ import edu.wpi.first.wpilibj.command.Command;
 import com.team2337.robot.Robot;
 
 /**
- * Claw: OPEN - Opens the claw
+ * Opens the claw to release pressure and then close at a different pressure
+ * 
  * @category CLAW
- * @author Brendan
+ * @author Brendan F.
  */
 public class claw_openClose extends Command {
 	public claw_openClose() {

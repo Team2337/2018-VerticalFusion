@@ -4,6 +4,12 @@ import com.team2337.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
+/**
+ * Ejects the hook for climbing
+ * 
+ * @category CLIMBER
+ * @author Bryce G.
+ */
 public class climber_ejector extends Command{
 	
 	public climber_ejector() {

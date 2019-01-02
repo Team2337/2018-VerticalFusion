@@ -6,7 +6,7 @@ import com.team2337.robot.Robot;
 
 /**
  * Claw: CLOSE - Closes the claw
- * @category CLAW
+ * @category AUTO-CLAW
  * @author Brendan
  */
 public class auto_claw60 extends Command {

@@ -17,7 +17,10 @@ import edu.wpi.first.wpilibj.command.Command;
 
 
 /**
- *
+ * Drive forward using Motion Magic
+ * 
+ * @category AUTO-DRIVE
+ * @author Chris B., Sean L.
  */
 public class auto_MMDriveRemote extends Command {
 

@@ -70,6 +70,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {
+		//Used to get the mac address from the roboRio
 		String mac;
 		mac = Address.getInstance().getMAC();
 		/*
@@ -88,10 +89,10 @@ public class Robot extends TimedRobot {
 		
 		// Initialize all of the Robots Mappings
 		RobotMap.init();
-		// Also start the camera(s)
+		//Start the camera(s)
 		//RobotMap.startCamera();
 
-		// Reference all of the subsystems
+		//Create an instance of subsystems listed
 
 		chassis = new Chassis();
 		trolley = new Trolley();
@@ -114,27 +115,22 @@ public class Robot extends TimedRobot {
 		AutoCommandManager.getInstance().init();
 		AutoCommandManager.getInstance().setBlinkin(RobotMap.blinkin);
 
-		// Also include the Auton Chooser
+		// Reset the sensors
 		Robot.gyro.resetPidgey();
 		Robot.chassis.resetEncoders();
 		Robot.pto.PTOLift();
 
-		// RobotMap.chassis_leftFront.setSelectedSensorPosition(0, 0, 0);  //replaced by above method
-		// RobotMap.chassis_rightFront.setSelectedSensorPosition(0, 0, 0);
+		// Auton Chooser
 
 		autonchooser.addObject("Do Nothing", "DoNothing");
 		autonchooser.addObject("Cross the Line", "CrossLine");
 		autonchooser.addDefault("Center Switch", "CenterSwitch");
-//		autonchooser.addObject("Center Switch Then Go Around", "SwitchThenGoAround");
-		
-//		autonchooser.addObject("Scale From Left", "ScaleLeft");
-//		autonchooser.addObject("Scale From Right", "ScaleRight");
+
 		autonchooser.addObject("Scale From Left Score On Side", "ScaleLeftSide");
 		autonchooser.addObject("Scale From Right Score On Side", "ScaleRightSide");
 		autonchooser.addObject("*Scale Greedy Right", "ScaleRightSideMutli");
 		autonchooser.addObject("*Scale Greedy Left Red", "ScaleLeftSideMutliRed");
 		autonchooser.addObject("*Scale Greedy Left Blue", "ScaleLeftSideMutliBlue");
-//		autonchooser.addObject("*Scale Left Only with Switches", "ScaleLeftSideMutliWithSwitch");
 		autonchooser.addObject("*Partner Scale On Our Left", "PartnerScaleOnOurLeft");
 		autonchooser.addObject("*Partner Scale On Our Right", "PartnerScaleOnOurRight");
 		autonchooser.addObject("*Favor Opponents Scale", "FavorOpponentsScale");
@@ -143,16 +139,6 @@ public class Robot extends TimedRobot {
 		autonchooser.addObject("*Triple Left Scale Single Right","CG_scaleFromLeftMultiCubeFarRightScale");
 		autonchooser.addObject("*Switch From Center Pyramid Cube to Scale", "CG_pyramid");
 		autonchooser.addObject("Left Side 3 Cube/ Right Cross Line", "3CubeOrCross");
-
-		
-//		autonchooser.addObject("LiftUpperPosition", "LiftUpperPosition");
-//		autonchooser.addObject("PRACTICE CenterSwitchRight", "CenterSwitchRight");
-//		autonchooser.addObject("PRACTICE CenterSwitchLeft", "CenterSwitchLeft");
-	
-		//autonchooser.addObject("TESTUTurn", "UTurn");
-		//autonchooser.addObject("TESTLineRead", "line");
-		
-
 	}
 
 	/**
@@ -202,11 +188,12 @@ public class Robot extends TimedRobot {
 		System.out.println("*************************Game Data from FMS: " + "***************************************");
 		System.out.println("Game Data from FMS: ");
 		
-		
+		//Game data 
 		ourswitch = gameData.substring(0, 1);
 		scale = gameData.substring(1, 2);
 		oppswitch = gameData.substring(2, 3);
 
+		//Auton Chooser
 		String selected = autonchooser.getSelected();
 
 		switch (selected) {
@@ -302,7 +289,8 @@ public class Robot extends TimedRobot {
 	}
 
 	/**
-	 * This function is called periodically during autonomous.
+	 * This function is called periodically during autonomous, running the schendular and printing 
+	 * SmartDashboard values
 	 */
 	@Override
 	public void autonomousPeriodic() {
@@ -329,7 +317,8 @@ public class Robot extends TimedRobot {
 	}
 
 	/**
-	 * This function is called periodically during operator control.
+	 * This function is called periodically during operator control, running the schedular and commands in 
+	 * all periodic
 	 */
 	@Override
 	public void teleopPeriodic() {
@@ -362,7 +351,8 @@ public class Robot extends TimedRobot {
 	public void allPeriodic() {
 
 		Robot.led.initDefaultCommand();
-		
+		// Prints these values for debugging
+		// (Used in comp)
 		if (RobotMap.robot_AllPeriodicDebug) {
 			SmartDashboard.putNumber("claw pressure", (int) (RobotMap.clawPressure.getValue() / 21.37));
 			SmartDashboard.putData("Auto mode", autonchooser);
@@ -374,20 +364,12 @@ public class Robot extends TimedRobot {
 			SmartDashboard.putNumber("armEncoderPositionPWM - 2300ish", RobotMap.arm_right.getSensorCollection().getPulseWidthPosition());
 			SmartDashboard.putNumber("armEncoderPosition - 2300ish", RobotMap.arm_right.getSelectedSensorPosition(0));
 			SmartDashboard.putBoolean("Line Reader", RobotMap.lineReader.get());
-			//SmartDashboard.putNumber("centerX", RobotMap.vision.getRevAngle());
 			SmartDashboard.putBoolean("claw Pressure", RobotMap.clawPressureDash);
 			SmartDashboard.putBoolean("Crate Sensor Red", RobotMap.crateSensorLeft.get());
 			SmartDashboard.putBoolean("Crate Sensor Green", RobotMap.crateSensorRight.get());
-			//SmartDashboard.putNumber("Navx Yaw", RobotMap.navx_gyro.getYaw());
 		}
-		//SmartDashboard.putString("intake Command", Robot.intake.getCurrentCommandName());
-//		SmartDashboard.putBoolean("first intake", RobotMap.firstIntake);
-		//SmartDashboard.putString("Pixy Command", Robot.pixy.getCurrentCommandName());
-//		SmartDashboard.putNumber("Pixy Xx Value", Robot.pixy.xx);
-		//SmartDashboard.putNumber("Pixy Yy Value", Robot.pixy.yy);
+		//Used to display the state of the arm (if the encoder goes out of bounds, this will turn black on the dashboard)
 		SmartDashboard.putBoolean("brokenArm", RobotMap.brokenArm);
-		
-		//System.out.println(gyro.gyrofusionStatus.bIsValid);
 	}
 
 }

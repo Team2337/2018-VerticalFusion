@@ -16,14 +16,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Arm extends Subsystem {
 
 	private final static TalonSRX armRight = RobotMap.arm_right;
-
-	//private boolean PIDStatus = false;
 	
 	private double kF = 0;
 	private double kP = 2;  //1.1
 	private double kI = 0;
 	private double kD = 200;
-	private int allowableError = 1;                ///need to set *****************//TODO
+	private int allowableError = 1;                
 
 	private static final double maxSpeedUp 		= 0.7;
 	private static final double maxSpeedDown 	= -0.7;
@@ -31,44 +29,44 @@ public class Arm extends Subsystem {
 	public static int forwardClampLimit, centerPosition, forwardLevel, forwardSoftLimit, forwardCarry, reverseSoftLimit, climberAdjLimit, armClimbHook, armClimbMode, armHookAdjLimit, armCenterAdjLimit;
 	
 	//ONLY USED IN JOYSTICK CONTROL
-	public static final int forwardTopSL 		= 548;   //548   /// not used /// comp  548??
-	public static final int reverseTopSL 		= -375;  //55   /// not used   /// comp comp -375
-	
+	public static final int forwardTopSL 		= 548;
+	public static final int reverseTopSL 		= -375;  	
 
 	protected void initDefaultCommand() {
-		//setDefaultCommand(new TEST_ONLY_arm_joystickControl());
+		//Defualt command is BigBrother, which is already running this subsystem through other means
 	}
 
 	public Arm() {
 		if(Robot.isComp) {
 			centerPosition 		= 2300;
 			
-			forwardLevel 		= centerPosition + 975;		//975 prac
-			forwardSoftLimit 	= centerPosition + 1200;    //1000 practice    /// comp  350 //1200
-			forwardCarry 		= centerPosition + 420;     //420 practice  // 900           ///  comp -160
+			forwardLevel 		= centerPosition + 975;
+			forwardSoftLimit 	= centerPosition + 1200;
+			forwardCarry 		= centerPosition + 420;
 			forwardClampLimit	= centerPosition + 800;
 			
-			reverseSoftLimit	= centerPosition - 1700;	//- 1008;practice //Flat Position //-1100
-			
-			climberAdjLimit		= 1180; //Climber flat position
-			armHookAdjLimit		= 245;   //Adj when getting hook 
-			armCenterAdjLimit	= 300;	//
+			reverseSoftLimit	= centerPosition - 1700;
+
+			//Flat position when climbing
+			climberAdjLimit		= 1180; 
+			armHookAdjLimit		= 245;    
+			armCenterAdjLimit	= 300;	
 			
 			armClimbHook			= centerPosition - 1300;
 			
 		} else {
 			centerPosition 		= 2300;
 			
-			forwardLevel 		= centerPosition + 975;		//975 prac
-			forwardSoftLimit 	= centerPosition + 1000;    //1000 practice    /// comp  350
-			forwardCarry 		= centerPosition + 420;     //420 practice  // 900           ///  comp -160
+			forwardLevel 		= centerPosition + 975;		
+			forwardSoftLimit 	= centerPosition + 1000;    
+			forwardCarry 		= centerPosition + 420;
 			forwardClampLimit	= centerPosition + 800;
 			
-			reverseSoftLimit	= centerPosition - 1008;	//- 1008;practice //Flat Position //-1100
-			
-			climberAdjLimit		= 1180; //Climber flat position
-			armHookAdjLimit		= 200;   //Adj when getting hook
-			armCenterAdjLimit	= 250;	//
+			reverseSoftLimit	= centerPosition - 1008;
+						
+			climberAdjLimit		= 1180; 
+			armHookAdjLimit		= 200;   
+			armCenterAdjLimit	= 250;
 			
 			armClimbHook			= centerPosition - 1300;
 		}

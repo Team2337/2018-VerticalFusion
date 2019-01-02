@@ -4,6 +4,12 @@ import com.team2337.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
+/**
+ * Moves the lift downwards
+ * 
+ * @category AUTO-LIFT
+ * @author Bryce G. 
+ */
 public class auto_LiftDown extends Command{
 	
 	double lift, liftEnd;
@@ -23,7 +29,9 @@ public class auto_LiftDown extends Command{
 	/**
 	 * This command sets the setpoint on the lift, and does NOT end the command until a certain point has been reached
 	 * @param lift
+	 * Starting position of the lift
 	 * @param liftEnd
+	 * Ending position of the lift after it goes down
 	 */
 	public auto_LiftDown(double lift, double liftEnd) {
 		this.lift = lift;

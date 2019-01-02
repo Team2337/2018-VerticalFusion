@@ -6,6 +6,10 @@ import com.team2337.robot.commands.shifter.shifter_low;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
+/**
+ * Drives around the switch to the left, from the right side of the front wall of the switch
+ * After backing up, the robot drives forward to intake the cube 
+ */
 public class commonCG_driveAroundSwitchLeft extends CommandGroup {
 
 	public commonCG_driveAroundSwitchLeft() {

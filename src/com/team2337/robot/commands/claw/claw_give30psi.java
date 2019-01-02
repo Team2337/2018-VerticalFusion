@@ -13,6 +13,12 @@ import com.team2337.robot.OI;
 import com.team2337.robot.Robot;
 import com.team2337.robot.RobotMap;
 
+/**
+ * Sets the claw pressure to 30 psi
+ * 
+ * @category CLAW
+ * @author Brendan F.
+ */
 public class claw_give30psi extends Command {
 	public claw_give30psi() {
 		requires(Robot.claw);

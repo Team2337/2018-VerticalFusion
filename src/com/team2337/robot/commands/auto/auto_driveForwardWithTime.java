@@ -7,10 +7,19 @@ import com.team2337.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
+/**
+ * Drives the chassis forward for a given time 
+ * @category AUTO
+ * @author Bryce G., Sean L.
+ */
 public class auto_driveForwardWithTime extends Command {
 
 	double speed, turn, Pgain, Dgain, MaxCorrectionRatio, targetAngle, timeout;
 	
+	/**
+	 * @param speed Percent Power of the motors (Values of -1 -> 1)
+	 * @param timeout The amount of time the command runs for, in milliseconds
+	 */
 	public auto_driveForwardWithTime(double speed, double timeout) {
 		requires(Robot.chassis);
 

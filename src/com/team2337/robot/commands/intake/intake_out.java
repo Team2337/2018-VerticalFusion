@@ -9,7 +9,7 @@ import com.team2337.robot.RobotMap;
  * Intake: OUT - Move the intake out
  * 
  * @category INTAKE
- * @author Brendan
+ * @author Brendan F.
  */
 public class intake_out extends Command {
 

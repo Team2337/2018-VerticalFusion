@@ -11,10 +11,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 /**
- * The system to move Trolley up and down
+ * Changes the position of the trolley using PID setpoints
  * 
  * @category TROLLEY
- * @author Bryce
+ * @author Bryce G.
  */
 public class Trolley extends Subsystem {
 
@@ -49,21 +49,22 @@ public class Trolley extends Subsystem {
 	
 	
 	protected void initDefaultCommand() {
-		//setDefaultCommand(new TEST_ONLY_trolley_joystickControl());
+		//Defualt command is BigBrother, which is already running this subsystem through other means
 	}
 
 	public Trolley() {
+		//Changes the trolley set points based on the robot being used (comp or practice)
 		if(Robot.isComp) {
 			trolleyLowHold = trolleyStart + 90;
 			trolleyPlus215 = trolleyStart + 215;
-			trolleyPlus315 = trolleyStart + 330;	//315
-			trolleyTop	  = trolleyStart + 485; //545
+			trolleyPlus315 = trolleyStart + 330;
+			trolleyTop	   = trolleyStart + 485; 
 			trolleyHookPos = trolleyStart + 300;
 		} else {
 			trolleyLowHold = trolleyStart + 90;
 			trolleyPlus215 = trolleyStart + 215;
-			trolleyPlus315 = trolleyStart + 330;  //315
-			trolleyTop	  = trolleyStart + 485;
+			trolleyPlus315 = trolleyStart + 330;  
+			trolleyTop	   = trolleyStart + 485;
 		}
 		
 		setSoftLimits(forwardTrolleySoftLimit, reverseTrolleySoftLimit);
@@ -96,14 +97,14 @@ public class Trolley extends Subsystem {
 	/**
 	 * Returns if trolley is at top, so that arm can go over
 	 */
-	public boolean isAtTop(){
+	public boolean isAtTop() {
 		return (getPosition() > 0.95 * forwardTrolleySoftLimit);
 	}
 	
 	/**
 	 * Returns if trolley is above midpoint
 	 */
-	public boolean isAboveMid(){
+	public boolean isAboveMid() {
 		return (getPosition() > (0.5 * (forwardTrolleySoftLimit - reverseTrolleySoftLimit) + reverseTrolleySoftLimit));
 	}
 	
@@ -111,7 +112,7 @@ public class Trolley extends Subsystem {
 	/**
 	 * Sets the position of the trolley
 	 */
-	public void setSetpoint(double pos){
+	public void setSetpoint(double pos) {
 		rightFront.set(ControlMode.Position, pos);
 	}
 	
@@ -122,27 +123,28 @@ public class Trolley extends Subsystem {
 	/**
 	 * Gets the set point of the trolley
 	 */
-	public double getSetpoint(){
+	public double getSetpoint() {
 		return rightFront.getClosedLoopTarget(0);
 	}
 	
 	/**
 	 * Gets the set point error of the trolley
 	 */
-	public double getError(){
+	public double getError() {
 		return rightFront.getClosedLoopError(0);
 	}
 	
 	/**
 	 * Gets the position of the trolley
 	 */
-	public double getPosition(){
+	public double getPosition() {
 		return rightFront.getSelectedSensorPosition(0);
 	}
-	/**
-	 * Runs the trolley by joystick
-	 */
 
+	/**
+	 * Runs the trolley by power input
+	 * @param power Percentage of power given to the motors to move the trolley (Value of 0-1)
+	 */
 	public void move(double power) {
 		rightFront.set(ControlMode.PercentOutput, power);
 	}
@@ -152,7 +154,10 @@ public class Trolley extends Subsystem {
 	}
 	
 	/**
-	 * Set the software limits of the trolley
+	 * Set the soft limits of the trolley
+	 * Soft limits are position limits that are envoked through the talons, and are not physical stops
+	 * @param forward encoder value in which the talon keeps the system from going past (-4096 - 4096)
+	 * @param reverse encoder value in which the talon keeps the system from going past (-4096 - 4096)
 	 */
 	public static void setSoftLimits(int forward, int reverse) {
 		forwardTrolleySoftLimit = forward;
@@ -166,6 +171,7 @@ public class Trolley extends Subsystem {
 	}
 	
 	/**
+	 * Runs the code while this subsystem is in use
 	 * Debug, turn on/off in RobotMap
 	 */
 	public void periodic() {

@@ -6,12 +6,19 @@ import com.team2337.robot.Robot;
 
 /**
  * Intake: OUT - Move the intake out
- * @category INTAKE
- * @author Brendan
+ * @category AUTO-INTAKE
+ * @author Brendan F.
  */
 public class auto_intakeOut extends Command {
 	private double power = 1;
 	private double timeout;
+
+	/**
+	 * @param power
+	 * Percent of power output on the motor
+	 * @param timeout
+	 * The amount of time the command is allowed to run until it is forced to terminate
+	 */
 	public auto_intakeOut(double power, double timeout) {
 		requires(Robot.intake);
 		this.power = power;

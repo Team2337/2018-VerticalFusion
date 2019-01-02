@@ -9,6 +9,11 @@ import com.team2337.robot.RobotMap;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+/**
+ * Drives the chassis to an angle using the pigeon and a chassis encoder (left - for turning right, right - for turning left)
+ * @category AUTO
+ * @author Bryce G., Sean L.
+ */
 public class auto_driveToAngleWithEncoder extends Command {
 
 	double speed, turn, Pgain, Dgain, MaxCorrectionRatio, targetAngle, timeout, isFinishedPos;
@@ -17,56 +22,6 @@ public class auto_driveToAngleWithEncoder extends Command {
 	boolean change = false;
 	String changeScaleEnc = "false";
 	
-	public auto_driveToAngleWithEncoder(double speed, double timeout, double angle, int encoderTargetLeft, int encoderTargetRight, double Pgain) {
-		requires(Robot.chassis);
-		Dgain = 0.0004; /* percent throttle per angular velocity dps */
-		MaxCorrectionRatio = 0.30; /* cap corrective turning throttle to 30 percent of forward throttle */
-		this.speed = speed;
-	    this.timeout = timeout;
-	    this.targetAngle = angle;
-	    this.encoderLeft = encoderTargetLeft;
-	    this.encoderRight = encoderTargetRight;
-		this.Pgain = Pgain;
-	}
-	
-	public auto_driveToAngleWithEncoder(double speed, double timeout, double angle, int encoderTargetLeft, int encoderTargetRight, double Pgain, boolean change) {
-		requires(Robot.chassis);
-		Dgain = 0.0004; /* percent throttle per angular velocity dps */
-		MaxCorrectionRatio = 0.30; /* cap corrective turning throttle to 30 percent of forward throttle */
-		this.speed = speed;
-	    this.timeout = timeout;
-	    this.targetAngle = angle;
-	    this.encoderLeft = encoderTargetLeft;
-	    this.encoderRight = encoderTargetRight;
-		this.Pgain = Pgain;
-		this.change = change;
-	}
-	public auto_driveToAngleWithEncoder(double speed, double timeout, double angle, int encoderTargetLeft, int encoderTargetRight, double Pgain, boolean change, double Dgain) {
-		requires(Robot.chassis);
-		MaxCorrectionRatio = 0.30; /* cap corrective turning throttle to 30 percent of forward throttle */
-		this.speed = speed;
-	    this.timeout = timeout;
-	    this.targetAngle = angle;
-	    this.encoderLeft = encoderTargetLeft;
-	    this.encoderRight = encoderTargetRight;
-		this.Pgain = Pgain;
-		this.change = change;
-		this.Dgain = Dgain;
-	}
-	
-	public auto_driveToAngleWithEncoder(double speed, double timeout, double angle, int encoderTargetLeft, int encoderTargetRight, double Pgain, boolean change, double Dgain, String changeScaleEnc) {
-		requires(Robot.chassis);
-		MaxCorrectionRatio = 0.30; /* cap corrective turning throttle to 30 percent of forward throttle */
-		this.speed = speed;
-	    this.timeout = timeout;
-	    this.targetAngle = angle;
-	    this.encoderLeft = encoderTargetLeft;
-	    this.encoderRight = encoderTargetRight;
-		this.Pgain = Pgain;
-		this.change = change;
-		this.Dgain = Dgain;
-		this.changeScaleEnc = changeScaleEnc;
-	}
 	
 	/**
 	 * This command drives the chassis motors, using a PID, towards a given setpoint

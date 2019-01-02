@@ -28,6 +28,7 @@ import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
+ * @author Team2337 - EngiNERDs
  */
 public class OI {
 
@@ -36,9 +37,7 @@ public class OI {
 	public final int blueSwitch	  = 4;
 	public final int blueButton   = 8;
 	
-	/*
-	 * DriverJoystick
-	 */
+	/* --- DRIVER JOYSTICK --- */
 	public static Joystick				driverJoystick			= new Joystick(0);
 	
 	JoystickButton			driver_GreenA			= new JoystickButton(driverJoystick, 1);
@@ -62,34 +61,20 @@ public class OI {
 	JoystickPOVButton		driver_POVLeft			= new JoystickPOVButton(driverJoystick, 270);
 	JoystickPOVButton		driver_POVUpLeft		= new JoystickPOVButton(driverJoystick, 315);
 	
+	
+	/* --- OPERATOR JOYSTICK - FLIGHT STICK --- */
+
 	/*
-	 * OperatorJoystick
+		AXIS:
+		#	Description		Direction   			Positive
+		--	---------------	---------------------	--------
+		0	Joystick tilt	Right/Left				Right
+		1	Joystick tilt	Forward/back			Back
+		2	Throttle tilt	Forward/Back			Back
+		3	Joystick rotate	Right/Left (Rotation)	Right
+		4	Throttle rocker	Right/Left (Rocker)		Right
 	 */
-	
-	/*public static Joystick				operatorJoystick		= new Joystick(1);
-	JoystickButton			operator_GreenA			= new JoystickButton(operatorJoystick, 1);
-	JoystickButton			operator_RedB			= new JoystickButton(operatorJoystick, 2);
-	JoystickButton			operator_BlueX			= new JoystickButton(operatorJoystick, 3);
-	JoystickButton			operator_YellowY		= new JoystickButton(operatorJoystick, 4);
-	JoystickButton			operator_BumperLeft		= new JoystickButton(operatorJoystick, 5);
-	JoystickButton			operator_BumperRight 	= new JoystickButton(operatorJoystick, 6);
-	JoystickButton			operator_Back			= new JoystickButton(operatorJoystick, 7);
-	JoystickButton			operator_Start			= new JoystickButton(operatorJoystick, 8);
-	JoystickButton			operator_LeftStick		= new JoystickButton(operatorJoystick, 9);
-	JoystickButton			operator_RightStick		= new JoystickButton(operatorJoystick, 10);
-	JoystickAnalogButton	operator_TriggerLeft	= new JoystickAnalogButton(operatorJoystick, 2);
-	JoystickAnalogButton	operator_TriggerRight	= new JoystickAnalogButton(operatorJoystick, 3);
-	JoystickPOVButton		operator_POVUp			= new JoystickPOVButton(operatorJoystick, 0);
-	JoystickPOVButton		operator_POVUpRight		= new JoystickPOVButton(operatorJoystick, 45);
-	JoystickPOVButton		operator_POVRight		= new JoystickPOVButton(operatorJoystick, 90);
-	JoystickPOVButton		operator_POVDownRight	= new JoystickPOVButton(operatorJoystick, 135);
-	JoystickPOVButton		operator_POVDown		= new JoystickPOVButton(operatorJoystick, 180);
-	JoystickPOVButton		operator_POVDownLeft	= new JoystickPOVButton(operatorJoystick, 225);
-	JoystickPOVButton		operator_POVLeft		= new JoystickPOVButton(operatorJoystick, 270);
-	JoystickPOVButton		operator_POVUpLeft		= new JoystickPOVButton(operatorJoystick, 315);
-	*/
-	
-	
+
 	public static Joystick				operatorJoystick		= new Joystick(1);
 	JoystickButton			operator_RightTrigger				= new JoystickButton(operatorJoystick, 1);	//Digital trigger on the back of the joystick
 	JoystickButton			operator_StripedButton				= new JoystickButton(operatorJoystick, 2);	//The orange and black striped button on joystick
@@ -116,18 +101,8 @@ public class OI {
 	JoystickPOVButton		operator_JoystickPOVLeft			= new JoystickPOVButton(operatorJoystick, 270);
 	JoystickPOVButton		operator_JoystickPOVUpLeft			= new JoystickPOVButton(operatorJoystick, 315);
 	
-	/*
-		AXIS:
-		#	Description		Direction   			Positive
-		--	---------------	---------------------	--------
-		0	Joystick tilt	Right/Left				Right
-		1	Joystick tilt	Forward/back			Back
-		2	Throttle tilt	Forward/Back			Back
-		3	Joystick rotate	Right/Left (Rotation)	Right
-		4	Throttle rocker	Right/Left (Rocker)		Right
-	 */
 	
-	
+	/* --- DRIVER STATION CONTROLS --- */
 	public static Joystick				operatorControls		= new Joystick(2);
 	JoystickButton			operatorInt_GreenButton				= new JoystickButton(operatorControls, 19);
 	JoystickButton			operatorInt_RedButton				= new JoystickButton(operatorControls, 20);
@@ -139,11 +114,17 @@ public class OI {
 	JoystickButton 			operatorInt_YellowButton			= new JoystickButton(operatorControls, 6);
 	JoystickButton 			operatorInt_BlueButton				= new JoystickButton(operatorControls, blueButton);
 	JoystickButton 			operatorInt_BlackButton 			= new JoystickButton(operatorControls, 7);
-     /* OperatorControl*/
+
 	
 	public OI() {
+
+		/***************************/
+		/* ----------------------- */
+		/* --- BUTTON BINDINGS --- */
+		/* ----------------------- */
+		/***************************/
 		
-		/* ====== DRIVER JOYSTICK ===== */
+		/* --- DRIVER JOYSTICK --- */
 		
 		driver_GreenA			.whileHeld(new climbWinch_driveVertical(1));
 		driver_RedB				.whenPressed(new DoNothing()); 
@@ -172,8 +153,8 @@ public class OI {
 	    driver_POVLeft			.whenPressed(new DoNothing()); 
 	   	//driver_POVUpLeft		.whenPressed(new _DoNothing()); 
 	    
-	    //////////////////////////////////
 	    
+	    /* --- OPERATOR JOYSTICK - FLIGHT STICK --- */
    
 	    operator_RightTrigger			       .whileHeld(new intake_in(1));
 	    operator_StripedButton			       .whenPressed(new claw_CGOpen());
@@ -210,14 +191,12 @@ public class OI {
 	    
 	    operator_JoystickPOVRight		       .whenPressed(new DoNothing());
 	    operator_JoystickPOVLeft		       .whenPressed(new DoNothing());
-	    
-	    ////////////////////////////////////
 		
 		
-		/* ===== DRIVER STATION CONTROLS ===== */
+		/* --- DRIVER STATION CONTROLS --- */
 		
-//		operatorInt_GreenButton	.whenPressed(new _DoNothing());
-//		operatorInt_RedButton	.whenPressed(new _DoNothing());
+//		operatorInt_GreenButton	.whenPressed(new _DoNothing());		//used to enable the robot
+//		operatorInt_RedButton	.whenPressed(new _DoNothing());		//used to disable the robot
 		
 //		operatorInt_ClearSwitch	.whenPressed(new DoNothing());
 	    operatorInt_YellowSwitch.whileHeld(new DoNothing());		//this is being used in ALTControl to disable arm
@@ -225,25 +204,29 @@ public class OI {
 	    operatorInt_BlackSwitch	.whenPressed(new DoNothing());		//this is being used in ALTControl to disable trolley
 		operatorInt_BlueSwitch	.whenPressed(new DoNothing());		//this is being used in ALTControl to disable lift
 		
-//		operatorInt_BlackButton	.whenPressed(new PTO_Climb());
 //		operatorInt_BlueButton	.whileHeld(new lift_climb());
-//		operatorInt_YellowButton.whenPressed(new PTO_Lift());
 //		operatorInt_WhiteButton	.whenPressed(new DoNothing());
-		
 		operatorInt_BlackButton .whenPressed(new CG_returnToALTControl());
 		operatorInt_YellowButton.whenPressed(new CG_defenseMode());
-		///////////////////////////////////////// 
 	}
 
-	
+	/**
+	 * Returns the Driver Joystick Object
+	 */
 	public Joystick getDriverJoystick() {
 		return driverJoystick;
 	}
 	
+	/**
+	 * Returns the Operator Joystick Object
+	 */
 	public Joystick getOperatorJoystick() {
 		return operatorJoystick;
 	}
 	
+	/**
+	 * Returns the Driver Station Controls Object
+	 */
 	public Joystick getOperatorControls() {
 		return operatorControls;
 	}
@@ -251,7 +234,7 @@ public class OI {
 	/** 
 	   * <p style="color:blue;"><strong>Function enables/disables controller vibration.</strong></p> 
 	   * <p style="color:blue;"><i>Call with Robot.OI.rumble(OnOff)</i></p> 
-	   * @author SomeNerd 
+	   * @author Jack E. (SomeNerd) 
 	   * @param joy Joystick to vibrate (EX: Robot.OI.driverJoystick)
 	   * @param intensity Intensity of the vibration from 0 to 1 (EX: 0.75)
 	   */ 

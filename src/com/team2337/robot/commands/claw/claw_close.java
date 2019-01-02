@@ -7,7 +7,7 @@ import com.team2337.robot.Robot;
 /**
  * Claw: CLOSE - Closes the claw
  * @category CLAW
- * @author Brendan
+ * @author Brendan F.
  */
 public class claw_close extends Command {
 	public claw_close() {

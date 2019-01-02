@@ -6,6 +6,9 @@ import com.team2337.robot.commands.shifter.shifter_low;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
+/**
+ * Brings the arm to the front to pick up position 
+ */
 public class commonCG_armToPickupFromFront extends CommandGroup {
 
 	public commonCG_armToPickupFromFront() {

@@ -2,6 +2,9 @@ package com.team2337.robot.commands.auto;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
+/**
+ * Drives to the scale and scores the cube from the start
+ */
 public class commonCG_scoreScale extends CommandGroup{
 	public commonCG_scoreScale() {
 	addParallel(new auto_bigBrother_DoNothing());

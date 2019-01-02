@@ -6,6 +6,9 @@ import com.team2337.robot.commands.shifter.shifter_low;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
+/**
+ * Drives aound the switch to the right, from the right side of the front wall of the switch
+ */
 public class commonCG_driveAroundNearSwitchRight extends CommandGroup {
 
 	public commonCG_driveAroundNearSwitchRight() {

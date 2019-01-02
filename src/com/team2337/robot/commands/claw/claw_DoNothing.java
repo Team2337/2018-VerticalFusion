@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 import com.team2337.robot.Robot;
 
-/*
+/**
  * Does nothing. Placeholder/filler command for buttons or other triggers.
  */
 public class claw_DoNothing extends Command {

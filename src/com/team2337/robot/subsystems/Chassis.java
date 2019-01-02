@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * The main chasiss runtime
+ * The main chassis runtime
  * 
  * @category CHASSIS
  * @author Team2337 - EngiNERDs

@@ -4,6 +4,12 @@ import com.team2337.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
+/**
+ * Runs the intake without the use of the crate sensor
+ * 
+ * @category INTAKE
+ * @author Team2337 - EngiNERDs
+ */
 public class intake_bypassCrateSensor extends Command {
 
 	public intake_bypassCrateSensor() {

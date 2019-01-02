@@ -7,6 +7,12 @@ import com.team2337.robot.commands.claw.claw_open;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
+/**
+ * Fusion Command Group
+ * Opens the claw to release pressure and then close it with less grip
+ * @category AUTO-CLAW
+ * @author Brendan F. 
+ */
 public class auto_clawCGOpenClose extends Action {
 	public auto_clawCGOpenClose() {
 		addSequential(new claw_give60psi());

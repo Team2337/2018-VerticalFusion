@@ -5,6 +5,13 @@ import com.team2337.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
+/**
+ * Fusion Command Group 
+ * Closes the claw at 60 psi without using the crate sensor
+ * 
+ * @category CLAW
+ * @author Brendan F.
+ */
 public class claw_CGCloseNoSensor extends Action {
 	public claw_CGCloseNoSensor() {
 		addSequential(new claw_close());

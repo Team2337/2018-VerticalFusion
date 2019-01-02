@@ -4,6 +4,9 @@ import com.team2337.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
+/**
+ * Runs the lift while in climb mode
+ */
 public class lift_climb extends Command {
 
 	public lift_climb() {

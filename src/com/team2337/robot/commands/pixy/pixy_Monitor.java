@@ -5,6 +5,11 @@ import com.team2337.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+/**
+ * Monitors the pixy cam,printing the values on the dashboard
+ * 
+ * @category VISION
+ */
 public class pixy_Monitor extends Command {
 
 	public pixy_Monitor() {

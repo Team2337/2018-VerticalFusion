@@ -5,10 +5,10 @@ import edu.wpi.first.wpilibj.command.Command;
 import com.team2337.robot.Robot;
 
 /**
- * Shifter: HIGH - Shifts drive train into low gear
+ * Shifter: LOW - Shifts drive train into low gear
  * 
  * @category SHIFTER
- * @author Brendan
+ * @author Brendan F.
  */
 public class shifter_low extends Command {
 	public shifter_low() {

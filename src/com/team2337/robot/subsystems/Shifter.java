@@ -9,10 +9,10 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- * Shifts the chassis to a different gear ration
+ * Shifts the chassis to a different gear ratio
  * 
- * @category SHIFTER
- * @author Brendan
+ * @category shifter
+ * @author Brendan F.
  */
 public class Shifter extends Subsystem {
 	

@@ -6,15 +6,18 @@ import com.team2337.robot.Robot;
 import com.team2337.robot.RobotMap;
 
 /**
- * Claw: OPEN - Opens the claw
- * @category CLAW
- * @author Bryce"Bruce""Flounder"
+ * Opens the claw when the accelerometer senses a force of 0.9 G forces being put on the robot (when we run into the switch)
+ * @category AUTO-CLAW
+ * @author Bryce G., Sean L.
  */
 public class auto_clawOpenWithCollision extends Command {
 	public boolean collisionDetected;
 	double currentJerkX, curr_world_linear_accel_x, curr_world_linear_accel_y, currentJerkY, last_world_linear_accel_x, last_world_linear_accel_y, timeout;
 	final static double kCollisionThreshold_DeltaG = 0.9f;
 	
+	/**
+	 * @param timeout The amount of time the command is allowed to run, in milliseconds, if it never ends by any other means
+	 */
 	public auto_clawOpenWithCollision(double timeout) {
 		this.timeout = timeout;
 		requires(Robot.claw);

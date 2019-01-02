@@ -5,6 +5,13 @@ import com.team2337.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
+/**
+ * Moves the arm and trolley at the same time
+ * Finished when the trolley position is passed the desired position
+ * 
+ * @category AUTO-BIGBROTHER
+ * @author Bryce G.
+ */
 public class auto_moveUpperPositionWithIsFinished extends Command {
 	double arm,trolley,trolleyEnd;
 	boolean trolleyDone = false;
@@ -26,7 +33,9 @@ public class auto_moveUpperPositionWithIsFinished extends Command {
 	/**
 	 * The arm setpoint is set as normal, while the trolley setpoint is set, but does NOT end the command until the trolley has reached the given end point
 	 * @param arm
+	 * Arm setpoint
 	 * @param trolley
+	 * Trolley setpoint
 	 * @param trolleyEnd
 	 * End point determining if the command can terminate based on trolley position 
 	 */

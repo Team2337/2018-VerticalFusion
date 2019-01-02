@@ -7,9 +7,10 @@ import com.team2337.robot.Robot;
 import com.team2337.robot.RobotMap;
 
 /**
- * Claw: OPEN - Opens the claw
+ * Opens the claw while the button is held 
+ * 
  * @category CLAW
- * @author Brendan
+ * @author Brendan F. 
  */
 public class claw_openHeld extends Command {
 	private int time;

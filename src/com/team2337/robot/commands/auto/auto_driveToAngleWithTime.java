@@ -8,10 +8,26 @@ import com.team2337.robot.RobotMap;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+/**
+ * Drives the chassis to a desired angle with the gyro, for a given amount of time 
+ * 
+ * @category AUTO-DRIVE
+ * @author Bryce G., Sean L.
+ */
 public class auto_driveToAngleWithTime extends Command {
 
 	double speed, turn, Pgain, Dgain, MaxCorrectionRatio, targetAngle, timeout;
 	double num = 0;
+
+	/**
+	 * This command drives the chassis motors, using a PID, towards a given setpoint for a set amount of time 
+	 * @param speed
+	 * Percent of power output on the motor
+	 * @param timeout
+	 * The amount of time the command is allowed to run until it is forced to terminate
+	 * @param angle
+	 * The desired angle the robot should be at, at the end of the command
+	 */
 	public auto_driveToAngleWithTime(double speed, double timeout, double angle) {
 		requires(Robot.chassis);
 		Pgain = 0.08; /* percent throttle per degree of error */

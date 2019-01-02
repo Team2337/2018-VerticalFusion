@@ -2,6 +2,12 @@ package com.team2337.robot.commands.bigBrother;
 
 import com.team2337.robot.Robot;
 
+/**
+ * The Arm-Lift-Trolley set points array for the comp bot using variableized values
+ * 
+ * @category BIGBROTHER
+ * @author Bryce G., Sean L.
+ */
 public class setPointsCompBot {
 	static int armForwardSoftLimit = Robot.arm.forwardSoftLimit;
 	static int armReverseSoftLimit = Robot.arm.reverseSoftLimit;

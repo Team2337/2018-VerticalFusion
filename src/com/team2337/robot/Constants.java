@@ -1,10 +1,17 @@
 package com.team2337.robot;
 /**
- * Constants of the Team2337 Code
+ * Constants for the Vision Camera 
  * @category CONSTANTS
  * @author Team2337 - EngiNERDs
  */
 public class Constants {
+
+	/************************************************/
+	/* -------------------------------------------- */
+	/* --- VISION CAMERA CALIBRATION - PIXY CAM --- */
+	/* -------------------------------------------- */
+	/************************************************/
+
 	public final static double TargetingCamera_UpdaterTimeout = 3;
 	public final static double TargetingCamera_Deadband = 10;
 	public final static double TargetingCamera_TurnSpeed = 0.4;

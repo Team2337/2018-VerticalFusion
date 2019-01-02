@@ -11,7 +11,10 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- *
+ * Turns to a desired angle using the gyro along side MotionMagic code, with the pixy cam 
+ * 
+ * @category AUTO-TURN
+ * @author Robin B., Sean L. 
  */
 public class auto_gyroMMTurnWithCam extends Command { 
 
@@ -29,6 +32,10 @@ public class auto_gyroMMTurnWithCam extends Command {
 	private double moveSpeed, cubeX, turnAngle;
 	private double pixlesPerDegree = 3.86;
 
+	/**
+	 * @param timeout
+	 * The amount of time the command is allowed to run before it is forced to terminate
+	 */
 	public auto_gyroMMTurnWithCam(double timeout) {
 		requires(Robot.chassis);
 		this.timeout = timeout;

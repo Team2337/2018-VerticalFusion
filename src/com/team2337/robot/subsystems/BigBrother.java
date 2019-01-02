@@ -8,7 +8,7 @@ import com.team2337.robot.RobotMap;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- * BIGBROTHER IS ALWAYS WATCHING
+ * Used to control the arm lift and trolley subsystems simotaneously
  * 
  * @category BIGBROTHER
  * @author Team2337 - EngiNERDs
@@ -18,6 +18,7 @@ public class BigBrother extends Subsystem {
 	int totalRows = 20;
 	int totalColumns = 13;
 
+	//Arm, Lift, and Trolley set points array
 	public double points[][] = new double[totalRows][totalColumns];
 
 	public BigBrother() {
@@ -29,6 +30,9 @@ public class BigBrother extends Subsystem {
 		
 	}
 
+	/**
+	 * Loads the arm, lift, and trolley setpoints array
+	 */
 	void startFilling() {
 		//points = setPointsTestPickUpOnly.points;
 		//points = setPoints.points;
@@ -43,11 +47,20 @@ public class BigBrother extends Subsystem {
 		}
 
 	}
+
+	/**
+	 * Sets the Percent Output (speed in percent) of the arm, lift, and trolley to zero 
+	 */
 	public void stopAltControl() {
 		RobotMap.trolley_right.set(ControlMode.PercentOutput, 0);
 		RobotMap.lift_right.set(ControlMode.PercentOutput, 0);
 		RobotMap.arm_right.set(ControlMode.PercentOutput, 0);
 	}
+
+	/**
+	 * Holds the current position of the arm, lift, and trolley 
+	 * (Sets the positoin to the current position by getting the encoder & string pot position of each subsystem)
+	 */
 	public void holdAltControl() {
 		RobotMap.trolley_right.set(ControlMode.Position, Robot.trolley.getPosition());
 		RobotMap.lift_right.set(ControlMode.Position, Robot.lift.getPosition());

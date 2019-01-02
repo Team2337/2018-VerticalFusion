@@ -15,7 +15,12 @@ import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-
+/**
+ * 
+ * 
+ * @category VISION
+ * @author Team2337 - EngiNERDS
+ */
 public class PixyVision extends Subsystem {
 	
 	public double centerXX = 190;

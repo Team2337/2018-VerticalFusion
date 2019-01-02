@@ -15,7 +15,10 @@ import com.team2337.robot.commands.climbWinch.climbWinch_doNothing;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- * An example subsystem.  You can replace me with your own Subsystem.
+ * Winches the hook rope up to pull the robot off the ground, when the hook is in position 
+ * 
+ * @category CLIMBER
+ * @author Brendan F. 
  */
 public class ClimbWinch extends Subsystem {
 
@@ -23,13 +26,22 @@ public class ClimbWinch extends Subsystem {
 			
 	public ClimbWinch() {
 	
-}
+	}
 	public void initDefaultCommand() {
 		setDefaultCommand(new climbWinch_doNothing());
 	}
+
+	/**
+	 * Drives the winch in the forward direction
+	 * @param power Percent of the motors power (Value of 0-1)
+	 */
 	public void driveVertical(double power) {
 		climbMotor.set(ControlMode.PercentOutput, power);
 	}
+
+	/**
+	 * Stops the winch
+	 */
 	public void stop() {
 		climbMotor.neutralOutput();
 	}

@@ -12,14 +12,18 @@ import edu.wpi.first.wpilibj.command.Command;
 import com.team2337.robot.Robot;
 
 /**
- * arm: SETPID - Moves the arm based of a PID set
+ * Using the encoder, it moves the arm to a given set point
  * 
  * @category arm
- * @author - Bryce
+ * @author Bryce G.
  */
 public class arm_setPID extends Command {
 	private double pos = 0;
 
+	/**
+	 * Sets the set point position of the arm 
+	 * @param pos Set point position of the arm ranging from -1000 - 1500 (0-4096 = full rotation)
+	 */
 	public arm_setPID(double pos) {
 		requires(Robot.arm);
 

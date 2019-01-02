@@ -8,6 +8,12 @@ import com.team2337.robot.RobotMap;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+/**
+ * Makes a U-Turn with the chassis 
+ * 
+ * @category AUTO-DRIVE
+ * @author Bryce G., Sean L.
+ */
 public class auto_UTurn extends Command {
 
 	double speedLeft, speedRight, turn, timeout, target;

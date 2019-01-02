@@ -4,6 +4,11 @@ import com.team2337.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
+/**
+ * Moves the arm, until a setpoint is reached
+ * @category AUTO
+ * @author Bryce G., Sean L.
+ */
 public class auto_armMoveWithFinish extends Command{
 	
 	double arm, armEnd;

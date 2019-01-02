@@ -2,6 +2,12 @@ package com.team2337.robot.commands.bigBrother;
 
 import com.team2337.robot.Robot;
 
+/**
+ * The Arm-Lift-Trolley set points for the practice bot, using variableized values
+ * 
+ * @category BIGBROTHER
+ * @author Bryce G., Sean L.
+ */
 public class setPointsPracticeBot {
 	
 	static int armForwardSoftLimit = Robot.arm.forwardSoftLimit;

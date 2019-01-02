@@ -6,6 +6,10 @@ import com.team2337.robot.commands.shifter.shifter_low;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
+/**
+ * Drives to the switch from the right
+ * Does drop the cube
+ */
 public class commonCG_rightSwitchDontScore extends CommandGroup {
 
 	public commonCG_rightSwitchDontScore() {
